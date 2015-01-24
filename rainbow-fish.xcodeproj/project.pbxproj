@@ -9,33 +9,26 @@
 /* Begin PBXBuildFile section */
 		49DF07F71A743A2800BF94D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DF07F61A743A2800BF94D3 /* AppDelegate.swift */; };
 		49DF07F91A743A2800BF94D3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DF07F81A743A2800BF94D3 /* ViewController.swift */; };
-		49DF07FC1A743A2800BF94D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49DF07FA1A743A2800BF94D3 /* Main.storyboard */; };
 		49DF07FE1A743A2800BF94D3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49DF07FD1A743A2800BF94D3 /* Images.xcassets */; };
 		49DF08011A743A2800BF94D3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49DF07FF1A743A2800BF94D3 /* LaunchScreen.xib */; };
-		49DF080D1A743A2800BF94D3 /* rainbow_fishTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DF080C1A743A2800BF94D3 /* rainbow_fishTests.swift */; };
+		49E8D8B81A7443C60064E682 /* CoreDataKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E8D8B71A7443C60064E682 /* CoreDataKit.framework */; };
+		49E8D8BB1A7443F50064E682 /* JHProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8BA1A7443F50064E682 /* JHProgressHUD.swift */; };
+		49E8D8BE1A7445400064E682 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E8D8BD1A7445400064E682 /* CoreData.framework */; };
+		49E8D8C11A7445670064E682 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E8D8C01A7445670064E682 /* CloudKit.framework */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		49DF08071A743A2800BF94D3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 49DF07E91A743A2800BF94D3 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 49DF07F01A743A2800BF94D3;
-			remoteInfo = "rainbow-fish";
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		49DF07F11A743A2800BF94D3 /* rainbow-fish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "rainbow-fish.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		49DF07F51A743A2800BF94D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		49DF07F61A743A2800BF94D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49DF07F81A743A2800BF94D3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		49DF07FB1A743A2800BF94D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		49DF07FD1A743A2800BF94D3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		49DF08001A743A2800BF94D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		49DF08061A743A2800BF94D3 /* rainbow-fishTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "rainbow-fishTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		49DF080B1A743A2800BF94D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		49DF080C1A743A2800BF94D3 /* rainbow_fishTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rainbow_fishTests.swift; sourceTree = "<group>"; };
+		49E8D8B71A7443C60064E682 /* CoreDataKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreDataKit.framework; path = ../Carthage/Build/iOS/CoreDataKit.framework; sourceTree = "<group>"; };
+		49E8D8BA1A7443F50064E682 /* JHProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHProgressHUD.swift; sourceTree = "<group>"; };
+		49E8D8BD1A7445400064E682 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		49E8D8BF1A7445620064E682 /* rainbow-fish.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "rainbow-fish.entitlements"; sourceTree = "<group>"; };
+		49E8D8C01A7445670064E682 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,13 +36,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		49DF08031A743A2800BF94D3 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				49E8D8C11A7445670064E682 /* CloudKit.framework in Frameworks */,
+				49E8D8BE1A7445400064E682 /* CoreData.framework in Frameworks */,
+				49E8D8B81A7443C60064E682 /* CoreDataKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,8 +48,8 @@
 		49DF07E81A743A2800BF94D3 = {
 			isa = PBXGroup;
 			children = (
+				49E8D8C01A7445670064E682 /* CloudKit.framework */,
 				49DF07F31A743A2800BF94D3 /* rainbow-fish */,
-				49DF08091A743A2800BF94D3 /* rainbow-fishTests */,
 				49DF07F21A743A2800BF94D3 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -69,7 +58,6 @@
 			isa = PBXGroup;
 			children = (
 				49DF07F11A743A2800BF94D3 /* rainbow-fish.app */,
-				49DF08061A743A2800BF94D3 /* rainbow-fishTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -77,9 +65,10 @@
 		49DF07F31A743A2800BF94D3 /* rainbow-fish */ = {
 			isa = PBXGroup;
 			children = (
+				49E8D8BF1A7445620064E682 /* rainbow-fish.entitlements */,
+				49E8D8B91A7443E00064E682 /* JHProgressHUD */,
 				49DF07F61A743A2800BF94D3 /* AppDelegate.swift */,
 				49DF07F81A743A2800BF94D3 /* ViewController.swift */,
-				49DF07FA1A743A2800BF94D3 /* Main.storyboard */,
 				49DF07FD1A743A2800BF94D3 /* Images.xcassets */,
 				49DF07FF1A743A2800BF94D3 /* LaunchScreen.xib */,
 				49DF07F41A743A2800BF94D3 /* Supporting Files */,
@@ -90,26 +79,19 @@
 		49DF07F41A743A2800BF94D3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				49E8D8BD1A7445400064E682 /* CoreData.framework */,
+				49E8D8B71A7443C60064E682 /* CoreDataKit.framework */,
 				49DF07F51A743A2800BF94D3 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		49DF08091A743A2800BF94D3 /* rainbow-fishTests */ = {
+		49E8D8B91A7443E00064E682 /* JHProgressHUD */ = {
 			isa = PBXGroup;
 			children = (
-				49DF080C1A743A2800BF94D3 /* rainbow_fishTests.swift */,
-				49DF080A1A743A2800BF94D3 /* Supporting Files */,
+				49E8D8BA1A7443F50064E682 /* JHProgressHUD.swift */,
 			);
-			path = "rainbow-fishTests";
-			sourceTree = "<group>";
-		};
-		49DF080A1A743A2800BF94D3 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				49DF080B1A743A2800BF94D3 /* Info.plist */,
-			);
-			name = "Supporting Files";
+			name = JHProgressHUD;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -122,6 +104,7 @@
 				49DF07ED1A743A2800BF94D3 /* Sources */,
 				49DF07EE1A743A2800BF94D3 /* Frameworks */,
 				49DF07EF1A743A2800BF94D3 /* Resources */,
+				49E8D8BC1A7444190064E682 /* Carthage copy frameworks */,
 			);
 			buildRules = (
 			);
@@ -131,24 +114,6 @@
 			productName = "rainbow-fish";
 			productReference = 49DF07F11A743A2800BF94D3 /* rainbow-fish.app */;
 			productType = "com.apple.product-type.application";
-		};
-		49DF08051A743A2800BF94D3 /* rainbow-fishTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 49DF08131A743A2800BF94D3 /* Build configuration list for PBXNativeTarget "rainbow-fishTests" */;
-			buildPhases = (
-				49DF08021A743A2800BF94D3 /* Sources */,
-				49DF08031A743A2800BF94D3 /* Frameworks */,
-				49DF08041A743A2800BF94D3 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				49DF08081A743A2800BF94D3 /* PBXTargetDependency */,
-			);
-			name = "rainbow-fishTests";
-			productName = "rainbow-fishTests";
-			productReference = 49DF08061A743A2800BF94D3 /* rainbow-fishTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
 
@@ -161,10 +126,12 @@
 				TargetAttributes = {
 					49DF07F01A743A2800BF94D3 = {
 						CreatedOnToolsVersion = 6.1.1;
-					};
-					49DF08051A743A2800BF94D3 = {
-						CreatedOnToolsVersion = 6.1.1;
-						TestTargetID = 49DF07F01A743A2800BF94D3;
+						DevelopmentTeam = FA5W6TJ34U;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -182,7 +149,6 @@
 			projectRoot = "";
 			targets = (
 				49DF07F01A743A2800BF94D3 /* rainbow-fish */,
-				49DF08051A743A2800BF94D3 /* rainbow-fishTests */,
 			);
 		};
 /* End PBXProject section */
@@ -192,58 +158,45 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				49DF07FC1A743A2800BF94D3 /* Main.storyboard in Resources */,
 				49DF08011A743A2800BF94D3 /* LaunchScreen.xib in Resources */,
 				49DF07FE1A743A2800BF94D3 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		49DF08041A743A2800BF94D3 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		49E8D8BC1A7444190064E682 /* Carthage copy frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/CoreDataKit.framework",
+			);
+			name = "Carthage copy frameworks";
+			outputPaths = (
+			);
 			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
-/* End PBXResourcesBuildPhase section */
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		49DF07ED1A743A2800BF94D3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49E8D8BB1A7443F50064E682 /* JHProgressHUD.swift in Sources */,
 				49DF07F91A743A2800BF94D3 /* ViewController.swift in Sources */,
 				49DF07F71A743A2800BF94D3 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		49DF08021A743A2800BF94D3 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				49DF080D1A743A2800BF94D3 /* rainbow_fishTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		49DF08081A743A2800BF94D3 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 49DF07F01A743A2800BF94D3 /* rainbow-fish */;
-			targetProxy = 49DF08071A743A2800BF94D3 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin PBXVariantGroup section */
-		49DF07FA1A743A2800BF94D3 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				49DF07FB1A743A2800BF94D3 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		49DF07FF1A743A2800BF94D3 /* LaunchScreen.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -336,9 +289,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "rainbow-fish/rainbow-fish.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "rainbow-fish/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -346,43 +307,17 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "rainbow-fish/rainbow-fish.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = "rainbow-fish/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		49DF08141A743A2800BF94D3 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "rainbow-fishTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/rainbow-fish.app/rainbow-fish";
-			};
-			name = Debug;
-		};
-		49DF08151A743A2800BF94D3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "rainbow-fishTests/Info.plist";
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/rainbow-fish.app/rainbow-fish";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -405,14 +340,7 @@
 				49DF08121A743A2800BF94D3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-		};
-		49DF08131A743A2800BF94D3 /* Build configuration list for PBXNativeTarget "rainbow-fishTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				49DF08141A743A2800BF94D3 /* Debug */,
-				49DF08151A743A2800BF94D3 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
