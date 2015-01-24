@@ -1,0 +1,420 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		49DF07F71A743A2800BF94D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DF07F61A743A2800BF94D3 /* AppDelegate.swift */; };
+		49DF07F91A743A2800BF94D3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DF07F81A743A2800BF94D3 /* ViewController.swift */; };
+		49DF07FC1A743A2800BF94D3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49DF07FA1A743A2800BF94D3 /* Main.storyboard */; };
+		49DF07FE1A743A2800BF94D3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49DF07FD1A743A2800BF94D3 /* Images.xcassets */; };
+		49DF08011A743A2800BF94D3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49DF07FF1A743A2800BF94D3 /* LaunchScreen.xib */; };
+		49DF080D1A743A2800BF94D3 /* rainbow_fishTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DF080C1A743A2800BF94D3 /* rainbow_fishTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		49DF08071A743A2800BF94D3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 49DF07E91A743A2800BF94D3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 49DF07F01A743A2800BF94D3;
+			remoteInfo = "rainbow-fish";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		49DF07F11A743A2800BF94D3 /* rainbow-fish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "rainbow-fish.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		49DF07F51A743A2800BF94D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49DF07F61A743A2800BF94D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		49DF07F81A743A2800BF94D3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		49DF07FB1A743A2800BF94D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		49DF07FD1A743A2800BF94D3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		49DF08001A743A2800BF94D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		49DF08061A743A2800BF94D3 /* rainbow-fishTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "rainbow-fishTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		49DF080B1A743A2800BF94D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49DF080C1A743A2800BF94D3 /* rainbow_fishTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = rainbow_fishTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		49DF07EE1A743A2800BF94D3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		49DF08031A743A2800BF94D3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		49DF07E81A743A2800BF94D3 = {
+			isa = PBXGroup;
+			children = (
+				49DF07F31A743A2800BF94D3 /* rainbow-fish */,
+				49DF08091A743A2800BF94D3 /* rainbow-fishTests */,
+				49DF07F21A743A2800BF94D3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		49DF07F21A743A2800BF94D3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				49DF07F11A743A2800BF94D3 /* rainbow-fish.app */,
+				49DF08061A743A2800BF94D3 /* rainbow-fishTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		49DF07F31A743A2800BF94D3 /* rainbow-fish */ = {
+			isa = PBXGroup;
+			children = (
+				49DF07F61A743A2800BF94D3 /* AppDelegate.swift */,
+				49DF07F81A743A2800BF94D3 /* ViewController.swift */,
+				49DF07FA1A743A2800BF94D3 /* Main.storyboard */,
+				49DF07FD1A743A2800BF94D3 /* Images.xcassets */,
+				49DF07FF1A743A2800BF94D3 /* LaunchScreen.xib */,
+				49DF07F41A743A2800BF94D3 /* Supporting Files */,
+			);
+			path = "rainbow-fish";
+			sourceTree = "<group>";
+		};
+		49DF07F41A743A2800BF94D3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				49DF07F51A743A2800BF94D3 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		49DF08091A743A2800BF94D3 /* rainbow-fishTests */ = {
+			isa = PBXGroup;
+			children = (
+				49DF080C1A743A2800BF94D3 /* rainbow_fishTests.swift */,
+				49DF080A1A743A2800BF94D3 /* Supporting Files */,
+			);
+			path = "rainbow-fishTests";
+			sourceTree = "<group>";
+		};
+		49DF080A1A743A2800BF94D3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				49DF080B1A743A2800BF94D3 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		49DF07F01A743A2800BF94D3 /* rainbow-fish */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 49DF08101A743A2800BF94D3 /* Build configuration list for PBXNativeTarget "rainbow-fish" */;
+			buildPhases = (
+				49DF07ED1A743A2800BF94D3 /* Sources */,
+				49DF07EE1A743A2800BF94D3 /* Frameworks */,
+				49DF07EF1A743A2800BF94D3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "rainbow-fish";
+			productName = "rainbow-fish";
+			productReference = 49DF07F11A743A2800BF94D3 /* rainbow-fish.app */;
+			productType = "com.apple.product-type.application";
+		};
+		49DF08051A743A2800BF94D3 /* rainbow-fishTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 49DF08131A743A2800BF94D3 /* Build configuration list for PBXNativeTarget "rainbow-fishTests" */;
+			buildPhases = (
+				49DF08021A743A2800BF94D3 /* Sources */,
+				49DF08031A743A2800BF94D3 /* Frameworks */,
+				49DF08041A743A2800BF94D3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				49DF08081A743A2800BF94D3 /* PBXTargetDependency */,
+			);
+			name = "rainbow-fishTests";
+			productName = "rainbow-fishTests";
+			productReference = 49DF08061A743A2800BF94D3 /* rainbow-fishTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		49DF07E91A743A2800BF94D3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = Clamdango;
+				TargetAttributes = {
+					49DF07F01A743A2800BF94D3 = {
+						CreatedOnToolsVersion = 6.1.1;
+					};
+					49DF08051A743A2800BF94D3 = {
+						CreatedOnToolsVersion = 6.1.1;
+						TestTargetID = 49DF07F01A743A2800BF94D3;
+					};
+				};
+			};
+			buildConfigurationList = 49DF07EC1A743A2800BF94D3 /* Build configuration list for PBXProject "rainbow-fish" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 49DF07E81A743A2800BF94D3;
+			productRefGroup = 49DF07F21A743A2800BF94D3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				49DF07F01A743A2800BF94D3 /* rainbow-fish */,
+				49DF08051A743A2800BF94D3 /* rainbow-fishTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		49DF07EF1A743A2800BF94D3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49DF07FC1A743A2800BF94D3 /* Main.storyboard in Resources */,
+				49DF08011A743A2800BF94D3 /* LaunchScreen.xib in Resources */,
+				49DF07FE1A743A2800BF94D3 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		49DF08041A743A2800BF94D3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		49DF07ED1A743A2800BF94D3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49DF07F91A743A2800BF94D3 /* ViewController.swift in Sources */,
+				49DF07F71A743A2800BF94D3 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		49DF08021A743A2800BF94D3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				49DF080D1A743A2800BF94D3 /* rainbow_fishTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		49DF08081A743A2800BF94D3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 49DF07F01A743A2800BF94D3 /* rainbow-fish */;
+			targetProxy = 49DF08071A743A2800BF94D3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		49DF07FA1A743A2800BF94D3 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				49DF07FB1A743A2800BF94D3 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		49DF07FF1A743A2800BF94D3 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				49DF08001A743A2800BF94D3 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		49DF080E1A743A2800BF94D3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		49DF080F1A743A2800BF94D3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		49DF08111A743A2800BF94D3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "rainbow-fish/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		49DF08121A743A2800BF94D3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "rainbow-fish/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		49DF08141A743A2800BF94D3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "rainbow-fishTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/rainbow-fish.app/rainbow-fish";
+			};
+			name = Debug;
+		};
+		49DF08151A743A2800BF94D3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "rainbow-fishTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/rainbow-fish.app/rainbow-fish";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		49DF07EC1A743A2800BF94D3 /* Build configuration list for PBXProject "rainbow-fish" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				49DF080E1A743A2800BF94D3 /* Debug */,
+				49DF080F1A743A2800BF94D3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		49DF08101A743A2800BF94D3 /* Build configuration list for PBXNativeTarget "rainbow-fish" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				49DF08111A743A2800BF94D3 /* Debug */,
+				49DF08121A743A2800BF94D3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		49DF08131A743A2800BF94D3 /* Build configuration list for PBXNativeTarget "rainbow-fishTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				49DF08141A743A2800BF94D3 /* Debug */,
+				49DF08151A743A2800BF94D3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 49DF07E91A743A2800BF94D3 /* Project object */;
+}
