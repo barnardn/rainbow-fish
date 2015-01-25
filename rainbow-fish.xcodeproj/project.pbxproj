@@ -15,6 +15,16 @@
 		49E8D8BB1A7443F50064E682 /* JHProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8BA1A7443F50064E682 /* JHProgressHUD.swift */; };
 		49E8D8BE1A7445400064E682 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E8D8BD1A7445400064E682 /* CoreData.framework */; };
 		49E8D8C11A7445670064E682 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E8D8C01A7445670064E682 /* CloudKit.framework */; };
+		49E8D8C51A74474B0064E682 /* rainbow-fish.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8C31A74474B0064E682 /* rainbow-fish.xcdatamodeld */; };
+		49E8D8C71A7547770064E682 /* ColorValueTransformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8C61A7547770064E682 /* ColorValueTransformer.swift */; };
+		49E8D8D21A7564400064E682 /* Inventory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8C91A7564400064E682 /* Inventory.swift */; };
+		49E8D8D31A7564400064E682 /* _Inventory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8CB1A7564400064E682 /* _Inventory.swift */; };
+		49E8D8D41A7564400064E682 /* _Manufacturer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8CC1A7564400064E682 /* _Manufacturer.swift */; };
+		49E8D8D51A7564400064E682 /* _Pencil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8CD1A7564400064E682 /* _Pencil.swift */; };
+		49E8D8D61A7564400064E682 /* _Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8CE1A7564400064E682 /* _Product.swift */; };
+		49E8D8D71A7564400064E682 /* Manufacturer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8CF1A7564400064E682 /* Manufacturer.swift */; };
+		49E8D8D81A7564400064E682 /* Pencil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8D01A7564400064E682 /* Pencil.swift */; };
+		49E8D8D91A7564400064E682 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8D11A7564400064E682 /* Product.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +39,16 @@
 		49E8D8BD1A7445400064E682 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		49E8D8BF1A7445620064E682 /* rainbow-fish.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "rainbow-fish.entitlements"; sourceTree = "<group>"; };
 		49E8D8C01A7445670064E682 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		49E8D8C41A74474B0064E682 /* rainbow-fish.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "rainbow-fish.xcdatamodel"; sourceTree = "<group>"; };
+		49E8D8C61A7547770064E682 /* ColorValueTransformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorValueTransformer.swift; sourceTree = "<group>"; };
+		49E8D8C91A7564400064E682 /* Inventory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Inventory.swift; sourceTree = "<group>"; };
+		49E8D8CB1A7564400064E682 /* _Inventory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _Inventory.swift; sourceTree = "<group>"; };
+		49E8D8CC1A7564400064E682 /* _Manufacturer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _Manufacturer.swift; sourceTree = "<group>"; };
+		49E8D8CD1A7564400064E682 /* _Pencil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _Pencil.swift; sourceTree = "<group>"; };
+		49E8D8CE1A7564400064E682 /* _Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _Product.swift; sourceTree = "<group>"; };
+		49E8D8CF1A7564400064E682 /* Manufacturer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Manufacturer.swift; sourceTree = "<group>"; };
+		49E8D8D01A7564400064E682 /* Pencil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pencil.swift; sourceTree = "<group>"; };
+		49E8D8D11A7564400064E682 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,7 +68,6 @@
 		49DF07E81A743A2800BF94D3 = {
 			isa = PBXGroup;
 			children = (
-				49E8D8C01A7445670064E682 /* CloudKit.framework */,
 				49DF07F31A743A2800BF94D3 /* rainbow-fish */,
 				49DF07F21A743A2800BF94D3 /* Products */,
 			);
@@ -65,7 +84,7 @@
 		49DF07F31A743A2800BF94D3 /* rainbow-fish */ = {
 			isa = PBXGroup;
 			children = (
-				49E8D8BF1A7445620064E682 /* rainbow-fish.entitlements */,
+				49E8D8C21A7447180064E682 /* Core Data */,
 				49E8D8B91A7443E00064E682 /* JHProgressHUD */,
 				49DF07F61A743A2800BF94D3 /* AppDelegate.swift */,
 				49DF07F81A743A2800BF94D3 /* ViewController.swift */,
@@ -79,6 +98,8 @@
 		49DF07F41A743A2800BF94D3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				49E8D8BF1A7445620064E682 /* rainbow-fish.entitlements */,
+				49E8D8C01A7445670064E682 /* CloudKit.framework */,
 				49E8D8BD1A7445400064E682 /* CoreData.framework */,
 				49E8D8B71A7443C60064E682 /* CoreDataKit.framework */,
 				49DF07F51A743A2800BF94D3 /* Info.plist */,
@@ -94,6 +115,31 @@
 			name = JHProgressHUD;
 			sourceTree = "<group>";
 		};
+		49E8D8C21A7447180064E682 /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				49E8D8C91A7564400064E682 /* Inventory.swift */,
+				49E8D8CA1A7564400064E682 /* machine */,
+				49E8D8CF1A7564400064E682 /* Manufacturer.swift */,
+				49E8D8D01A7564400064E682 /* Pencil.swift */,
+				49E8D8D11A7564400064E682 /* Product.swift */,
+				49E8D8C31A74474B0064E682 /* rainbow-fish.xcdatamodeld */,
+				49E8D8C61A7547770064E682 /* ColorValueTransformer.swift */,
+			);
+			name = "Core Data";
+			sourceTree = "<group>";
+		};
+		49E8D8CA1A7564400064E682 /* machine */ = {
+			isa = PBXGroup;
+			children = (
+				49E8D8CB1A7564400064E682 /* _Inventory.swift */,
+				49E8D8CC1A7564400064E682 /* _Manufacturer.swift */,
+				49E8D8CD1A7564400064E682 /* _Pencil.swift */,
+				49E8D8CE1A7564400064E682 /* _Product.swift */,
+			);
+			path = machine;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -101,6 +147,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 49DF08101A743A2800BF94D3 /* Build configuration list for PBXNativeTarget "rainbow-fish" */;
 			buildPhases = (
+				49E8D8C81A75630C0064E682 /* Mogenerator */,
 				49DF07ED1A743A2800BF94D3 /* Sources */,
 				49DF07EE1A743A2800BF94D3 /* Frameworks */,
 				49DF07EF1A743A2800BF94D3 /* Resources */,
@@ -181,6 +228,20 @@
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks";
 		};
+		49E8D8C81A75630C0064E682 /* Mogenerator */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Mogenerator;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/bin/mogenerator -m $SRCROOT/$TARGET_NAME/$TARGET_NAME.xcdatamodeld/$TARGET_NAME.xcdatamodel -H $SRCROOT/$TARGET_NAME -M $SRCROOT/$TARGET_NAME/machine --template-var arc=true --swift";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -188,9 +249,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49E8D8D21A7564400064E682 /* Inventory.swift in Sources */,
+				49E8D8D61A7564400064E682 /* _Product.swift in Sources */,
+				49E8D8D81A7564400064E682 /* Pencil.swift in Sources */,
 				49E8D8BB1A7443F50064E682 /* JHProgressHUD.swift in Sources */,
+				49E8D8D41A7564400064E682 /* _Manufacturer.swift in Sources */,
+				49E8D8D51A7564400064E682 /* _Pencil.swift in Sources */,
 				49DF07F91A743A2800BF94D3 /* ViewController.swift in Sources */,
+				49E8D8C51A74474B0064E682 /* rainbow-fish.xcdatamodeld in Sources */,
 				49DF07F71A743A2800BF94D3 /* AppDelegate.swift in Sources */,
+				49E8D8C71A7547770064E682 /* ColorValueTransformer.swift in Sources */,
+				49E8D8D71A7564400064E682 /* Manufacturer.swift in Sources */,
+				49E8D8D31A7564400064E682 /* _Inventory.swift in Sources */,
+				49E8D8D91A7564400064E682 /* Product.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -343,6 +414,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		49E8D8C31A74474B0064E682 /* rainbow-fish.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				49E8D8C41A74474B0064E682 /* rainbow-fish.xcdatamodel */,
+			);
+			currentVersion = 49E8D8C41A74474B0064E682 /* rainbow-fish.xcdatamodel */;
+			path = "rainbow-fish.xcdatamodeld";
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 49DF07E91A743A2800BF94D3 /* Project object */;
 }
