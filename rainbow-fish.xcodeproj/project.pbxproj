@@ -28,6 +28,11 @@
 		49E8D8DC1A7566E00064E682 /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8DB1A7566E00064E682 /* AppController.swift */; };
 		49E8D8DE1A7567FF0064E682 /* AppearanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8DD1A7567FF0064E682 /* AppearanceManager.swift */; };
 		49E8D8E11A7571960064E682 /* NSFileManager+CDOExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8E01A7571960064E682 /* NSFileManager+CDOExtensions.swift */; };
+		49E8D8E51A75C6940064E682 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8E41A75C6940064E682 /* RootViewController.swift */; };
+		49E8D8E71A75C9420064E682 /* ContentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8E61A75C9420064E682 /* ContentTableViewController.swift */; };
+		49E8D8EC1A75CADE0064E682 /* InventoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8EB1A75CADE0064E682 /* InventoryTableViewController.swift */; };
+		49E8D8EE1A75D2A50064E682 /* PencilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8ED1A75D2A50064E682 /* PencilViewController.swift */; };
+		49E8D8F01A75D4760064E682 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8EF1A75D4760064E682 /* SettingsTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -55,6 +60,11 @@
 		49E8D8DB1A7566E00064E682 /* AppController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppController.swift; sourceTree = "<group>"; };
 		49E8D8DD1A7567FF0064E682 /* AppearanceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceManager.swift; sourceTree = "<group>"; };
 		49E8D8E01A7571960064E682 /* NSFileManager+CDOExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSFileManager+CDOExtensions.swift"; sourceTree = "<group>"; };
+		49E8D8E41A75C6940064E682 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		49E8D8E61A75C9420064E682 /* ContentTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentTableViewController.swift; sourceTree = "<group>"; };
+		49E8D8EB1A75CADE0064E682 /* InventoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InventoryTableViewController.swift; sourceTree = "<group>"; };
+		49E8D8ED1A75D2A50064E682 /* PencilViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PencilViewController.swift; sourceTree = "<group>"; };
+		49E8D8EF1A75D4760064E682 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,6 +100,7 @@
 		49DF07F31A743A2800BF94D3 /* rainbow-fish */ = {
 			isa = PBXGroup;
 			children = (
+				49E8D8E21A75C66B0064E682 /* View Controllers */,
 				49E8D8DF1A7570DF0064E682 /* Categories */,
 				49E8D8DA1A7566570064E682 /* App Config */,
 				49E8D8C21A7447180064E682 /* Core Data */,
@@ -163,6 +174,50 @@
 				49E8D8E01A7571960064E682 /* NSFileManager+CDOExtensions.swift */,
 			);
 			name = Categories;
+			sourceTree = "<group>";
+		};
+		49E8D8E21A75C66B0064E682 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				49E8D8EA1A75CA0F0064E682 /* Settings */,
+				49E8D8E91A75C9F60064E682 /* Pencils */,
+				49E8D8E81A75C9E50064E682 /* Inventory */,
+				49E8D8E31A75C67C0064E682 /* Main & Base */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		49E8D8E31A75C67C0064E682 /* Main & Base */ = {
+			isa = PBXGroup;
+			children = (
+				49E8D8E41A75C6940064E682 /* RootViewController.swift */,
+				49E8D8E61A75C9420064E682 /* ContentTableViewController.swift */,
+			);
+			name = "Main & Base";
+			sourceTree = "<group>";
+		};
+		49E8D8E81A75C9E50064E682 /* Inventory */ = {
+			isa = PBXGroup;
+			children = (
+				49E8D8EB1A75CADE0064E682 /* InventoryTableViewController.swift */,
+			);
+			name = Inventory;
+			sourceTree = "<group>";
+		};
+		49E8D8E91A75C9F60064E682 /* Pencils */ = {
+			isa = PBXGroup;
+			children = (
+				49E8D8ED1A75D2A50064E682 /* PencilViewController.swift */,
+			);
+			name = Pencils;
+			sourceTree = "<group>";
+		};
+		49E8D8EA1A75CA0F0064E682 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				49E8D8EF1A75D4760064E682 /* SettingsTableViewController.swift */,
+			);
+			name = Settings;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -275,6 +330,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				49E8D8D21A7564400064E682 /* Inventory.swift in Sources */,
+				49E8D8E51A75C6940064E682 /* RootViewController.swift in Sources */,
+				49E8D8E71A75C9420064E682 /* ContentTableViewController.swift in Sources */,
 				49E8D8D61A7564400064E682 /* _Product.swift in Sources */,
 				49E8D8D81A7564400064E682 /* Pencil.swift in Sources */,
 				49E8D8BB1A7443F50064E682 /* JHProgressHUD.swift in Sources */,
@@ -287,9 +344,12 @@
 				49E8D8C71A7547770064E682 /* ColorValueTransformer.swift in Sources */,
 				49E8D8E11A7571960064E682 /* NSFileManager+CDOExtensions.swift in Sources */,
 				49E8D8D71A7564400064E682 /* Manufacturer.swift in Sources */,
+				49E8D8EE1A75D2A50064E682 /* PencilViewController.swift in Sources */,
 				49E8D8D31A7564400064E682 /* _Inventory.swift in Sources */,
 				49E8D8D91A7564400064E682 /* Product.swift in Sources */,
+				49E8D8EC1A75CADE0064E682 /* InventoryTableViewController.swift in Sources */,
 				49E8D8DC1A7566E00064E682 /* AppController.swift in Sources */,
+				49E8D8F01A75D4760064E682 /* SettingsTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

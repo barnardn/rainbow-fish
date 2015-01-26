@@ -31,7 +31,7 @@ class AppController {
     // MARK: core data properties
     
     lazy var managedObjectModel: NSManagedObjectModel = {
-        let modelURL = self.urlForResourceInApplicationSupport(resourceName: self.modelName)
+        let modelURL = NSBundle.mainBundle().URLForResource(self.modelName, withExtension: "momd")!
         return NSManagedObjectModel(contentsOfURL: modelURL)!
     }()
     
