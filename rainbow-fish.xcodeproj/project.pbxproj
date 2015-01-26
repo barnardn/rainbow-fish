@@ -33,6 +33,7 @@
 		49E8D8EC1A75CADE0064E682 /* InventoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8EB1A75CADE0064E682 /* InventoryTableViewController.swift */; };
 		49E8D8EE1A75D2A50064E682 /* PencilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8ED1A75D2A50064E682 /* PencilViewController.swift */; };
 		49E8D8F01A75D4760064E682 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8EF1A75D4760064E682 /* SettingsTableViewController.swift */; };
+		49F914681A75DDDD0042EA0D /* InventoryNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F914671A75DDDD0042EA0D /* InventoryNavigationController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,7 @@
 		49E8D8EB1A75CADE0064E682 /* InventoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InventoryTableViewController.swift; sourceTree = "<group>"; };
 		49E8D8ED1A75D2A50064E682 /* PencilViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PencilViewController.swift; sourceTree = "<group>"; };
 		49E8D8EF1A75D4760064E682 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		49F914671A75DDDD0042EA0D /* InventoryNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InventoryNavigationController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +202,7 @@
 			isa = PBXGroup;
 			children = (
 				49E8D8EB1A75CADE0064E682 /* InventoryTableViewController.swift */,
+				49F914671A75DDDD0042EA0D /* InventoryNavigationController.swift */,
 			);
 			name = Inventory;
 			sourceTree = "<group>";
@@ -345,6 +348,7 @@
 				49E8D8E11A7571960064E682 /* NSFileManager+CDOExtensions.swift in Sources */,
 				49E8D8D71A7564400064E682 /* Manufacturer.swift in Sources */,
 				49E8D8EE1A75D2A50064E682 /* PencilViewController.swift in Sources */,
+				49F914681A75DDDD0042EA0D /* InventoryNavigationController.swift in Sources */,
 				49E8D8D31A7564400064E682 /* _Inventory.swift in Sources */,
 				49E8D8D91A7564400064E682 /* Product.swift in Sources */,
 				49E8D8EC1A75CADE0064E682 /* InventoryTableViewController.swift in Sources */,

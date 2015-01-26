@@ -34,6 +34,10 @@ class AppearanceManager {
         return UIColor(red: 3.0/256.0, green: 11.0/256.0, blue: 64.0/256.0, alpha: 1.0)
     }()
     
+    lazy var strokeColor: UIColor = {
+        return UIColor(white: 0.0, alpha: 0.05)
+    }()
+    
     var bodyTextColor: UIColor {
         return self.blackColor
     }

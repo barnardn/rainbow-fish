@@ -21,7 +21,7 @@ class SettingsTableViewController: ContentTableViewController {
     override init(style: UITableViewStyle) {
         super.init(style: .Grouped)
         let image = UIImage(named: "tabbar-icon-settings")?.imageWithRenderingMode(.AlwaysTemplate)
-        self.tabBarItem = UITabBarItem(title: "Settings", image: image, tag: 0)
+        self.tabBarItem = UITabBarItem(title: NSLocalizedString("Settings", comment:"setting tabbar item title"), image: image, tag: 0)
     }
     
 }

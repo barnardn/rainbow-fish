@@ -10,6 +10,12 @@ import UIKit
 
 class InventoryTableViewController: ContentTableViewController {
 
+    enum InventorySortModes: Int {
+        case Alpha = 0, Quantity
+    }
+    
+    var sortMethodSegmentedControl: UISegmentedControl?
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -21,9 +27,18 @@ class InventoryTableViewController: ContentTableViewController {
     override init(style: UITableViewStyle) {
         super.init(style: UITableViewStyle.Plain)
         var image = UIImage(named:"tabbar-icon-inventory")?.imageWithRenderingMode(.AlwaysTemplate)
-        self.tabBarItem = UITabBarItem(title: "Inventory", image: image, tag: 0)
+        let title = NSLocalizedString("My Pencils", comment: "my pencils tab bar item title")
+        self.tabBarItem = UITabBarItem(title: title, image: image, tag: 0)
     }
 
-    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        sortMethodSegmentedControl = UISegmentedControl(items: [
+            NSLocalizedString("A-Z",  comment: "inventory sort alpha title"),
+            NSLocalizedString("Least - Most", comment: "inventory tab sort lest to most title")])
+        sortMethodSegmentedControl!.selectedSegmentIndex = InventorySortModes.Alpha.rawValue
+        self.navigationItem.titleView = sortMethodSegmentedControl
+        sortMethodSegmentedControl!.tintColor = AppearanceManager.appearanceManager.brandColorLight
+    }
     
 }

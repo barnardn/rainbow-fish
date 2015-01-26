@@ -21,7 +21,7 @@ class RootViewController: UITabBarController {
     override init() {
         super.init()
         viewControllers = [
-                InventoryTableViewController(style: .Plain),
+                InventoryNavigationController(),
                 PencilViewController(style: .Plain),
                 SettingsTableViewController(style: .Grouped)
         ]

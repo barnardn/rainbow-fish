@@ -21,7 +21,8 @@ class PencilViewController: ContentTableViewController {
     override init(style: UITableViewStyle) {
         super.init(style: UITableViewStyle.Plain)
         var image = UIImage(named: "tabbar-icon-pencils")?.imageWithRenderingMode(.AlwaysTemplate)
-        self.tabBarItem = UITabBarItem(title: "Pencils", image: image, tag: 1)
+        self.tabBarItem = UITabBarItem(title: NSLocalizedString("All Pencils", comment:"all pencils tab bar item title"), image: image, tag: 1)
+        
     }
     
 }

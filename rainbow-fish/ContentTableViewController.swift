@@ -24,7 +24,8 @@ class ContentTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = AppearanceManager.appearanceManager.appBackgroundColor;
+        self.view.backgroundColor = AppearanceManager.appearanceManager.appBackgroundColor
+        self.tableView.separatorColor = AppearanceManager.appearanceManager.strokeColor
     }
     
 }
