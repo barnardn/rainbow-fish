@@ -10,6 +10,7 @@ import UIKit
 
 class ColorValueTransformer: NSValueTransformer {
 
+    
     class func allowsReveseTransformation() -> Bool {
         return true
     }

@@ -25,6 +25,9 @@
 		49E8D8D71A7564400064E682 /* Manufacturer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8CF1A7564400064E682 /* Manufacturer.swift */; };
 		49E8D8D81A7564400064E682 /* Pencil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8D01A7564400064E682 /* Pencil.swift */; };
 		49E8D8D91A7564400064E682 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8D11A7564400064E682 /* Product.swift */; };
+		49E8D8DC1A7566E00064E682 /* AppController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8DB1A7566E00064E682 /* AppController.swift */; };
+		49E8D8DE1A7567FF0064E682 /* AppearanceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8DD1A7567FF0064E682 /* AppearanceManager.swift */; };
+		49E8D8E11A7571960064E682 /* NSFileManager+CDOExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8E01A7571960064E682 /* NSFileManager+CDOExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +52,9 @@
 		49E8D8CF1A7564400064E682 /* Manufacturer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Manufacturer.swift; sourceTree = "<group>"; };
 		49E8D8D01A7564400064E682 /* Pencil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Pencil.swift; sourceTree = "<group>"; };
 		49E8D8D11A7564400064E682 /* Product.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		49E8D8DB1A7566E00064E682 /* AppController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppController.swift; sourceTree = "<group>"; };
+		49E8D8DD1A7567FF0064E682 /* AppearanceManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppearanceManager.swift; sourceTree = "<group>"; };
+		49E8D8E01A7571960064E682 /* NSFileManager+CDOExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSFileManager+CDOExtensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,9 +90,10 @@
 		49DF07F31A743A2800BF94D3 /* rainbow-fish */ = {
 			isa = PBXGroup;
 			children = (
+				49E8D8DF1A7570DF0064E682 /* Categories */,
+				49E8D8DA1A7566570064E682 /* App Config */,
 				49E8D8C21A7447180064E682 /* Core Data */,
 				49E8D8B91A7443E00064E682 /* JHProgressHUD */,
-				49DF07F61A743A2800BF94D3 /* AppDelegate.swift */,
 				49DF07F81A743A2800BF94D3 /* ViewController.swift */,
 				49DF07FD1A743A2800BF94D3 /* Images.xcassets */,
 				49DF07FF1A743A2800BF94D3 /* LaunchScreen.xib */,
@@ -138,6 +145,24 @@
 				49E8D8CE1A7564400064E682 /* _Product.swift */,
 			);
 			path = machine;
+			sourceTree = "<group>";
+		};
+		49E8D8DA1A7566570064E682 /* App Config */ = {
+			isa = PBXGroup;
+			children = (
+				49DF07F61A743A2800BF94D3 /* AppDelegate.swift */,
+				49E8D8DB1A7566E00064E682 /* AppController.swift */,
+				49E8D8DD1A7567FF0064E682 /* AppearanceManager.swift */,
+			);
+			name = "App Config";
+			sourceTree = "<group>";
+		};
+		49E8D8DF1A7570DF0064E682 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				49E8D8E01A7571960064E682 /* NSFileManager+CDOExtensions.swift */,
+			);
+			name = Categories;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -253,15 +278,18 @@
 				49E8D8D61A7564400064E682 /* _Product.swift in Sources */,
 				49E8D8D81A7564400064E682 /* Pencil.swift in Sources */,
 				49E8D8BB1A7443F50064E682 /* JHProgressHUD.swift in Sources */,
+				49E8D8DE1A7567FF0064E682 /* AppearanceManager.swift in Sources */,
 				49E8D8D41A7564400064E682 /* _Manufacturer.swift in Sources */,
 				49E8D8D51A7564400064E682 /* _Pencil.swift in Sources */,
 				49DF07F91A743A2800BF94D3 /* ViewController.swift in Sources */,
 				49E8D8C51A74474B0064E682 /* rainbow-fish.xcdatamodeld in Sources */,
 				49DF07F71A743A2800BF94D3 /* AppDelegate.swift in Sources */,
 				49E8D8C71A7547770064E682 /* ColorValueTransformer.swift in Sources */,
+				49E8D8E11A7571960064E682 /* NSFileManager+CDOExtensions.swift in Sources */,
 				49E8D8D71A7564400064E682 /* Manufacturer.swift in Sources */,
 				49E8D8D31A7564400064E682 /* _Inventory.swift in Sources */,
 				49E8D8D91A7564400064E682 /* Product.swift in Sources */,
+				49E8D8DC1A7566E00064E682 /* AppController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
