@@ -14,7 +14,37 @@ class InventoryTableViewController: ContentTableViewController {
         case Alpha = 0, Quantity
     }
     
-    var sortMethodSegmentedControl: UISegmentedControl?
+    lazy var sortMethodSegmentedControl: UISegmentedControl = {
+        
+        let segControl =  UISegmentedControl(items: [
+            NSLocalizedString("A-Z",  comment: "inventory sort alpha title"),
+            NSLocalizedString("Least - Most", comment: "inventory tab sort lest to most title")])
+        
+        segControl.selectedSegmentIndex = InventorySortModes.Alpha.rawValue
+        segControl.tintColor = AppearanceManager.appearanceManager.brandColorLight
+        segControl.addTarget(self, action: "segmentControlChanged:", forControlEvents: .ValueChanged)
+        return segControl
+    }()
+    
+    lazy var searchBar: UISearchBar = {
+        let searchBar = UISearchBar()
+        searchBar.searchBarStyle = .Minimal
+        searchBar.placeholder = NSLocalizedString("Search", comment:"inventory search bar placeholder")
+        searchBar.delegate = self
+        return searchBar
+    }()
+    
+    lazy var demoDataSource: [(String, String, Int)] = {
+       return [
+            ("Cadmium Blue", "Prismacolor PC 1097", 3),
+            ("Forest Green", "Prismacolor PC 1015", 4),
+            ("Ferrari Red", "Prismacolor PC 1032", 2),
+            ("Arctic White", "Prismacolor PC 322", 1),
+            ("Desert Jasmine", "Prismacolor PC 3237", 1)
+        ]
+        
+    }()
+    
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -33,12 +63,48 @@ class InventoryTableViewController: ContentTableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        sortMethodSegmentedControl = UISegmentedControl(items: [
-            NSLocalizedString("A-Z",  comment: "inventory sort alpha title"),
-            NSLocalizedString("Least - Most", comment: "inventory tab sort lest to most title")])
-        sortMethodSegmentedControl!.selectedSegmentIndex = InventorySortModes.Alpha.rawValue
+        
         self.navigationItem.titleView = sortMethodSegmentedControl
-        sortMethodSegmentedControl!.tintColor = AppearanceManager.appearanceManager.brandColorLight
+        self.tableView!.rowHeight = UITableViewAutomaticDimension;
+        self.tableView!.estimatedRowHeight = 60.0
+        self.tableView!.registerNib(UINib(nibName: PencilTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: PencilTableViewCell.nibName)
+        self.tableView!.tableHeaderView = self.searchBar
+        self.searchBar.sizeToFit()        
+    }
+    
+    func segmentControlChanged(sender: UISegmentedControl) {
+        println("\(sender.selectedSegmentIndex)")
+    }
+    
+    
+}
+
+extension InventoryTableViewController : UITableViewDataSource, UITableViewDelegate {
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.demoDataSource.count
+    }
+    
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(PencilTableViewCell.nibName, forIndexPath: indexPath) as PencilTableViewCell
+        let tuple = demoDataSource[indexPath.row]
+        cell.title = tuple.0
+        cell.subtitle = tuple.1
+        cell.quantity = String(tuple.2)
+        return cell
     }
     
 }
+    
+    
+
+
+extension InventoryTableViewController : UISearchBarDelegate {
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        println("\(searchText)")
+    }
+    
+}
+
+

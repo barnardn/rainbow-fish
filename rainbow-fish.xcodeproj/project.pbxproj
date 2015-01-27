@@ -34,6 +34,8 @@
 		49E8D8EE1A75D2A50064E682 /* PencilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8ED1A75D2A50064E682 /* PencilViewController.swift */; };
 		49E8D8F01A75D4760064E682 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8EF1A75D4760064E682 /* SettingsTableViewController.swift */; };
 		49F914681A75DDDD0042EA0D /* InventoryNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F914671A75DDDD0042EA0D /* InventoryNavigationController.swift */; };
+		49F9146B1A7727C70042EA0D /* PencilTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F9146A1A7727C70042EA0D /* PencilTableViewCell.swift */; };
+		49F9146D1A7727E20042EA0D /* PencilTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F9146C1A7727E20042EA0D /* PencilTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -67,6 +69,8 @@
 		49E8D8ED1A75D2A50064E682 /* PencilViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PencilViewController.swift; sourceTree = "<group>"; };
 		49E8D8EF1A75D4760064E682 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		49F914671A75DDDD0042EA0D /* InventoryNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InventoryNavigationController.swift; sourceTree = "<group>"; };
+		49F9146A1A7727C70042EA0D /* PencilTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PencilTableViewCell.swift; sourceTree = "<group>"; };
+		49F9146C1A7727E20042EA0D /* PencilTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PencilTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +106,7 @@
 		49DF07F31A743A2800BF94D3 /* rainbow-fish */ = {
 			isa = PBXGroup;
 			children = (
+				49F914691A77279E0042EA0D /* Tableview Cells */,
 				49E8D8E21A75C66B0064E682 /* View Controllers */,
 				49E8D8DF1A7570DF0064E682 /* Categories */,
 				49E8D8DA1A7566570064E682 /* App Config */,
@@ -223,6 +228,15 @@
 			name = Settings;
 			sourceTree = "<group>";
 		};
+		49F914691A77279E0042EA0D /* Tableview Cells */ = {
+			isa = PBXGroup;
+			children = (
+				49F9146A1A7727C70042EA0D /* PencilTableViewCell.swift */,
+				49F9146C1A7727E20042EA0D /* PencilTableViewCell.xib */,
+			);
+			name = "Tableview Cells";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -288,6 +302,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49F9146D1A7727E20042EA0D /* PencilTableViewCell.xib in Resources */,
 				49DF08011A743A2800BF94D3 /* LaunchScreen.xib in Resources */,
 				49DF07FE1A743A2800BF94D3 /* Images.xcassets in Resources */,
 			);
@@ -338,6 +353,7 @@
 				49E8D8D61A7564400064E682 /* _Product.swift in Sources */,
 				49E8D8D81A7564400064E682 /* Pencil.swift in Sources */,
 				49E8D8BB1A7443F50064E682 /* JHProgressHUD.swift in Sources */,
+				49F9146B1A7727C70042EA0D /* PencilTableViewCell.swift in Sources */,
 				49E8D8DE1A7567FF0064E682 /* AppearanceManager.swift in Sources */,
 				49E8D8D41A7564400064E682 /* _Manufacturer.swift in Sources */,
 				49E8D8D51A7564400064E682 /* _Pencil.swift in Sources */,

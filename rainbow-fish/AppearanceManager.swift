@@ -18,6 +18,8 @@ class AppearanceManager {
         return Singleton.instance
     }
     
+    // MARK: colors
+    
     lazy var brandColor: UIColor = {
         return UIColor(red: 11.0/256.0, green: 163.0/256.0, blue: 244.0/256.0, alpha: 1.0)
     }()
@@ -38,6 +40,10 @@ class AppearanceManager {
         return UIColor(white: 0.0, alpha: 0.05)
     }()
     
+    lazy var selectedCellBackgroundColor: UIColor = {
+        return UIColor(red: 1.0/256.0, green: 161.0/256.0, blue: 221.0/256.0, alpha: 1.0)
+    }()
+    
     var bodyTextColor: UIColor {
         return self.blackColor
     }
@@ -45,6 +51,22 @@ class AppearanceManager {
     var subTitleColor: UIColor {
         return self.brandColorLight
     }
+    
+    // MARK: fonts
+    
+    var standardFont: UIFont {
+        return UIFont.systemFontOfSize(16.0)
+    }
+    
+    var subtitleFont: UIFont {
+        return UIFont.systemFontOfSize(12.0)
+    }
+    
+    var headlineFont: UIFont {
+        return UIFont.systemFontOfSize(24.0)
+    }
+    
+    // MARK: methods
     
     func setupAppearanceProxies() {
         
