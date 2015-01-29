@@ -22,7 +22,7 @@ class InventoryTableViewController: ContentTableViewController {
         
         segControl.selectedSegmentIndex = InventorySortModes.Alpha.rawValue
         segControl.tintColor = AppearanceManager.appearanceManager.brandColorLight
-        segControl.addTarget(self, action: "segmentControlChanged:", forControlEvents: .ValueChanged)
+        segControl.addTarget(self, action: Selector("segmentControlChanged:"), forControlEvents: .ValueChanged)
         return segControl
     }()
     
@@ -67,7 +67,7 @@ class InventoryTableViewController: ContentTableViewController {
         self.navigationItem.titleView = sortMethodSegmentedControl
         self.tableView!.rowHeight = UITableViewAutomaticDimension;
         self.tableView!.estimatedRowHeight = 60.0
-        self.tableView!.registerNib(UINib(nibName: PencilTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: PencilTableViewCell.nibName)
+        self.tableView!.registerNib(UINib(nibName: InventoryTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: InventoryTableViewCell.nibName)
         self.tableView!.tableHeaderView = self.searchBar
         self.searchBar.sizeToFit()        
     }
@@ -86,7 +86,7 @@ extension InventoryTableViewController : UITableViewDataSource, UITableViewDeleg
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(PencilTableViewCell.nibName, forIndexPath: indexPath) as PencilTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(InventoryTableViewCell.nibName, forIndexPath: indexPath) as InventoryTableViewCell
         let tuple = demoDataSource[indexPath.row]
         cell.title = tuple.0
         cell.subtitle = tuple.1
@@ -96,8 +96,6 @@ extension InventoryTableViewController : UITableViewDataSource, UITableViewDeleg
     
 }
     
-    
-
 
 extension InventoryTableViewController : UISearchBarDelegate {
     

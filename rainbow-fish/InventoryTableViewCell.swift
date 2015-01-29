@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import QuartzCore
 
-class PencilTableViewCell: UITableViewCell {
+class InventoryTableViewCell: UITableViewCell {
 
     @IBOutlet private weak var quantityLabel: UILabel!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var subTitleLabel: UILabel!
+    @IBOutlet weak var colorSwatchImageView: UIImageView!
     
     var titleColor: UIColor {
         get {
@@ -64,6 +66,10 @@ class PencilTableViewCell: UITableViewCell {
         self.subTitleLabel.font = AppearanceManager.appearanceManager.subtitleFont
         self.subTitleLabel.textColor = AppearanceManager.appearanceManager.subTitleColor
         
+        self.colorSwatchImageView.layer.cornerRadius = 10.0;
+        self.colorSwatchImageView.layer.borderColor = AppearanceManager.appearanceManager.blackColor.CGColor;
+        self.colorSwatchImageView.layer.borderWidth = 1.0;
+        
     }
     
     // MARK: class methods
@@ -73,6 +79,6 @@ class PencilTableViewCell: UITableViewCell {
     }
     
     class var nibName: String {
-        return "PencilTableViewCell"
+        return "InventoryTableViewCell"
     }
 }
