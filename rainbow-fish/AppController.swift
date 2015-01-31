@@ -26,6 +26,8 @@ class AppController {
         NSValueTransformer.setValueTransformer(ColorValueTransformer(), forName: "ColorValueTransformer")
         AppearanceManager.appearanceManager.setupAppearanceProxies()
         CoreDataKit.sharedStack = CoreDataStack(persistentStoreCoordinator: self.persistenStoreCoordinator)
+
+        
     }
     
     // MARK: core data properties
