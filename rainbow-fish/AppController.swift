@@ -25,9 +25,7 @@ class AppController {
     func setup() {
         NSValueTransformer.setValueTransformer(ColorValueTransformer(), forName: "ColorValueTransformer")
         AppearanceManager.appearanceManager.setupAppearanceProxies()
-        CoreDataKit.sharedStack = CoreDataStack(persistentStoreCoordinator: self.persistenStoreCoordinator)
-
-        
+        CoreDataKit.sharedStack = CoreDataStack(persistentStoreCoordinator: self.persistentStoreCoordinator)
     }
     
     // MARK: core data properties
@@ -37,8 +35,9 @@ class AppController {
         return NSManagedObjectModel(contentsOfURL: modelURL)!
     }()
     
-    lazy var persistenStoreCoordinator: NSPersistentStoreCoordinator = {
+    lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         let storeURL = self.urlForResourceInApplicationSupport(resourceName: self.storeName)
+        println("Store URL: \(storeURL)")
         return NSPersistentStoreCoordinator(automigrating: true, deleteOnMismatch: true, URL: storeURL, managedObjectModel: self.managedObjectModel)!
     }()
     

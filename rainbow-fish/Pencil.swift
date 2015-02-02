@@ -1,6 +1,20 @@
+import CoreDataKit
+
 @objc(Pencil)
-class Pencil: _Pencil {
+class Pencil: _Pencil, /*CloudSyncable, */NamedManagedObject {
 
-	// Custom logic goes here.
+    // MARK: NSManagedObject overrides
+    
+    override func awakeFromInsert() {
+        self.isNew = true
+        super.awakeFromInsert()
+    }
+    
+    // MARK: NamedManagedObject    
+    
+    class var entityName: String { return self.entityName() }
+    
 
+    
+    
 }

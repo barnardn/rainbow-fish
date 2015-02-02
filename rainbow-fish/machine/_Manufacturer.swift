@@ -4,7 +4,10 @@
 import CoreData
 
 enum ManufacturerAttributes: String {
+    case isNew = "isNew"
+    case modificationDate = "modificationDate"
     case name = "name"
+    case recordID = "recordID"
 }
 
 enum ManufacturerRelationships: String {
@@ -38,9 +41,24 @@ class _Manufacturer: NSManagedObject {
     // MARK: - Properties
 
     @NSManaged
+    var isNew: NSNumber?
+
+    // func validateIsNew(value: AutoreleasingUnsafePointer<AnyObject>, error: NSErrorPointer) {}
+
+    @NSManaged
+    var modificationDate: NSDate?
+
+    // func validateModificationDate(value: AutoreleasingUnsafePointer<AnyObject>, error: NSErrorPointer) {}
+
+    @NSManaged
     var name: String?
 
     // func validateName(value: AutoreleasingUnsafePointer<AnyObject>, error: NSErrorPointer) {}
+
+    @NSManaged
+    var recordID: String?
+
+    // func validateRecordID(value: AutoreleasingUnsafePointer<AnyObject>, error: NSErrorPointer) {}
 
     // MARK: - Relationships
 

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4913E5C91A7D81D600C4C9BF /* CloudManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4913E5C81A7D81D600C4C9BF /* CloudManager.swift */; };
+		4913E5CD1A7E893E00C4C9BF /* CloudSyncable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4913E5CC1A7E893E00C4C9BF /* CloudSyncable.swift */; };
 		49BB8F5E1A79D431007CFE3B /* Seeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BB8F5D1A79D431007CFE3B /* Seeder.swift */; };
 		49BB8F601A79D89C007CFE3B /* prismacolor-pencils.json in Resources */ = {isa = PBXBuildFile; fileRef = 49BB8F5F1A79D89C007CFE3B /* prismacolor-pencils.json */; };
 		49DF07F71A743A2800BF94D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DF07F61A743A2800BF94D3 /* AppDelegate.swift */; };
@@ -41,6 +43,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4913E5C81A7D81D600C4C9BF /* CloudManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudManager.swift; sourceTree = "<group>"; };
+		4913E5CC1A7E893E00C4C9BF /* CloudSyncable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudSyncable.swift; sourceTree = "<group>"; };
 		49BB8F5D1A79D431007CFE3B /* Seeder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Seeder.swift; sourceTree = "<group>"; };
 		49BB8F5F1A79D89C007CFE3B /* prismacolor-pencils.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "prismacolor-pencils.json"; sourceTree = "<group>"; };
 		49DF07F11A743A2800BF94D3 /* rainbow-fish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "rainbow-fish.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				49BB8F5D1A79D431007CFE3B /* Seeder.swift */,
+				4913E5C81A7D81D600C4C9BF /* CloudManager.swift */,
 			);
 			name = Cloudkit;
 			sourceTree = "<group>";
@@ -163,6 +168,7 @@
 				49E8D8D11A7564400064E682 /* Product.swift */,
 				49E8D8C31A74474B0064E682 /* rainbow-fish.xcdatamodeld */,
 				49E8D8C61A7547770064E682 /* ColorValueTransformer.swift */,
+				4913E5CC1A7E893E00C4C9BF /* CloudSyncable.swift */,
 			);
 			name = "Core Data";
 			sourceTree = "<group>";
@@ -366,6 +372,7 @@
 				49E8D8E51A75C6940064E682 /* RootViewController.swift in Sources */,
 				49E8D8E71A75C9420064E682 /* ContentTableViewController.swift in Sources */,
 				49E8D8D61A7564400064E682 /* _Product.swift in Sources */,
+				4913E5CD1A7E893E00C4C9BF /* CloudSyncable.swift in Sources */,
 				49E8D8D81A7564400064E682 /* Pencil.swift in Sources */,
 				49E8D8BB1A7443F50064E682 /* JHProgressHUD.swift in Sources */,
 				49F9146B1A7727C70042EA0D /* InventoryTableViewCell.swift in Sources */,
@@ -382,6 +389,7 @@
 				49F914681A75DDDD0042EA0D /* InventoryNavigationController.swift in Sources */,
 				49E8D8D31A7564400064E682 /* _Inventory.swift in Sources */,
 				49E8D8D91A7564400064E682 /* Product.swift in Sources */,
+				4913E5C91A7D81D600C4C9BF /* CloudManager.swift in Sources */,
 				49E8D8EC1A75CADE0064E682 /* InventoryTableViewController.swift in Sources */,
 				49E8D8DC1A7566E00064E682 /* AppController.swift in Sources */,
 				49E8D8F01A75D4760064E682 /* SettingsTableViewController.swift in Sources */,

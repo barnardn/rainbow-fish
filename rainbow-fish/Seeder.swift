@@ -64,7 +64,7 @@ class Seeder {
         product.setObject(name, forKey: ProductAttributes.name.rawValue)
         
         let manufactRef = CKReference(record: manufacturer, action: CKReferenceAction.DeleteSelf)
-        product.setObject(manufactRef, forKey: ManufacturerRelationships.products.rawValue);
+        product.setObject(manufactRef, forKey: ProductRelationships.manufacturer.rawValue);
         return product
     }
     

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import CoreData
+import CoreDataKit
 
 class RootViewController: UITabBarController {
 
@@ -33,11 +35,25 @@ class RootViewController: UITabBarController {
         
 #if SEED_CLOUD
         self.makeRain()
+#else
+        self.showHUD(header: "Updating Pencils", footer: "Please wait...")
+    
+    var predicate = NSPredicate(format: "%K == %@", "recordID", "6966EFFF-DC54-457B-BF77-DD3C8880B715")
+    
+    switch CoreDataKit.mainThreadContext.findFirst(Manufacturer.self, predicate: predicate, sortDescriptors: nil, offset: nil) {
+    case .Failure:
+        println("Grbilly")
+    case let .Success(boxedResult):
+        var m = boxedResult() as Manufacturer!
+        println(m.name!)
+    }
+
+    
+    
+        CloudManager.sharedManger.refreshManufacturersAndProducts{ [unowned self] () in
+            self.hideHUD()
+        }
 #endif
-        
-        
-        
-        
     }
     
     
@@ -70,8 +86,12 @@ class RootViewController: UITabBarController {
         var seeder = Seeder(seedFile: "prismacolor-pencils")
         seeder.seedPencilDatabase { [unowned self](countInserted, error) -> () in
             self.hideHUD()
-            if error != nil {
+            if error == nil {
                 println("inserted: \(countInserted)")
+                self.showHUD(header: "Updating Pencils", footer: "Please wait...")
+                CloudManager.sharedManger.refreshManufacturersAndProducts{ [unowned self] () in
+                    self.hideHUD()
+                }
             } else {
                 println(error)
             }
