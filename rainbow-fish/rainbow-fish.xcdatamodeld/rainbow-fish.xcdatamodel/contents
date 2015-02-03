@@ -31,8 +31,8 @@
     </entity>
     <elements>
         <element name="Inventory" positionX="97" positionY="117" width="128" height="73"/>
-        <element name="Manufacturer" positionX="16" positionY="225" width="128" height="120"/>
-        <element name="Pencil" positionX="-180" positionY="-4" width="128" height="165"/>
-        <element name="Product" positionX="-171" positionY="162" width="128" height="135"/>
+        <element name="Manufacturer" positionX="16" positionY="225" width="128" height="118"/>
+        <element name="Pencil" positionX="-180" positionY="-4" width="128" height="163"/>
+        <element name="Product" positionX="-171" positionY="162" width="128" height="133"/>
     </elements>
 </model>

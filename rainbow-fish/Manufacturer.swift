@@ -6,6 +6,21 @@ import CloudKit
 @objc(Manufacturer)
 class Manufacturer: _Manufacturer, CloudSyncable, NamedManagedObject {
 
+    func sayHi() {
+        println("\(self.name) says Hi!")
+    }
+    
+    func sortedProducts() -> [Product]? {
+        if let products = self.products.allObjects as? [Product] {
+            products.sorted{(p1: Product, p2: Product) in
+                let name1 = p1.name as String!
+                let name2 = p2.name as String!
+                return ((name1.localizedCaseInsensitiveCompare(name2)) == .OrderedDescending)
+            }
+        }
+        return nil
+    }
+    
     // MARK: NSManagedObject overrides
 
     override func awakeFromInsert() {
@@ -13,6 +28,11 @@ class Manufacturer: _Manufacturer, CloudSyncable, NamedManagedObject {
         super.awakeFromInsert()
     }
 
+    override func awakeFromFetch() {
+        super.awakeFromFetch()
+        println("hmm....")
+        self.sayHi()
+    }
     
     // MARK: NamedManagedObject
     class var entityName: String { return self.entityName() }

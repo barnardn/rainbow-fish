@@ -9,8 +9,11 @@
 /* Begin PBXBuildFile section */
 		4913E5C91A7D81D600C4C9BF /* CloudManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4913E5C81A7D81D600C4C9BF /* CloudManager.swift */; };
 		4913E5CD1A7E893E00C4C9BF /* CloudSyncable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4913E5CC1A7E893E00C4C9BF /* CloudSyncable.swift */; };
+		4973DA701A7F05CB00619D06 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4973DA6F1A7F05CB00619D06 /* ProductTableViewCell.swift */; };
+		4973DA721A7F05E600619D06 /* ProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4973DA711A7F05E600619D06 /* ProductTableViewCell.xib */; };
 		49BB8F5E1A79D431007CFE3B /* Seeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BB8F5D1A79D431007CFE3B /* Seeder.swift */; };
 		49BB8F601A79D89C007CFE3B /* prismacolor-pencils.json in Resources */ = {isa = PBXBuildFile; fileRef = 49BB8F5F1A79D89C007CFE3B /* prismacolor-pencils.json */; };
+		49BEC0E31A7F094E00A601CF /* ProductHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BEC0E21A7F094E00A601CF /* ProductHeaderView.swift */; };
 		49DF07F71A743A2800BF94D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DF07F61A743A2800BF94D3 /* AppDelegate.swift */; };
 		49DF07F91A743A2800BF94D3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DF07F81A743A2800BF94D3 /* ViewController.swift */; };
 		49DF07FE1A743A2800BF94D3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49DF07FD1A743A2800BF94D3 /* Images.xcassets */; };
@@ -45,8 +48,11 @@
 /* Begin PBXFileReference section */
 		4913E5C81A7D81D600C4C9BF /* CloudManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudManager.swift; sourceTree = "<group>"; };
 		4913E5CC1A7E893E00C4C9BF /* CloudSyncable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudSyncable.swift; sourceTree = "<group>"; };
+		4973DA6F1A7F05CB00619D06 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
+		4973DA711A7F05E600619D06 /* ProductTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductTableViewCell.xib; sourceTree = "<group>"; };
 		49BB8F5D1A79D431007CFE3B /* Seeder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Seeder.swift; sourceTree = "<group>"; };
 		49BB8F5F1A79D89C007CFE3B /* prismacolor-pencils.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "prismacolor-pencils.json"; sourceTree = "<group>"; };
+		49BEC0E21A7F094E00A601CF /* ProductHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductHeaderView.swift; sourceTree = "<group>"; };
 		49DF07F11A743A2800BF94D3 /* rainbow-fish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "rainbow-fish.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		49DF07F51A743A2800BF94D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		49DF07F61A743A2800BF94D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -95,6 +101,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4973DA6E1A7F058700619D06 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				4973DA6F1A7F05CB00619D06 /* ProductTableViewCell.swift */,
+				4973DA711A7F05E600619D06 /* ProductTableViewCell.xib */,
+				49BEC0E21A7F094E00A601CF /* ProductHeaderView.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
 		49BB8F5C1A79D402007CFE3B /* Cloudkit */ = {
 			isa = PBXGroup;
 			children = (
@@ -235,6 +251,7 @@
 		49E8D8E91A75C9F60064E682 /* Pencils */ = {
 			isa = PBXGroup;
 			children = (
+				4973DA6E1A7F058700619D06 /* Cells */,
 				49E8D8ED1A75D2A50064E682 /* PencilViewController.swift */,
 			);
 			name = Pencils;
@@ -324,6 +341,7 @@
 			files = (
 				49F9146D1A7727E20042EA0D /* InventoryTableViewCell.xib in Resources */,
 				49DF08011A743A2800BF94D3 /* LaunchScreen.xib in Resources */,
+				4973DA721A7F05E600619D06 /* ProductTableViewCell.xib in Resources */,
 				49BB8F601A79D89C007CFE3B /* prismacolor-pencils.json in Resources */,
 				49DF07FE1A743A2800BF94D3 /* Images.xcassets in Resources */,
 			);
@@ -388,12 +406,14 @@
 				49E8D8EE1A75D2A50064E682 /* PencilViewController.swift in Sources */,
 				49F914681A75DDDD0042EA0D /* InventoryNavigationController.swift in Sources */,
 				49E8D8D31A7564400064E682 /* _Inventory.swift in Sources */,
+				4973DA701A7F05CB00619D06 /* ProductTableViewCell.swift in Sources */,
 				49E8D8D91A7564400064E682 /* Product.swift in Sources */,
 				4913E5C91A7D81D600C4C9BF /* CloudManager.swift in Sources */,
 				49E8D8EC1A75CADE0064E682 /* InventoryTableViewController.swift in Sources */,
 				49E8D8DC1A7566E00064E682 /* AppController.swift in Sources */,
 				49E8D8F01A75D4760064E682 /* SettingsTableViewController.swift in Sources */,
 				49BB8F5E1A79D431007CFE3B /* Seeder.swift in Sources */,
+				49BEC0E31A7F094E00A601CF /* ProductHeaderView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
