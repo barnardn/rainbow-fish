@@ -21,7 +21,7 @@ class InventoryTableViewController: ContentTableViewController {
             NSLocalizedString("Least - Most", comment: "inventory tab sort lest to most title")])
         
         segControl.selectedSegmentIndex = InventorySortModes.Alpha.rawValue
-        segControl.tintColor = AppearanceManager.appearanceManager.brandColorLight
+        segControl.tintColor = UIColor.whiteColor()
         segControl.addTarget(self, action: Selector("segmentControlChanged:"), forControlEvents: .ValueChanged)
         return segControl
     }()
