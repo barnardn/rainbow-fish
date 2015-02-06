@@ -1,9 +1,10 @@
 import CloudKit
 import CoreDataKit
 
-@objc(Product)
-class Product: _Product,  CloudSyncable, NamedManagedObject {
 
+@objc(Product)
+class Product: _Product, NamedManagedObject {
+    
     // MARK: NSManagedObject overrides
     
     override func awakeFromInsert() {
@@ -14,11 +15,14 @@ class Product: _Product,  CloudSyncable, NamedManagedObject {
     // MARK: NamedManagedObject
     class var entityName: String { return self.entityName() }
 
-    // MARK: CloudSyncable
-    
+}
+
+extension Product: CloudSyncable {
+  
     func populateFromCKRecord(record: CKRecord) {
         self.recordID = record.recordID.recordName
         self.name = record.objectForKey(ProductAttributes.name.rawValue) as? String
         self.modificationDate = record.modificationDate
     }
+
 }

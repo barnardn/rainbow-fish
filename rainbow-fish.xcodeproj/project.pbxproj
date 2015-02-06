@@ -284,8 +284,8 @@
 				49E8D8C81A75630C0064E682 /* Mogenerator */,
 				49DF07ED1A743A2800BF94D3 /* Sources */,
 				49DF07EE1A743A2800BF94D3 /* Frameworks */,
-				49DF07EF1A743A2800BF94D3 /* Resources */,
 				49E8D8BC1A7444190064E682 /* Carthage copy frameworks */,
+				49DF07EF1A743A2800BF94D3 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -377,7 +377,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "/usr/bin/mogenerator -m $SRCROOT/$TARGET_NAME/$TARGET_NAME.xcdatamodeld/$TARGET_NAME.xcdatamodel -H $SRCROOT/$TARGET_NAME -M $SRCROOT/$TARGET_NAME/machine --template-var arc=true --swift";
+			shellScript = "/usr/bin/mogenerator --v2 --swift -m $SRCROOT/$TARGET_NAME/$TARGET_NAME.xcdatamodeld/$TARGET_NAME.xcdatamodel -H $SRCROOT/$TARGET_NAME -M $SRCROOT/$TARGET_NAME/machine";
 		};
 /* End PBXShellScriptBuildPhase section */
 

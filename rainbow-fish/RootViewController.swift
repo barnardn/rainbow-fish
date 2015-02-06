@@ -37,26 +37,11 @@ class RootViewController: UITabBarController {
         self.makeRain()
 #else
         self.showHUD(header: "Updating Pencils", footer: "Please wait...")
-    
-    var predicate = NSPredicate(format: "%K == %@", "recordID", "6966EFFF-DC54-457B-BF77-DD3C8880B715")
-    switch CoreDataKit.mainThreadContext.findFirst(Manufacturer.self, predicate: predicate, sortDescriptors: nil, offset: nil) {
-    case .Failure:
-        println("Grbilly")
-    case let .Success(boxedResult):
-        if let m = boxedResult() as Manufacturer! {
-            println(m.name!)
-            m.sayHi()
-        }
-//        var m = boxedResult() as Manufacturer!
-//        println(m.name!)
-//        m.sayHi()
-    }
-
-    
-    
         CloudManager.sharedManger.refreshManufacturersAndProducts{ [unowned self] () in
-            self.hideHUD()
-        }
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.hideHUD()
+            })
+        }    
 #endif
     }
     

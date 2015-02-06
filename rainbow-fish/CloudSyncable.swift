@@ -11,6 +11,7 @@ import CoreData
 import CoreDataKit
 import CloudKit
 
+@objc
 protocol CloudSyncable {  // used by NSMangedObject
     
     var recordID: String? { get set }

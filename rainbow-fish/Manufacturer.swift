@@ -4,9 +4,36 @@ import CoreDataKit
 import CloudKit
 
 @objc(Manufacturer)
-class Manufacturer: _Manufacturer, CloudSyncable, NamedManagedObject {
+class Manufacturer: _Manufacturer, NamedManagedObject {
+    
+    // MARK: NSManagedObject overrides
 
-    func sayHi() {
+    override func awakeFromInsert() {
+        self.isNew = true
+        super.awakeFromInsert()
+    }
+    
+    // MARK: NamedManagedObject
+    class var entityName: String { return self.entityName() }
+
+    // MARK: CloudSyncable
+}
+
+extension Manufacturer: CloudSyncable {
+   
+    func populateFromCKRecord(record: CKRecord) {
+        self.recordID = record.recordID.recordName
+        self.modificationDate = record.modificationDate
+        self.name = record.objectForKey(ManufacturerAttributes.name.rawValue) as? String
+    }
+    
+}
+
+
+
+extension Manufacturer {
+    
+    func sayHi() -> Void {
         println("\(self.name) says Hi!")
     }
     
@@ -21,28 +48,5 @@ class Manufacturer: _Manufacturer, CloudSyncable, NamedManagedObject {
         return nil
     }
     
-    // MARK: NSManagedObject overrides
-
-    override func awakeFromInsert() {
-        self.isNew = true
-        super.awakeFromInsert()
-    }
-
-    override func awakeFromFetch() {
-        super.awakeFromFetch()
-        println("hmm....")
-        self.sayHi()
-    }
-    
-    // MARK: NamedManagedObject
-    class var entityName: String { return self.entityName() }
-
-    // MARK: CloudSyncable
-    
-    func populateFromCKRecord(record: CKRecord) {
-        self.recordID = record.recordID.recordName
-        self.modificationDate = record.modificationDate
-        self.name = record.objectForKey(ManufacturerAttributes.name.rawValue) as? String
-    }
     
 }

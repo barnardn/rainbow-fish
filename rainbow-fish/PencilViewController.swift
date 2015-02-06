@@ -39,7 +39,7 @@ class PencilViewController: ContentTableViewController {
         self.tableView.registerNib(UINib(nibName: ProductTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: ProductTableViewCell.nibName)
         self.tableView.registerClass(ProductHeaderView.self, forHeaderFooterViewReuseIdentifier: "ProductHeaderView")
         self.tableView!.rowHeight = UITableViewAutomaticDimension;
-        self.tableView!.estimatedRowHeight = ProductTableViewCell.estimatedRowHeight
+        self.tableView!.rowHeight = ProductTableViewCell.estimatedRowHeight
     }
     
 }
@@ -74,7 +74,7 @@ extension PencilViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func productAtIndexPath(indexPath: NSIndexPath) -> Product? {
-        var manufacturer: Manufacturer = allManufacturers[indexPath.section] as Manufacturer
+        var manufacturer = allManufacturers[indexPath.section] as Manufacturer
         println(manufacturer.name)
         manufacturer.sayHi()
         if let products = manufacturer.sortedProducts() {
