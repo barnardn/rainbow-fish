@@ -39,10 +39,10 @@ extension Manufacturer {
     
     func sortedProducts() -> [Product]? {
         if let products = self.products.allObjects as? [Product] {
-            products.sorted{(p1: Product, p2: Product) in
+            return products.sorted{(p1: Product, p2: Product) in
                 let name1 = p1.name as String!
                 let name2 = p2.name as String!
-                return ((name1.localizedCaseInsensitiveCompare(name2)) == .OrderedDescending)
+                return ((name1.localizedCaseInsensitiveCompare(name2)) == .OrderedAscending)
             }
         }
         return nil

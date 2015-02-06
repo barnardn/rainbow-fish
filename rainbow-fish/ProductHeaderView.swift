@@ -42,7 +42,7 @@ class ProductHeaderView: UITableViewHeaderFooterView {
     }
     
     override func layoutSubviews() {
-        self.titleLabel.frame = CGRectMake(0, 0, CGRectGetWidth(self.bounds), ProductHeaderView.headerHeight)
+        self.titleLabel.frame = CGRectMake(10, 0, CGRectGetWidth(self.bounds), ProductHeaderView.headerHeight)
     }
     
     class var headerHeight: CGFloat {

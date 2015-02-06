@@ -24,7 +24,7 @@ class RootViewController: UITabBarController {
         super.init()
         viewControllers = [
                 InventoryNavigationController(),
-                PencilViewController(style: .Plain),
+                PencilNavigationController(),
                 SettingsTableViewController(style: .Grouped)
         ]
     }
@@ -40,32 +40,12 @@ class RootViewController: UITabBarController {
         CloudManager.sharedManger.refreshManufacturersAndProducts{ [unowned self] () in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 self.hideHUD()
+                NSNotificationCenter.defaultCenter().postNotificationName(AppNotifications.DidFinishCloudUpdate.rawValue, object: nil)
             })
         }    
 #endif
     }
-    
-    
-
-    
-    //MARK: HUD methods
-    
-    func showHUD(#header: String?, footer: String?) {
-        dispatch_async(dispatch_get_main_queue(), {[unowned self] () -> Void in
-            if let (header, footer) = (header, footer) as (String?,String?)? {
-                JHProgressHUD.sharedHUD.showInView(self.view, withHeader: header, andFooter: footer)
-            } else {
-                JHProgressHUD.sharedHUD.showInView(self.view)
-            }
-        })
-    }
-    
-    func hideHUD() {
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            JHProgressHUD.sharedHUD.hide()
-        })
-    }
-    
+        
     //MARK: seed cloudkit
     //TODO: REMOVE BEFORE APP SUBMISSION!!
     
