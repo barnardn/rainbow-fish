@@ -55,6 +55,7 @@ class InventoryTableViewCell: UITableViewCell {
         super.awakeFromNib()
         self.accessoryType = .DisclosureIndicator
         self.selectedBackgroundView = UIView(frame: self.bounds)
+        self.separatorInset = UIEdgeInsets(top: 0, left: 35.0, bottom: 0, right: 0)
         self.selectedBackgroundView.backgroundColor = AppearanceManager.appearanceManager.selectedCellBackgroundColor
         self.contentView.backgroundColor = UIColor.whiteColor()
         self.quantityLabel.font = AppearanceManager.appearanceManager.standardFont
