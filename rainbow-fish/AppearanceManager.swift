@@ -24,12 +24,12 @@ class AppearanceManager {
         return UIColor(red: 11.0/256.0, green: 163.0/256.0, blue: 244.0/256.0, alpha: 1.0)
     }()
     
-    lazy var brandColorLight: UIColor = {
-        return UIColor(red: 1.0/256.0, green: 221.0/256.0, blue: 213.0/256.0, alpha: 1.0)
+    lazy var brandColorAlternate: UIColor = {
+        return UIColor(red: 30.0/256.0, green: 1.0/256.0, blue: 250.0/256.0, alpha: 1.0)
     }()
     
     lazy var appBackgroundColor: UIColor = {
-        return UIColor(red: 215.0/256.0, green: 238.0/256.0, blue: 254.0/256.0, alpha: 1.0)
+        return UIColor(red: 228.0/256.0, green: 238.0/256.0, blue: 254.0/256.0, alpha: 1.0)
     }()
     
     lazy var blackColor: UIColor = {
@@ -49,7 +49,7 @@ class AppearanceManager {
     }
     
     var subTitleColor: UIColor {
-        return self.brandColorLight
+        return self.brandColorAlternate
     }
     
     // MARK: fonts
@@ -74,8 +74,7 @@ class AppearanceManager {
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
 
         UITabBar.appearance().barTintColor = self.brandColor
-        UITabBar.appearance().tintColor = self.brandColorLight
-
+        UITabBar.appearance().tintColor = self.brandColorAlternate
     }
     
     
