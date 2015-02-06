@@ -27,6 +27,7 @@ class PencilViewController: ContentTableViewController {
         var image = UIImage(named: "tabbar-icon-pencils")?.imageWithRenderingMode(.AlwaysTemplate)
         self.tabBarItem = UITabBarItem(title: NSLocalizedString("All Pencils", comment:"all pencils tab bar item title"), image: image, tag: 1)
         self.title = NSLocalizedString("Browse Pencils", comment:"browse all pencils navigation title")
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("updateDatasource"), name: AppNotifications.DidFinishCloudUpdate.rawValue, object: nil)
     }
     
     override func viewDidLoad() {
@@ -34,9 +35,18 @@ class PencilViewController: ContentTableViewController {
         self.tableView.registerNib(UINib(nibName: ProductTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: ProductTableViewCell.nibName)
         self.tableView.registerClass(ProductHeaderView.self, forHeaderFooterViewReuseIdentifier: "ProductHeaderView")
         self.tableView!.rowHeight = ProductTableViewCell.estimatedRowHeight
-        updateDatasource()
-        self.tableView!.reloadData()
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        struct Static {
+            static var token: dispatch_once_t = 0
+        }
+        dispatch_once(&Static.token, { () -> Void in
+            self.updateDatasource()
+        })
+    }
+    
     
     func updateDatasource() {
         switch CoreDataKit.mainThreadContext.find(Manufacturer.self, predicate: nil, sortDescriptors: [NSSortDescriptor(key: ManufacturerAttributes.name.rawValue, ascending: true)], limit: nil, offset: nil) {
@@ -46,6 +56,7 @@ class PencilViewController: ContentTableViewController {
         case let .Success(boxedResults):
             self.allManufacturers = boxedResults()
         }
+        self.tableView!.reloadData()
     }
 }
 
