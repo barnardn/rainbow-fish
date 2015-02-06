@@ -24,7 +24,7 @@ class RootViewController: UITabBarController {
         super.init()
         viewControllers = [
                 InventoryNavigationController(),
-                PencilViewController(style: .Plain),
+                PencilNavigationController(),
                 SettingsTableViewController(style: .Grouped)
         ]
     }
@@ -37,50 +37,15 @@ class RootViewController: UITabBarController {
         self.makeRain()
 #else
         self.showHUD(header: "Updating Pencils", footer: "Please wait...")
-    
-    var predicate = NSPredicate(format: "%K == %@", "recordID", "6966EFFF-DC54-457B-BF77-DD3C8880B715")
-    switch CoreDataKit.mainThreadContext.findFirst(Manufacturer.self, predicate: predicate, sortDescriptors: nil, offset: nil) {
-    case .Failure:
-        println("Grbilly")
-    case let .Success(boxedResult):
-        if let m = boxedResult() as Manufacturer! {
-            println(m.name!)
-            m.sayHi()
-        }
-//        var m = boxedResult() as Manufacturer!
-//        println(m.name!)
-//        m.sayHi()
-    }
-
-    
-    
         CloudManager.sharedManger.refreshManufacturersAndProducts{ [unowned self] () in
-            self.hideHUD()
-        }
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                self.hideHUD()
+                NSNotificationCenter.defaultCenter().postNotificationName(AppNotifications.DidFinishCloudUpdate.rawValue, object: nil)
+            })
+        }    
 #endif
     }
-    
-    
-
-    
-    //MARK: HUD methods
-    
-    func showHUD(#header: String?, footer: String?) {
-        dispatch_async(dispatch_get_main_queue(), {[unowned self] () -> Void in
-            if let (header, footer) = (header, footer) as (String?,String?)? {
-                JHProgressHUD.sharedHUD.showInView(self.view, withHeader: header, andFooter: footer)
-            } else {
-                JHProgressHUD.sharedHUD.showInView(self.view)
-            }
-        })
-    }
-    
-    func hideHUD() {
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            JHProgressHUD.sharedHUD.hide()
-        })
-    }
-    
+        
     //MARK: seed cloudkit
     //TODO: REMOVE BEFORE APP SUBMISSION!!
     

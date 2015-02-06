@@ -11,7 +11,7 @@ import CoreDataKit
 
 class PencilViewController: ContentTableViewController {
 
-    var allManufacturers: [Manufacturer]!
+    var allManufacturers: [Manufacturer]?
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -22,26 +22,31 @@ class PencilViewController: ContentTableViewController {
     }
     
     override init(style: UITableViewStyle) {
-        
+        allManufacturers = [Manufacturer]()
         super.init(style: UITableViewStyle.Grouped)
-        
+        var image = UIImage(named: "tabbar-icon-pencils")?.imageWithRenderingMode(.AlwaysTemplate)
+        self.tabBarItem = UITabBarItem(title: NSLocalizedString("All Pencils", comment:"all pencils tab bar item title"), image: image, tag: 1)
+        self.title = NSLocalizedString("Browse Pencils", comment:"browse all pencils navigation title")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.tableView.registerNib(UINib(nibName: ProductTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: ProductTableViewCell.nibName)
+        self.tableView.registerClass(ProductHeaderView.self, forHeaderFooterViewReuseIdentifier: "ProductHeaderView")
+        self.tableView!.rowHeight = ProductTableViewCell.estimatedRowHeight
+        updateDatasource()
+        self.tableView!.reloadData()
+    }
+    
+    func updateDatasource() {
         switch CoreDataKit.mainThreadContext.find(Manufacturer.self, predicate: nil, sortDescriptors: [NSSortDescriptor(key: ManufacturerAttributes.name.rawValue, ascending: true)], limit: nil, offset: nil) {
             
         case let .Failure(error):
             assertionFailure(error.localizedDescription)
         case let .Success(boxedResults):
             self.allManufacturers = boxedResults()
-            self.tableView.reloadData()
         }
-
-        var image = UIImage(named: "tabbar-icon-pencils")?.imageWithRenderingMode(.AlwaysTemplate)
-        self.tabBarItem = UITabBarItem(title: NSLocalizedString("All Pencils", comment:"all pencils tab bar item title"), image: image, tag: 1)
-        self.tableView.registerNib(UINib(nibName: ProductTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: ProductTableViewCell.nibName)
-        self.tableView.registerClass(ProductHeaderView.self, forHeaderFooterViewReuseIdentifier: "ProductHeaderView")
-        self.tableView!.rowHeight = UITableViewAutomaticDimension;
-        self.tableView!.estimatedRowHeight = ProductTableViewCell.estimatedRowHeight
     }
-    
 }
 
 extension PencilViewController: UITableViewDataSource, UITableViewDelegate {
@@ -51,7 +56,7 @@ extension PencilViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let manufacturer = allManufacturers[section] as Manufacturer
+        let manufacturer = allManufacturers![section] as Manufacturer
         return manufacturer.products.count
     }
 
@@ -64,7 +69,7 @@ extension PencilViewController: UITableViewDataSource, UITableViewDelegate {
     
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier("ProductHeaderView") as ProductHeaderView
-        let manufacturer = allManufacturers[section] as Manufacturer
+        let manufacturer = allManufacturers![section] as Manufacturer
         headerView.title = manufacturer.name
         return headerView
     }
@@ -74,9 +79,8 @@ extension PencilViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func productAtIndexPath(indexPath: NSIndexPath) -> Product? {
-        var manufacturer: Manufacturer = allManufacturers[indexPath.section] as Manufacturer
+        var manufacturer = allManufacturers![indexPath.section] as Manufacturer
         println(manufacturer.name)
-        manufacturer.sayHi()
         if let products = manufacturer.sortedProducts() {
             return products[indexPath.row]
         }
