@@ -29,13 +29,7 @@ extension Manufacturer: CloudSyncable {
     
 }
 
-
-
 extension Manufacturer {
-    
-    func sayHi() -> Void {
-        println("\(self.name) says Hi!")
-    }
     
     func sortedProducts() -> [Product]? {
         if let products = self.products.allObjects as? [Product] {

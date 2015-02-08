@@ -52,7 +52,8 @@ class SelectManufacturerTableViewController: UITableViewController {
 
 }
 
-extension SelectManufacturerTableViewController: UITableViewDataSource, UITableViewDelegate {
+// MARK: -- UITableViewDataSource
+extension SelectManufacturerTableViewController: UITableViewDataSource {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let manufacturers = self.manufacturers {
@@ -77,7 +78,12 @@ extension SelectManufacturerTableViewController: UITableViewDataSource, UITableV
         }
         return cell
     }
+   
+}
 
+// MARK: -- UITableViewDelegate
+extension SelectManufacturerTableViewController: UITableViewDelegate {
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if let manufacturers = self.manufacturers {
             viewModel?.manufacturer = manufacturers[indexPath.row]
@@ -86,6 +92,6 @@ extension SelectManufacturerTableViewController: UITableViewDataSource, UITableV
         }
     }
     
-    
-    
 }
+
+

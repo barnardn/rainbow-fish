@@ -25,6 +25,9 @@
 		4973DA701A7F05CB00619D06 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4973DA6F1A7F05CB00619D06 /* ProductTableViewCell.swift */; };
 		4973DA721A7F05E600619D06 /* ProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4973DA711A7F05E600619D06 /* ProductTableViewCell.xib */; };
 		49AC9E391A87D59D007CE68A /* SelectProductTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AC9E381A87D59D007CE68A /* SelectProductTableViewController.swift */; };
+		49AC9E3B1A87DD67007CE68A /* SelectPencilTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AC9E3A1A87DD67007CE68A /* SelectPencilTableViewController.swift */; };
+		49AC9E3E1A87E120007CE68A /* DefaultDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AC9E3C1A87E120007CE68A /* DefaultDetailTableViewCell.swift */; };
+		49AC9E3F1A87E120007CE68A /* DefaultDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49AC9E3D1A87E120007CE68A /* DefaultDetailTableViewCell.xib */; };
 		49BB8F5E1A79D431007CFE3B /* Seeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BB8F5D1A79D431007CFE3B /* Seeder.swift */; };
 		49BB8F601A79D89C007CFE3B /* prismacolor-pencils.json in Resources */ = {isa = PBXBuildFile; fileRef = 49BB8F5F1A79D89C007CFE3B /* prismacolor-pencils.json */; };
 		49BEC0E31A7F094E00A601CF /* ProductHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BEC0E21A7F094E00A601CF /* ProductHeaderView.swift */; };
@@ -78,6 +81,9 @@
 		4973DA6F1A7F05CB00619D06 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
 		4973DA711A7F05E600619D06 /* ProductTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductTableViewCell.xib; sourceTree = "<group>"; };
 		49AC9E381A87D59D007CE68A /* SelectProductTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectProductTableViewController.swift; sourceTree = "<group>"; };
+		49AC9E3A1A87DD67007CE68A /* SelectPencilTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPencilTableViewController.swift; sourceTree = "<group>"; };
+		49AC9E3C1A87E120007CE68A /* DefaultDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultDetailTableViewCell.swift; sourceTree = "<group>"; };
+		49AC9E3D1A87E120007CE68A /* DefaultDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultDetailTableViewCell.xib; sourceTree = "<group>"; };
 		49BB8F5D1A79D431007CFE3B /* Seeder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Seeder.swift; sourceTree = "<group>"; };
 		49BB8F5F1A79D89C007CFE3B /* prismacolor-pencils.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "prismacolor-pencils.json"; sourceTree = "<group>"; };
 		49BEC0E21A7F094E00A601CF /* ProductHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductHeaderView.swift; sourceTree = "<group>"; };
@@ -152,6 +158,7 @@
 				493803771A86AE8900E62FC2 /* EmbeddedPickerTableViewCell.swift */,
 				4938037E1A86BA7100E62FC2 /* NameValueTableViewCell.swift */,
 				493FC60E1A86ED5700D8D17F /* DefaultTableViewCell.swift */,
+				49AC9E3C1A87E120007CE68A /* DefaultDetailTableViewCell.swift */,
 			);
 			name = "Tableview Cells";
 			sourceTree = "<group>";
@@ -160,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				493FC60F1A86ED5700D8D17F /* DefaultTableViewCell.xib */,
+				49AC9E3D1A87E120007CE68A /* DefaultDetailTableViewCell.xib */,
 				4938037F1A86BA7100E62FC2 /* NameValueTableViewCell.xib */,
 				493803781A86AE8900E62FC2 /* EmbeddedPickerTableViewCell.xib */,
 			);
@@ -171,6 +179,7 @@
 			children = (
 				493803831A86C03100E62FC2 /* SelectManufacturerTableViewController.swift */,
 				49AC9E381A87D59D007CE68A /* SelectProductTableViewController.swift */,
+				49AC9E3A1A87DD67007CE68A /* SelectPencilTableViewController.swift */,
 			);
 			name = "Edit Manufacturer";
 			sourceTree = "<group>";
@@ -429,6 +438,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49AC9E3F1A87E120007CE68A /* DefaultDetailTableViewCell.xib in Resources */,
 				49F9146D1A7727E20042EA0D /* InventoryTableViewCell.xib in Resources */,
 				493FC6111A86ED5700D8D17F /* DefaultTableViewCell.xib in Resources */,
 				49DF08011A743A2800BF94D3 /* LaunchScreen.xib in Resources */,
@@ -489,6 +499,7 @@
 				4913E5CD1A7E893E00C4C9BF /* CloudSyncable.swift in Sources */,
 				49AC9E391A87D59D007CE68A /* SelectProductTableViewController.swift in Sources */,
 				49E8D8D81A7564400064E682 /* Pencil.swift in Sources */,
+				49AC9E3B1A87DD67007CE68A /* SelectPencilTableViewController.swift in Sources */,
 				49E8D8BB1A7443F50064E682 /* JHProgressHUD.swift in Sources */,
 				493803761A86A8EC00E62FC2 /* PencilProductNavigationController.swift in Sources */,
 				49F9146B1A7727C70042EA0D /* InventoryTableViewCell.swift in Sources */,
@@ -503,6 +514,7 @@
 				49E8D8C71A7547770064E682 /* ColorValueTransformer.swift in Sources */,
 				49E8D8E11A7571960064E682 /* NSFileManager+CDOExtensions.swift in Sources */,
 				49E8D8D71A7564400064E682 /* Manufacturer.swift in Sources */,
+				49AC9E3E1A87E120007CE68A /* DefaultDetailTableViewCell.swift in Sources */,
 				493803841A86C03100E62FC2 /* SelectManufacturerTableViewController.swift in Sources */,
 				49E8D8EE1A75D2A50064E682 /* PencilViewController.swift in Sources */,
 				49F914681A75DDDD0042EA0D /* InventoryNavigationController.swift in Sources */,

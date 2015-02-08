@@ -170,6 +170,8 @@ extension PencilProductTableViewController: UITableViewDelegate {
             } else if indexPath.row == 1 {
                 self.navigationController?.pushViewController(SelectProductTableViewController(viewModel: self.viewModel!), animated: true)
             }
+        } else if indexPath.section == TableSections.Pencil.rawValue {
+            self.navigationController?.pushViewController(SelectPencilTableViewController(viewModel: self.viewModel!), animated: true)
         }
     }
     

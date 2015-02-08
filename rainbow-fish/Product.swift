@@ -26,3 +26,18 @@ extension Product: CloudSyncable {
     }
 
 }
+
+extension Product {
+    
+    func sortedPencils() -> [Pencil]? {
+        if let pencils = self.pencils.allObjects as? [Pencil] {
+            return pencils.sorted({ (p1: Pencil, p2: Pencil) -> Bool in
+                let name1 = p1.name as String!
+                let name2 = p2.name as String!
+                return (name1.localizedCaseInsensitiveCompare(name2) == .OrderedDescending)
+            })
+        }
+        return nil
+    }
+    
+}

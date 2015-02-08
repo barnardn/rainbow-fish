@@ -54,8 +54,6 @@ extension SelectProductTableViewController: UITableViewDataSource {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(DefaultTableViewCell.nibName, forIndexPath: indexPath) as UITableViewCell
-        cell.textLabel?.font = AppearanceManager.appearanceManager.standardFont
-        cell.textLabel?.textColor = AppearanceManager.appearanceManager.bodyTextColor
         cell.accessoryType = .None
         
         if let product = self.products?[indexPath.row] {
