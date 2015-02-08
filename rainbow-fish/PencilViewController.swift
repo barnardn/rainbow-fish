@@ -35,6 +35,9 @@ class PencilViewController: ContentTableViewController {
         self.tableView.registerNib(UINib(nibName: ProductTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: ProductTableViewCell.nibName)
         self.tableView.registerClass(ProductHeaderView.self, forHeaderFooterViewReuseIdentifier: "ProductHeaderView")
         self.tableView!.rowHeight = ProductTableViewCell.estimatedRowHeight
+        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: Selector("addButtonTapped:"))
+        addButton.tintColor = UIColor.whiteColor()
+        navigationItem.rightBarButtonItem = addButton
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -47,6 +50,11 @@ class PencilViewController: ContentTableViewController {
         })
     }
     
+    // MARK: button action
+    
+    func addButtonTapped(sender: UIBarButtonItem) {
+        self.presentViewController(PencilProductNavigationController(nibName: nil, bundle: nil), animated: true, completion: nil)
+    }
     
     func updateDatasource() {
         switch CoreDataKit.mainThreadContext.find(Manufacturer.self, predicate: nil, sortDescriptors: [NSSortDescriptor(key: ManufacturerAttributes.name.rawValue, ascending: true)], limit: nil, offset: nil) {

@@ -62,6 +62,10 @@ class AppearanceManager {
         return UIFont.systemFontOfSize(12.0)
     }
     
+    var nameLabelFont: UIFont {
+        return UIFont.systemFontOfSize(14.0)
+    }
+    
     var headlineFont: UIFont {
         return UIFont.systemFontOfSize(24.0)
     }
@@ -72,7 +76,7 @@ class AppearanceManager {
         
         UINavigationBar.appearance().barTintColor = self.brandColor
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
-
+        UIBarButtonItem.appearance().tintColor = UIColor.whiteColor()
         UITabBar.appearance().barTintColor = self.brandColor
         UITabBar.appearance().tintColor = self.brandColorAlternate
     }
