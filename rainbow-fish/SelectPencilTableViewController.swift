@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import CoreData
+import CoreDataKit
 
 class SelectPencilTableViewController: UITableViewController {
 
@@ -31,13 +33,33 @@ class SelectPencilTableViewController: UITableViewController {
         self.title = NSLocalizedString("Add a Pencil", comment:"select pencil view title")
     }
     
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: NSManagedObjectContextDidSaveNotification, object: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.backgroundColor = AppearanceManager.appearanceManager.appBackgroundColor
         self.tableView.allowsMultipleSelection = true
         self.tableView.registerNib(UINib(nibName: DefaultDetailTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: DefaultDetailTableViewCell.nibName)
-        pencils = viewModel?.product?.sortedPencils()
+        self.pencils = Pencil.allPencils(forProduct: viewModel!.product!, context: viewModel!.childContext)
         tableView.reloadData()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if pencils!.count == 0 {
+            self.showHUD(header: "Refreshing Pencils", footer: "Please Wait...")
+            CloudManager.sharedManger.importPencilsForProduct(viewModel!.product!, modifiedAfterDate: nil){ (success, error) in
+                self.hideHUD()
+                if error != nil {
+                    println(error?.localizedDescription)
+                } else {
+                    self.pencils = Pencil.allPencils(forProduct: self.viewModel!.product!, context: self.viewModel!.childContext)
+                    self.tableView.reloadData()
+                }
+            }
+        }
     }
 
 }
