@@ -42,24 +42,38 @@ class SelectPencilTableViewController: UITableViewController {
         self.tableView.backgroundColor = AppearanceManager.appearanceManager.appBackgroundColor
         self.tableView.allowsMultipleSelection = true
         self.tableView.registerNib(UINib(nibName: DefaultDetailTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: DefaultDetailTableViewCell.nibName)
-        self.pencils = Pencil.allPencils(forProduct: viewModel!.product!, context: viewModel!.childContext)
-        tableView.reloadData()
+        updatePencils()
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        if pencils!.count == 0 {
-            self.showHUD(header: "Refreshing Pencils", footer: "Please Wait...")
-            CloudManager.sharedManger.importPencilsForProduct(viewModel!.product!, modifiedAfterDate: nil){ (success, error) in
-                self.hideHUD()
-                if error != nil {
-                    println(error?.localizedDescription)
-                } else {
-                    self.pencils = Pencil.allPencils(forProduct: self.viewModel!.product!, context: self.viewModel!.childContext)
-                    self.tableView.reloadData()
-                }
+    func updatePencils() {
+        var modificationDate: NSDate?
+        if let pencils = Pencil.allPencils(forProduct: self.viewModel!.product!, context: self.viewModel!.childContext) {
+            self.pencils = pencils
+            modificationDate = recentModificationDate(inPencils: pencils)
+            tableView.reloadData()
+        }
+        self.showHUD(header: "Refreshing Pencils", footer: "Please Wait...")
+        CloudManager.sharedManger.importPencilsForProduct(viewModel!.product!, modifiedAfterDate: modificationDate ){ (success, error) in
+            self.hideHUD()
+            if error != nil {
+                println(error?.localizedDescription)
+            } else {
+                self.pencils = Pencil.allPencils(forProduct: self.viewModel!.product!, context: self.viewModel!.childContext)
+                self.tableView.reloadData()
             }
         }
+    }
+    
+    func recentModificationDate(inPencils pencils: [Pencil]) -> NSDate {
+        let newestPencil =  pencils.reduce(pencils.first!) { (p1: Pencil, p2: Pencil) -> Pencil in
+            let date1 = p1.modificationDate!
+            let date2 = p2.modificationDate!
+            if date1.compare(date2) == NSComparisonResult.OrderedDescending {
+                return p1
+            }
+            return p2
+        }
+        return newestPencil.modificationDate!
     }
 
 }
