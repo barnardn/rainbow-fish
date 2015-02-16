@@ -45,7 +45,18 @@ class EditPecilPropertyTableViewCell: UITableViewCell {
         self.textfield.textColor = AppearanceManager.appearanceManager.bodyTextColor
         self.textfield.backgroundColor = UIColor.whiteColor()
         self.textfield.tintColor = AppearanceManager.appearanceManager.brandColor
+        self.selectionStyle = .None
     }
+    
+    override func setSelected(selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        if selected {
+            self.textfield.becomeFirstResponder()
+        } else {
+            self.textfield.resignFirstResponder()
+        }
+    }
+    
     
     class var nibName: String {
         return "EditPecilPropertyTableViewCell"
@@ -60,7 +71,6 @@ extension EditPecilPropertyTableViewCell: UITextFieldDelegate {
             if let pencil = self.pencil {
                 var value = textfield.text + string
                 pencil.setValue(value, forKey: keypath)
-                println("Setting \(value) for \(keypath)")
             }
         }
         return true
