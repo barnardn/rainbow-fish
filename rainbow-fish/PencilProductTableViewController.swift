@@ -164,13 +164,13 @@ extension PencilProductTableViewController: UITableViewDelegate {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == TableSections.ManufacturerDetail.rawValue {
             if indexPath.row == 0 {
-                self.navigationController?.pushViewController(SelectManufacturerTableViewController(viewModel: self.viewModel!), animated: true)
+                self.navigationController?.pushViewController(SelectManufacturerTableViewController(viewModel: self.viewModel), animated: true)
             } else if indexPath.row == 1 {
-                self.navigationController?.pushViewController(SelectProductTableViewController(viewModel: self.viewModel!), animated: true)
+                self.navigationController?.pushViewController(SelectProductTableViewController(viewModel: self.viewModel), animated: true)
             }
         } else if indexPath.section == TableSections.Pencil.rawValue {
-            self.navigationController?.pushViewController(EditPencilTableViewController(pencil: nil, context: viewModel!.childContext), animated: true)
-//            self.navigationController?.pushViewController(SelectPencilTableViewController(viewModel: self.viewModel!), animated: true)
+            self.navigationController?.pushViewController(SelectPencilTableViewController(viewModel: viewModel), animated: true)
+//            self.navigationController?.pushViewController(EditPencilTableViewController(pencil: nil, context: viewModel.childContext), animated: true)
         }
     }
     
