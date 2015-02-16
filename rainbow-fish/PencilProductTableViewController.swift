@@ -157,8 +157,6 @@ extension PencilProductTableViewController: UITableViewDataSource {
         }
         return nil
     }
-    
-    
 }
 
 extension PencilProductTableViewController: UITableViewDelegate {
@@ -171,7 +169,8 @@ extension PencilProductTableViewController: UITableViewDelegate {
                 self.navigationController?.pushViewController(SelectProductTableViewController(viewModel: self.viewModel!), animated: true)
             }
         } else if indexPath.section == TableSections.Pencil.rawValue {
-            self.navigationController?.pushViewController(SelectPencilTableViewController(viewModel: self.viewModel!), animated: true)
+            self.navigationController?.pushViewController(EditPencilTableViewController(pencil: nil, context: viewModel!.childContext), animated: true)
+//            self.navigationController?.pushViewController(SelectPencilTableViewController(viewModel: self.viewModel!), animated: true)
         }
     }
     

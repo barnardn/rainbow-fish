@@ -20,6 +20,12 @@
 		493803811A86BA7100E62FC2 /* NameValueTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4938037F1A86BA7100E62FC2 /* NameValueTableViewCell.xib */; };
 		493803841A86C03100E62FC2 /* SelectManufacturerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493803831A86C03100E62FC2 /* SelectManufacturerTableViewController.swift */; };
 		493803871A86C46000E62FC2 /* PencilDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493803861A86C46000E62FC2 /* PencilDataViewModel.swift */; };
+		493F6AC31A8AE990003636AE /* CoreDataKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E8D8B71A7443C60064E682 /* CoreDataKit.framework */; };
+		493F6AC71A8AEB48003636AE /* EditPecilPropertyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493F6AC51A8AEB48003636AE /* EditPecilPropertyTableViewCell.swift */; };
+		493F6AC81A8AEB48003636AE /* EditPecilPropertyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 493F6AC61A8AEB48003636AE /* EditPecilPropertyTableViewCell.xib */; };
+		493F6ACB1A8AEFBE003636AE /* PencilColorPickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493F6AC91A8AEFBE003636AE /* PencilColorPickerTableViewCell.swift */; };
+		493F6ACC1A8AEFBE003636AE /* PencilColorPickerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 493F6ACA1A8AEFBE003636AE /* PencilColorPickerTableViewCell.xib */; };
+		493F6ACE1A911996003636AE /* EditPencilTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493F6ACD1A911996003636AE /* EditPencilTableViewController.swift */; };
 		493FC6101A86ED5700D8D17F /* DefaultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493FC60E1A86ED5700D8D17F /* DefaultTableViewCell.swift */; };
 		493FC6111A86ED5700D8D17F /* DefaultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 493FC60F1A86ED5700D8D17F /* DefaultTableViewCell.xib */; };
 		4973DA701A7F05CB00619D06 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4973DA6F1A7F05CB00619D06 /* ProductTableViewCell.swift */; };
@@ -35,7 +41,6 @@
 		49DF07F91A743A2800BF94D3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DF07F81A743A2800BF94D3 /* ViewController.swift */; };
 		49DF07FE1A743A2800BF94D3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49DF07FD1A743A2800BF94D3 /* Images.xcassets */; };
 		49DF08011A743A2800BF94D3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49DF07FF1A743A2800BF94D3 /* LaunchScreen.xib */; };
-		49E8D8B81A7443C60064E682 /* CoreDataKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E8D8B71A7443C60064E682 /* CoreDataKit.framework */; };
 		49E8D8BB1A7443F50064E682 /* JHProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8BA1A7443F50064E682 /* JHProgressHUD.swift */; };
 		49E8D8BE1A7445400064E682 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E8D8BD1A7445400064E682 /* CoreData.framework */; };
 		49E8D8C11A7445670064E682 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E8D8C01A7445670064E682 /* CloudKit.framework */; };
@@ -76,6 +81,11 @@
 		4938037F1A86BA7100E62FC2 /* NameValueTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NameValueTableViewCell.xib; sourceTree = "<group>"; };
 		493803831A86C03100E62FC2 /* SelectManufacturerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectManufacturerTableViewController.swift; sourceTree = "<group>"; };
 		493803861A86C46000E62FC2 /* PencilDataViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PencilDataViewModel.swift; sourceTree = "<group>"; };
+		493F6AC51A8AEB48003636AE /* EditPecilPropertyTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditPecilPropertyTableViewCell.swift; sourceTree = "<group>"; };
+		493F6AC61A8AEB48003636AE /* EditPecilPropertyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditPecilPropertyTableViewCell.xib; sourceTree = "<group>"; };
+		493F6AC91A8AEFBE003636AE /* PencilColorPickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PencilColorPickerTableViewCell.swift; sourceTree = "<group>"; };
+		493F6ACA1A8AEFBE003636AE /* PencilColorPickerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PencilColorPickerTableViewCell.xib; sourceTree = "<group>"; };
+		493F6ACD1A911996003636AE /* EditPencilTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditPencilTableViewController.swift; sourceTree = "<group>"; };
 		493FC60E1A86ED5700D8D17F /* DefaultTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultTableViewCell.swift; sourceTree = "<group>"; };
 		493FC60F1A86ED5700D8D17F /* DefaultTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultTableViewCell.xib; sourceTree = "<group>"; };
 		4973DA6F1A7F05CB00619D06 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
@@ -126,9 +136,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				493F6AC31A8AE990003636AE /* CoreDataKit.framework in Frameworks */,
 				49E8D8C11A7445670064E682 /* CloudKit.framework in Frameworks */,
 				49E8D8BE1A7445400064E682 /* CoreData.framework in Frameworks */,
-				49E8D8B81A7443C60064E682 /* CoreDataKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,14 +184,16 @@
 			name = Xibs;
 			sourceTree = "<group>";
 		};
-		493803821A86BFA100E62FC2 /* Edit Manufacturer */ = {
+		493803821A86BFA100E62FC2 /* Create Pencil */ = {
 			isa = PBXGroup;
 			children = (
+				493F6AC41A8AEB20003636AE /* Tableview Cells */,
 				493803831A86C03100E62FC2 /* SelectManufacturerTableViewController.swift */,
 				49AC9E381A87D59D007CE68A /* SelectProductTableViewController.swift */,
 				49AC9E3A1A87DD67007CE68A /* SelectPencilTableViewController.swift */,
+				493F6ACD1A911996003636AE /* EditPencilTableViewController.swift */,
 			);
-			name = "Edit Manufacturer";
+			name = "Create Pencil";
 			sourceTree = "<group>";
 		};
 		493803851A86C42700E62FC2 /* View Models */ = {
@@ -190,6 +202,25 @@
 				493803861A86C46000E62FC2 /* PencilDataViewModel.swift */,
 			);
 			name = "View Models";
+			sourceTree = "<group>";
+		};
+		493F6AC41A8AEB20003636AE /* Tableview Cells */ = {
+			isa = PBXGroup;
+			children = (
+				493F6ACF1A9177C7003636AE /* Xibs */,
+				493F6AC51A8AEB48003636AE /* EditPecilPropertyTableViewCell.swift */,
+				493F6AC91A8AEFBE003636AE /* PencilColorPickerTableViewCell.swift */,
+			);
+			name = "Tableview Cells";
+			sourceTree = "<group>";
+		};
+		493F6ACF1A9177C7003636AE /* Xibs */ = {
+			isa = PBXGroup;
+			children = (
+				493F6AC61A8AEB48003636AE /* EditPecilPropertyTableViewCell.xib */,
+				493F6ACA1A8AEFBE003636AE /* PencilColorPickerTableViewCell.xib */,
+			);
+			name = Xibs;
 			sourceTree = "<group>";
 		};
 		4973DA6E1A7F058700619D06 /* Cells */ = {
@@ -346,7 +377,7 @@
 		49E8D8E91A75C9F60064E682 /* Pencils */ = {
 			isa = PBXGroup;
 			children = (
-				493803821A86BFA100E62FC2 /* Edit Manufacturer */,
+				493803821A86BFA100E62FC2 /* Create Pencil */,
 				4973DA6E1A7F058700619D06 /* Cells */,
 				49E8D8ED1A75D2A50064E682 /* PencilViewController.swift */,
 				493803711A84503F00E62FC2 /* PencilNavigationController.swift */,
@@ -446,7 +477,9 @@
 				493803811A86BA7100E62FC2 /* NameValueTableViewCell.xib in Resources */,
 				49BB8F601A79D89C007CFE3B /* prismacolor-pencils.json in Resources */,
 				49DF07FE1A743A2800BF94D3 /* Images.xcassets in Resources */,
+				493F6AC81A8AEB48003636AE /* EditPecilPropertyTableViewCell.xib in Resources */,
 				4938037A1A86AE8900E62FC2 /* EmbeddedPickerTableViewCell.xib in Resources */,
+				493F6ACC1A8AEFBE003636AE /* PencilColorPickerTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -495,6 +528,7 @@
 				493803721A84503F00E62FC2 /* PencilNavigationController.swift in Sources */,
 				493803741A86A46600E62FC2 /* PencilProductTableViewController.swift in Sources */,
 				493803701A8449AA00E62FC2 /* Types.swift in Sources */,
+				493F6AC71A8AEB48003636AE /* EditPecilPropertyTableViewCell.swift in Sources */,
 				49E8D8D61A7564400064E682 /* _Product.swift in Sources */,
 				4913E5CD1A7E893E00C4C9BF /* CloudSyncable.swift in Sources */,
 				49AC9E391A87D59D007CE68A /* SelectProductTableViewController.swift in Sources */,
@@ -514,6 +548,7 @@
 				49E8D8C71A7547770064E682 /* ColorValueTransformer.swift in Sources */,
 				49E8D8E11A7571960064E682 /* NSFileManager+CDOExtensions.swift in Sources */,
 				49E8D8D71A7564400064E682 /* Manufacturer.swift in Sources */,
+				493F6ACB1A8AEFBE003636AE /* PencilColorPickerTableViewCell.swift in Sources */,
 				49AC9E3E1A87E120007CE68A /* DefaultDetailTableViewCell.swift in Sources */,
 				493803841A86C03100E62FC2 /* SelectManufacturerTableViewController.swift in Sources */,
 				49E8D8EE1A75D2A50064E682 /* PencilViewController.swift in Sources */,
@@ -521,6 +556,7 @@
 				49E8D8D31A7564400064E682 /* _Inventory.swift in Sources */,
 				4973DA701A7F05CB00619D06 /* ProductTableViewCell.swift in Sources */,
 				49E8D8D91A7564400064E682 /* Product.swift in Sources */,
+				493F6ACE1A911996003636AE /* EditPencilTableViewController.swift in Sources */,
 				493803871A86C46000E62FC2 /* PencilDataViewModel.swift in Sources */,
 				493803791A86AE8900E62FC2 /* EmbeddedPickerTableViewCell.swift in Sources */,
 				4913E5C91A7D81D600C4C9BF /* CloudManager.swift in Sources */,
