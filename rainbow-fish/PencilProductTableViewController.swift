@@ -12,7 +12,7 @@ class PencilProductTableViewController: UITableViewController {
 
     private var editContext = 0
     var sectionTitles: [[String]]?
-    var viewModel: PencilDataViewModel?
+    var viewModel: PencilDataViewModel!
     
     enum TableSections: NSInteger {
         case ManufacturerDetail, Pencil
@@ -31,14 +31,14 @@ class PencilProductTableViewController: UITableViewController {
         sectionTitles = [[NSLocalizedString("Manufacturer", comment:"edit product manufacturer cell title")]]
         viewModel = PencilDataViewModel()
         
-        viewModel?.addObserver(self, forKeyPath: "manufacturer", options: .New, context: &editContext)
-        viewModel?.addObserver(self, forKeyPath: "product", options: .New, context: &editContext)
+        viewModel.addObserver(self, forKeyPath: "manufacturer", options: .New, context: &editContext)
+        viewModel.addObserver(self, forKeyPath: "product", options: .New, context: &editContext)
         
     }
     
     deinit {
-        viewModel?.removeObserver(self, forKeyPath: "manufacturer")
-        viewModel?.removeObserver(self, forKeyPath: "product")
+        viewModel.removeObserver(self, forKeyPath: "manufacturer")
+        viewModel.removeObserver(self, forKeyPath: "product")
     }
     
     override func viewDidLoad() {
@@ -75,10 +75,10 @@ class PencilProductTableViewController: UITableViewController {
         }
         switch keyPath {
             case "manufacturer":
-                let mnf = viewModel?.manufacturer as Manufacturer!
+                let mnf = viewModel.manufacturer as Manufacturer!
                 updateTableForSelectedManfufacturer(mnf)
             case "product":
-                let prod = viewModel?.product as Product!
+                let prod = viewModel.product as Product!
                 updateTableForSelectedProduct(prod)
             default:
                 return
@@ -146,12 +146,12 @@ extension PencilProductTableViewController: UITableViewDataSource {
     func valueForRow(atIndexPath indexPath: NSIndexPath) -> String? {
         if indexPath.section == TableSections.ManufacturerDetail.rawValue {
             if indexPath.row == 0 {
-                return viewModel?.manufacturer?.name
+                return viewModel.manufacturer?.name
             } else {
-                return viewModel?.product?.name
+                return viewModel.product?.name
             }
         } else {
-            if let count = viewModel?.pencils?.count {
+            if let count = viewModel.pencils?.count {
                 return String(count)
             }
         }
