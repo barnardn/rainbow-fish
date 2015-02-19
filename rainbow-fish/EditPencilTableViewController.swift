@@ -14,6 +14,22 @@ class EditPencilTableViewController: UITableViewController {
 
     var pencil: Pencil!
     var context: NSManagedObjectContext!
+    var readonly = true
+    
+    lazy var saveButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: Selector("saveButonTapped:"))
+        return button
+    }()
+    
+    lazy var editButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: Selector("editButtonTapped:"))
+        return button
+    }()
+
+    lazy var cancelButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: Selector("cancelButtonTapped:"))
+        return button
+    }()
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -29,12 +45,14 @@ class EditPencilTableViewController: UITableViewController {
     
     convenience init(pencil: Pencil?, context: NSManagedObjectContext) {
         self.init(style: UITableViewStyle.Grouped)
-        self.title = NSLocalizedString("Add a Pencil", comment:"select pencil view title")
-        self.context = context
+        self.context = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType, parentContext: context)
         if let editPencil = pencil {
-            self.pencil = editPencil
+            self.title = NSLocalizedString("Edit Pencil", comment:"edit an existing pencil view title")
+            self.pencil = self.context.objectWithID(editPencil.objectID) as Pencil
         } else {
-            self.pencil = Pencil(managedObjectContext: context)
+            self.readonly = false
+            self.title = NSLocalizedString("New Pencil", comment:"new pencil view title")
+            self.pencil = Pencil(managedObjectContext: self.context)
         }
     }
     
@@ -42,8 +60,31 @@ class EditPencilTableViewController: UITableViewController {
         super.viewDidLoad()
         self.tableView.registerNib(UINib(nibName: EditPecilPropertyTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: EditPecilPropertyTableViewCell.nibName)
         self.tableView.registerNib(UINib(nibName: PencilColorPickerTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: PencilColorPickerTableViewCell.nibName)
+        if self.readonly {
+            self.navigationItem.rightBarButtonItem = self.editButton
+        } else {
+            self.navigationItem.rightBarButtonItem = self.saveButton
+        }
     }
 
+    // MARK: button actions
+    
+    func editButtonTapped(sender: UIBarButtonItem) {
+        self.readonly = false
+        self.navigationItem.setRightBarButtonItem(self.saveButton, animated: true)
+        self.navigationItem.setLeftBarButtonItem(self.cancelButton, animated: true)
+        self.tableView.reloadData()
+    }
+
+    func cancelButtonTapped(sender: UIBarButtonItem) {
+        self.readonly = true
+        self.navigationItem.setRightBarButtonItem(self.editButton, animated: true)
+        self.navigationItem.setLeftBarButtonItem(nil, animated: true)
+        self.context.rollback()
+        self.pencil = self.context.objectWithID(self.pencil.objectID) as Pencil
+        self.tableView.reloadData()
+    }
+    
 }
 
 // MARK: - Table view data source
@@ -68,10 +109,12 @@ extension EditPencilTableViewController: UITableViewDataSource {
                 cell.placeholder = NSLocalizedString("Color Code e.g. PC1097", comment:"edit pencil color code placeholder")
                 cell.keyPath = "identifier"
             }
+            cell.readonly = self.readonly
             return cell
         }
         var cell = tableView.dequeueReusableCellWithIdentifier(PencilColorPickerTableViewCell.nibName, forIndexPath: indexPath) as PencilColorPickerTableViewCell
         cell.defaultColor = self.pencil.color as UIColor? ?? UIColor.blackColor()
+        cell.readonly = self.readonly
         return cell
     }
 }

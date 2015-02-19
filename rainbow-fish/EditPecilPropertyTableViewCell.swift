@@ -38,6 +38,13 @@ class EditPecilPropertyTableViewCell: UITableViewCell {
         }
     }
     
+    var readonly: Bool! {
+        didSet {
+            self.textfield.enabled = !self.readonly
+        }
+    }
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.textfield.delegate = self

@@ -39,6 +39,15 @@ class PencilColorPickerTableViewCell: UITableViewCell {
             blueSlider.CGFloatValue = blue
         }
     }
+    
+    var readonly: Bool! {
+        didSet {
+            redSlider.enabled = !self.readonly
+            greenSlider.enabled = !self.readonly
+            blueSlider.enabled = !self.readonly
+        }
+    }
+    
     var sliders: [UISlider]?
     
     override func awakeFromNib() {
@@ -61,7 +70,7 @@ class PencilColorPickerTableViewCell: UITableViewCell {
         self.greenLabel.text = NSLocalizedString("G:", comment:"green 'G' label")
         self.blueLabel.text = NSLocalizedString("B:", comment:"blue 'B' label")
         
-        swatchView.backgroundColor = UIColor.whiteColor()
+        swatchView.backgroundColor = UIColor.blackColor()
         swatchView.layer.borderColor = UIColor.blackColor().CGColor
         swatchView.layer.borderWidth = CGFloat(1.0)
     }

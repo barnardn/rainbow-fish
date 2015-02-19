@@ -12,8 +12,24 @@ import CoreDataKit
 
 class SelectPencilTableViewController: UITableViewController {
 
-    var viewModel: PencilDataViewModel?
+    var viewModel: PencilDataViewModel!
     var pencils: [Pencil]?
+    
+    lazy var searchResultsTableController: PencilSearchResultsTableViewController = {
+        let controller =  PencilSearchResultsTableViewController()
+        controller.tableView.delegate = self
+        return controller
+    }()
+    
+    lazy var searchController: UISearchController = {
+        let controller = UISearchController(searchResultsController: self.searchResultsTableController)
+        controller.searchResultsUpdater = self
+        controller.searchBar.sizeToFit()
+        controller.delegate = self
+        controller.searchBar.delegate = self
+        return controller
+    }()
+    
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -40,25 +56,27 @@ class SelectPencilTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.backgroundColor = AppearanceManager.appearanceManager.appBackgroundColor
-        self.tableView.allowsMultipleSelection = true
+        self.tableView.tableHeaderView = self.searchController.searchBar
+        self.tableView.estimatedRowHeight = 44.0
         self.tableView.registerNib(UINib(nibName: DefaultDetailTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: DefaultDetailTableViewCell.nibName)
         updatePencils()
+        definesPresentationContext = true
     }
     
     func updatePencils() {
         var modificationDate: NSDate?
-        if let pencils = Pencil.allPencils(forProduct: self.viewModel!.product!, context: self.viewModel!.childContext) {
+        if let pencils = Pencil.allPencils(forProduct: self.viewModel.product!, context: self.viewModel!.childContext) {
             self.pencils = pencils
             modificationDate = recentModificationDate(inPencils: pencils)
             tableView.reloadData()
         }
         self.showHUD(header: "Refreshing Pencils", footer: "Please Wait...")
-        CloudManager.sharedManger.importPencilsForProduct(viewModel!.product!, modifiedAfterDate: modificationDate ){ (success, error) in
+        CloudManager.sharedManger.importPencilsForProduct(viewModel.product!, modifiedAfterDate: modificationDate ){ (success, error) in
             self.hideHUD()
             if error != nil {
                 println(error?.localizedDescription)
             } else {
-                self.pencils = Pencil.allPencils(forProduct: self.viewModel!.product!, context: self.viewModel!.childContext)
+                self.pencils = Pencil.allPencils(forProduct: self.viewModel.product!, context: self.viewModel.childContext)
                 self.tableView.reloadData()
             }
         }
@@ -91,42 +109,56 @@ extension SelectPencilTableViewController: UITableViewDataSource {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(DefaultDetailTableViewCell.nibName, forIndexPath: indexPath) as DefaultDetailTableViewCell
-        cell.accessoryType = .None
+        cell.accessoryType = .DisclosureIndicator
         if let pencil = self.pencils?[indexPath.row] {
-            if pencil.isNew!.boolValue && containsSelectedIndexPath(indexPath) {
-                cell.accessoryType = .Checkmark
-            }
             cell.textLabel?.text = pencil.name
             cell.detailTextLabel?.text = pencil.identifier
         }
         return cell
     }
-
-    private func containsSelectedIndexPath(indexPath: NSIndexPath) -> Bool {
-        if let selected = self.tableView.indexPathsForSelectedRows() as [NSIndexPath]? {
-            var match = selected.filter{idxPath in
-                return (indexPath == idxPath)
-            }
-            return (match.count > 0)
-        }
-        return false
-    }
-    
 }
-
 
 // MARK: UITableViewDelegate
 
 extension SelectPencilTableViewController: UITableViewDelegate {
     
-    override func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as DefaultDetailTableViewCell
-        cell.accessoryType = .None
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if let pencil = self.pencils?[indexPath.row] {
+            self.navigationController?.pushViewController(EditPencilTableViewController(pencil: pencil, context: viewModel.childContext), animated: true)
+        }
+    }
+}
+
+// MARK: search extensions
+
+extension SelectPencilTableViewController: UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating {
+ 
+    func searchBarBookmarkButtonClicked(searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as DefaultDetailTableViewCell
-        cell.accessoryType = .Checkmark
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        let resultsController = searchController.searchResultsController as PencilSearchResultsTableViewController
+        
+        let whitespaceCharacterSet = NSCharacterSet.whitespaceCharacterSet()
+        let strippedString = searchController.searchBar.text.stringByTrimmingCharactersInSet(whitespaceCharacterSet)
+        let searchItems = strippedString.componentsSeparatedByString(" ") as [String]
+        
+        var subpredicates = [NSPredicate]()
+        for searchText in searchItems {
+            let namePredicate = NSPredicate(format: "name contains[cd] %@ ", searchText)
+            let identifierPredicate = NSPredicate(format: "identifier contains[cd] %@", searchText)
+            let subpredicate = NSCompoundPredicate(type: .OrPredicateType, subpredicates: [namePredicate!, identifierPredicate!])
+            subpredicates.append(subpredicate)
+        }
+        let searchPredicate = NSCompoundPredicate(type: .OrPredicateType, subpredicates: subpredicates)
+        
+        let results = pencils?.filter{ searchPredicate.evaluateWithObject($0) }
+        
+        resultsController.searchResults = results ?? [Pencil]()
+        resultsController.tableView.reloadData()
     }
     
 }
+
+

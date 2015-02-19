@@ -26,6 +26,7 @@
 		493F6ACB1A8AEFBE003636AE /* PencilColorPickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493F6AC91A8AEFBE003636AE /* PencilColorPickerTableViewCell.swift */; };
 		493F6ACC1A8AEFBE003636AE /* PencilColorPickerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 493F6ACA1A8AEFBE003636AE /* PencilColorPickerTableViewCell.xib */; };
 		493F6ACE1A911996003636AE /* EditPencilTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493F6ACD1A911996003636AE /* EditPencilTableViewController.swift */; };
+		493F6AD21A956833003636AE /* PencilSearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493F6AD11A956833003636AE /* PencilSearchResultsTableViewController.swift */; };
 		493FC6101A86ED5700D8D17F /* DefaultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493FC60E1A86ED5700D8D17F /* DefaultTableViewCell.swift */; };
 		493FC6111A86ED5700D8D17F /* DefaultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 493FC60F1A86ED5700D8D17F /* DefaultTableViewCell.xib */; };
 		4973DA701A7F05CB00619D06 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4973DA6F1A7F05CB00619D06 /* ProductTableViewCell.swift */; };
@@ -86,6 +87,7 @@
 		493F6AC91A8AEFBE003636AE /* PencilColorPickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PencilColorPickerTableViewCell.swift; sourceTree = "<group>"; };
 		493F6ACA1A8AEFBE003636AE /* PencilColorPickerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PencilColorPickerTableViewCell.xib; sourceTree = "<group>"; };
 		493F6ACD1A911996003636AE /* EditPencilTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditPencilTableViewController.swift; sourceTree = "<group>"; };
+		493F6AD11A956833003636AE /* PencilSearchResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PencilSearchResultsTableViewController.swift; sourceTree = "<group>"; };
 		493FC60E1A86ED5700D8D17F /* DefaultTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultTableViewCell.swift; sourceTree = "<group>"; };
 		493FC60F1A86ED5700D8D17F /* DefaultTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultTableViewCell.xib; sourceTree = "<group>"; };
 		4973DA6F1A7F05CB00619D06 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
@@ -187,6 +189,7 @@
 		493803821A86BFA100E62FC2 /* Create Pencil */ = {
 			isa = PBXGroup;
 			children = (
+				493F6AD01A95680A003636AE /* Search Results Controller */,
 				493F6AC41A8AEB20003636AE /* Tableview Cells */,
 				493803831A86C03100E62FC2 /* SelectManufacturerTableViewController.swift */,
 				49AC9E381A87D59D007CE68A /* SelectProductTableViewController.swift */,
@@ -221,6 +224,14 @@
 				493F6ACA1A8AEFBE003636AE /* PencilColorPickerTableViewCell.xib */,
 			);
 			name = Xibs;
+			sourceTree = "<group>";
+		};
+		493F6AD01A95680A003636AE /* Search Results Controller */ = {
+			isa = PBXGroup;
+			children = (
+				493F6AD11A956833003636AE /* PencilSearchResultsTableViewController.swift */,
+			);
+			name = "Search Results Controller";
 			sourceTree = "<group>";
 		};
 		4973DA6E1A7F058700619D06 /* Cells */ = {
@@ -548,6 +559,7 @@
 				49E8D8C71A7547770064E682 /* ColorValueTransformer.swift in Sources */,
 				49E8D8E11A7571960064E682 /* NSFileManager+CDOExtensions.swift in Sources */,
 				49E8D8D71A7564400064E682 /* Manufacturer.swift in Sources */,
+				493F6AD21A956833003636AE /* PencilSearchResultsTableViewController.swift in Sources */,
 				493F6ACB1A8AEFBE003636AE /* PencilColorPickerTableViewCell.swift in Sources */,
 				49AC9E3E1A87E120007CE68A /* DefaultDetailTableViewCell.swift in Sources */,
 				493803841A86C03100E62FC2 /* SelectManufacturerTableViewController.swift in Sources */,
