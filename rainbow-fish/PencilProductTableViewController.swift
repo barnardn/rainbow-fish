@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 Clamdango. All rights reserved.
 //
 
+import CoreData
 import UIKit
 
 class PencilProductTableViewController: UITableViewController {
@@ -13,6 +14,16 @@ class PencilProductTableViewController: UITableViewController {
     private var editContext = 0
     var sectionTitles = [String]()
     var viewModel: PencilDataViewModel!
+    
+    lazy var doneButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: Selector("doneButtonTapped:"))
+        return button
+    }()
+    
+    lazy var cancelButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: Selector("cancelButtonTapped:"))
+        return button
+    }()
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -43,18 +54,16 @@ class PencilProductTableViewController: UITableViewController {
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.tableView.separatorInset = UIEdgeInsetsZero
         self.tableView.rowHeight = 44.0
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: Selector("doneButtonTapped:"))
-        let cancelButton = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: Selector("cancelButtonTapped:"))
 
         navigationItem.leftBarButtonItem = cancelButton
         navigationItem.rightBarButtonItem = doneButton
         navigationItem.title = NSLocalizedString("New Product", comment:"new product view controller navigation title")
-
     }
     
     // MARK: button actions
     
     func cancelButtonTapped(sender: UIBarButtonItem) {
+        self.viewModel.childContext.parentContext?.rollback()
         self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -72,10 +81,14 @@ class PencilProductTableViewController: UITableViewController {
         switch keyPath {
             case "manufacturer":
                 let mnf = viewModel.manufacturer as Manufacturer!
+                self.doneButton.enabled = shouldEnableDoneButton(mnf)
                 updateTableForSelectedManfufacturer(mnf)
             case "product":
-                let prod = viewModel.product as Product?
-                updateTableForSelectedProduct(prod)
+                let product = viewModel.product as Product?
+                if let prod = product {
+                    self.doneButton.enabled = shouldEnableDoneButton(prod)
+                }
+                updateTableForSelectedProduct(product)
             default:
                 return
         }
@@ -98,6 +111,14 @@ class PencilProductTableViewController: UITableViewController {
             cell.value = product?.name
         }
     }
+    
+    private func shouldEnableDoneButton<T: CloudSyncable>(item: T) -> Bool {
+        if let isnew = item.isNew?.boolValue as Bool? {
+            return isnew
+        }
+        return false
+    }
+    
     
 }
 
