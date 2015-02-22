@@ -13,9 +13,11 @@ extension Array {
     func insertionIndexOf(item: T, isOrderedBefore: (T,T) -> Bool) -> Int {
         if self.count == 0 {
             return 0
+        } else if self.count == 1 {
+            return isOrderedBefore(item, self[0]) ? 0 : 1
         }
         var lo = 0, hi = self.count, mid = self.count / 2
-        while (lo < hi) {
+        while (lo <= hi) {
             if isOrderedBefore(item, self[mid]) {
                 hi = mid - 1
             } else if isOrderedBefore(self[mid], item) {
@@ -23,7 +25,7 @@ extension Array {
             } else {
                 return mid
             }
-            mid = (lo + mid)/2
+            mid = (lo + hi)/2
         }
         return lo
     }
