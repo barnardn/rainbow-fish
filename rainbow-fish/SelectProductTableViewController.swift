@@ -28,6 +28,7 @@ class SelectProductTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.backgroundColor = UIColor.whiteColor()
+        self.tableView.separatorColor = AppearanceManager.appearanceManager.strokeColor
         self.tableView.registerNib(UINib(nibName: DefaultTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: DefaultTableViewCell.nibName)
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 44.0        
@@ -39,7 +40,7 @@ class SelectProductTableViewController: UITableViewController {
     //MARK: button action
     
     func addButtonTapped(sender: UIBarButtonItem) {
-        let viewController = EditManufacturerNavigationController(manufacturer: nil) { (didSave, edittedText) -> Void in
+        let viewController = EditProductNavigationController(product: nil) { (didSave, edittedText) -> Void in
             if didSave {
                 if let name = edittedText {
                     let product = Product(managedObjectContext: self.viewModel.childContext)

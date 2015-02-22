@@ -52,6 +52,7 @@ class PencilProductTableViewController: UITableViewController {
         super.viewDidLoad()
         self.tableView.registerNib(UINib(nibName: NameValueTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: NameValueTableViewCell.nibName)
         self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        self.tableView.backgroundColor = AppearanceManager.appearanceManager.appBackgroundColor
         self.tableView.separatorInset = UIEdgeInsetsZero
         self.tableView.rowHeight = 44.0
 
@@ -81,12 +82,16 @@ class PencilProductTableViewController: UITableViewController {
         switch keyPath {
             case "manufacturer":
                 let mnf = viewModel.manufacturer as Manufacturer!
-                self.doneButton.enabled = shouldEnableDoneButton(mnf)
+                if self.viewModel.product != nil {
+                    self.doneButton.enabled = shouldEnableDoneButton(mnf)
+                }
                 updateTableForSelectedManfufacturer(mnf)
             case "product":
                 let product = viewModel.product as Product?
                 if let prod = product {
                     self.doneButton.enabled = shouldEnableDoneButton(prod)
+                } else {
+                    self.doneButton.enabled = false
                 }
                 updateTableForSelectedProduct(product)
             default:
