@@ -74,7 +74,6 @@ class CloudManager {
                         dispatch_async(dispatch_get_main_queue()) { completion(success: false, error: error) }
                     } else {
                         self.importPencilRecord(results!, productRecord: product, completion)
-//                        dispatch_async(dispatch_get_main_queue()) { completion(success: true, error: nil) }
                     }
                 }
             }
