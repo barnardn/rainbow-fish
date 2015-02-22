@@ -12,20 +12,13 @@ import CoreDataKit
 
 class SelectManufacturerTableViewController: UITableViewController {
 
-    var viewModel: PencilDataViewModel?
+    var viewModel: PencilDataViewModel!
     var manufacturers: [Manufacturer]?
     
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-    
-    override init(style: UITableViewStyle) {
-        super.init(style: style)
-    }
+    lazy var addButton:  UIBarButtonItem = {
+        var button = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: Selector("addButtonTapped:"))
+        return button
+    }()
     
     convenience init(viewModel: PencilDataViewModel) {
         self.init(style: UITableViewStyle.Plain)
@@ -35,10 +28,14 @@ class SelectManufacturerTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.backgroundColor = AppearanceManager.appearanceManager.appBackgroundColor
+        self.tableView.backgroundColor = UIColor.whiteColor()
         self.tableView.registerNib(UINib(nibName: DefaultTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: DefaultTableViewCell.nibName)
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = 44.0
+        
+        self.navigationItem.rightBarButtonItem = self.addButton
+        
         let byName = NSSortDescriptor(key: ManufacturerAttributes.name.rawValue, ascending: true)
-
         let result = viewModel!.childContext.find(Manufacturer.self, predicate: nil, sortDescriptors: [byName], limit: nil, offset: nil)
         switch result {
         case let .Failure(error):
@@ -48,6 +45,46 @@ class SelectManufacturerTableViewController: UITableViewController {
             manufacturers = results
             tableView.reloadData()
         }
+    }
+    
+    
+    //MARK: button action
+    
+    func addButtonTapped(sender: UIBarButtonItem) {
+        let viewController = EditManufacturerNavigationController(manufacturer: nil) { (didSave, edittedText) -> Void in
+            if didSave {
+                if let name = edittedText {
+                    let manufacturer = Manufacturer(managedObjectContext: self.viewModel.childContext)
+                    manufacturer.name = name
+                    var error: NSError?
+                    let ok = self.viewModel.childContext.save(&error)
+                    assert(ok, "unable to save: \(error?.localizedDescription)")
+                    self.insertManufacturer(manufacturer)
+                }
+            }
+            self.dismissViewControllerAnimated(true, completion: nil)
+        }
+        self.presentViewController(viewController, animated: true, completion: nil)
+    }
+    
+    private func insertManufacturer(manufacturer: Manufacturer) {
+        var row = 0
+        self.viewModel.manufacturer = manufacturer
+        if var manufacturers = self.manufacturers {
+            let idx = manufacturers.insertionIndexOf(manufacturer, isOrderedBefore: { (m1: Manufacturer, m2: Manufacturer) -> Bool in
+                let name1 = m1.name
+                let name2 = m2.name
+                return (name1!.localizedCaseInsensitiveCompare(name2!) == .OrderedAscending)
+            })
+            row = idx
+            manufacturers.insert(manufacturer, atIndex: idx)
+            self.manufacturers = manufacturers
+        } else {
+            self.manufacturers = [manufacturer]
+        }
+        var indexPath = NSIndexPath(forRow: row, inSection: 0)
+        self.tableView.reloadData()
+        self.tableView.scrollToRowAtIndexPath(indexPath, atScrollPosition: .Middle, animated: false)
     }
 
 }
