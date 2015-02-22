@@ -11,12 +11,8 @@ import UIKit
 class PencilProductTableViewController: UITableViewController {
 
     private var editContext = 0
-    var sectionTitles: [[String]]?
+    var sectionTitles = [String]()
     var viewModel: PencilDataViewModel!
-    
-    enum TableSections: NSInteger {
-        case ManufacturerDetail, Pencil
-    }
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -28,7 +24,7 @@ class PencilProductTableViewController: UITableViewController {
     
     override init(style: UITableViewStyle) {
         super.init(style: .Grouped)
-        sectionTitles = [[NSLocalizedString("Manufacturer", comment:"edit product manufacturer cell title")]]
+        sectionTitles.append(NSLocalizedString("Manufacturer", comment:"edit product manufacturer cell title"))
         viewModel = PencilDataViewModel()
         
         viewModel.addObserver(self, forKeyPath: "manufacturer", options: .New, context: &editContext)
@@ -52,7 +48,7 @@ class PencilProductTableViewController: UITableViewController {
 
         navigationItem.leftBarButtonItem = cancelButton
         navigationItem.rightBarButtonItem = doneButton
-        navigationItem.title = NSLocalizedString("New Pencil", comment:"new pencil view controller navigation title")
+        navigationItem.title = NSLocalizedString("New Product", comment:"new product view controller navigation title")
 
     }
     
@@ -78,7 +74,7 @@ class PencilProductTableViewController: UITableViewController {
                 let mnf = viewModel.manufacturer as Manufacturer!
                 updateTableForSelectedManfufacturer(mnf)
             case "product":
-                let prod = viewModel.product as Product!
+                let prod = viewModel.product as Product?
                 updateTableForSelectedProduct(prod)
             default:
                 return
@@ -87,24 +83,19 @@ class PencilProductTableViewController: UITableViewController {
     }
     
     private func updateTableForSelectedManfufacturer(manufacturer: Manufacturer) {
-        var cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: TableSections.ManufacturerDetail.rawValue)) as NameValueTableViewCell
+        var cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as NameValueTableViewCell
         cell.value = manufacturer.name
-        var sectionRows = self.sectionTitles![0]
-        if sectionRows.count == 1 {
-            self.sectionTitles![0] = [
-                NSLocalizedString("Manufacturer", comment:"edit product manufacturer cell title"),
-                NSLocalizedString("Product", comment:"edit product product cell title")
-            ]
-            self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: 1, inSection: 0)], withRowAnimation: .Automatic)
+        var sectionRows = self.sectionTitles[0]
+        if self.sectionTitles.count == 1 {
+            self.sectionTitles.append(NSLocalizedString("Product", comment:"edit product product cell title"))
+            self.tableView.insertSections(NSIndexSet(index: 1), withRowAnimation: .Automatic)
         }
     }
     
-    private func updateTableForSelectedProduct(product: Product) {
-        var cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: TableSections.ManufacturerDetail.rawValue)) as NameValueTableViewCell
-        cell.value = product.name
-        if self.sectionTitles!.count == 1 {
-            self.sectionTitles?.append([NSLocalizedString("Pencils", comment:"edit product pencils cell title")])
-            self.tableView.insertSections(NSIndexSet(index: 1), withRowAnimation: .Automatic)
+    private func updateTableForSelectedProduct(product: Product?) {
+        if self.tableView.numberOfSections() == 2 {
+            var cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1)) as NameValueTableViewCell
+            cell.value = product?.name
         }
     }
     
@@ -113,64 +104,40 @@ class PencilProductTableViewController: UITableViewController {
 extension PencilProductTableViewController: UITableViewDataSource {
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        if let sectionInfo = self.sectionTitles {
-            return sectionInfo.count
-        }
-        return 0
+        return self.sectionTitles.count
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let sectionInfo = self.sectionTitles {
-            let sectionRows = sectionInfo[section]
-            return sectionRows.count
-        }
-        return 0
+        return 1
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(NameValueTableViewCell.nibName, forIndexPath: indexPath) as NameValueTableViewCell
-        cell.name = titleForRowAtIndexPath(indexPath)
-        cell.value = valueForRow(atIndexPath: indexPath)
+        cell.name = titleForSection(atIndexPath: indexPath)
+        cell.value = valueForSection(atIndexPath: indexPath)
         cell.accessoryType = .DisclosureIndicator
         return cell
     }
     
-    func titleForRowAtIndexPath(indexPath: NSIndexPath) -> String? {
-        if let sectionInfo = self.sectionTitles {
-            let sectionRows = sectionInfo[indexPath.section]
-            return sectionRows[indexPath.row]
-        }
-        return nil
+    func titleForSection(atIndexPath indexPath: NSIndexPath) -> String? {
+        return self.sectionTitles[indexPath.section]
     }
     
-    func valueForRow(atIndexPath indexPath: NSIndexPath) -> String? {
-        if indexPath.section == TableSections.ManufacturerDetail.rawValue {
-            if indexPath.row == 0 {
-                return viewModel.manufacturer?.name
-            } else {
-                return viewModel.product?.name
-            }
-        } else {
-            if let count = viewModel.pencils?.count {
-                return String(count)
-            }
+    func valueForSection(atIndexPath indexPath: NSIndexPath) -> String? {
+        if indexPath.section == 0 {
+            return viewModel.manufacturer?.name
         }
-        return nil
+        return viewModel.product?.name
     }
 }
 
 extension PencilProductTableViewController: UITableViewDelegate {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.section == TableSections.ManufacturerDetail.rawValue {
-            if indexPath.row == 0 {
-                self.navigationController?.pushViewController(SelectManufacturerTableViewController(viewModel: self.viewModel), animated: true)
-            } else if indexPath.row == 1 {
-                self.navigationController?.pushViewController(SelectProductTableViewController(viewModel: self.viewModel), animated: true)
-            }
-        } else if indexPath.section == TableSections.Pencil.rawValue {
-            self.navigationController?.pushViewController(SelectPencilTableViewController(viewModel: viewModel), animated: true)
-//            self.navigationController?.pushViewController(EditPencilTableViewController(pencil: nil, context: viewModel.childContext), animated: true)
+        if indexPath.section == 0 {
+            self.navigationController?.pushViewController(SelectManufacturerTableViewController(viewModel: self.viewModel), animated: true)
+        } else if indexPath.section == 1 {
+            self.navigationController?.pushViewController(SelectProductTableViewController(viewModel: self.viewModel), animated: true)
         }
     }
     

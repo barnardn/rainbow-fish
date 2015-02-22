@@ -79,6 +79,7 @@ class AppearanceManager {
         UIBarButtonItem.appearance().tintColor = UIColor.whiteColor()
         UITabBar.appearance().barTintColor = self.brandColor
         UITabBar.appearance().tintColor = self.brandColorAlternate
+        UITextField.appearance().tintColor = self.brandColor
     }
     
     

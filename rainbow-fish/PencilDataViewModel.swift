@@ -13,9 +13,15 @@ import CoreDataKit
 class PencilDataViewModel: NSObject {
     
     let childContext: NSManagedObjectContext
-    dynamic var manufacturer: Manufacturer?
+    dynamic var manufacturer: Manufacturer? {
+        didSet {
+            self.product = nil
+        }
+    }
     dynamic var product: Product?
-    dynamic var pencils: [Pencil]?
+
+    
+    
     
     override init() {
         childContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType, parentContext: CoreDataKit.mainThreadContext)

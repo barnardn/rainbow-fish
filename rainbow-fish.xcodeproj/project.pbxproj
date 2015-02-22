@@ -27,6 +27,12 @@
 		493F6ACC1A8AEFBE003636AE /* PencilColorPickerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 493F6ACA1A8AEFBE003636AE /* PencilColorPickerTableViewCell.xib */; };
 		493F6ACE1A911996003636AE /* EditPencilTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493F6ACD1A911996003636AE /* EditPencilTableViewController.swift */; };
 		493F6AD21A956833003636AE /* PencilSearchResultsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493F6AD11A956833003636AE /* PencilSearchResultsTableViewController.swift */; };
+		493F6AD91A990E1E003636AE /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493F6AD71A990E1E003636AE /* TextFieldTableViewCell.swift */; };
+		493F6ADA1A990E1E003636AE /* TextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 493F6AD81A990E1E003636AE /* TextFieldTableViewCell.xib */; };
+		493F6ADC1A9911CF003636AE /* EditTextFieldTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493F6ADB1A9911CF003636AE /* EditTextFieldTableViewController.swift */; };
+		493F6ADE1A99230C003636AE /* EditManufacturerNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493F6ADD1A99230C003636AE /* EditManufacturerNavigationController.swift */; };
+		493F6AE01A99253A003636AE /* EditProductNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493F6ADF1A99253A003636AE /* EditProductNavigationController.swift */; };
+		493F6AE21A992BE6003636AE /* Array+CDOExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493F6AE11A992BE6003636AE /* Array+CDOExtensions.swift */; };
 		493FC6101A86ED5700D8D17F /* DefaultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493FC60E1A86ED5700D8D17F /* DefaultTableViewCell.swift */; };
 		493FC6111A86ED5700D8D17F /* DefaultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 493FC60F1A86ED5700D8D17F /* DefaultTableViewCell.xib */; };
 		4973DA701A7F05CB00619D06 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4973DA6F1A7F05CB00619D06 /* ProductTableViewCell.swift */; };
@@ -88,6 +94,12 @@
 		493F6ACA1A8AEFBE003636AE /* PencilColorPickerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PencilColorPickerTableViewCell.xib; sourceTree = "<group>"; };
 		493F6ACD1A911996003636AE /* EditPencilTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditPencilTableViewController.swift; sourceTree = "<group>"; };
 		493F6AD11A956833003636AE /* PencilSearchResultsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PencilSearchResultsTableViewController.swift; sourceTree = "<group>"; };
+		493F6AD71A990E1E003636AE /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
+		493F6AD81A990E1E003636AE /* TextFieldTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldTableViewCell.xib; sourceTree = "<group>"; };
+		493F6ADB1A9911CF003636AE /* EditTextFieldTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditTextFieldTableViewController.swift; sourceTree = "<group>"; };
+		493F6ADD1A99230C003636AE /* EditManufacturerNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditManufacturerNavigationController.swift; sourceTree = "<group>"; };
+		493F6ADF1A99253A003636AE /* EditProductNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProductNavigationController.swift; sourceTree = "<group>"; };
+		493F6AE11A992BE6003636AE /* Array+CDOExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+CDOExtensions.swift"; sourceTree = "<group>"; };
 		493FC60E1A86ED5700D8D17F /* DefaultTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultTableViewCell.swift; sourceTree = "<group>"; };
 		493FC60F1A86ED5700D8D17F /* DefaultTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultTableViewCell.xib; sourceTree = "<group>"; };
 		4973DA6F1A7F05CB00619D06 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
@@ -171,6 +183,7 @@
 				4938037E1A86BA7100E62FC2 /* NameValueTableViewCell.swift */,
 				493FC60E1A86ED5700D8D17F /* DefaultTableViewCell.swift */,
 				49AC9E3C1A87E120007CE68A /* DefaultDetailTableViewCell.swift */,
+				493F6AD71A990E1E003636AE /* TextFieldTableViewCell.swift */,
 			);
 			name = "Tableview Cells";
 			sourceTree = "<group>";
@@ -178,6 +191,7 @@
 		4938037D1A86B9AB00E62FC2 /* Xibs */ = {
 			isa = PBXGroup;
 			children = (
+				493F6AD81A990E1E003636AE /* TextFieldTableViewCell.xib */,
 				493FC60F1A86ED5700D8D17F /* DefaultTableViewCell.xib */,
 				49AC9E3D1A87E120007CE68A /* DefaultDetailTableViewCell.xib */,
 				4938037F1A86BA7100E62FC2 /* NameValueTableViewCell.xib */,
@@ -195,6 +209,8 @@
 				49AC9E381A87D59D007CE68A /* SelectProductTableViewController.swift */,
 				49AC9E3A1A87DD67007CE68A /* SelectPencilTableViewController.swift */,
 				493F6ACD1A911996003636AE /* EditPencilTableViewController.swift */,
+				493F6ADD1A99230C003636AE /* EditManufacturerNavigationController.swift */,
+				493F6ADF1A99253A003636AE /* EditProductNavigationController.swift */,
 			);
 			name = "Create Pencil";
 			sourceTree = "<group>";
@@ -351,6 +367,7 @@
 			children = (
 				49E8D8E01A7571960064E682 /* NSFileManager+CDOExtensions.swift */,
 				4938036C1A8447EB00E62FC2 /* UIViewController+JHProgressHUD.swift */,
+				493F6AE11A992BE6003636AE /* Array+CDOExtensions.swift */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -369,6 +386,7 @@
 		49E8D8E31A75C67C0064E682 /* Main & Base */ = {
 			isa = PBXGroup;
 			children = (
+				493F6ADB1A9911CF003636AE /* EditTextFieldTableViewController.swift */,
 				49E8D8E41A75C6940064E682 /* RootViewController.swift */,
 				49E8D8E61A75C9420064E682 /* ContentTableViewController.swift */,
 			);
@@ -487,6 +505,7 @@
 				4973DA721A7F05E600619D06 /* ProductTableViewCell.xib in Resources */,
 				493803811A86BA7100E62FC2 /* NameValueTableViewCell.xib in Resources */,
 				49BB8F601A79D89C007CFE3B /* prismacolor-pencils.json in Resources */,
+				493F6ADA1A990E1E003636AE /* TextFieldTableViewCell.xib in Resources */,
 				49DF07FE1A743A2800BF94D3 /* Images.xcassets in Resources */,
 				493F6AC81A8AEB48003636AE /* EditPecilPropertyTableViewCell.xib in Resources */,
 				4938037A1A86AE8900E62FC2 /* EmbeddedPickerTableViewCell.xib in Resources */,
@@ -556,15 +575,19 @@
 				493FC6101A86ED5700D8D17F /* DefaultTableViewCell.swift in Sources */,
 				49E8D8C51A74474B0064E682 /* rainbow-fish.xcdatamodeld in Sources */,
 				49DF07F71A743A2800BF94D3 /* AppDelegate.swift in Sources */,
+				493F6AD91A990E1E003636AE /* TextFieldTableViewCell.swift in Sources */,
+				493F6AE21A992BE6003636AE /* Array+CDOExtensions.swift in Sources */,
 				49E8D8C71A7547770064E682 /* ColorValueTransformer.swift in Sources */,
 				49E8D8E11A7571960064E682 /* NSFileManager+CDOExtensions.swift in Sources */,
 				49E8D8D71A7564400064E682 /* Manufacturer.swift in Sources */,
 				493F6AD21A956833003636AE /* PencilSearchResultsTableViewController.swift in Sources */,
+				493F6ADE1A99230C003636AE /* EditManufacturerNavigationController.swift in Sources */,
 				493F6ACB1A8AEFBE003636AE /* PencilColorPickerTableViewCell.swift in Sources */,
 				49AC9E3E1A87E120007CE68A /* DefaultDetailTableViewCell.swift in Sources */,
 				493803841A86C03100E62FC2 /* SelectManufacturerTableViewController.swift in Sources */,
 				49E8D8EE1A75D2A50064E682 /* PencilViewController.swift in Sources */,
 				49F914681A75DDDD0042EA0D /* InventoryNavigationController.swift in Sources */,
+				493F6AE01A99253A003636AE /* EditProductNavigationController.swift in Sources */,
 				49E8D8D31A7564400064E682 /* _Inventory.swift in Sources */,
 				4973DA701A7F05CB00619D06 /* ProductTableViewCell.swift in Sources */,
 				49E8D8D91A7564400064E682 /* Product.swift in Sources */,
@@ -575,6 +598,7 @@
 				49E8D8EC1A75CADE0064E682 /* InventoryTableViewController.swift in Sources */,
 				49E8D8DC1A7566E00064E682 /* AppController.swift in Sources */,
 				49E8D8F01A75D4760064E682 /* SettingsTableViewController.swift in Sources */,
+				493F6ADC1A9911CF003636AE /* EditTextFieldTableViewController.swift in Sources */,
 				49BB8F5E1A79D431007CFE3B /* Seeder.swift in Sources */,
 				49BEC0E31A7F094E00A601CF /* ProductHeaderView.swift in Sources */,
 				493803801A86BA7100E62FC2 /* NameValueTableViewCell.swift in Sources */,
