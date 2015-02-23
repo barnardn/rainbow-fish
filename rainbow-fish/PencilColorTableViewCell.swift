@@ -10,8 +10,8 @@ import UIKit
 
 class PencilColorTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var colorLabel: UILabel!
-    @IBOutlet weak var swatchView: UIView!
+    @IBOutlet private weak var colorLabel: UILabel!
+    @IBOutlet private weak var swatchView: UIView!
 
     var colorName: String? {
         didSet {
