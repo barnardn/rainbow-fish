@@ -14,7 +14,7 @@ class EditPencilTableViewController: UITableViewController {
 
     var pencil: Pencil!
     var context: NSManagedObjectContext!
-    var readonly = true
+    var newPencil: Bool = false
     
     lazy var saveButton: UIBarButtonItem = {
         let button = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: Selector("saveButonTapped:"))
@@ -50,9 +50,9 @@ class EditPencilTableViewController: UITableViewController {
             self.title = NSLocalizedString("Edit Pencil", comment:"edit an existing pencil view title")
             self.pencil = self.context.objectWithID(editPencil.objectID) as Pencil
         } else {
-            self.readonly = false
             self.title = NSLocalizedString("New Pencil", comment:"new pencil view title")
             self.pencil = Pencil(managedObjectContext: self.context)
+            self.newPencil = true
         }
     }
     
@@ -61,30 +61,61 @@ class EditPencilTableViewController: UITableViewController {
         self.tableView.registerNib(UINib(nibName: EditPecilPropertyTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: EditPecilPropertyTableViewCell.nibName)
         self.tableView.registerNib(UINib(nibName: PencilColorPickerTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: PencilColorPickerTableViewCell.nibName)
         self.tableView.registerNib(UINib(nibName: PencilColorTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: PencilColorTableViewCell.nibName)
-        if self.readonly {
-            self.navigationItem.rightBarButtonItem = self.editButton
-        } else {
+        self.navigationItem.rightBarButtonItem = self.editButton
+        if self.newPencil {
             self.navigationItem.rightBarButtonItem = self.saveButton
         }
+
     }
 
     // MARK: button actions
     
     func editButtonTapped(sender: UIBarButtonItem) {
-        self.readonly = false
         self.navigationItem.setRightBarButtonItem(self.saveButton, animated: true)
         self.navigationItem.setLeftBarButtonItem(self.cancelButton, animated: true)
-        self.tableView.reloadData()
+        self.toggleEditing(true)
     }
 
     func cancelButtonTapped(sender: UIBarButtonItem) {
-        self.readonly = true
         self.navigationItem.setRightBarButtonItem(self.editButton, animated: true)
         self.navigationItem.setLeftBarButtonItem(nil, animated: true)
         self.context.rollback()
         self.pencil = self.context.objectWithID(self.pencil.objectID) as Pencil
-        self.tableView.reloadData()
+        if self.newPencil {
+            self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+            return
+        }
+        self.toggleEditing(false)
     }
+    
+    func saveButonTapped(sender: UIBarButtonItem) {
+        
+        self.context.performBlock(
+            { (_) in
+                return .SaveToPersistentStore
+            }, completionHandler: {[unowned self] (result: Result<CommitAction>) in
+                switch result {
+                case let .Failure(error):
+                    println("cant save \(error)")
+                default:
+                    if self.newPencil {
+                        self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+                    } else {
+                        self.toggleEditing(false)
+                        self.navigationItem.leftBarButtonItem = nil
+                        self.navigationItem.rightBarButtonItem = self.editButton
+                    }
+                }
+        })
+    }
+    
+    private func toggleEditing(editing: Bool) {
+        self.tableView.beginUpdates()
+        self.tableView.setEditing(editing, animated: true)
+        self.tableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: .Automatic)
+        self.tableView.endUpdates()
+    }
+    
     
 }
 
@@ -110,10 +141,9 @@ extension EditPencilTableViewController: UITableViewDataSource {
                 cell.placeholder = NSLocalizedString("Color Code e.g. PC1097", comment:"edit pencil color code placeholder")
                 cell.keyPath = "identifier"
             }
-            cell.readonly = self.readonly
             return cell
         } else {
-            if self.readonly {
+            if !self.tableView.editing {
                 var cell = tableView.dequeueReusableCellWithIdentifier(PencilColorTableViewCell.nibName, forIndexPath: indexPath) as PencilColorTableViewCell
                 let color = self.pencil.color as? UIColor ?? UIColor.blackColor()
                 cell.swatchColor = color
@@ -122,13 +152,48 @@ extension EditPencilTableViewController: UITableViewDataSource {
             }
             var cell = tableView.dequeueReusableCellWithIdentifier(PencilColorPickerTableViewCell.nibName, forIndexPath: indexPath) as PencilColorPickerTableViewCell
             cell.defaultColor = self.pencil.color as UIColor? ?? UIColor.blackColor()
-            cell.readonly = false
+            cell.delegate = self
             return cell
         }
     }
+    
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        if self.tableView.editing {
+            return (indexPath.section != 1)
+        }
+        return false
+    }
+    
 }
 
 // MARK: - Table view delegate
 extension EditPencilTableViewController: UITableViewDelegate {
     
+    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if self.tableView.editing {
+            if indexPath.section == 0 {
+                return 50.0
+            } else {
+                return 159.0
+            }
+        }
+        return 44.0
+    }
+    
+    override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+        return .None
+    }
+    
+    override func tableView(tableView: UITableView, shouldIndentWhileEditingRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return false
+    }
 }
+
+extension EditPencilTableViewController: PencilColorPickerTableViewCellDelegate {
+    
+    func colorPickerTableViewCell(cell: PencilColorPickerTableViewCell, didChangeColor color: UIColor) {
+        self.pencil.color = color
+    }
+    
+}
+

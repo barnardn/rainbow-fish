@@ -8,6 +8,12 @@
 
 import UIKit
 
+
+protocol PencilColorPickerTableViewCellDelegate {
+    func colorPickerTableViewCell(cell: PencilColorPickerTableViewCell, didChangeColor color: UIColor)
+}
+
+
 class PencilColorPickerTableViewCell: UITableViewCell {
 
     @IBOutlet weak var redSlider: UISlider!
@@ -32,7 +38,7 @@ class PencilColorPickerTableViewCell: UITableViewCell {
             var blue: CGFloat = 0
             var alpha: CGFloat = 0
             if let color = inValue {
-                color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
+                (red, green, blue, alpha) = color.getCGFloatValues()
             }
             redSlider.CGFloatValue = red
             greenSlider.CGFloatValue = green
@@ -40,14 +46,7 @@ class PencilColorPickerTableViewCell: UITableViewCell {
         }
     }
     
-    var readonly: Bool! {
-        didSet {
-            redSlider.enabled = !self.readonly
-            greenSlider.enabled = !self.readonly
-            blueSlider.enabled = !self.readonly
-        }
-    }
-    
+    var delegate: PencilColorPickerTableViewCellDelegate?
     var sliders: [UISlider]?
     
     override func awakeFromNib() {
@@ -89,17 +88,11 @@ class PencilColorPickerTableViewCell: UITableViewCell {
         }
         let color = UIColor(red: redSlider.CGFloatValue, green: greenSlider.CGFloatValue, blue: blueSlider.CGFloatValue, alpha: 1.0)
         swatchView.backgroundColor = color
-        updateHexString(color: color)
+        self.hexValueLabel.text = color.hexRepresentation
         self.color = color
-    }
-    
-    func updateHexString(#color: UIColor) {
-        var red: CGFloat = 0
-        var green: CGFloat = 0
-        var blue: CGFloat = 0
-        var alpha: CGFloat = 0
-        color.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
-        self.hexValueLabel.text = "#\(Int(red * 256.0).toHex())\(Int(green * 256.0).toHex())\(Int(blue * 256.0).toHex())"
+        if let delegate = self.delegate {
+            delegate.colorPickerTableViewCell(self, didChangeColor: color)
+        }
     }
     
     class var nibName: String {
