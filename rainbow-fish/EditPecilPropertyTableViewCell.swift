@@ -38,13 +38,6 @@ class EditPecilPropertyTableViewCell: UITableViewCell {
         }
     }
     
-    var readonly: Bool! {
-        didSet {
-            self.textfield.enabled = !self.readonly
-        }
-    }
-    
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.textfield.delegate = self
@@ -52,6 +45,7 @@ class EditPecilPropertyTableViewCell: UITableViewCell {
         self.textfield.textColor = AppearanceManager.appearanceManager.bodyTextColor
         self.textfield.backgroundColor = UIColor.whiteColor()
         self.textfield.tintColor = AppearanceManager.appearanceManager.brandColor
+        self.shouldIndentWhileEditing = false
         self.selectionStyle = .None
     }
     
@@ -64,6 +58,10 @@ class EditPecilPropertyTableViewCell: UITableViewCell {
         }
     }
     
+    override func setEditing(editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        self.textfield.enabled = editing
+    }
     
     class var nibName: String {
         return "EditPecilPropertyTableViewCell"

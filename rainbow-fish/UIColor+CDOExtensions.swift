@@ -20,6 +20,12 @@ extension UIColor {
         return (Int(red * 256.0), Int(green * 256.0), Int(blue * 256.0), Float(alpha))
     }
     
+    func getCGFloatValues() -> (r: CGFloat, g: CGFloat, b: CGFloat, alpha: CGFloat) {
+        var values = [CGFloat](count: 4, repeatedValue: 0.0)
+        self.getRed(&values[0], green: &values[1], blue: &values[2], alpha: &values[3])
+        return (values[0], values[1], values[2], values[3])
+    }
+    
     var hexRepresentation: String {
         get {
             let (r,g,b,alpha) = self.getIntegerValues()
