@@ -20,8 +20,17 @@ class ColorValueTransformer: NSValueTransformer {
     }
     
     override func transformedValue(value: AnyObject?) -> AnyObject? {
-        
-        if let stringValue = value as String? {
+        if let colorValue = value as? UIColor {
+            let (r,g,b,_) = colorValue.getIntegerValues()
+            var str = "\(r),\(g),\(b)"
+            return str.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+        }
+        return nil
+    }
+
+    override func reverseTransformedValue(value: AnyObject?) -> AnyObject? {
+        if let dataValue = value as? NSData {
+            let stringValue = NSString(data: dataValue, encoding: NSUTF8StringEncoding) as String
             let rgb = stringValue.componentsSeparatedByString(",")
             assert(rgb.count == 3, "string returned was not a triple: \(stringValue)")
             var red = rgb[0].toInt() ?? 0
@@ -29,22 +38,6 @@ class ColorValueTransformer: NSValueTransformer {
             var blue = rgb[2].toInt() ?? 0
             return UIColor(red: CGFloat(Float(red)/256.0), green: CGFloat(Float(green)/256.0), blue: CGFloat(Float(blue)/256.0), alpha: 1.0)
         }
-        return UIColor.blackColor()
-    }
-
-    override func reverseTransformedValue(value: AnyObject?) -> AnyObject? {
-        
-        if let colorValue = value as UIColor? {
-            var red, green, blue, alpha: CGFloat
-            red = 0.0
-            green = 0.0
-            blue = 0.0
-            alpha = 0.0
-            let ok = colorValue.getRed(&red, green: &green, blue: &blue, alpha: &alpha)
-            if ok {
-                return "\(Int(red * 256.0)),\(Int(green * 256.0)),\(Int(blue * 256.0))"
-            }
-        }
-        return String()
+        return nil
     }
 }
