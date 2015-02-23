@@ -69,6 +69,10 @@
 		49E8D8EC1A75CADE0064E682 /* InventoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8EB1A75CADE0064E682 /* InventoryTableViewController.swift */; };
 		49E8D8EE1A75D2A50064E682 /* PencilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8ED1A75D2A50064E682 /* PencilViewController.swift */; };
 		49E8D8F01A75D4760064E682 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8EF1A75D4760064E682 /* SettingsTableViewController.swift */; };
+		49F419D11A9AA61900635EF3 /* PencilColorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F419CF1A9AA61900635EF3 /* PencilColorTableViewCell.swift */; };
+		49F419D21A9AA61900635EF3 /* PencilColorTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F419D01A9AA61900635EF3 /* PencilColorTableViewCell.xib */; };
+		49F419D41A9AAA5100635EF3 /* Int+CDOExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F419D31A9AAA5100635EF3 /* Int+CDOExtensions.swift */; };
+		49F419D61A9AAAF600635EF3 /* UIColor+CDOExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F419D51A9AAAF600635EF3 /* UIColor+CDOExtensions.swift */; };
 		49F914681A75DDDD0042EA0D /* InventoryNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F914671A75DDDD0042EA0D /* InventoryNavigationController.swift */; };
 		49F9146B1A7727C70042EA0D /* InventoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F9146A1A7727C70042EA0D /* InventoryTableViewCell.swift */; };
 		49F9146D1A7727E20042EA0D /* InventoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F9146C1A7727E20042EA0D /* InventoryTableViewCell.xib */; };
@@ -140,6 +144,10 @@
 		49E8D8EB1A75CADE0064E682 /* InventoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InventoryTableViewController.swift; sourceTree = "<group>"; };
 		49E8D8ED1A75D2A50064E682 /* PencilViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PencilViewController.swift; sourceTree = "<group>"; };
 		49E8D8EF1A75D4760064E682 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		49F419CF1A9AA61900635EF3 /* PencilColorTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PencilColorTableViewCell.swift; sourceTree = "<group>"; };
+		49F419D01A9AA61900635EF3 /* PencilColorTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PencilColorTableViewCell.xib; sourceTree = "<group>"; };
+		49F419D31A9AAA5100635EF3 /* Int+CDOExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+CDOExtensions.swift"; sourceTree = "<group>"; };
+		49F419D51A9AAAF600635EF3 /* UIColor+CDOExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+CDOExtensions.swift"; sourceTree = "<group>"; };
 		49F914671A75DDDD0042EA0D /* InventoryNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InventoryNavigationController.swift; sourceTree = "<group>"; };
 		49F9146A1A7727C70042EA0D /* InventoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InventoryTableViewCell.swift; sourceTree = "<group>"; };
 		49F9146C1A7727E20042EA0D /* InventoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InventoryTableViewCell.xib; sourceTree = "<group>"; };
@@ -200,7 +208,7 @@
 			name = Xibs;
 			sourceTree = "<group>";
 		};
-		493803821A86BFA100E62FC2 /* Create Pencil */ = {
+		493803821A86BFA100E62FC2 /* Edit Pencil */ = {
 			isa = PBXGroup;
 			children = (
 				493F6AD01A95680A003636AE /* Search Results Controller */,
@@ -212,7 +220,7 @@
 				493F6ADD1A99230C003636AE /* EditManufacturerNavigationController.swift */,
 				493F6ADF1A99253A003636AE /* EditProductNavigationController.swift */,
 			);
-			name = "Create Pencil";
+			name = "Edit Pencil";
 			sourceTree = "<group>";
 		};
 		493803851A86C42700E62FC2 /* View Models */ = {
@@ -229,6 +237,7 @@
 				493F6ACF1A9177C7003636AE /* Xibs */,
 				493F6AC51A8AEB48003636AE /* EditPecilPropertyTableViewCell.swift */,
 				493F6AC91A8AEFBE003636AE /* PencilColorPickerTableViewCell.swift */,
+				49F419CF1A9AA61900635EF3 /* PencilColorTableViewCell.swift */,
 			);
 			name = "Tableview Cells";
 			sourceTree = "<group>";
@@ -236,6 +245,7 @@
 		493F6ACF1A9177C7003636AE /* Xibs */ = {
 			isa = PBXGroup;
 			children = (
+				49F419D01A9AA61900635EF3 /* PencilColorTableViewCell.xib */,
 				493F6AC61A8AEB48003636AE /* EditPecilPropertyTableViewCell.xib */,
 				493F6ACA1A8AEFBE003636AE /* PencilColorPickerTableViewCell.xib */,
 			);
@@ -368,6 +378,8 @@
 				49E8D8E01A7571960064E682 /* NSFileManager+CDOExtensions.swift */,
 				4938036C1A8447EB00E62FC2 /* UIViewController+JHProgressHUD.swift */,
 				493F6AE11A992BE6003636AE /* Array+CDOExtensions.swift */,
+				49F419D31A9AAA5100635EF3 /* Int+CDOExtensions.swift */,
+				49F419D51A9AAAF600635EF3 /* UIColor+CDOExtensions.swift */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -406,7 +418,7 @@
 		49E8D8E91A75C9F60064E682 /* Pencils */ = {
 			isa = PBXGroup;
 			children = (
-				493803821A86BFA100E62FC2 /* Create Pencil */,
+				493803821A86BFA100E62FC2 /* Edit Pencil */,
 				4973DA6E1A7F058700619D06 /* Cells */,
 				49E8D8ED1A75D2A50064E682 /* PencilViewController.swift */,
 				493803711A84503F00E62FC2 /* PencilNavigationController.swift */,
@@ -503,6 +515,7 @@
 				493FC6111A86ED5700D8D17F /* DefaultTableViewCell.xib in Resources */,
 				49DF08011A743A2800BF94D3 /* LaunchScreen.xib in Resources */,
 				4973DA721A7F05E600619D06 /* ProductTableViewCell.xib in Resources */,
+				49F419D21A9AA61900635EF3 /* PencilColorTableViewCell.xib in Resources */,
 				493803811A86BA7100E62FC2 /* NameValueTableViewCell.xib in Resources */,
 				49BB8F601A79D89C007CFE3B /* prismacolor-pencils.json in Resources */,
 				493F6ADA1A990E1E003636AE /* TextFieldTableViewCell.xib in Resources */,
@@ -557,10 +570,12 @@
 				49E8D8E71A75C9420064E682 /* ContentTableViewController.swift in Sources */,
 				493803721A84503F00E62FC2 /* PencilNavigationController.swift in Sources */,
 				493803741A86A46600E62FC2 /* PencilProductTableViewController.swift in Sources */,
+				49F419D61A9AAAF600635EF3 /* UIColor+CDOExtensions.swift in Sources */,
 				493803701A8449AA00E62FC2 /* Types.swift in Sources */,
 				493F6AC71A8AEB48003636AE /* EditPecilPropertyTableViewCell.swift in Sources */,
 				49E8D8D61A7564400064E682 /* _Product.swift in Sources */,
 				4913E5CD1A7E893E00C4C9BF /* CloudSyncable.swift in Sources */,
+				49F419D11A9AA61900635EF3 /* PencilColorTableViewCell.swift in Sources */,
 				49AC9E391A87D59D007CE68A /* SelectProductTableViewController.swift in Sources */,
 				49E8D8D81A7564400064E682 /* Pencil.swift in Sources */,
 				49AC9E3B1A87DD67007CE68A /* SelectPencilTableViewController.swift in Sources */,
@@ -601,6 +616,7 @@
 				493F6ADC1A9911CF003636AE /* EditTextFieldTableViewController.swift in Sources */,
 				49BB8F5E1A79D431007CFE3B /* Seeder.swift in Sources */,
 				49BEC0E31A7F094E00A601CF /* ProductHeaderView.swift in Sources */,
+				49F419D41A9AAA5100635EF3 /* Int+CDOExtensions.swift in Sources */,
 				493803801A86BA7100E62FC2 /* NameValueTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

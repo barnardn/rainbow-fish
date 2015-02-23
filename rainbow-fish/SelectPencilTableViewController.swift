@@ -12,7 +12,7 @@ import CoreDataKit
 
 class SelectPencilTableViewController: UITableViewController {
 
-    var viewModel: PencilDataViewModel!
+    var product: Product!
     var pencils: [Pencil]?
     
     lazy var searchResultsTableController: PencilSearchResultsTableViewController = {
@@ -43,9 +43,9 @@ class SelectPencilTableViewController: UITableViewController {
         super.init(style: style)
     }
     
-    convenience init(viewModel: PencilDataViewModel) {
+    convenience init(product: Product) {
         self.init(style: UITableViewStyle.Plain)
-        self.viewModel = viewModel
+        self.product = product
         self.title = NSLocalizedString("Add a Pencil", comment:"select pencil view title")
     }
     
@@ -65,18 +65,18 @@ class SelectPencilTableViewController: UITableViewController {
     
     func updatePencils() {
         var modificationDate: NSDate?
-        if let pencils = Pencil.allPencils(forProduct: self.viewModel.product!, context: self.viewModel!.childContext) {
+        if let pencils = Pencil.allPencils(forProduct: self.product, context: self.product.managedObjectContext!) {
             self.pencils = pencils
             modificationDate = recentModificationDate(inPencils: pencils)
             tableView.reloadData()
         }
         self.showHUD(header: "Refreshing Pencils", footer: "Please Wait...")
-        CloudManager.sharedManger.importPencilsForProduct(viewModel.product!, modifiedAfterDate: modificationDate ){ (success, error) in
+        CloudManager.sharedManger.importPencilsForProduct(self.product, modifiedAfterDate: modificationDate ){ (success, error) in
             self.hideHUD()
             if error != nil {
                 println(error?.localizedDescription)
             } else {
-                self.pencils = Pencil.allPencils(forProduct: self.viewModel.product!, context: self.viewModel.childContext)
+                self.pencils = Pencil.allPencils(forProduct: self.product, context: self.product.managedObjectContext!)
                 self.tableView.reloadData()
             }
         }
@@ -124,7 +124,7 @@ extension SelectPencilTableViewController: UITableViewDelegate {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if let pencil = self.pencils?[indexPath.row] {
-            self.navigationController?.pushViewController(EditPencilTableViewController(pencil: pencil, context: viewModel.childContext), animated: true)
+            self.navigationController?.pushViewController(EditPencilTableViewController(pencil: pencil), animated: true)
         }
     }
 }

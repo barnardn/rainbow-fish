@@ -43,9 +43,9 @@ class EditPencilTableViewController: UITableViewController {
         super.init(style: style)
     }
     
-    convenience init(pencil: Pencil?, context: NSManagedObjectContext) {
+    convenience init(pencil: Pencil?) {
         self.init(style: UITableViewStyle.Grouped)
-        self.context = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType, parentContext: context)
+        self.context = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType, parentContext: CoreDataKit.mainThreadContext)
         if let editPencil = pencil {
             self.title = NSLocalizedString("Edit Pencil", comment:"edit an existing pencil view title")
             self.pencil = self.context.objectWithID(editPencil.objectID) as Pencil
@@ -60,6 +60,7 @@ class EditPencilTableViewController: UITableViewController {
         super.viewDidLoad()
         self.tableView.registerNib(UINib(nibName: EditPecilPropertyTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: EditPecilPropertyTableViewCell.nibName)
         self.tableView.registerNib(UINib(nibName: PencilColorPickerTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: PencilColorPickerTableViewCell.nibName)
+        self.tableView.registerNib(UINib(nibName: PencilColorTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: PencilColorTableViewCell.nibName)
         if self.readonly {
             self.navigationItem.rightBarButtonItem = self.editButton
         } else {
@@ -111,11 +112,19 @@ extension EditPencilTableViewController: UITableViewDataSource {
             }
             cell.readonly = self.readonly
             return cell
+        } else {
+            if self.readonly {
+                var cell = tableView.dequeueReusableCellWithIdentifier(PencilColorTableViewCell.nibName, forIndexPath: indexPath) as PencilColorTableViewCell
+                let color = self.pencil.color as? UIColor ?? UIColor.blackColor()
+                cell.swatchColor = color
+                cell.colorName = color.hexRepresentation
+                return cell
+            }
+            var cell = tableView.dequeueReusableCellWithIdentifier(PencilColorPickerTableViewCell.nibName, forIndexPath: indexPath) as PencilColorPickerTableViewCell
+            cell.defaultColor = self.pencil.color as UIColor? ?? UIColor.blackColor()
+            cell.readonly = false
+            return cell
         }
-        var cell = tableView.dequeueReusableCellWithIdentifier(PencilColorPickerTableViewCell.nibName, forIndexPath: indexPath) as PencilColorPickerTableViewCell
-        cell.defaultColor = self.pencil.color as UIColor? ?? UIColor.blackColor()
-        cell.readonly = self.readonly
-        return cell
     }
 }
 

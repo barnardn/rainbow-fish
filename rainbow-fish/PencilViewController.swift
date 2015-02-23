@@ -86,20 +86,8 @@ extension PencilViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
-    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier("ProductHeaderView") as ProductHeaderView
-        let manufacturer = allManufacturers![section] as Manufacturer
-        headerView.title = manufacturer.name
-        return headerView
-    }
-
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return ProductHeaderView.headerHeight;
-    }
-    
     func productAtIndexPath(indexPath: NSIndexPath) -> Product? {
         var manufacturer = allManufacturers![indexPath.section] as Manufacturer
-        println(manufacturer.name)
         if let products = manufacturer.sortedProducts() {
             return products[indexPath.row]
         }
@@ -107,3 +95,29 @@ extension PencilViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
 }
+
+
+extension PencilViewController: UITableViewDelegate {
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if let product = productAtIndexPath(indexPath) {
+            self.navigationController?.pushViewController(SelectPencilTableViewController(product: product), animated: true)
+        }
+    }
+    
+    
+    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier("ProductHeaderView") as ProductHeaderView
+        let manufacturer = allManufacturers![section] as Manufacturer
+        headerView.title = manufacturer.name
+        return headerView
+    }
+    
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return ProductHeaderView.headerHeight;
+    }
+    
+}
+
+
+
