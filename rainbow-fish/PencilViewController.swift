@@ -13,17 +13,9 @@ class PencilViewController: ContentTableViewController {
 
     var allManufacturers: [Manufacturer]?
     
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    override init(style: UITableViewStyle) {
+    convenience init() {
+        self.init(style: UITableViewStyle.Grouped)
         allManufacturers = [Manufacturer]()
-        super.init(style: UITableViewStyle.Grouped)
         var image = UIImage(named: "tabbar-icon-pencils")?.imageWithRenderingMode(.AlwaysTemplate)
         self.tabBarItem = UITabBarItem(title: NSLocalizedString("All Pencils", comment:"all pencils tab bar item title"), image: image, tag: 1)
         self.title = NSLocalizedString("Browse Pencils", comment:"browse all pencils navigation title")
