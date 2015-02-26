@@ -18,6 +18,7 @@ protocol CloudSyncable {  // used by NSMangedObject
     var modificationDate: NSDate? { get set }
     var isNew: NSNumber? { get set }
     func populateFromCKRecord(record: CKRecord) -> Void
+    func toCKRecord() -> CKRecord
 }
 
 extension NSManagedObjectContext {

@@ -27,6 +27,13 @@ extension Manufacturer: CloudSyncable {
         self.name = record.objectForKey(ManufacturerAttributes.name.rawValue) as? String
     }
     
+    func toCKRecord() -> CKRecord {
+        let recordID = CKRecordID(recordName: self.recordID!)
+        var record = CKRecord(recordType: Manufacturer.entityName, recordID: recordID)
+        record.setValue(self.name, forKey: ManufacturerAttributes.name.rawValue)
+        return record
+    }
+    
 }
 
 extension Manufacturer {

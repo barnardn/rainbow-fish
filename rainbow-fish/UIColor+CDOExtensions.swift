@@ -33,4 +33,11 @@ extension UIColor {
         }
     }
     
+    var rgbRepresentation: String {
+        get {
+            let (r,g,b,_) = self.getIntegerValues()
+            return "\(r),\(g),\(b)"
+        }
+    }
+    
 }

@@ -25,6 +25,13 @@ extension Product: CloudSyncable {
         self.modificationDate = record.modificationDate
     }
 
+    func toCKRecord() -> CKRecord {
+        let ckRecordID = CKRecordID(recordName: self.recordID!)
+        let record = CKRecord(recordType: Product.entityName, recordID: ckRecordID)
+        record.setValue(self.name, forKey: ProductAttributes.name.rawValue)
+        return record
+    }
+    
 }
 
 extension Product {
@@ -40,6 +47,11 @@ extension Product {
         return nil
     }
     
+    func ckReferenceWithManufacturerRecord(manufacturerRecord: CKRecord) -> CKReference {
+        let reference = CKReference(record: manufacturerRecord, action: .DeleteSelf)
+        let productRecord = self.toCKRecord()
+        reference.setValue(productRecord, forKey: ProductRelationships.manufacturer.rawValue)
+        return reference
+    }
 
-    
 }
