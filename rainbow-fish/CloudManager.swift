@@ -31,11 +31,7 @@ class CloudManager {
                 let manufacturer = m as CKRecord
                 self.productsForManufacturer(manufacturer, completion: { (products, error) -> Void in
                     assert(error == nil, "Can't get products \(error!.localizedDescription)")
-                    
-                    //TODO: this method needs to take the completion block.. its async!!!!                    
-                    
-                    self.importManufacturer(manufacturer, productRecords: products)
-                    completionHandler()
+                    self.importManufacturer(manufacturer, productRecords: products, completionHandler)
                 })
             }
         }
@@ -106,7 +102,7 @@ class CloudManager {
     
     // MARK: core data 
     
-    func importManufacturer(manufacturerRecord: CKRecord, productRecords: [CKRecord]?) {
+    func importManufacturer(manufacturerRecord: CKRecord, productRecords: [CKRecord]?, completion: ()->Void) {
 
         CoreDataKit.performBlockOnBackgroundContext({(context: NSManagedObjectContext) in
             let (manufacturer, error) = context.updateFromCKRecord(Manufacturer.self, record: manufacturerRecord, createIfNotFound: true)
@@ -126,6 +122,7 @@ class CloudManager {
             if let error = result.error() {
                 assertionFailure("Unable to import to core data \(error.localizedDescription)")
             }
+            completion()
         })
     }
     
