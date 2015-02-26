@@ -11,14 +11,18 @@ import CoreDataKit
 
 class PencilViewController: ContentTableViewController {
 
-    var allManufacturers: [Manufacturer]?
+    var allManufacturers =  [Manufacturer]()
+    
+    lazy var backButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(title: NSLocalizedString("All", comment:"all pencils back button title"), style: .Plain, target: nil, action: nil)
+        return button
+    }()
     
     convenience init() {
         self.init(style: UITableViewStyle.Grouped)
-        allManufacturers = [Manufacturer]()
         var image = UIImage(named: "tabbar-icon-pencils")?.imageWithRenderingMode(.AlwaysTemplate)
         self.tabBarItem = UITabBarItem(title: NSLocalizedString("All Pencils", comment:"all pencils tab bar item title"), image: image, tag: 1)
-        self.title = NSLocalizedString("Browse Pencils", comment:"browse all pencils navigation title")
+        self.title = NSLocalizedString("All Pencils", comment:"browse all pencils navigation title")
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("updateDatasource"), name: AppNotifications.DidFinishCloudUpdate.rawValue, object: nil)
     }
     
@@ -30,6 +34,7 @@ class PencilViewController: ContentTableViewController {
         let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: Selector("addButtonTapped:"))
         addButton.tintColor = UIColor.whiteColor()
         navigationItem.rightBarButtonItem = addButton
+        navigationItem.backBarButtonItem = self.backButton;
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -63,11 +68,11 @@ class PencilViewController: ContentTableViewController {
 extension PencilViewController: UITableViewDataSource, UITableViewDelegate {
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return allManufacturers?.count ?? 0
+        return allManufacturers.count ?? 0
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let manufacturer = allManufacturers![section] as Manufacturer
+        let manufacturer = allManufacturers[section] as Manufacturer
         return manufacturer.products.count
     }
 
@@ -79,7 +84,7 @@ extension PencilViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func productAtIndexPath(indexPath: NSIndexPath) -> Product? {
-        var manufacturer = allManufacturers![indexPath.section] as Manufacturer
+        var manufacturer = allManufacturers[indexPath.section] as Manufacturer
         if let products = manufacturer.sortedProducts() {
             return products[indexPath.row]
         }
@@ -100,7 +105,7 @@ extension PencilViewController: UITableViewDelegate {
     
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier("ProductHeaderView") as ProductHeaderView
-        let manufacturer = allManufacturers![section] as Manufacturer
+        let manufacturer = allManufacturers[section] as Manufacturer
         headerView.title = manufacturer.name
         return headerView
     }

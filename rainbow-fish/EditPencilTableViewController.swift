@@ -31,12 +31,12 @@ class EditPencilTableViewController: UITableViewController {
         let button = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: Selector("cancelButtonTapped:"))
         return button
     }()
-        
+    
     convenience init(pencil: Pencil?) {
         self.init(style: UITableViewStyle.Grouped)
         self.context = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType, parentContext: CoreDataKit.mainThreadContext)
         if let editPencil = pencil {
-            self.title = NSLocalizedString("Edit Pencil", comment:"edit an existing pencil view title")
+            self.title = editPencil.name ?? NSLocalizedString("Edit Pencil", comment:"edit an existing pencil view title")
             self.pencil = self.context.objectWithID(editPencil.objectID) as Pencil
         } else {
             self.title = NSLocalizedString("New Pencil", comment:"new pencil view title")

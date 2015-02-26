@@ -16,7 +16,7 @@ class PencilNavigationController: UINavigationController {
     
     override init() {
         super.init(nibName: nil, bundle: nil)
-        self.viewControllers = [PencilViewController(style: .Plain)]
+        self.viewControllers = [PencilViewController()]
     }
     
 }

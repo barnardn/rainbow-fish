@@ -34,11 +34,16 @@ class SelectPencilTableViewController: UITableViewController {
         let button = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: Selector("addButtonTapped:"))
         return button
     }()
-        
+    
+    lazy var backButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(title: NSLocalizedString("Back", comment:"back button title"), style: .Plain, target: nil, action: nil)
+        return button
+    }()
+    
     convenience init(product: Product) {
         self.init(style: UITableViewStyle.Plain)
         self.product = product
-        self.title = NSLocalizedString("Add a Pencil", comment:"select pencil view title")
+        self.title = NSLocalizedString(product.name!, comment:"select pencil view title")
     }
     
     deinit {
@@ -52,6 +57,7 @@ class SelectPencilTableViewController: UITableViewController {
         self.tableView.estimatedRowHeight = 44.0
         self.tableView.registerNib(UINib(nibName: DefaultDetailTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: DefaultDetailTableViewCell.nibName)
         self.navigationItem.rightBarButtonItem = self.addButton
+        self.navigationItem.backBarButtonItem = self.backButton
         updatePencils()
         definesPresentationContext = true
     }

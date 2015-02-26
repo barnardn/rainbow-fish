@@ -217,7 +217,6 @@
 				493F6AC41A8AEB20003636AE /* Tableview Cells */,
 				493803831A86C03100E62FC2 /* SelectManufacturerTableViewController.swift */,
 				49AC9E381A87D59D007CE68A /* SelectProductTableViewController.swift */,
-				49AC9E3A1A87DD67007CE68A /* SelectPencilTableViewController.swift */,
 				493F6ACD1A911996003636AE /* EditPencilTableViewController.swift */,
 				493F6ADD1A99230C003636AE /* EditManufacturerNavigationController.swift */,
 				493F6ADF1A99253A003636AE /* EditProductNavigationController.swift */,
@@ -427,6 +426,7 @@
 				493803711A84503F00E62FC2 /* PencilNavigationController.swift */,
 				493803731A86A46600E62FC2 /* PencilProductTableViewController.swift */,
 				493803751A86A8EC00E62FC2 /* PencilProductNavigationController.swift */,
+				49AC9E3A1A87DD67007CE68A /* SelectPencilTableViewController.swift */,
 			);
 			name = Pencils;
 			sourceTree = "<group>";
