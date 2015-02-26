@@ -30,6 +30,10 @@ class SelectPencilTableViewController: UITableViewController {
         return controller
     }()
     
+    lazy var addButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: Selector("addButtonTapped:"))
+        return button
+    }()
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -59,11 +63,16 @@ class SelectPencilTableViewController: UITableViewController {
         self.tableView.tableHeaderView = self.searchController.searchBar
         self.tableView.estimatedRowHeight = 44.0
         self.tableView.registerNib(UINib(nibName: DefaultDetailTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: DefaultDetailTableViewCell.nibName)
+        self.navigationItem.rightBarButtonItem = self.addButton
         updatePencils()
         definesPresentationContext = true
     }
     
-    func updatePencils() {
+    func addButtonTapped(sender: UIBarButtonItem) {
+        self.presentViewController(CreatePencilNavigationController(), animated: true, completion: nil)
+    }
+    
+    private func updatePencils() {
         var modificationDate: NSDate?
         if let pencils = Pencil.allPencils(forProduct: self.product, context: self.product.managedObjectContext!) {
             self.pencils = pencils
@@ -82,7 +91,7 @@ class SelectPencilTableViewController: UITableViewController {
         }
     }
     
-    func recentModificationDate(inPencils pencils: [Pencil]) -> NSDate {
+    private func recentModificationDate(inPencils pencils: [Pencil]) -> NSDate {
         let newestPencil =  pencils.reduce(pencils.first!) { (p1: Pencil, p2: Pencil) -> Pencil in
             let date1 = p1.modificationDate!
             let date2 = p2.modificationDate!

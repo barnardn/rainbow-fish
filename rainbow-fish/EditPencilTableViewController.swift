@@ -58,12 +58,15 @@ class EditPencilTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.modalPresentationStyle = .FullScreen
         self.tableView.registerNib(UINib(nibName: EditPecilPropertyTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: EditPecilPropertyTableViewCell.nibName)
         self.tableView.registerNib(UINib(nibName: PencilColorPickerTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: PencilColorPickerTableViewCell.nibName)
         self.tableView.registerNib(UINib(nibName: PencilColorTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: PencilColorTableViewCell.nibName)
         self.navigationItem.rightBarButtonItem = self.editButton
         if self.newPencil {
+            self.navigationItem.leftBarButtonItem = self.cancelButton
             self.navigationItem.rightBarButtonItem = self.saveButton
+            self.tableView.editing = true
         }
 
     }
@@ -77,14 +80,14 @@ class EditPencilTableViewController: UITableViewController {
     }
 
     func cancelButtonTapped(sender: UIBarButtonItem) {
-        self.navigationItem.setRightBarButtonItem(self.editButton, animated: true)
-        self.navigationItem.setLeftBarButtonItem(nil, animated: true)
-        self.context.rollback()
-        self.pencil = self.context.objectWithID(self.pencil.objectID) as Pencil
         if self.newPencil {
             self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
             return
         }
+        self.navigationItem.setRightBarButtonItem(self.editButton, animated: true)
+        self.navigationItem.setLeftBarButtonItem(nil, animated: true)
+        self.context.rollback()
+        self.pencil = self.context.objectWithID(self.pencil.objectID) as Pencil
         self.toggleEditing(false)
     }
     
