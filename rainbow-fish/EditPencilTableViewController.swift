@@ -15,6 +15,7 @@ class EditPencilTableViewController: UITableViewController {
     var pencil: Pencil!
     var context: NSManagedObjectContext!
     var newPencil: Bool = false
+    var product: Product?
     
     lazy var saveButton: UIBarButtonItem = {
         let button = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: Selector("saveButonTapped:"))
@@ -30,19 +31,7 @@ class EditPencilTableViewController: UITableViewController {
         let button = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: Selector("cancelButtonTapped:"))
         return button
     }()
-    
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-    
-    override init(style: UITableViewStyle) {
-        super.init(style: style)
-    }
-    
+        
     convenience init(pencil: Pencil?) {
         self.init(style: UITableViewStyle.Grouped)
         self.context = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType, parentContext: CoreDataKit.mainThreadContext)

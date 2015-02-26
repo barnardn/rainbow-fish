@@ -34,19 +34,7 @@ class SelectPencilTableViewController: UITableViewController {
         let button = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: Selector("addButtonTapped:"))
         return button
     }()
-    
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-    }
-    
-    override init(style: UITableViewStyle) {
-        super.init(style: style)
-    }
-    
+        
     convenience init(product: Product) {
         self.init(style: UITableViewStyle.Plain)
         self.product = product
