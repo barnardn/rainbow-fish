@@ -105,14 +105,6 @@ class EditPencilTableViewController: UITableViewController {
                         }
                     }
                     self.cloudStoreRecords([pencilRecord])
-                    
-//                    if self.newPencil {
-//                        self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
-//                    } else {
-//                        self.toggleEditing(false)
-//                        self.navigationItem.leftBarButtonItem = nil
-//                        self.navigationItem.rightBarButtonItem = self.editButton
-//                    }
                 }
         })
     }
@@ -126,16 +118,25 @@ class EditPencilTableViewController: UITableViewController {
     
     private func cloudStoreRecords(records: [CKRecord]) {
         self.showHUD(header: nil, footer: nil)
-        CloudManager.sharedManger.syncChangeSet(records){ [unowned self] (success, error) -> Void in
+        CloudManager.sharedManger.syncChangeSet(records){ [unowned self] (success, returnedRecords, error) -> Void in
             self.hideHUD()
             assert(success, error!.localizedDescription)
-            if self.newPencil {
-                self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
-            } else {
-                self.toggleEditing(false)
-                self.navigationItem.leftBarButtonItem = nil
-                self.navigationItem.rightBarButtonItem = self.editButton
-            }
+            self.context.performBlock({(_) in
+                if let results = returnedRecords {
+                    if let rec = results.first {
+                        self.pencil.populateFromCKRecord(rec)
+                    }
+                }
+                return .SaveToPersistentStore
+            }, completionHandler: { [unowned self] (result: Result<CommitAction>) in
+                if self.newPencil {
+                    self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+                } else {
+                    self.toggleEditing(false)
+                    self.navigationItem.leftBarButtonItem = nil
+                    self.navigationItem.rightBarButtonItem = self.editButton
+                }
+            })
         }
     }
     

@@ -8,8 +8,8 @@ class Product: _Product, NamedManagedObject {
     // MARK: NSManagedObject overrides
     
     override func awakeFromInsert() {
-        self.isNew = true
         super.awakeFromInsert()
+        self.isNew = true
     }
     
     // MARK: NamedManagedObject
