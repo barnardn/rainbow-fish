@@ -30,7 +30,6 @@ class AppearanceManager {
     
     lazy var appBackgroundColor: UIColor = {
         return UIColor(red: 248.0/256.0, green: 248.0/256.0, blue: 254.0/256.0, alpha: 1.0)
-//        return UIColor(red: 228.0/256.0, green: 238.0/256.0, blue: 254.0/256.0, alpha: 1.0)
     }()
     
     lazy var blackColor: UIColor = {
@@ -78,8 +77,7 @@ class AppearanceManager {
         UINavigationBar.appearance().barTintColor = self.brandColor
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
         UIBarButtonItem.appearance().tintColor = UIColor.whiteColor()
-        UITabBar.appearance().barTintColor = self.brandColor
-        UITabBar.appearance().tintColor = self.brandColorAlternate
+        UITabBar.appearance().tintColor = self.brandColor
         UITextField.appearance().tintColor = self.brandColor
     }
     
