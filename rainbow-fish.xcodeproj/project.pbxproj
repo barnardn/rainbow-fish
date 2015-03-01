@@ -11,6 +11,8 @@
 		4913E5CD1A7E893E00C4C9BF /* CloudSyncable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4913E5CC1A7E893E00C4C9BF /* CloudSyncable.swift */; };
 		491AD0F21A9EA64E0046FE00 /* CreatePencilNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491AD0F11A9EA64E0046FE00 /* CreatePencilNavigationController.swift */; };
 		491AD0F41A9EB9E70046FE00 /* CKRecord+AppExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491AD0F31A9EB9E70046FE00 /* CKRecord+AppExtensions.swift */; };
+		491AD0F61AA2B6D60046FE00 /* _SyncInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491AD0F51AA2B6D60046FE00 /* _SyncInfo.swift */; };
+		491AD0F81AA2B6E30046FE00 /* SyncInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491AD0F71AA2B6E30046FE00 /* SyncInfo.swift */; };
 		4938036D1A8447EB00E62FC2 /* UIViewController+JHProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4938036C1A8447EB00E62FC2 /* UIViewController+JHProgressHUD.swift */; };
 		493803701A8449AA00E62FC2 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4938036F1A8449AA00E62FC2 /* Types.swift */; };
 		493803721A84503F00E62FC2 /* PencilNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493803711A84503F00E62FC2 /* PencilNavigationController.swift */; };
@@ -85,6 +87,8 @@
 		4913E5CC1A7E893E00C4C9BF /* CloudSyncable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudSyncable.swift; sourceTree = "<group>"; };
 		491AD0F11A9EA64E0046FE00 /* CreatePencilNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePencilNavigationController.swift; sourceTree = "<group>"; };
 		491AD0F31A9EB9E70046FE00 /* CKRecord+AppExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CKRecord+AppExtensions.swift"; sourceTree = "<group>"; };
+		491AD0F51AA2B6D60046FE00 /* _SyncInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _SyncInfo.swift; sourceTree = "<group>"; };
+		491AD0F71AA2B6E30046FE00 /* SyncInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncInfo.swift; sourceTree = "<group>"; };
 		4938036C1A8447EB00E62FC2 /* UIViewController+JHProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+JHProgressHUD.swift"; sourceTree = "<group>"; };
 		4938036F1A8449AA00E62FC2 /* Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		493803711A84503F00E62FC2 /* PencilNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PencilNavigationController.swift; sourceTree = "<group>"; };
@@ -343,6 +347,7 @@
 		49E8D8C21A7447180064E682 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
+				491AD0F71AA2B6E30046FE00 /* SyncInfo.swift */,
 				49E8D8C91A7564400064E682 /* Inventory.swift */,
 				49E8D8CA1A7564400064E682 /* machine */,
 				49E8D8CF1A7564400064E682 /* Manufacturer.swift */,
@@ -358,6 +363,7 @@
 		49E8D8CA1A7564400064E682 /* machine */ = {
 			isa = PBXGroup;
 			children = (
+				491AD0F51AA2B6D60046FE00 /* _SyncInfo.swift */,
 				49E8D8CB1A7564400064E682 /* _Inventory.swift */,
 				49E8D8CC1A7564400064E682 /* _Manufacturer.swift */,
 				49E8D8CD1A7564400064E682 /* _Pencil.swift */,
@@ -586,6 +592,7 @@
 				49E8D8D81A7564400064E682 /* Pencil.swift in Sources */,
 				491AD0F41A9EB9E70046FE00 /* CKRecord+AppExtensions.swift in Sources */,
 				49AC9E3B1A87DD67007CE68A /* SelectPencilTableViewController.swift in Sources */,
+				491AD0F81AA2B6E30046FE00 /* SyncInfo.swift in Sources */,
 				49E8D8BB1A7443F50064E682 /* JHProgressHUD.swift in Sources */,
 				493803761A86A8EC00E62FC2 /* PencilProductNavigationController.swift in Sources */,
 				491AD0F21A9EA64E0046FE00 /* CreatePencilNavigationController.swift in Sources */,
@@ -621,6 +628,7 @@
 				49E8D8EC1A75CADE0064E682 /* InventoryTableViewController.swift in Sources */,
 				49E8D8DC1A7566E00064E682 /* AppController.swift in Sources */,
 				49E8D8F01A75D4760064E682 /* SettingsTableViewController.swift in Sources */,
+				491AD0F61AA2B6D60046FE00 /* _SyncInfo.swift in Sources */,
 				493F6ADC1A9911CF003636AE /* EditTextFieldTableViewController.swift in Sources */,
 				49BB8F5E1A79D431007CFE3B /* Seeder.swift in Sources */,
 				49BEC0E31A7F094E00A601CF /* ProductHeaderView.swift in Sources */,

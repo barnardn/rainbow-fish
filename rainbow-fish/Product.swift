@@ -14,7 +14,7 @@ class Product: _Product, NamedManagedObject {
     
     // MARK: NamedManagedObject
     class var entityName: String { return self.entityName() }
-
+    class var UpdateIntervalInSeconds: NSTimeInterval { return 60.0 * 60.0 }
 }
 
 extension Product: CloudSyncable {
@@ -35,6 +35,17 @@ extension Product: CloudSyncable {
 }
 
 extension Product {
+    
+    var shouldPerformUpdate: Bool {
+        get {
+            if let lastSyncDate = self.syncInfo?.lastRefreshTime {
+                let updateTime = NSDate(timeInterval: Product.UpdateIntervalInSeconds, sinceDate: lastSyncDate)
+                let now = NSDate()
+                return (now.timeIntervalSinceDate(updateTime) >= 0.0)
+            }
+            return true
+        }
+    }
     
     func sortedPencils() -> [Pencil]? {
         if let pencils = self.pencils.allObjects as? [Pencil] {
