@@ -54,12 +54,11 @@ class SelectPencilTableViewController: UITableViewController {
         super.viewDidLoad()
         self.tableView.backgroundColor = AppearanceManager.appearanceManager.appBackgroundColor
         self.tableView.tableHeaderView = self.searchController.searchBar
-        self.tableView.estimatedRowHeight = 44.0
-        self.tableView.registerNib(UINib(nibName: DefaultDetailTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: DefaultDetailTableViewCell.nibName)
+        self.tableView.rowHeight = PencilTableViewCell.rowHeight
+        self.tableView.registerNib(UINib(nibName: PencilTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: PencilTableViewCell.nibName)
         self.refreshControl = UIRefreshControl()
         self.refreshControl?.tintColor = AppearanceManager.appearanceManager.brandColor
         self.refreshControl?.addTarget(self, action: Selector("refreshControlDidChange:"), forControlEvents: .ValueChanged)
-        
         self.navigationItem.rightBarButtonItem = self.addButton
         self.navigationItem.backBarButtonItem = self.backButton
         definesPresentationContext = true
@@ -140,11 +139,13 @@ extension SelectPencilTableViewController: UITableViewDataSource {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(DefaultDetailTableViewCell.nibName, forIndexPath: indexPath) as DefaultDetailTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(PencilTableViewCell.nibName, forIndexPath: indexPath) as PencilTableViewCell
         cell.accessoryType = .DisclosureIndicator
         let pencil = self.pencils[indexPath.row]
-        cell.textLabel?.text = pencil.name
-        cell.detailTextLabel?.text = pencil.identifier
+        cell.name = pencil.name
+        cell.pencilIdentifier = pencil.identifier
+        cell.colorSwatch = pencil.color as? UIColor
+        cell.presentInInventory = (indexPath.row == 4)
         return cell
     }
 }
