@@ -56,6 +56,10 @@ class SelectPencilTableViewController: UITableViewController {
         self.tableView.tableHeaderView = self.searchController.searchBar
         self.tableView.estimatedRowHeight = 44.0
         self.tableView.registerNib(UINib(nibName: DefaultDetailTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: DefaultDetailTableViewCell.nibName)
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl?.tintColor = AppearanceManager.appearanceManager.brandColor
+        self.refreshControl?.addTarget(self, action: Selector("refreshControlDidChange:"), forControlEvents: .ValueChanged)
+        
         self.navigationItem.rightBarButtonItem = self.addButton
         self.navigationItem.backBarButtonItem = self.backButton
         definesPresentationContext = true
@@ -65,9 +69,19 @@ class SelectPencilTableViewController: UITableViewController {
         updatePencils()
     }
     
+    
+    // MARK: action & event handlers
+    
     func addButtonTapped(sender: UIBarButtonItem) {
         self.presentViewController(CreatePencilNavigationController(product: self.product), animated: true, completion: nil)
     }
+    
+    func refreshControlDidChange(sender: UIRefreshControl) {
+        self.cloudUpdate(forced: true)
+    }
+    
+    
+    // MARK: private methods
     
     private func updatePencils() {
         if let pencils = Pencil.allPencils(forProduct: self.product, context: self.product.managedObjectContext!) {
@@ -78,13 +92,19 @@ class SelectPencilTableViewController: UITableViewController {
     }
     
     private func cloudUpdate(#forced: Bool) {
-        if !self.product.shouldPerformUpdate {
+        if !forced && !self.product.shouldPerformUpdate {
             return
         }
-        self.showHUD()
+        if !forced {
+            self.showHUD()
+        }
         let modificationDate = recentModificationDate(inPencils: pencils)
         CloudManager.sharedManger.importPencilsForProduct(self.product, modifiedAfterDate: modificationDate ){ (success, error) in
-            self.hideHUD()
+            if !forced {
+                self.hideHUD()
+            } else {
+                self.refreshControl?.endRefreshing()
+            }
             if error != nil {
                 println(error?.localizedDescription)
             } else {

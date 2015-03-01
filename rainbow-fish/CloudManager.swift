@@ -105,12 +105,12 @@ class CloudManager {
         saveOp.savePolicy = .AllKeys
         saveOp.modifyRecordsCompletionBlock = {(saved, deleted, error) in
             if let e = error {
-                completion(success: false, savedRecords: nil, error: e)
+                dispatch_async(dispatch_get_main_queue()) { completion(success: false, savedRecords: nil, error: e) }
             }
             let savedRecords = saved.map({ (o: AnyObject) -> CKRecord in
                 return o as CKRecord
             })
-            completion(success: true, savedRecords: savedRecords, error: nil)
+            dispatch_async(dispatch_get_main_queue()) { completion(success: true, savedRecords: savedRecords, error: nil) }
         }
         saveOp.start()
     }
@@ -168,9 +168,9 @@ class CloudManager {
             
             }, completionHandler: { (result: Result<CommitAction>) in
                 if let error = result.error() {
-                    completion(false, error)
+                    dispatch_async(dispatch_get_main_queue()) { completion(false, error) }
                 } else {
-                    completion(true, nil)
+                    dispatch_async(dispatch_get_main_queue()) { completion(true, nil) }
                 }
         })
     }
