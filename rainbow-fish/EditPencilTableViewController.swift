@@ -6,9 +6,11 @@
 //  Copyright (c) 2015 Clamdango. All rights reserved.
 //
 
+import CloudKit
 import CoreData
 import CoreDataKit
 import UIKit
+
 
 class EditPencilTableViewController: UITableViewController {
 
@@ -43,6 +45,12 @@ class EditPencilTableViewController: UITableViewController {
             self.pencil = Pencil(managedObjectContext: self.context)
             self.newPencil = true
         }
+    }
+    
+    convenience init(product: Product) {
+        self.init(pencil: nil)
+        self.product = product
+        self.pencil.product = self.context.objectWithID(self.product!.objectID) as? Product
     }
     
     override func viewDidLoad() {
@@ -83,20 +91,28 @@ class EditPencilTableViewController: UITableViewController {
     func saveButonTapped(sender: UIBarButtonItem) {
         
         self.context.performBlock(
-            { (_) in
+            {(_) in
                 return .SaveToPersistentStore
             }, completionHandler: {[unowned self] (result: Result<CommitAction>) in
                 switch result {
                 case let .Failure(error):
                     println("cant save \(error)")
                 default:
+                    let pencilRecord = self.pencil.toCKRecord()
                     if self.newPencil {
-                        self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
-                    } else {
-                        self.toggleEditing(false)
-                        self.navigationItem.leftBarButtonItem = nil
-                        self.navigationItem.rightBarButtonItem = self.editButton
+                        if let product = self.product {
+                            pencilRecord.assignParentReference(parentRecord: product.toCKRecord(), relationshipName: PencilRelationships.product.rawValue)
+                        }
                     }
+                    self.cloudStoreRecords([pencilRecord])
+                    
+//                    if self.newPencil {
+//                        self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+//                    } else {
+//                        self.toggleEditing(false)
+//                        self.navigationItem.leftBarButtonItem = nil
+//                        self.navigationItem.rightBarButtonItem = self.editButton
+//                    }
                 }
         })
     }
@@ -108,6 +124,20 @@ class EditPencilTableViewController: UITableViewController {
         self.tableView.endUpdates()
     }
     
+    private func cloudStoreRecords(records: [CKRecord]) {
+        self.showHUD(header: nil, footer: nil)
+        CloudManager.sharedManger.syncChangeSet(records){ [unowned self] (success, error) -> Void in
+            self.hideHUD()
+            assert(success, error!.localizedDescription)
+            if self.newPencil {
+                self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+            } else {
+                self.toggleEditing(false)
+                self.navigationItem.leftBarButtonItem = nil
+                self.navigationItem.rightBarButtonItem = self.editButton
+            }
+        }
+    }
     
 }
 

@@ -63,7 +63,7 @@ class SelectPencilTableViewController: UITableViewController {
     }
     
     func addButtonTapped(sender: UIBarButtonItem) {
-        self.presentViewController(CreatePencilNavigationController(), animated: true, completion: nil)
+        self.presentViewController(CreatePencilNavigationController(product: self.product), animated: true, completion: nil)
     }
     
     private func updatePencils() {

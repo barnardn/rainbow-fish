@@ -35,8 +35,15 @@ extension Pencil: CloudSyncable {
     }
     
     func toCKRecord() -> CKRecord {
-        let ckRecordID = CKRecordID(recordName: self.recordID!)
-        let record = CKRecord(recordType: Pencil.entityName, recordID: ckRecordID)
+        var record: CKRecord
+        if let recordID = self.recordID {
+            let ckRecordID = CKRecordID(recordName: self.recordID!)
+            record = CKRecord(recordType: Pencil.entityName, recordID: ckRecordID) as CKRecord
+        } else {
+            record = CKRecord(recordType: Pencil.entityName)
+//            let ckRecordID = CKRecordID(recordName: NSUUID().UUIDString)
+//            record = CKRecord(recordType: Pencil.entityName, recordID: ckRecordID) as CKRecord
+        }
         record.setValue(self.name, forKey: PencilAttributes.name.rawValue)
         record.setValue(self.identifier, forKey: PencilAttributes.identifier.rawValue)
         if let color = self.color as? UIColor {
@@ -67,7 +74,7 @@ extension Pencil {
     func ckReferenceWithProductRecord(productRecord: CKRecord) -> CKReference {
         let reference = CKReference(record: productRecord, action: .DeleteSelf)
         let pencilRecord = self.toCKRecord()
-        reference.setValue(pencilRecord, forKey: PencilRelationships.product.rawValue)
+        pencilRecord.setValue(reference, forKey: PencilRelationships.product.rawValue)
         return reference
     }
     

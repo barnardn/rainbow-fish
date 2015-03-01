@@ -99,8 +99,20 @@ class CloudManager {
         }
     }
     
+    func syncChangeSet(changeSet: [CKRecord], completion: (success: Bool, error: NSError?) -> Void) {
+        var saveOp =  CKModifyRecordsOperation(recordsToSave: changeSet, recordIDsToDelete: nil)
+        saveOp.database = self.publicDb
+        saveOp.savePolicy = .AllKeys
+        saveOp.modifyRecordsCompletionBlock = {(saved, deleted, error) in
+            if let e = error {
+                completion(success: false, error: e)
+            }
+            completion(success: true, error: nil)
+        }
+        saveOp.start()
+    }
     
-    // MARK: core data 
+    // MARK: core data
     
     func importManufacturer(manufacturerRecord: CKRecord, productRecords: [CKRecord]?, completion: ()->Void) {
 
