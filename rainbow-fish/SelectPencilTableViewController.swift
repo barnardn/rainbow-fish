@@ -70,13 +70,19 @@ class SelectPencilTableViewController: UITableViewController {
     }
     
     private func updatePencils() {
-        var modificationDate: NSDate?
         if let pencils = Pencil.allPencils(forProduct: self.product, context: self.product.managedObjectContext!) {
             self.pencils = pencils
             tableView.reloadData()
         }
+        self.cloudUpdate(forced: false)
+    }
+    
+    private func cloudUpdate(#forced: Bool) {
+        if !self.product.shouldPerformUpdate {
+            return
+        }
         self.showHUD()
-        modificationDate = recentModificationDate(inPencils: pencils)
+        let modificationDate = recentModificationDate(inPencils: pencils)
         CloudManager.sharedManger.importPencilsForProduct(self.product, modifiedAfterDate: modificationDate ){ (success, error) in
             self.hideHUD()
             if error != nil {
