@@ -28,11 +28,17 @@
         <attribute name="recordID" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <relationship name="manufacturer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Manufacturer" inverseName="products" inverseEntity="Manufacturer" syncable="YES"/>
         <relationship name="pencils" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Pencil" inverseName="product" inverseEntity="Pencil" syncable="YES"/>
+        <relationship name="syncInfo" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="SyncInfo" inverseName="product" inverseEntity="SyncInfo" syncable="YES"/>
+    </entity>
+    <entity name="SyncInfo" representedClassName="SyncInfo" syncable="YES">
+        <attribute name="lastRefreshTime" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="product" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Product" inverseName="syncInfo" inverseEntity="Product" syncable="YES"/>
     </entity>
     <elements>
         <element name="Inventory" positionX="97" positionY="117" width="128" height="73"/>
         <element name="Manufacturer" positionX="16" positionY="225" width="128" height="120"/>
         <element name="Pencil" positionX="-180" positionY="-4" width="128" height="163"/>
-        <element name="Product" positionX="-171" positionY="162" width="128" height="135"/>
+        <element name="Product" positionX="-171" positionY="162" width="128" height="148"/>
+        <element name="SyncInfo" positionX="-45" positionY="144" width="128" height="73"/>
     </elements>
 </model>

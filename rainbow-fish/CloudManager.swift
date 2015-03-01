@@ -157,6 +157,12 @@ class CloudManager {
             if pencils.count > 0 {
                 product?.addPencils(NSSet(array: pencils))
             }
+            if let syncInfo = product?.syncInfo {
+                syncInfo.lastRefreshTime = NSDate()
+            } else {
+                product?.syncInfo = SyncInfo(managedObjectContext: context)
+                product?.syncInfo?.lastRefreshTime = NSDate()
+            }
             println("New pencils: \(pencils.count) total records \(records.count)")
             return .SaveToPersistentStore
             

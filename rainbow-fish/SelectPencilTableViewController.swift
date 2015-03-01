@@ -73,10 +73,10 @@ class SelectPencilTableViewController: UITableViewController {
         var modificationDate: NSDate?
         if let pencils = Pencil.allPencils(forProduct: self.product, context: self.product.managedObjectContext!) {
             self.pencils = pencils
-            modificationDate = recentModificationDate(inPencils: pencils)
             tableView.reloadData()
         }
         self.showHUD()
+        modificationDate = recentModificationDate(inPencils: pencils)
         CloudManager.sharedManger.importPencilsForProduct(self.product, modifiedAfterDate: modificationDate ){ (success, error) in
             self.hideHUD()
             if error != nil {
@@ -89,6 +89,9 @@ class SelectPencilTableViewController: UITableViewController {
     }
     
     private func recentModificationDate(inPencils pencils: [Pencil]) -> NSDate {
+        if pencils.count == 0 {
+            return NSDate(timeIntervalSinceReferenceDate: 0)
+        }
         let newestPencil =  pencils.reduce(pencils.first!) { (p1: Pencil, p2: Pencil) -> Pencil in
             let date1 = p1.modificationDate!
             let date2 = p2.modificationDate!

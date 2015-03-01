@@ -13,6 +13,7 @@ enum ProductAttributes: String {
 enum ProductRelationships: String {
     case manufacturer = "manufacturer"
     case pencils = "pencils"
+    case syncInfo = "syncInfo"
 }
 
 @objc
@@ -70,6 +71,11 @@ class _Product: NSManagedObject {
 
     @NSManaged
     var pencils: NSSet
+
+    @NSManaged
+    var syncInfo: SyncInfo?
+
+    // func validateSyncInfo(value: AutoreleasingUnsafePointer<AnyObject>, error: NSErrorPointer) {}
 
 }
 
