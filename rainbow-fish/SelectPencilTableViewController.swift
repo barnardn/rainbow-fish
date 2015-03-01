@@ -13,7 +13,7 @@ import CoreDataKit
 class SelectPencilTableViewController: UITableViewController {
 
     var product: Product!
-    var pencils: [Pencil]?
+    var pencils =  [Pencil]()
     
     lazy var searchResultsTableController: PencilSearchResultsTableViewController = {
         let controller =  PencilSearchResultsTableViewController()
@@ -58,8 +58,11 @@ class SelectPencilTableViewController: UITableViewController {
         self.tableView.registerNib(UINib(nibName: DefaultDetailTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: DefaultDetailTableViewCell.nibName)
         self.navigationItem.rightBarButtonItem = self.addButton
         self.navigationItem.backBarButtonItem = self.backButton
-        updatePencils()
         definesPresentationContext = true
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        updatePencils()
     }
     
     func addButtonTapped(sender: UIBarButtonItem) {
@@ -73,13 +76,13 @@ class SelectPencilTableViewController: UITableViewController {
             modificationDate = recentModificationDate(inPencils: pencils)
             tableView.reloadData()
         }
-        self.showHUD(header: "Refreshing Pencils", footer: "Please Wait...")
+        self.showHUD()
         CloudManager.sharedManger.importPencilsForProduct(self.product, modifiedAfterDate: modificationDate ){ (success, error) in
             self.hideHUD()
             if error != nil {
                 println(error?.localizedDescription)
             } else {
-                self.pencils = Pencil.allPencils(forProduct: self.product, context: self.product.managedObjectContext!)
+                self.pencils = Pencil.allPencils(forProduct: self.product, context: self.product.managedObjectContext!) ?? [Pencil]()
                 self.tableView.reloadData()
             }
         }
@@ -104,19 +107,15 @@ class SelectPencilTableViewController: UITableViewController {
 extension SelectPencilTableViewController: UITableViewDataSource {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let pencils = self.pencils {
-            return pencils.count
-        }
-        return 0
+        return self.pencils.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(DefaultDetailTableViewCell.nibName, forIndexPath: indexPath) as DefaultDetailTableViewCell
         cell.accessoryType = .DisclosureIndicator
-        if let pencil = self.pencils?[indexPath.row] {
-            cell.textLabel?.text = pencil.name
-            cell.detailTextLabel?.text = pencil.identifier
-        }
+        let pencil = self.pencils[indexPath.row]
+        cell.textLabel?.text = pencil.name
+        cell.detailTextLabel?.text = pencil.identifier
         return cell
     }
 }
@@ -126,9 +125,13 @@ extension SelectPencilTableViewController: UITableViewDataSource {
 extension SelectPencilTableViewController: UITableViewDelegate {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if let pencil = self.pencils?[indexPath.row] {
-            self.navigationController?.pushViewController(EditPencilTableViewController(pencil: pencil), animated: true)
+        var pencil: Pencil
+        if tableView == searchResultsTableController.tableView {
+            pencil = self.searchResultsTableController.searchResults[indexPath.row]
+        } else {
+            pencil = self.pencils[indexPath.row]
         }
+        self.navigationController?.pushViewController(EditPencilTableViewController(pencil: pencil), animated: true)
     }
 }
 
@@ -156,7 +159,7 @@ extension SelectPencilTableViewController: UISearchBarDelegate, UISearchControll
         }
         let searchPredicate = NSCompoundPredicate(type: .OrPredicateType, subpredicates: subpredicates)
         
-        let results = pencils?.filter{ searchPredicate.evaluateWithObject($0) }
+        let results = self.pencils.filter{ searchPredicate.evaluateWithObject($0) }
         
         resultsController.searchResults = results ?? [Pencil]()
         resultsController.tableView.reloadData()

@@ -28,7 +28,9 @@ extension Pencil: CloudSyncable {
     
     func populateFromCKRecord(record: CKRecord) {
         self.recordID = record.recordID.recordName
-        self.color = record.objectForKey(PencilAttributes.color.rawValue)
+        if let colorValue = record.objectForKey(PencilAttributes.color.rawValue) as? String {
+            self.color = UIColor.colorFromRGBString(colorValue)
+        }
         self.modificationDate = record.modificationDate
         self.name = record.objectForKey(PencilAttributes.name.rawValue) as? String
         self.identifier = record.objectForKey(PencilAttributes.identifier.rawValue) as String
@@ -37,12 +39,10 @@ extension Pencil: CloudSyncable {
     func toCKRecord() -> CKRecord {
         var record: CKRecord
         if let recordID = self.recordID {
-            let ckRecordID = CKRecordID(recordName: self.recordID!)
+            let ckRecordID = CKRecordID(recordName: recordID)
             record = CKRecord(recordType: Pencil.entityName, recordID: ckRecordID) as CKRecord
         } else {
             record = CKRecord(recordType: Pencil.entityName)
-//            let ckRecordID = CKRecordID(recordName: NSUUID().UUIDString)
-//            record = CKRecord(recordType: Pencil.entityName, recordID: ckRecordID) as CKRecord
         }
         record.setValue(self.name, forKey: PencilAttributes.name.rawValue)
         record.setValue(self.identifier, forKey: PencilAttributes.identifier.rawValue)

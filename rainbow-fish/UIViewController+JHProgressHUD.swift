@@ -20,6 +20,10 @@ extension UIViewController {
         })
     }
     
+    func showHUD() {
+        return showHUD(header: nil, footer: nil)
+    }
+    
     func hideHUD() {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
             JHProgressHUD.sharedHUD.hide()

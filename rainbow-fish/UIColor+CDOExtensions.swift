@@ -40,4 +40,19 @@ extension UIColor {
         }
     }
     
+    class func colorFromRGBString(rgbString: String?) -> UIColor {
+        if let rgbString = rgbString {
+            if rgbString.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) <= 5 {
+                return UIColor.blackColor()
+            }
+            let rgbParts = rgbString.componentsSeparatedByString(",")
+            if rgbParts.count != 3 {
+                return UIColor.blackColor()
+            }
+            let rgbValues = rgbParts.map{(str: String) in Float(str.toInt()!)/256.0 }
+            return UIColor(red: CGFloat(rgbValues[0]), green: CGFloat(rgbValues[1]), blue: CGFloat(rgbValues[2]), alpha: 1.0)
+        }
+        return UIColor.blackColor()
+    }
+    
 }
