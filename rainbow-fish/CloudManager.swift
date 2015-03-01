@@ -54,30 +54,10 @@ class CloudManager {
         }
     }
     
-    func importPencilsForProduct(product: Product, modifiedAfterDate: NSDate?, completion: (success: Bool, error: NSError?)->Void) {
+    func importAllPencilsForProduct(product: Product, modifiedAfterDate: NSDate?, completion: (success: Bool, error: NSError?)->Void) {
         assert(product.recordID != nil, "Must have a CKRecordID")
-        let recordID = CKRecordID(recordName: product.recordID!)
-        let byRecordID = NSPredicate(format: "%K == %@", ProductAttributes.recordID.rawValue, recordID)
-        publicDb.performQuery(CKQuery(recordType: Product.entityName, predicate: byRecordID), inZoneWithID: nil) { (results, error) -> Void in
-            if error != nil {
-                dispatch_async(dispatch_get_main_queue()) { completion(success: false, error: error) }
-            } else if  results.count == 0  {
-                dispatch_async(dispatch_get_main_queue()) { completion(success: true, error: nil) }
-            } else {
-                let product = results.first as CKRecord!
-                self.pencilsForProduct(product, modifiedAfterDate: modifiedAfterDate) { (results, error) -> Void in
-                    if error != nil {
-                        dispatch_async(dispatch_get_main_queue()) { completion(success: false, error: error) }
-                    } else {
-                        self.importPencilRecord(results!, productRecord: product, completion)
-                    }
-                }
-            }
-        }
-    }
-    
-    func pencilsForProduct(product: CKRecord, modifiedAfterDate: NSDate?, completion: ([CKRecord]?, NSError?)->Void) {
-        let productRef = CKReference(record: product, action: CKReferenceAction.DeleteSelf)
+        let productRecordId = CKRecordID(recordName: product.recordID!)
+        let productRef = CKReference(recordID: productRecordId, action: .DeleteSelf)
         let byProduct = NSPredicate(format: "%K == %@", PencilRelationships.product.rawValue, productRef)
         var subpredicates = [byProduct!]
         if let modDate = modifiedAfterDate {
@@ -86,17 +66,54 @@ class CloudManager {
         }
         let predicate = NSCompoundPredicate(type: NSCompoundPredicateType.AndPredicateType, subpredicates: subpredicates)
         let pencilQuery = CKQuery(recordType: Pencil.entityName, predicate: predicate)
-        publicDb.performQuery(pencilQuery, inZoneWithID: nil) { [unowned self] (results, error) -> Void in
-            if error != nil {
-                completion(nil, error)
-                return
-            }
-            let pencils = results.map{ (obj) -> CKRecord in
-                let record = obj as CKRecord
-                return record
-            }
-            completion(pencils, nil)
+        let queryOperation = CKQueryOperation(query: pencilQuery) as CKQueryOperation
+        var pencilRecords = [CKRecord]()
+        queryOperation.recordFetchedBlock = {(record: CKRecord!) in
+            pencilRecords.append(record)
         }
+        queryOperation.queryCompletionBlock = {[unowned self] (cursor: CKQueryCursor!, error: NSError!) in
+            if error != nil {
+                dispatch_async(dispatch_get_main_queue()) { completion(success: false, error: error) }
+            }
+            if cursor != nil {
+                let fetchMoreOperation = CKQueryOperation(cursor: cursor)
+                fetchMoreOperation.recordFetchedBlock = queryOperation.recordFetchedBlock
+                fetchMoreOperation.queryCompletionBlock = queryOperation.queryCompletionBlock
+                self.publicDb.addOperation(fetchMoreOperation)
+            } else {
+                self.storePencilRecords(pencilRecords, forProduct: product, completion: completion)
+            }
+        }
+        self.publicDb.addOperation(queryOperation)
+    }
+    
+    func storePencilRecords(pencilRecords: [CKRecord], forProduct product: Product, completion: (Bool, NSError?)->Void) {
+        CoreDataKit.performBlockOnBackgroundContext({(context: NSManagedObjectContext) in
+            var pencils = pencilRecords.map{ (record: CKRecord) -> Pencil in
+                var (pencil, error) = context.updateFromCKRecord(Pencil.self, record: record, createIfNotFound: true)
+                return pencil!
+            }.filter{ return $0.isNew!.boolValue }
+            let localProduct = context.objectWithID(product.objectID) as Product
+    
+            if pencils.count > 0 {
+                localProduct.addPencils(NSSet(array: pencils))
+            }
+            if let syncInfo = product.syncInfo {
+                syncInfo.lastRefreshTime = NSDate()
+            } else {
+                localProduct.syncInfo = SyncInfo(managedObjectContext: context)
+                localProduct.syncInfo?.lastRefreshTime = NSDate()
+            }
+            println("New pencils: \(pencils.count) total records \(pencilRecords.count)")
+            return .SaveToPersistentStore
+            
+            }, completionHandler: { (result: Result<CommitAction>) in
+                if let error = result.error() {
+                    dispatch_async(dispatch_get_main_queue()) { completion(false, error) }
+                } else {
+                    dispatch_async(dispatch_get_main_queue()) { completion(true, nil) }
+                }
+        })
     }
     
     func syncChangeSet(changeSet: [CKRecord], completion: (success: Bool, savedRecords:[CKRecord]?, error: NSError?) -> Void) {
@@ -140,42 +157,7 @@ class CloudManager {
             completion()
         })
     }
-    
-    func importPencilRecord(records: [CKRecord], productRecord: CKRecord, completion: (Bool, NSError?)->Void) {
-        CoreDataKit.performBlockOnBackgroundContext({(context: NSManagedObjectContext) in
-            let byID = NSPredicate(format: "%K == %@", ProductAttributes.recordID.rawValue, productRecord.recordID.recordName)
-            var result = context.findFirst(Product.self, predicate: byID, sortDescriptors: nil, offset: nil)
-            if let error = result.error() {
-                assertionFailure(error.localizedDescription)
-            }
-            let product = result.value()!
-            var pencils = records.map{ (pencilRecord: CKRecord) -> Pencil in
-                var (pencil, error) = context.updateFromCKRecord(Pencil.self, record: pencilRecord, createIfNotFound: true)
-                return pencil!
-            }.filter{ return $0.isNew!.boolValue }
-            
-            if pencils.count > 0 {
-                product?.addPencils(NSSet(array: pencils))
-            }
-            if let syncInfo = product?.syncInfo {
-                syncInfo.lastRefreshTime = NSDate()
-            } else {
-                product?.syncInfo = SyncInfo(managedObjectContext: context)
-                product?.syncInfo?.lastRefreshTime = NSDate()
-            }
-            println("New pencils: \(pencils.count) total records \(records.count)")
-            return .SaveToPersistentStore
-            
-            }, completionHandler: { (result: Result<CommitAction>) in
-                if let error = result.error() {
-                    dispatch_async(dispatch_get_main_queue()) { completion(false, error) }
-                } else {
-                    dispatch_async(dispatch_get_main_queue()) { completion(true, nil) }
-                }
-        })
-    }
-    
-    
+
     // MARK: shared singleton instance
     
     class var sharedManger: CloudManager {

@@ -99,7 +99,7 @@ class SelectPencilTableViewController: UITableViewController {
             self.showHUD()
         }
         let modificationDate = recentModificationDate(inPencils: pencils)
-        CloudManager.sharedManger.importPencilsForProduct(self.product, modifiedAfterDate: modificationDate ){ (success, error) in
+        CloudManager.sharedManger.importAllPencilsForProduct(self.product, modifiedAfterDate: modificationDate ){ (success, error) in
             if !forced {
                 self.hideHUD()
             } else {
