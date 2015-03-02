@@ -6,6 +6,8 @@
 //  Copyright (c) 2015 Clamdango. All rights reserved.
 //
 
+import CoreData
+import CoreDataKit
 import UIKit
 
 class InventoryTableViewController: ContentTableViewController {
@@ -13,6 +15,8 @@ class InventoryTableViewController: ContentTableViewController {
     enum InventorySortModes: Int {
         case Alpha = 0, Quantity
     }
+    
+    var inventory = [Inventory]()
     
     lazy var sortMethodSegmentedControl: UISegmentedControl = {
         
@@ -34,28 +38,8 @@ class InventoryTableViewController: ContentTableViewController {
         return searchBar
     }()
     
-    lazy var demoDataSource: [(String, String, Int)] = {
-       return [
-            ("Cadmium Blue", "Prismacolor PC 1097", 3),
-            ("Forest Green", "Prismacolor PC 1015", 4),
-            ("Ferrari Red", "Prismacolor PC 1032", 2),
-            ("Arctic White", "Prismacolor PC 322", 1),
-            ("Desert Jasmine", "Prismacolor PC 3237", 1)
-        ]
-        
-    }()
-    
-    
-    required init(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    override init(style: UITableViewStyle) {
-        super.init(style: UITableViewStyle.Plain)
+    convenience init() {
+        self.init(style: UITableViewStyle.Plain)
         var image = UIImage(named:"tabbar-icon-inventory")?.imageWithRenderingMode(.AlwaysTemplate)
         let title = NSLocalizedString("My Pencils", comment: "my pencils tab bar item title")
         self.tabBarItem = UITabBarItem(title: title, image: image, tag: 0)
@@ -65,32 +49,51 @@ class InventoryTableViewController: ContentTableViewController {
         super.viewDidLoad()
         
         self.navigationItem.titleView = sortMethodSegmentedControl
-        self.tableView!.rowHeight = UITableViewAutomaticDimension;
-        self.tableView!.estimatedRowHeight = 60.0
-        self.tableView!.registerNib(UINib(nibName: InventoryTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: InventoryTableViewCell.nibName)
-        self.tableView!.tableHeaderView = self.searchBar
-        self.searchBar.sizeToFit()        
+        self.tableView.rowHeight = UITableViewAutomaticDimension;
+        self.tableView.estimatedRowHeight = 60.0
+        self.tableView.registerNib(UINib(nibName: InventoryTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: InventoryTableViewCell.nibName)
+        self.tableView.tableHeaderView = self.searchBar
+        self.searchBar.sizeToFit()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("inventoryDidUpdate:"), name: AppNotifications.DidAddPencilToInventory.rawValue, object: nil)
+        self.updateInventory()
     }
     
     func segmentControlChanged(sender: UISegmentedControl) {
         println("\(sender.selectedSegmentIndex)")
     }
     
+    func updateInventory() {
+        let results = Inventory.fullInventory(inContext: CoreDataKit.mainThreadContext)
+        self.inventory = results ?? [Inventory]()
+        self.tableView.reloadData()
+    }
+    
+    // MARK: NSNotification handler
+    
+    func inventoryDidUpdate(notification: NSNotification) {
+        self.updateInventory()
+    }
     
 }
 
 extension InventoryTableViewController : UITableViewDataSource, UITableViewDelegate {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.demoDataSource.count
+        return self.inventory.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(InventoryTableViewCell.nibName, forIndexPath: indexPath) as InventoryTableViewCell
-        let tuple = demoDataSource[indexPath.row]
-        cell.title = tuple.0
-        cell.subtitle = tuple.1
-        cell.quantity = String(tuple.2)
+        let lineItem = self.inventory[indexPath.row]
+        cell.title = lineItem.name
+        if let qty = lineItem.quantity {
+            cell.quantity = qty.stringValue
+        }
+        if let productName = lineItem.productName {
+            if let pencilIdent = lineItem.pencilIdentifier {
+                cell.subtitle = "\(productName) \(pencilIdent)"
+            }
+        }
         return cell
     }
     

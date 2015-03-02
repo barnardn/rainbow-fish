@@ -59,6 +59,7 @@ class EditPencilTableViewController: UITableViewController {
         self.tableView.registerNib(UINib(nibName: EditPecilPropertyTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: EditPecilPropertyTableViewCell.nibName)
         self.tableView.registerNib(UINib(nibName: PencilColorPickerTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: PencilColorPickerTableViewCell.nibName)
         self.tableView.registerNib(UINib(nibName: PencilColorTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: PencilColorTableViewCell.nibName)
+        self.tableView.registerNib(UINib(nibName: BigButtonTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: BigButtonTableViewCell.nibName)
         self.navigationItem.rightBarButtonItem = self.editButton
         if self.newPencil {
             self.navigationItem.leftBarButtonItem = self.cancelButton
@@ -112,6 +113,11 @@ class EditPencilTableViewController: UITableViewController {
     private func toggleEditing(editing: Bool) {
         self.tableView.beginUpdates()
         self.tableView.setEditing(editing, animated: true)
+        if editing {
+            self.tableView.deleteSections(NSIndexSet(index: 2), withRowAnimation: .Automatic)
+        } else {
+            self.tableView.insertSections(NSIndexSet(index: 2), withRowAnimation: .Automatic)
+        }
         self.tableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: .Automatic)
         self.tableView.endUpdates()
     }
@@ -140,13 +146,38 @@ class EditPencilTableViewController: UITableViewController {
         }
     }
     
+    // MARK: inventory management methods
+    
+    
+    private func addPencilToInventory() {
+        self.context.performBlock({ [unowned self] (context: NSManagedObjectContext) in
+            let inventory = Inventory(managedObjectContext: self.context)
+            inventory.populateWithPencil(self.pencil)
+            return .SaveToPersistentStore
+        },
+        completionHandler: { [unowned self] (result: Result<CommitAction>) in
+            
+            switch result {
+            case let .Failure(error):
+                assertionFailure("Unable to save inventory: \(error)")
+            default:
+                var userInfo = [AppNotificationInfoKeys.DidAddPencilToInventoryPencilKey.rawValue : self.pencil ]
+                NSNotificationCenter.defaultCenter().postNotificationName(AppNotifications.DidAddPencilToInventory.rawValue, object: nil, userInfo: userInfo)
+            }
+            
+        })
+    }
+    
 }
 
 // MARK: - Table view data source
 extension EditPencilTableViewController: UITableViewDataSource {
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        if self.newPencil {
+            return 2
+        }
+        return (self.tableView.editing) ? 2 : 3
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -165,7 +196,7 @@ extension EditPencilTableViewController: UITableViewDataSource {
                 cell.keyPath = "identifier"
             }
             return cell
-        } else {
+        } else if indexPath.section == 1 {
             if !self.tableView.editing {
                 var cell = tableView.dequeueReusableCellWithIdentifier(PencilColorTableViewCell.nibName, forIndexPath: indexPath) as PencilColorTableViewCell
                 let color = self.pencil.color as? UIColor ?? UIColor.blackColor()
@@ -176,6 +207,12 @@ extension EditPencilTableViewController: UITableViewDataSource {
             var cell = tableView.dequeueReusableCellWithIdentifier(PencilColorPickerTableViewCell.nibName, forIndexPath: indexPath) as PencilColorPickerTableViewCell
             cell.defaultColor = self.pencil.color as UIColor? ?? UIColor.blackColor()
             cell.delegate = self
+            return cell
+        } else {
+            var title = (self.pencil.inventory != nil) ? NSLocalizedString("You own this pencil.", comment:"edit pencil button title") : NSLocalizedString("Add Pencil To My Inventory", comment:"edit pencil add pencil to inventory button title")
+            var cell = tableView.dequeueReusableCellWithIdentifier(BigButtonTableViewCell.nibName) as BigButtonTableViewCell
+            cell.title = title
+            cell.disabled = (self.pencil.inventory != nil)
             return cell
         }
     }
@@ -210,6 +247,23 @@ extension EditPencilTableViewController: UITableViewDelegate {
     override func tableView(tableView: UITableView, shouldIndentWhileEditingRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return false
     }
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section != 2 {
+            return
+        }
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as BigButtonTableViewCell
+        if !cell.disabled {
+            self.addPencilToInventory()
+            cell.title = NSLocalizedString("You own this pencil.", comment:"edit pencil button title")
+            cell.disabled = true
+        }
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
+    
+
+    
+    
 }
 
 extension EditPencilTableViewController: PencilColorPickerTableViewCellDelegate {
