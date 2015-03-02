@@ -16,7 +16,7 @@ class InventoryNavigationController: UINavigationController {
     
     override init() {
         super.init(nibName: nil, bundle: nil)
-        self.viewControllers = [InventoryTableViewController(style: .Plain)]
+        self.viewControllers = [InventoryTableViewController()]
     }
     
 }

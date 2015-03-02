@@ -145,7 +145,7 @@ extension SelectPencilTableViewController: UITableViewDataSource {
         cell.name = pencil.name
         cell.pencilIdentifier = pencil.identifier
         cell.colorSwatch = pencil.color as? UIColor
-        cell.presentInInventory = (indexPath.row == 4)
+        cell.presentInInventory = false
         return cell
     }
 }

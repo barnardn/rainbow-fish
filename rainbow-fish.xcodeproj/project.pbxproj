@@ -43,6 +43,8 @@
 		493FC6111A86ED5700D8D17F /* DefaultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 493FC60F1A86ED5700D8D17F /* DefaultTableViewCell.xib */; };
 		4973DA701A7F05CB00619D06 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4973DA6F1A7F05CB00619D06 /* ProductTableViewCell.swift */; };
 		4973DA721A7F05E600619D06 /* ProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4973DA711A7F05E600619D06 /* ProductTableViewCell.xib */; };
+		497E0D631AA3D2E9007FA6A4 /* BigButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497E0D611AA3D2E9007FA6A4 /* BigButtonTableViewCell.swift */; };
+		497E0D641AA3D2E9007FA6A4 /* BigButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 497E0D621AA3D2E9007FA6A4 /* BigButtonTableViewCell.xib */; };
 		49AC9E391A87D59D007CE68A /* SelectProductTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AC9E381A87D59D007CE68A /* SelectProductTableViewController.swift */; };
 		49AC9E3B1A87DD67007CE68A /* SelectPencilTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AC9E3A1A87DD67007CE68A /* SelectPencilTableViewController.swift */; };
 		49AC9E3E1A87E120007CE68A /* DefaultDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AC9E3C1A87E120007CE68A /* DefaultDetailTableViewCell.swift */; };
@@ -120,6 +122,8 @@
 		493FC60F1A86ED5700D8D17F /* DefaultTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultTableViewCell.xib; sourceTree = "<group>"; };
 		4973DA6F1A7F05CB00619D06 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
 		4973DA711A7F05E600619D06 /* ProductTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductTableViewCell.xib; sourceTree = "<group>"; };
+		497E0D611AA3D2E9007FA6A4 /* BigButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigButtonTableViewCell.swift; sourceTree = "<group>"; };
+		497E0D621AA3D2E9007FA6A4 /* BigButtonTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BigButtonTableViewCell.xib; sourceTree = "<group>"; };
 		49AC9E381A87D59D007CE68A /* SelectProductTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectProductTableViewController.swift; sourceTree = "<group>"; };
 		49AC9E3A1A87DD67007CE68A /* SelectPencilTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPencilTableViewController.swift; sourceTree = "<group>"; };
 		49AC9E3C1A87E120007CE68A /* DefaultDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultDetailTableViewCell.swift; sourceTree = "<group>"; };
@@ -205,6 +209,7 @@
 				493FC60E1A86ED5700D8D17F /* DefaultTableViewCell.swift */,
 				49AC9E3C1A87E120007CE68A /* DefaultDetailTableViewCell.swift */,
 				493F6AD71A990E1E003636AE /* TextFieldTableViewCell.swift */,
+				497E0D611AA3D2E9007FA6A4 /* BigButtonTableViewCell.swift */,
 			);
 			name = "Tableview Cells";
 			sourceTree = "<group>";
@@ -212,6 +217,7 @@
 		4938037D1A86B9AB00E62FC2 /* Xibs */ = {
 			isa = PBXGroup;
 			children = (
+				497E0D621AA3D2E9007FA6A4 /* BigButtonTableViewCell.xib */,
 				493F6AD81A990E1E003636AE /* TextFieldTableViewCell.xib */,
 				493FC60F1A86ED5700D8D17F /* DefaultTableViewCell.xib */,
 				49AC9E3D1A87E120007CE68A /* DefaultDetailTableViewCell.xib */,
@@ -528,6 +534,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				497E0D641AA3D2E9007FA6A4 /* BigButtonTableViewCell.xib in Resources */,
 				49AC9E3F1A87E120007CE68A /* DefaultDetailTableViewCell.xib in Resources */,
 				49F9146D1A7727E20042EA0D /* InventoryTableViewCell.xib in Resources */,
 				493FC6111A86ED5700D8D17F /* DefaultTableViewCell.xib in Resources */,
@@ -614,6 +621,7 @@
 				49DF07F71A743A2800BF94D3 /* AppDelegate.swift in Sources */,
 				493F6AD91A990E1E003636AE /* TextFieldTableViewCell.swift in Sources */,
 				493F6AE21A992BE6003636AE /* Array+CDOExtensions.swift in Sources */,
+				497E0D631AA3D2E9007FA6A4 /* BigButtonTableViewCell.swift in Sources */,
 				49E8D8C71A7547770064E682 /* ColorValueTransformer.swift in Sources */,
 				49E8D8E11A7571960064E682 /* NSFileManager+CDOExtensions.swift in Sources */,
 				49E8D8D71A7564400064E682 /* Manufacturer.swift in Sources */,

@@ -4,6 +4,12 @@
 import CoreData
 
 enum InventoryAttributes: String {
+    case color = "color"
+    case identity = "identity"
+    case manufacturerName = "manufacturerName"
+    case name = "name"
+    case pencilIdentifier = "pencilIdentifier"
+    case productName = "productName"
     case quantity = "quantity"
 }
 
@@ -38,7 +44,37 @@ class _Inventory: NSManagedObject {
     // MARK: - Properties
 
     @NSManaged
-    var quantity: NSNumber?
+    var color: AnyObject?
+
+    // func validateColor(value: AutoreleasingUnsafePointer<AnyObject>, error: NSErrorPointer) {}
+
+    @NSManaged
+    var identity: String?
+
+    // func validateIdentity(value: AutoreleasingUnsafePointer<AnyObject>, error: NSErrorPointer) {}
+
+    @NSManaged
+    var manufacturerName: String?
+
+    // func validateManufacturerName(value: AutoreleasingUnsafePointer<AnyObject>, error: NSErrorPointer) {}
+
+    @NSManaged
+    var name: String?
+
+    // func validateName(value: AutoreleasingUnsafePointer<AnyObject>, error: NSErrorPointer) {}
+
+    @NSManaged
+    var pencilIdentifier: String?
+
+    // func validatePencilIdentifier(value: AutoreleasingUnsafePointer<AnyObject>, error: NSErrorPointer) {}
+
+    @NSManaged
+    var productName: String?
+
+    // func validateProductName(value: AutoreleasingUnsafePointer<AnyObject>, error: NSErrorPointer) {}
+
+    @NSManaged
+    var quantity: NSDecimalNumber?
 
     // func validateQuantity(value: AutoreleasingUnsafePointer<AnyObject>, error: NSErrorPointer) {}
 

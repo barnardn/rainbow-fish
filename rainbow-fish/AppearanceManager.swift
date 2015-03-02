@@ -41,11 +41,16 @@ class AppearanceManager {
     }()
     
     lazy var selectedCellBackgroundColor: UIColor = {
+        //return UIColor(red: 162.0/256.0, green: 218.0/256.0, blue: 244.0/256.0, alpha: 1.0)  a really light blue
         return UIColor(red: 1.0/256.0, green: 161.0/256.0, blue: 221.0/256.0, alpha: 1.0)
     }()
     
     var bodyTextColor: UIColor {
         return self.blackColor
+    }
+    
+    var disabledTitleColor: UIColor {
+        return UIColor(white: 0.0, alpha: 0.15)
     }
     
     var subTitleColor: UIColor {

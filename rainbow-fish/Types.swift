@@ -10,6 +10,9 @@ import Foundation
 
 enum AppNotifications: String {
     case DidFinishCloudUpdate = "DidFinishCloudUpdate"
+    case DidAddPencilToInventory = "DidAddPencilToInventory"
 }
 
-
+enum AppNotificationInfoKeys: String {
+    case DidAddPencilToInventoryPencilKey =  "DidAddPencilToInventoryPencilKey"
+}
