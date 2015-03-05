@@ -93,6 +93,9 @@ class EditPencilTableViewController: UITableViewController {
         
         self.context.performBlock(
             {(_) in
+                if let lineItem = self.pencil.inventory {
+                    lineItem.populateWithPencil(self.pencil)
+                }
                 return .SaveToPersistentStore
             }, completionHandler: {[unowned self] (result: Result<CommitAction>) in
                 switch result {
@@ -105,6 +108,8 @@ class EditPencilTableViewController: UITableViewController {
                             pencilRecord.assignParentReference(parentRecord: product.toCKRecord(), relationshipName: PencilRelationships.product.rawValue)
                         }
                     }
+                    let userInfo = [AppNotificationInfoKeys.DidEditPencilPencilKey.rawValue : self.pencil]
+                    NSNotificationCenter.defaultCenter().postNotificationName(AppNotifications.DidEditPencil.rawValue, object: nil, userInfo: userInfo)                    
                     self.cloudStoreRecords([pencilRecord])
                 }
         })
@@ -161,8 +166,8 @@ class EditPencilTableViewController: UITableViewController {
             case let .Failure(error):
                 assertionFailure("Unable to save inventory: \(error)")
             default:
-                var userInfo = [AppNotificationInfoKeys.DidAddPencilToInventoryPencilKey.rawValue : self.pencil ]
-                NSNotificationCenter.defaultCenter().postNotificationName(AppNotifications.DidAddPencilToInventory.rawValue, object: nil, userInfo: userInfo)
+                var userInfo = [AppNotificationInfoKeys.DidEditPencilPencilKey.rawValue : self.pencil ]
+                NSNotificationCenter.defaultCenter().postNotificationName(AppNotifications.DidEditPencil.rawValue, object: nil, userInfo: userInfo)
             }
             
         })

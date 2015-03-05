@@ -45,6 +45,10 @@ class InventoryTableViewController: ContentTableViewController {
         self.tabBarItem = UITabBarItem(title: title, image: image, tag: 0)
     }
 
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -54,7 +58,7 @@ class InventoryTableViewController: ContentTableViewController {
         self.tableView.registerNib(UINib(nibName: InventoryTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: InventoryTableViewCell.nibName)
         self.tableView.tableHeaderView = self.searchBar
         self.searchBar.sizeToFit()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("inventoryDidUpdate:"), name: AppNotifications.DidAddPencilToInventory.rawValue, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("didEditPencil:"), name: AppNotifications.DidEditPencil.rawValue, object: nil)
         self.updateInventory()
     }
     
@@ -70,7 +74,7 @@ class InventoryTableViewController: ContentTableViewController {
     
     // MARK: NSNotification handler
     
-    func inventoryDidUpdate(notification: NSNotification) {
+    func didEditPencil(notification: NSNotification) {
         self.updateInventory()
     }
     

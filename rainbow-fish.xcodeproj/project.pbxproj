@@ -45,6 +45,7 @@
 		4973DA721A7F05E600619D06 /* ProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4973DA711A7F05E600619D06 /* ProductTableViewCell.xib */; };
 		497E0D631AA3D2E9007FA6A4 /* BigButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497E0D611AA3D2E9007FA6A4 /* BigButtonTableViewCell.swift */; };
 		497E0D641AA3D2E9007FA6A4 /* BigButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 497E0D621AA3D2E9007FA6A4 /* BigButtonTableViewCell.xib */; };
+		497E0D661AA7E8D1007FA6A4 /* InventoryDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497E0D651AA7E8D1007FA6A4 /* InventoryDetailTableViewController.swift */; };
 		49AC9E391A87D59D007CE68A /* SelectProductTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AC9E381A87D59D007CE68A /* SelectProductTableViewController.swift */; };
 		49AC9E3B1A87DD67007CE68A /* SelectPencilTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AC9E3A1A87DD67007CE68A /* SelectPencilTableViewController.swift */; };
 		49AC9E3E1A87E120007CE68A /* DefaultDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AC9E3C1A87E120007CE68A /* DefaultDetailTableViewCell.swift */; };
@@ -124,6 +125,7 @@
 		4973DA711A7F05E600619D06 /* ProductTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductTableViewCell.xib; sourceTree = "<group>"; };
 		497E0D611AA3D2E9007FA6A4 /* BigButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigButtonTableViewCell.swift; sourceTree = "<group>"; };
 		497E0D621AA3D2E9007FA6A4 /* BigButtonTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BigButtonTableViewCell.xib; sourceTree = "<group>"; };
+		497E0D651AA7E8D1007FA6A4 /* InventoryDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InventoryDetailTableViewController.swift; sourceTree = "<group>"; };
 		49AC9E381A87D59D007CE68A /* SelectProductTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectProductTableViewController.swift; sourceTree = "<group>"; };
 		49AC9E3A1A87DD67007CE68A /* SelectPencilTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPencilTableViewController.swift; sourceTree = "<group>"; };
 		49AC9E3C1A87E120007CE68A /* DefaultDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultDetailTableViewCell.swift; sourceTree = "<group>"; };
@@ -434,6 +436,7 @@
 				49F914691A77279E0042EA0D /* Tableview Cells */,
 				49E8D8EB1A75CADE0064E682 /* InventoryTableViewController.swift */,
 				49F914671A75DDDD0042EA0D /* InventoryNavigationController.swift */,
+				497E0D651AA7E8D1007FA6A4 /* InventoryDetailTableViewController.swift */,
 			);
 			name = Inventory;
 			sourceTree = "<group>";
@@ -626,6 +629,7 @@
 				49E8D8E11A7571960064E682 /* NSFileManager+CDOExtensions.swift in Sources */,
 				49E8D8D71A7564400064E682 /* Manufacturer.swift in Sources */,
 				493F6AD21A956833003636AE /* PencilSearchResultsTableViewController.swift in Sources */,
+				497E0D661AA7E8D1007FA6A4 /* InventoryDetailTableViewController.swift in Sources */,
 				493F6ADE1A99230C003636AE /* EditManufacturerNavigationController.swift in Sources */,
 				493F6ACB1A8AEFBE003636AE /* PencilColorPickerTableViewCell.swift in Sources */,
 				49AC9E3E1A87E120007CE68A /* DefaultDetailTableViewCell.swift in Sources */,

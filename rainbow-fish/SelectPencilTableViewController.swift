@@ -62,7 +62,7 @@ class SelectPencilTableViewController: UITableViewController {
         self.navigationItem.rightBarButtonItem = self.addButton
         self.navigationItem.backBarButtonItem = self.backButton
         definesPresentationContext = true
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("inventoryDidUpdate:"), name: AppNotifications.DidAddPencilToInventory.rawValue, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("inventoryDidUpdate:"), name: AppNotifications.DidEditPencil.rawValue, object: nil)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -82,7 +82,7 @@ class SelectPencilTableViewController: UITableViewController {
     
     func inventoryDidUpdate(notification: NSNotification) {
         if let userInfo = notification.userInfo {
-            if let pencil = userInfo[AppNotificationInfoKeys.DidAddPencilToInventoryPencilKey.rawValue] as? Pencil {
+            if let pencil = userInfo[AppNotificationInfoKeys.DidEditPencilPencilKey.rawValue] as? Pencil {
                 let row = self.pencils.insertionIndexOf(pencil, isOrderedBefore: { (p1: Pencil, p2: Pencil) -> Bool in
                     return p1.identifier == p2.identifier
                 })
