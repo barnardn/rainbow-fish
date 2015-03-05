@@ -97,9 +97,8 @@ extension InventoryTableViewController : UITableViewDataSource, UITableViewDeleg
         cell.swatchColor = lineItem.color as? UIColor
         return cell
     }
-    
 }
-    
+
 
 extension InventoryTableViewController : UISearchBarDelegate {
     
