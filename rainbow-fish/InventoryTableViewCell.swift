@@ -16,15 +16,6 @@ class InventoryTableViewCell: UITableViewCell {
     @IBOutlet private weak var subTitleLabel: UILabel!
     @IBOutlet weak var colorSwatchImageView: UIImageView!
     
-    var titleColor: UIColor {
-        get {
-            return self.titleLabel.textColor
-        }
-        set {
-            self.titleLabel.textColor = newValue
-        }
-    }
-    
     var title: String? {
         get {
             return self.titleLabel.text
@@ -48,6 +39,15 @@ class InventoryTableViewCell: UITableViewCell {
         }
         set {
             self.quantityLabel.text = newValue
+        }
+    }
+    
+    var swatchColor: UIColor? {
+        get {
+            return self.colorSwatchImageView.backgroundColor
+        }
+        set {
+            self.colorSwatchImageView.backgroundColor = newValue
         }
     }
     

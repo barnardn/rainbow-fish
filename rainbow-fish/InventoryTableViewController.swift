@@ -94,6 +94,7 @@ extension InventoryTableViewController : UITableViewDataSource, UITableViewDeleg
                 cell.subtitle = "\(productName) \(pencilIdent)"
             }
         }
+        cell.swatchColor = lineItem.color as? UIColor
         return cell
     }
     
