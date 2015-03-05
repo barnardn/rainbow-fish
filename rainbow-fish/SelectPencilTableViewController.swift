@@ -47,7 +47,7 @@ class SelectPencilTableViewController: UITableViewController {
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: NSManagedObjectContextDidSaveNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     override func viewDidLoad() {
@@ -62,6 +62,7 @@ class SelectPencilTableViewController: UITableViewController {
         self.navigationItem.rightBarButtonItem = self.addButton
         self.navigationItem.backBarButtonItem = self.backButton
         definesPresentationContext = true
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("inventoryDidUpdate:"), name: AppNotifications.DidAddPencilToInventory.rawValue, object: nil)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -79,6 +80,23 @@ class SelectPencilTableViewController: UITableViewController {
         self.cloudUpdate(forced: true)
     }
     
+    func inventoryDidUpdate(notification: NSNotification) {
+        if let userInfo = notification.userInfo {
+            if let pencil = userInfo[AppNotificationInfoKeys.DidAddPencilToInventoryPencilKey.rawValue] as? Pencil {
+                let row = self.pencils.insertionIndexOf(pencil, isOrderedBefore: { (p1: Pencil, p2: Pencil) -> Bool in
+                    return p1.identifier == p2.identifier
+                })
+                if let visibleRows = self.tableView.indexPathsForVisibleRows() as [NSIndexPath]? {
+                    let results = visibleRows.filter{(indexPath: NSIndexPath) in
+                        return indexPath.row == row
+                    }
+                    if results.count > 0 {
+                        self.tableView.reloadRowsAtIndexPaths(results, withRowAnimation: .Automatic)
+                    }
+                }
+            }
+        }
+    }
     
     // MARK: private methods
     
@@ -145,7 +163,7 @@ extension SelectPencilTableViewController: UITableViewDataSource {
         cell.name = pencil.name
         cell.pencilIdentifier = pencil.identifier
         cell.colorSwatch = pencil.color as? UIColor
-        cell.presentInInventory = false
+        cell.presentInInventory = (pencil.inventory != nil)
         return cell
     }
 }
