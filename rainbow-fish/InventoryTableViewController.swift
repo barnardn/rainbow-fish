@@ -30,12 +30,19 @@ class InventoryTableViewController: ContentTableViewController {
         return segControl
     }()
     
-    lazy var searchBar: UISearchBar = {
-        let searchBar = UISearchBar()
-        searchBar.searchBarStyle = .Minimal
-        searchBar.placeholder = NSLocalizedString("Search", comment:"inventory search bar placeholder")
-        searchBar.delegate = self
-        return searchBar
+    lazy var searchResultsTableController: InventorySearchResultsTableViewController = {
+        let controller =  InventorySearchResultsTableViewController()
+        controller.tableView.delegate = self
+        return controller
+    }()
+    
+    lazy var searchController: UISearchController = {
+        let controller = UISearchController(searchResultsController: self.searchResultsTableController)
+        controller.searchResultsUpdater = self
+        controller.searchBar.sizeToFit()
+        controller.delegate = self
+        controller.searchBar.delegate = self
+        return controller
     }()
     
     convenience init() {
@@ -56,9 +63,9 @@ class InventoryTableViewController: ContentTableViewController {
         self.tableView.rowHeight = UITableViewAutomaticDimension;
         self.tableView.estimatedRowHeight = 60.0
         self.tableView.registerNib(UINib(nibName: InventoryTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: InventoryTableViewCell.nibName)
-        self.tableView.tableHeaderView = self.searchBar
-        self.searchBar.sizeToFit()
+        self.tableView.tableHeaderView = self.searchController.searchBar
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("didEditPencil:"), name: AppNotifications.DidEditPencil.rawValue, object: nil)
+        definesPresentationContext = true
         self.updateInventory()
     }
     
@@ -106,27 +113,86 @@ extension InventoryTableViewController : UITableViewDataSource {
 extension InventoryTableViewController: UITableViewDelegate {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let lineItem = self.inventory[indexPath.row]
+
+        var datasource = self.inventory
+        if tableView == self.searchResultsTableController.tableView {
+            datasource = self.searchResultsTableController.searchResults
+        }
+        let lineItem = datasource[indexPath.row]
         let viewController = InventoryDetailTableViewController(lineItem: lineItem)
         self.navigationController?.pushViewController(viewController, animated: true)
-        viewController.itemUpdatedBlock = { [unowned self] (_ : NSManagedObjectID, wasDeleted: Bool) in
+        
+        viewController.itemUpdatedBlock = { [unowned self] (itemID : NSManagedObjectID, wasDeleted: Bool) in
             if wasDeleted {
-                self.inventory.removeAtIndex(indexPath.row)
-                self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+                if tableView == self.searchResultsTableController.tableView {
+                    let inventoryIndex = self.findIndexOfItemByManagedObjectID(itemID)
+                    if inventoryIndex != NSNotFound {
+                        self.inventory.removeAtIndex(inventoryIndex)
+                    }
+                    self.tableView.reloadData()
+                    self.searchResultsTableController.searchResults.removeAtIndex(indexPath.row)
+                } else {
+                    self.inventory.removeAtIndex(indexPath.row)
+                }
+                tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
             } else {
-                self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+                if tableView == self.searchResultsTableController.tableView {
+                    self.tableView.reloadData()
+                }
+                tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
             }
         }
     }
-
+    
+    func findIndexOfItemByManagedObjectID( managedObjectID: NSManagedObjectID) -> Int {
+        if self.inventory.count == 0 {
+            return NSNotFound
+        }
+        for var i = 0; i < self.inventory.count; i++ {
+            let item = self.inventory[i]
+            if managedObjectID == item.objectID {
+                return i
+            }
+        }
+        return NSNotFound
+    }
+    
 }
 
 
-extension InventoryTableViewController : UISearchBarDelegate {
+
+
+
+extension InventoryTableViewController : UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating {
     
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        println("\(searchText)")
+    func searchBarBookmarkButtonClicked(searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
     }
+    
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        let resultsController = searchController.searchResultsController as InventorySearchResultsTableViewController
+        
+        let whitespaceCharacterSet = NSCharacterSet.whitespaceCharacterSet()
+        let strippedString = searchController.searchBar.text.stringByTrimmingCharactersInSet(whitespaceCharacterSet)
+        let searchItems = strippedString.componentsSeparatedByString(" ") as [String]
+        
+        var subpredicates = [NSPredicate]()
+        for searchText in searchItems {
+            let namePredicate = NSPredicate(format: "name contains[cd] %@ ", searchText)
+            let manufacturerPredicate = NSPredicate(format: "%K contains[cd] %@", InventoryAttributes.manufacturerName.rawValue, searchText)
+            let productPredicate = NSPredicate(format: "%K contains[cd] %@", InventoryAttributes.productName.rawValue, searchText)
+            let identifierPredicate = NSPredicate(format: "%K contains[cd] %@", InventoryAttributes.pencilIdentifier.rawValue, searchText)
+            let subpredicate = NSCompoundPredicate(type: .OrPredicateType, subpredicates: [namePredicate!, identifierPredicate!, manufacturerPredicate!, productPredicate!])
+            subpredicates.append(subpredicate)
+        }
+        let searchPredicate = NSCompoundPredicate(type: .OrPredicateType, subpredicates: subpredicates)
+        
+        let results = self.inventory.filter{ searchPredicate.evaluateWithObject($0) }
+        
+        resultsController.searchResults = results ?? [Inventory]()
+        resultsController.tableView.reloadData()
+    }
+
     
 }
 

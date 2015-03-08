@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4908EA751AABAF2200E176E9 /* DoneEditingInputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4908EA741AABAF2200E176E9 /* DoneEditingInputAccessoryView.swift */; };
+		4908EA781AABE80700E176E9 /* InventorySearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4908EA771AABE80700E176E9 /* InventorySearchResultsController.swift */; };
 		4913E5C91A7D81D600C4C9BF /* CloudManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4913E5C81A7D81D600C4C9BF /* CloudManager.swift */; };
 		4913E5CD1A7E893E00C4C9BF /* CloudSyncable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4913E5CC1A7E893E00C4C9BF /* CloudSyncable.swift */; };
 		491AD0F21A9EA64E0046FE00 /* CreatePencilNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491AD0F11A9EA64E0046FE00 /* CreatePencilNavigationController.swift */; };
@@ -92,6 +93,7 @@
 
 /* Begin PBXFileReference section */
 		4908EA741AABAF2200E176E9 /* DoneEditingInputAccessoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoneEditingInputAccessoryView.swift; sourceTree = "<group>"; };
+		4908EA771AABE80700E176E9 /* InventorySearchResultsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InventorySearchResultsController.swift; sourceTree = "<group>"; };
 		4913E5C81A7D81D600C4C9BF /* CloudManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudManager.swift; sourceTree = "<group>"; };
 		4913E5CC1A7E893E00C4C9BF /* CloudSyncable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudSyncable.swift; sourceTree = "<group>"; };
 		491AD0F11A9EA64E0046FE00 /* CreatePencilNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePencilNavigationController.swift; sourceTree = "<group>"; };
@@ -197,6 +199,14 @@
 				4908EA741AABAF2200E176E9 /* DoneEditingInputAccessoryView.swift */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		4908EA761AABE7B400E176E9 /* Search Results Controller */ = {
+			isa = PBXGroup;
+			children = (
+				4908EA771AABE80700E176E9 /* InventorySearchResultsController.swift */,
+			);
+			name = "Search Results Controller";
 			sourceTree = "<group>";
 		};
 		4938036E1A84498800E62FC2 /* Constants */ = {
@@ -457,6 +467,7 @@
 		49E8D8E81A75C9E50064E682 /* Inventory */ = {
 			isa = PBXGroup;
 			children = (
+				4908EA761AABE7B400E176E9 /* Search Results Controller */,
 				49F914691A77279E0042EA0D /* Tableview Cells */,
 				49E8D8EB1A75CADE0064E682 /* InventoryTableViewController.swift */,
 				49F914671A75DDDD0042EA0D /* InventoryNavigationController.swift */,
@@ -654,6 +665,7 @@
 				497E0D631AA3D2E9007FA6A4 /* BigButtonTableViewCell.swift in Sources */,
 				49E8D8C71A7547770064E682 /* ColorValueTransformer.swift in Sources */,
 				49E8D8E11A7571960064E682 /* NSFileManager+CDOExtensions.swift in Sources */,
+				4908EA781AABE80700E176E9 /* InventorySearchResultsController.swift in Sources */,
 				49E8D8D71A7564400064E682 /* Manufacturer.swift in Sources */,
 				493F6AD21A956833003636AE /* PencilSearchResultsTableViewController.swift in Sources */,
 				497E0D661AA7E8D1007FA6A4 /* InventoryDetailTableViewController.swift in Sources */,
