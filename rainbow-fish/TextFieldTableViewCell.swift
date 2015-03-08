@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol TextFieldTableViewCellDelegate {
+protocol TextFieldTableViewCellDelegate: class {
     
     func textFieldTableViewCell(cell: TextFieldTableViewCell, changedText: String?)
     
@@ -31,7 +31,7 @@ class TextFieldTableViewCell: UITableViewCell {
         }
     }
     
-    var delegate: TextFieldTableViewCellDelegate?
+    weak var delegate: TextFieldTableViewCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()

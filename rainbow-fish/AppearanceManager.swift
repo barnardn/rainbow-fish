@@ -57,6 +57,10 @@ class AppearanceManager {
         return self.brandColorAlternate
     }
     
+    var tableHeaderColor: UIColor {
+        return UIColor(white: 0.45, alpha: 1.0)
+    }
+    
     // MARK: fonts
     
     var standardFont: UIFont {

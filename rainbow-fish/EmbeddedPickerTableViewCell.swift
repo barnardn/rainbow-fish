@@ -8,12 +8,12 @@
 
 import UIKit
 
-protocol EmbeddedPickerTableViewCellDataSource {
+protocol EmbeddedPickerTableViewCellDataSource: class {
 
     func numberOfRowsForEmbeddedPickerTableViewCell(cell: EmbeddedPickerTableViewCell) -> Int
 }
 
-protocol EmbeddedPickerTableViewCellDelegate {
+protocol EmbeddedPickerTableViewCellDelegate: class {
     func embeddedPickerTableViewCell(cell: EmbeddedPickerTableViewCell, selectedItemAtIndex index: Int)
     func embeddedPickerTableViewCell(cell: EmbeddedPickerTableViewCell, titleForRow row: Int) -> String
 }
@@ -22,8 +22,8 @@ class EmbeddedPickerTableViewCell: UITableViewCell {
 
     @IBOutlet weak var pickerView: UIPickerView!
 
-    var delegate: EmbeddedPickerTableViewCellDelegate?
-    var dataSource: EmbeddedPickerTableViewCellDataSource? {
+    weak var delegate: EmbeddedPickerTableViewCellDelegate?
+    weak var dataSource: EmbeddedPickerTableViewCellDataSource? {
         get {
             return self.dataSource
         }

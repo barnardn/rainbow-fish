@@ -17,7 +17,7 @@ class ProductHeaderView: UITableViewHeaderFooterView {
             return self.titleLabel.text
         }
         set {
-            self.titleLabel.text = newValue
+            self.titleLabel.text = newValue?.uppercaseString
         }
     }
     
@@ -31,8 +31,8 @@ class ProductHeaderView: UITableViewHeaderFooterView {
         var label = UILabel(frame: CGRectZero)
         
         self.contentView.addSubview(label)
-        label.font = AppearanceManager.appearanceManager.subtitleFont
-        label.textColor = AppearanceManager.appearanceManager.subTitleColor
+        label.font = AppearanceManager.appearanceManager.nameLabelFont
+        label.textColor = AppearanceManager.appearanceManager.tableHeaderColor
         self.contentView.backgroundColor = AppearanceManager.appearanceManager.appBackgroundColor
         self.titleLabel = label;
     }
@@ -46,7 +46,7 @@ class ProductHeaderView: UITableViewHeaderFooterView {
     }
     
     class var headerHeight: CGFloat {
-        return 24.0
+        return 34.0
     }
     
 }
