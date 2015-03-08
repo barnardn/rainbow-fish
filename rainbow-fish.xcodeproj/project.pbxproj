@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4908EA751AABAF2200E176E9 /* DoneEditingInputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4908EA741AABAF2200E176E9 /* DoneEditingInputAccessoryView.swift */; };
 		4908EA781AABE80700E176E9 /* InventorySearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4908EA771AABE80700E176E9 /* InventorySearchResultsController.swift */; };
+		4908EA7A1AACBC4A00E176E9 /* ProductFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4908EA791AACBC4A00E176E9 /* ProductFooterView.swift */; };
 		4913E5C91A7D81D600C4C9BF /* CloudManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4913E5C81A7D81D600C4C9BF /* CloudManager.swift */; };
 		4913E5CD1A7E893E00C4C9BF /* CloudSyncable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4913E5CC1A7E893E00C4C9BF /* CloudSyncable.swift */; };
 		491AD0F21A9EA64E0046FE00 /* CreatePencilNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491AD0F11A9EA64E0046FE00 /* CreatePencilNavigationController.swift */; };
@@ -94,6 +95,7 @@
 /* Begin PBXFileReference section */
 		4908EA741AABAF2200E176E9 /* DoneEditingInputAccessoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoneEditingInputAccessoryView.swift; sourceTree = "<group>"; };
 		4908EA771AABE80700E176E9 /* InventorySearchResultsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InventorySearchResultsController.swift; sourceTree = "<group>"; };
+		4908EA791AACBC4A00E176E9 /* ProductFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductFooterView.swift; sourceTree = "<group>"; };
 		4913E5C81A7D81D600C4C9BF /* CloudManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudManager.swift; sourceTree = "<group>"; };
 		4913E5CC1A7E893E00C4C9BF /* CloudSyncable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudSyncable.swift; sourceTree = "<group>"; };
 		491AD0F11A9EA64E0046FE00 /* CreatePencilNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePencilNavigationController.swift; sourceTree = "<group>"; };
@@ -321,6 +323,7 @@
 				4973DA6F1A7F05CB00619D06 /* ProductTableViewCell.swift */,
 				49BEC0E21A7F094E00A601CF /* ProductHeaderView.swift */,
 				491AD0F91AA3C23F0046FE00 /* PencilTableViewCell.swift */,
+				4908EA791AACBC4A00E176E9 /* ProductFooterView.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -660,6 +663,7 @@
 				493FC6101A86ED5700D8D17F /* DefaultTableViewCell.swift in Sources */,
 				49E8D8C51A74474B0064E682 /* rainbow-fish.xcdatamodeld in Sources */,
 				49DF07F71A743A2800BF94D3 /* AppDelegate.swift in Sources */,
+				4908EA7A1AACBC4A00E176E9 /* ProductFooterView.swift in Sources */,
 				493F6AD91A990E1E003636AE /* TextFieldTableViewCell.swift in Sources */,
 				493F6AE21A992BE6003636AE /* Array+CDOExtensions.swift in Sources */,
 				497E0D631AA3D2E9007FA6A4 /* BigButtonTableViewCell.swift in Sources */,

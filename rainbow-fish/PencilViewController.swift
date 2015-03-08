@@ -30,6 +30,7 @@ class PencilViewController: ContentTableViewController {
         super.viewDidLoad()
         self.tableView.registerNib(UINib(nibName: ProductTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: ProductTableViewCell.nibName)
         self.tableView.registerClass(ProductHeaderView.self, forHeaderFooterViewReuseIdentifier: "ProductHeaderView")
+        self.tableView.registerClass(ProductFooterView.self, forHeaderFooterViewReuseIdentifier: "ProductFooterView")
         self.tableView!.rowHeight = ProductTableViewCell.estimatedRowHeight
         let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: Selector("addButtonTapped:"))
         addButton.tintColor = UIColor.whiteColor()
@@ -102,19 +103,40 @@ extension PencilViewController: UITableViewDelegate {
         }
     }
     
-    
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier("ProductHeaderView") as ProductHeaderView
         let manufacturer = allManufacturers[section] as Manufacturer
         headerView.title = manufacturer.name
         return headerView
     }
+
+    override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerview = tableView.dequeueReusableHeaderFooterViewWithIdentifier("ProductFooterView") as ProductFooterView
+        let manufacturer = allManufacturers[section] as Manufacturer
+        footerview.manufacturer = manufacturer
+        return footerview
+    }
     
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return ProductHeaderView.headerHeight;
     }
     
+    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return ProductFooterView.footerHeight
+    }
+    
 }
 
+extension PencilViewController: ProductFooterViewDelegate {
+    
+    func productFooterView(view: ProductFooterView, newProductForManufacturer manufacturer: Manufacturer?) {
+        if let manf = manufacturer {
+            println("selected manufacturer \(manf.name)")
+        } else {
+            println("hmmm")
+        }
+    }
+    
+}
 
 
