@@ -15,13 +15,13 @@ class PencilColorTableViewCell: UITableViewCell {
 
     var colorName: String? {
         didSet {
-            self.colorLabel.text = self.colorName
+            self.colorLabel.text = self.colorName ?? "#000000"
         }
     }
     
     var swatchColor: UIColor? {
         didSet {
-            self.swatchView.backgroundColor = self.swatchColor
+            self.swatchView.backgroundColor = self.swatchColor ?? UIColor.blackColor()
         }
     }
     

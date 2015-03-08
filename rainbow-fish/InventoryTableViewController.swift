@@ -80,7 +80,7 @@ class InventoryTableViewController: ContentTableViewController {
     
 }
 
-extension InventoryTableViewController : UITableViewDataSource, UITableViewDelegate {
+extension InventoryTableViewController : UITableViewDataSource {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.inventory.count
@@ -101,6 +101,24 @@ extension InventoryTableViewController : UITableViewDataSource, UITableViewDeleg
         cell.swatchColor = lineItem.color as? UIColor
         return cell
     }
+}
+
+extension InventoryTableViewController: UITableViewDelegate {
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let lineItem = self.inventory[indexPath.row]
+        let viewController = InventoryDetailTableViewController(lineItem: lineItem)
+        self.navigationController?.pushViewController(viewController, animated: true)
+        viewController.itemUpdatedBlock = { [unowned self] (_ : NSManagedObjectID, wasDeleted: Bool) in
+            if wasDeleted {
+                self.inventory.removeAtIndex(indexPath.row)
+                self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+            } else {
+                self.tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+            }
+        }
+    }
+
 }
 
 

@@ -6,92 +6,218 @@
 //  Copyright (c) 2015 Clamdango. All rights reserved.
 //
 
+import CoreData
+import CoreDataKit
 import UIKit
 
 class InventoryDetailTableViewController: UITableViewController {
 
+    enum InventorySection: Int {
+        case Details, Color, Quantity, Delete
+    }
+    
+    enum InventoryRow: Int {
+        case Manufacturer, Product, ColorName, Color, Quantity, Delete
+    }
+    
+    lazy var doneButton : UIBarButtonItem = {
+        let button = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: Selector("doneButtonTapped:"))
+        return button
+    }()
+    
+    let sectionInfo: [[InventoryRow]] = [[.Manufacturer, .Product, .ColorName],
+                                         [.Color], [.Quantity], [.Delete]]
+    
+    private var context: NSManagedObjectContext!
+    private var lineItem: Inventory!
+
+    var itemUpdatedBlock: ((lineItemWithIdentity: NSManagedObjectID, wasDeleted: Bool) -> Void)?
+    
+    convenience init(lineItem: Inventory) {
+        self.init(style: UITableViewStyle.Grouped)
+        self.context = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType, parentContext: CoreDataKit.mainThreadContext)
+        self.context.undoManager = nil
+        self.lineItem = self.context.objectWithID(lineItem.objectID) as? Inventory
+        self.title = self.lineItem.name
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tableView.backgroundColor = AppearanceManager.appearanceManager.appBackgroundColor
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = CGFloat(44.0)
+        self.tableView.registerNib(UINib(nibName: DefaultTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: DefaultTableViewCell.nibName)
+        self.tableView.registerNib(UINib(nibName: DefaultDetailTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: DefaultDetailTableViewCell.nibName)
+        self.tableView.registerNib(UINib(nibName: InventoryQuantityTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: InventoryQuantityTableViewCell.nibName)
+        self.tableView.registerNib(UINib(nibName: PencilColorTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: PencilColorTableViewCell.nibName)
+        self.tableView.registerNib(UINib(nibName: BigButtonTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: BigButtonTableViewCell.nibName)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("contextDidChange:"), name: NSManagedObjectContextObjectsDidChangeNotification, object: self.context)
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("contextWillSave:"), name: NSManagedObjectContextWillSaveNotification, object: self.context)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("contextDidSave:"), name: NSManagedObjectContextDidSaveNotification, object: self.context)
+        
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    // MARK: done button handler
+    
+    func doneButtonTapped(sender: UIBarButtonItem) {
+        self.view.endEditing(true)
+        self.context.performBlock( {(ctx: NSManagedObjectContext) in
+            return .SaveToPersistentStore
+            }, completionHandler: {(result: Result<CommitAction>) in
+                if let error = result.error() as NSError? {
+                    assertionFailure(error.localizedDescription)
+                } else {
+                    if let block = self.itemUpdatedBlock {
+                        block(lineItemWithIdentity: self.lineItem.objectID, wasDeleted: false)
+                    }
+                }
+        })
     }
+    
+    
+    // MARK: context notification handlers
+    
+    func contextDidChange(notification: NSNotification) {
+        self.navigationItem.setRightBarButtonItem(self.doneButton, animated: true)
+    }
+    
+    func contextWillSave(notification: NSNotification) {
+        self.navigationItem.setRightBarButtonItem(nil, animated: true)
+    }
+    
+    func contextDidSave(notification: NSNotification) {
+        if let userInfo = notification.userInfo {
+            if let itemSet = userInfo[NSDeletedObjectsKey] as? NSSet {
+                if itemSet.count > 0 {
+                    if let block = self.itemUpdatedBlock {
+                        block(lineItemWithIdentity: self.lineItem.objectID, wasDeleted: true)
+                    }
+                }
+            }
+        }
+        self.navigationController?.popViewControllerAnimated(true)        
+    }
+    
+}
 
-    // MARK: - Table view data source
+// MARK: - Table view data source
 
+extension InventoryDetailTableViewController: UITableViewDataSource {
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
-        return 0
+        return self.sectionInfo.count
     }
-
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
-        return 0
+        let sectionDetail = self.sectionInfo[section]
+        return sectionDetail.count
     }
-
-    /*
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath) as UITableViewCell
 
-        // Configure the cell...
-
-        return cell
+        switch (indexPath.section, indexPath.row) {
+        case (0,0...1):
+            let cell = tableView.dequeueReusableCellWithIdentifier(DefaultTableViewCell.nibName, forIndexPath: indexPath) as DefaultTableViewCell
+            configureDetailCell(cell, atIndexPath: indexPath)
+            return cell
+        case (0, 2):
+            let cell = tableView.dequeueReusableCellWithIdentifier(DefaultDetailTableViewCell.nibName, forIndexPath: indexPath) as DefaultDetailTableViewCell
+            cell.textLabel?.text = self.lineItem.name
+            cell.detailTextLabel?.text = self.lineItem.pencilIdentifier
+            return cell
+        case (1, _):
+            let cell = tableView.dequeueReusableCellWithIdentifier(PencilColorTableViewCell.nibName, forIndexPath: indexPath) as PencilColorTableViewCell
+            configureColorSwatchCell(cell, atIndexPath: indexPath)
+            return cell
+        case (2, _) :
+            let cell = tableView.dequeueReusableCellWithIdentifier(InventoryQuantityTableViewCell.nibName, forIndexPath: indexPath) as InventoryQuantityTableViewCell
+            configureQuantityCell(cell, atIndexPath: indexPath)
+            return cell
+        default:
+            let cell = tableView.dequeueReusableCellWithIdentifier(BigButtonTableViewCell.nibName, forIndexPath: indexPath) as BigButtonTableViewCell
+            configureButtonCell(cell, atIndexPath: indexPath)
+            return cell
+        }
+        
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the specified item to be editable.
-        return true
+    
+    private func configureDetailCell(cell: DefaultTableViewCell, atIndexPath indexPath: NSIndexPath) {
+        if indexPath.row == 0 {
+            cell.textLabel?.text = self.lineItem.manufacturerName
+        } else {
+            cell.textLabel?.text = self.lineItem.productName
+        }
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if editingStyle == .Delete {
-            // Delete the row from the data source
-            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
-        } else if editingStyle == .Insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    
+    private func configureColorSwatchCell(cell: PencilColorTableViewCell, atIndexPath indexPath: NSIndexPath) {
+        if let color = self.lineItem.color as? UIColor {
+            cell.colorName = color.hexRepresentation
+            cell.swatchColor = color
+        } else {
+            cell.colorName = nil
+            cell.swatchColor = nil
+        }
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(tableView: UITableView, moveRowAtIndexPath fromIndexPath: NSIndexPath, toIndexPath: NSIndexPath) {
-
+    
+    private func configureQuantityCell(cell: InventoryQuantityTableViewCell, atIndexPath indexPath: NSIndexPath ) {
+        cell.lineItem = self.lineItem
     }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(tableView: UITableView, canMoveRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return NO if you do not want the item to be re-orderable.
-        return true
+    
+    
+    private func configureButtonCell(cell: BigButtonTableViewCell, atIndexPath indexPath: NSIndexPath) {
+        cell.destructiveButton = true
+        cell.title = NSLocalizedString("Remove From My Inventory", comment:"remove pencil from inventory button title")
     }
-    */
+    
+}
 
-    /*
-    // MARK: - Navigation
+// MARK: - Table view delegate
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+extension InventoryDetailTableViewController: UITableViewDelegate {
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section != InventorySection.Delete.rawValue {
+            tableView.deselectRowAtIndexPath(indexPath, animated: false)
+            return
+        }
+        let pencilName = self.lineItem.name!
+        let confirmController = UIAlertController(title: NSLocalizedString("Remove From Inventory", comment:"confirm pencil inventory item alert title"), message: NSLocalizedString("Are you sure you want to remove \"\(pencilName)\" from your inventory?", comment:"confirm pencil deletion message"), preferredStyle: .Alert)
+        
+        confirmController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil))
+        
+        confirmController.addAction(UIAlertAction(title: "Delete", style: UIAlertActionStyle.Destructive, handler: { [unowned self] (_: UIAlertAction!) -> Void in
+            self.context.performBlock({(context: NSManagedObjectContext) in
+                
+                context.deleteObject(self.lineItem)
+                
+                return .SaveToPersistentStore
+                }, completionHandler: {(result: Result<CommitAction>) in
+                    if let error = result.error() as NSError? {
+                        assertionFailure(error.localizedDescription)
+                    }
+            })
+        }))
+        confirmController.view.tintColor = AppearanceManager.appearanceManager.brandColor
+        self.presentViewController(confirmController, animated: true, completion: nil);
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
-    */
-
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case InventorySection.Details.rawValue:
+            return NSLocalizedString("Pencil Details", comment:"inventory details  header title")
+        case InventorySection.Color.rawValue:
+            return NSLocalizedString("Color", comment:"inventory details color header title")
+        case InventorySection.Quantity.rawValue:
+            return NSLocalizedString("Quantity On Hand", comment:"inventory details quantity header title")
+        default:
+            return nil
+        }
+    }
+    
+    
+    
+    
 }

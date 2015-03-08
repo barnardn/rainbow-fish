@@ -10,7 +10,7 @@ import UIKit
 
 class BigButtonTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet private weak var titleLabel: UILabel!
 
     var disabled: Bool = false {
         didSet {
@@ -31,6 +31,19 @@ class BigButtonTableViewCell: UITableViewCell {
         }
     }
     
+    var destructiveButton: Bool = false {
+        didSet {
+            if self.destructiveButton {
+                self.titleLabel.textColor = UIColor.redColor()
+                self.selectedBackgroundView.backgroundColor = UIColor.redColor()
+            } else {
+                self.titleLabel.textColor = AppearanceManager.appearanceManager.brandColor
+                self.selectedBackgroundView.backgroundColor = AppearanceManager.appearanceManager.selectedCellBackgroundColor
+            }
+        }
+    }
+    
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.titleLabel.font = AppearanceManager.appearanceManager.standardFont
@@ -48,10 +61,9 @@ class BigButtonTableViewCell: UITableViewCell {
         if self.disabled {
             self.titleLabel.textColor = AppearanceManager.appearanceManager.disabledTitleColor
         } else {
-            self.titleLabel.textColor = AppearanceManager.appearanceManager.brandColor
+            self.titleLabel.textColor = (self.destructiveButton) ? UIColor.redColor() : AppearanceManager.appearanceManager.brandColor
         }
     }
-    
     
     class var nibName: String { return "BigButtonTableViewCell" }
     
