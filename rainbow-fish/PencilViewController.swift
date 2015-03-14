@@ -33,6 +33,10 @@ class PencilViewController: ContentTableViewController {
         self.tableView.registerClass(ProductHeaderView.self, forHeaderFooterViewReuseIdentifier: "ProductHeaderView")
         self.tableView.registerClass(ProductFooterView.self, forHeaderFooterViewReuseIdentifier: "ProductFooterView")
         self.tableView!.rowHeight = ProductTableViewCell.estimatedRowHeight
+        self.refreshControl = UIRefreshControl()
+        self.refreshControl?.tintColor = AppearanceManager.appearanceManager.brandColor
+        self.refreshControl?.addTarget(self, action: Selector("refreshControlDidChange:"), forControlEvents: .ValueChanged)
+            
         let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: Selector("addButtonTapped:"))
         addButton.tintColor = UIColor.whiteColor()
         navigationItem.rightBarButtonItem = addButton
@@ -64,6 +68,18 @@ class PencilViewController: ContentTableViewController {
         }
         self.presentViewController(viewController, animated: true, completion: nil)
     }
+    
+    func refreshControlDidChange(sender: UIRefreshControl) {
+        self.cloudUpdate()
+    }
+    
+    private func cloudUpdate() {
+        CloudManager.sharedManger.refreshManufacturersAndProducts { [unowned self] () in
+            self.refreshControl?.endRefreshing()
+            self.updateDatasource()
+        }
+    }
+    
     
     func updateDatasource() {
         switch CoreDataKit.mainThreadContext.find(Manufacturer.self, predicate: nil, sortDescriptors: [NSSortDescriptor(key: ManufacturerAttributes.name.rawValue, ascending: true)], limit: nil, offset: nil) {
