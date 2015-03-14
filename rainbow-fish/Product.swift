@@ -26,8 +26,13 @@ extension Product: CloudSyncable {
     }
 
     func toCKRecord() -> CKRecord {
-        let ckRecordID = CKRecordID(recordName: self.recordID!)
-        let record = CKRecord(recordType: Product.entityName, recordID: ckRecordID)
+        var record: CKRecord
+        if let recordID = self.recordID {
+            let ckRecordID = CKRecordID(recordName: recordID)
+            record = CKRecord(recordType: Product.entityName, recordID: ckRecordID) as CKRecord
+        } else {
+            record = CKRecord(recordType: Product.entityName)
+        }
         record.setValue(self.name, forKey: ProductAttributes.name.rawValue)
         return record
     }

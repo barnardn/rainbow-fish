@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ProductFooterViewDelegate : class {
-    func productFooterView(view: ProductFooterView, newProductForManufacturer manufacturer: Manufacturer?)
+    func productFooterView(view: ProductFooterView, newProductForManufacturer manufacturer: Manufacturer)
 }
 
 
@@ -55,7 +55,9 @@ class ProductFooterView: UITableViewHeaderFooterView {
     
     func addButtonTapped(sender: UIButton) {
         if let delegate = self.delegate {
-            delegate.productFooterView(self, newProductForManufacturer: self.manufacturer)
+            if let manufacturer = self.manufacturer {
+                delegate.productFooterView(self, newProductForManufacturer: manufacturer)
+            }
         }
     }
     

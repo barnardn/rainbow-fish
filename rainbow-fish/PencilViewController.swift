@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 import CoreDataKit
 
 class PencilViewController: ContentTableViewController {
@@ -38,20 +39,40 @@ class PencilViewController: ContentTableViewController {
         navigationItem.backBarButtonItem = self.backButton;
     }
     
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-        struct Static {
-            static var token: dispatch_once_t = 0
-        }
-        dispatch_once(&Static.token, { () -> Void in
-            self.updateDatasource()
-        })
-    }
+//    override func viewDidAppear(animated: Bool) {
+//        super.viewDidAppear(animated)
+//        struct Static {
+//            static var token: dispatch_once_t = 0
+//        }
+//        dispatch_once(&Static.token, { () -> Void in
+//            self.updateDatasource()
+//        })
+//    }
     
     // MARK: button action
     
     func addButtonTapped(sender: UIBarButtonItem) {
-        self.presentViewController(PencilProductNavigationController(nibName: nil, bundle: nil), animated: true, completion: nil)
+        let viewController = EditManufacturerNavigationController(manufacturer: nil) { (didSave, edittedText) -> Void in
+            if !didSave {
+                return
+            }
+            let manufacturer = Manufacturer(managedObjectContext: CoreDataKit.mainThreadContext)
+            let name = edittedText
+            manufacturer.name = name
+            var error: NSError?
+            if !CoreDataKit.mainThreadContext.save(&error) {
+                assertionFailure(error!.localizedDescription)
+            } else {
+                self.syncManufacturer(manufacturer, completionHandler: { [unowned self] (success: Bool, error: NSError?) -> Void in
+                    if let error = error {
+                        assertionFailure(error.localizedDescription)
+                    }
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                    self.updateDatasource()
+                })
+            }
+        }
+        self.presentViewController(viewController, animated: true, completion: nil)
     }
     
     func updateDatasource() {
@@ -64,6 +85,32 @@ class PencilViewController: ContentTableViewController {
         }
         self.tableView!.reloadData()
     }
+    
+    private func syncManufacturer(manufacturer: Manufacturer, completionHandler: ((Bool, NSError?) -> Void)) {
+        let record = manufacturer.toCKRecord()
+        self.showHUD()
+        
+        CloudManager.sharedManger.syncChangeSet([record], completion: { (success, savedRecords, error) -> Void in
+            self.hideHUD()
+            assert(success, error!.localizedDescription)
+            if let results = savedRecords {
+                if let rec = results.first {
+                    manufacturer.populateFromCKRecord(rec)
+                }
+            }
+            var saveError: NSError?
+            CoreDataKit.mainThreadContext.save(&saveError)
+            if let parentContext = CoreDataKit.mainThreadContext.parentContext {
+                parentContext.save(&saveError)
+            }
+            if let error = saveError {
+                dispatch_async(dispatch_get_main_queue()) { completionHandler(false, error) }
+                return
+            }
+            dispatch_async(dispatch_get_main_queue()) { completionHandler(true, nil) }
+        })
+    }
+    
 }
 
 extension PencilViewController: UITableViewDataSource, UITableViewDelegate {
@@ -94,7 +141,6 @@ extension PencilViewController: UITableViewDataSource, UITableViewDelegate {
     
 }
 
-
 extension PencilViewController: UITableViewDelegate {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -114,6 +160,7 @@ extension PencilViewController: UITableViewDelegate {
         let footerview = tableView.dequeueReusableHeaderFooterViewWithIdentifier("ProductFooterView") as ProductFooterView
         let manufacturer = allManufacturers[section] as Manufacturer
         footerview.manufacturer = manufacturer
+        footerview.delegate = self
         return footerview
     }
     
@@ -129,13 +176,55 @@ extension PencilViewController: UITableViewDelegate {
 
 extension PencilViewController: ProductFooterViewDelegate {
     
-    func productFooterView(view: ProductFooterView, newProductForManufacturer manufacturer: Manufacturer?) {
-        if let manf = manufacturer {
-            println("selected manufacturer \(manf.name)")
-        } else {
-            println("hmmm")
+    func productFooterView(view: ProductFooterView, newProductForManufacturer manufacturer: Manufacturer) {
+        let viewController = EditProductNavigationController(product: nil) { [unowned self] (didSave, edittedText) -> Void in
+            if didSave {
+                let name = edittedText
+                if let context = manufacturer.managedObjectContext {
+                    let product = Product(managedObjectContext: context)
+                    product.name = name
+                    manufacturer.addProductsObject(product)
+                    var error: NSError?
+                    let ok = context.save(&error)
+                    assert(ok, "unable to save: \(error?.localizedDescription)")
+                    self.syncProduct(product, forManufacturer: manufacturer, completion: { [unowned self] (success, error) -> Void in
+                        assert(success, error!.localizedDescription)
+                        self.updateDatasource()
+                        self.dismissViewControllerAnimated(true, completion: nil)
+                    })
+                }
+            } else {
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
         }
+        self.presentViewController(viewController, animated: true, completion: nil)
     }
+    
+    private func syncProduct(product: Product, forManufacturer manufacturer: Manufacturer, completion: ((Bool, NSError?) -> Void)) {
+        let productRecord = product.toCKRecord()
+        productRecord.assignParentReference(parentRecord: manufacturer.toCKRecord(), relationshipName: ProductRelationships.manufacturer.rawValue)
+        self.showHUD()
+        CloudManager.sharedManger.syncChangeSet([productRecord], completion: { (success, returnedRecords, error) -> Void in
+            self.hideHUD()
+            assert(success, error!.localizedDescription)
+            product.managedObjectContext?.performBlock({(_) in
+                if let results = returnedRecords {
+                    if let rec = results.first {
+                        product.populateFromCKRecord(rec)
+                    }
+                }
+                return .SaveToPersistentStore
+                }, completionHandler: { [unowned self] (result: Result<CommitAction>) in
+                    if let error = result.error() {
+                        completion(false, error)
+                    } else {
+                        completion(true, nil)
+                    }
+            })
+            
+        })
+    }
+    
     
 }
 
