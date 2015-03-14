@@ -18,6 +18,11 @@ class RootViewController: UITabBarController {
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nil, bundle: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("updateProductsNotificationHandler:"), name: AppNotifications.StartCloudUpdate.rawValue, object: nil)
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     override init() {
@@ -36,14 +41,23 @@ class RootViewController: UITabBarController {
 #if SEED_CLOUD
         self.makeRain()
 #else
+        self.updateProducts()
+#endif
+    }
+    
+    func updateProductsNotificationHandler(notification: NSNotification) {
+        self.updateProducts()
+    }
+    
+    private func updateProducts() {
         self.showHUD(header: "Updating Pencils", footer: "Please wait...")
         CloudManager.sharedManger.refreshManufacturersAndProducts{ [unowned self] () in
+            self.hideHUD()
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.hideHUD()
                 NSNotificationCenter.defaultCenter().postNotificationName(AppNotifications.DidFinishCloudUpdate.rawValue, object: nil)
             })
-        }    
-#endif
+        }
+        
     }
         
     //MARK: seed cloudkit
