@@ -39,16 +39,6 @@ class PencilViewController: ContentTableViewController {
         navigationItem.backBarButtonItem = self.backButton;
     }
     
-//    override func viewDidAppear(animated: Bool) {
-//        super.viewDidAppear(animated)
-//        struct Static {
-//            static var token: dispatch_once_t = 0
-//        }
-//        dispatch_once(&Static.token, { () -> Void in
-//            self.updateDatasource()
-//        })
-//    }
-    
     // MARK: button action
     
     func addButtonTapped(sender: UIBarButtonItem) {
