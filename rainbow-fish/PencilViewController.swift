@@ -15,15 +15,15 @@ class PencilViewController: ContentTableViewController {
     var allManufacturers =  [Manufacturer]()
     
     lazy var backButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(title: NSLocalizedString("All", comment:"all pencils back button title"), style: .Plain, target: nil, action: nil)
+        let button = UIBarButtonItem(title: NSLocalizedString("Catalog", comment:"all pencils back button title"), style: .Plain, target: nil, action: nil)
         return button
     }()
     
     convenience init() {
         self.init(style: UITableViewStyle.Grouped)
         var image = UIImage(named: "tabbar-icon-pencils")?.imageWithRenderingMode(.AlwaysTemplate)
-        self.tabBarItem = UITabBarItem(title: NSLocalizedString("All Pencils", comment:"all pencils tab bar item title"), image: image, tag: 1)
-        self.title = NSLocalizedString("All Pencils", comment:"browse all pencils navigation title")
+        self.tabBarItem = UITabBarItem(title: NSLocalizedString("Catalog", comment:"all pencils tab bar item title"), image: image, tag: 1)
+        self.title = NSLocalizedString("Catalog", comment:"browse all pencils navigation title")
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("updateDatasource"), name: AppNotifications.DidFinishCloudUpdate.rawValue, object: nil)
     }
     
