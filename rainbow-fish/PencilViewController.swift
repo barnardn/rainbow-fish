@@ -46,8 +46,9 @@ class PencilViewController: ContentTableViewController {
     // MARK: button action
     
     func addButtonTapped(sender: UIBarButtonItem) {
-        let viewController = EditManufacturerNavigationController(manufacturer: nil) { (didSave, edittedText) -> Void in
+        let viewController = EditManufacturerNavigationController(manufacturer: nil) { [unowned self] (didSave, edittedText) -> Void in
             if !didSave {
+                self.dismissViewControllerAnimated(true, completion: nil)
                 return
             }
             let manufacturer = Manufacturer(managedObjectContext: CoreDataKit.mainThreadContext)

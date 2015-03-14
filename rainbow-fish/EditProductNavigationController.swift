@@ -16,7 +16,7 @@ class EditProductNavigationController: UINavigationController {
         if let p = product {
             viewController = EditTextFieldTableViewController(title: NSLocalizedString("Edit Product", comment:"edit product title"), defaultText: p.name, placeholder: NSLocalizedString("Product Name", comment:"edit product placeholder"), completion: completion)
         } else {
-            viewController = EditTextFieldTableViewController(title: NSLocalizedString("Add Product", comment:"add product title"), defaultText: String(), placeholder: NSLocalizedString("Product Name", comment:"edit product placeholder"), completion: completion)
+            viewController = EditTextFieldTableViewController(title: NSLocalizedString("New Product", comment:"add product title"), defaultText: String(), placeholder: NSLocalizedString("Product Name", comment:"edit product placeholder"), completion: completion)
         }
         self.viewControllers = [viewController]
     }
