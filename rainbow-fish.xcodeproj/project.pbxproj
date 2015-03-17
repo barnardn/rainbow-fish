@@ -12,6 +12,7 @@
 		4908EA7A1AACBC4A00E176E9 /* ProductFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4908EA791AACBC4A00E176E9 /* ProductFooterView.swift */; };
 		490F20F01AB4BC47005D50E0 /* _ConfigurationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490F20EF1AB4BC47005D50E0 /* _ConfigurationSettings.swift */; };
 		490F20F21AB4BC51005D50E0 /* ConfigurationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490F20F11AB4BC51005D50E0 /* ConfigurationSettings.swift */; };
+		490F20F41AB4BDE7005D50E0 /* SettingsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490F20F31AB4BDE7005D50E0 /* SettingsNavigationController.swift */; };
 		4913E5C91A7D81D600C4C9BF /* CloudManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4913E5C81A7D81D600C4C9BF /* CloudManager.swift */; };
 		4913E5CD1A7E893E00C4C9BF /* CloudSyncable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4913E5CC1A7E893E00C4C9BF /* CloudSyncable.swift */; };
 		491AD0F21A9EA64E0046FE00 /* CreatePencilNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491AD0F11A9EA64E0046FE00 /* CreatePencilNavigationController.swift */; };
@@ -51,6 +52,7 @@
 		497E0D631AA3D2E9007FA6A4 /* BigButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497E0D611AA3D2E9007FA6A4 /* BigButtonTableViewCell.swift */; };
 		497E0D641AA3D2E9007FA6A4 /* BigButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 497E0D621AA3D2E9007FA6A4 /* BigButtonTableViewCell.xib */; };
 		497E0D661AA7E8D1007FA6A4 /* InventoryDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497E0D651AA7E8D1007FA6A4 /* InventoryDetailTableViewController.swift */; };
+		4988FEBA1AB61F1B00AE2D89 /* SettingsMinimumStockTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4988FEB91AB61F1B00AE2D89 /* SettingsMinimumStockTableViewController.swift */; };
 		49AC9E391A87D59D007CE68A /* SelectProductTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AC9E381A87D59D007CE68A /* SelectProductTableViewController.swift */; };
 		49AC9E3B1A87DD67007CE68A /* SelectPencilTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AC9E3A1A87DD67007CE68A /* SelectPencilTableViewController.swift */; };
 		49AC9E3E1A87E120007CE68A /* DefaultDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AC9E3C1A87E120007CE68A /* DefaultDetailTableViewCell.swift */; };
@@ -98,6 +100,7 @@
 		4908EA791AACBC4A00E176E9 /* ProductFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductFooterView.swift; sourceTree = "<group>"; };
 		490F20EF1AB4BC47005D50E0 /* _ConfigurationSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _ConfigurationSettings.swift; sourceTree = "<group>"; };
 		490F20F11AB4BC51005D50E0 /* ConfigurationSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationSettings.swift; sourceTree = "<group>"; };
+		490F20F31AB4BDE7005D50E0 /* SettingsNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsNavigationController.swift; sourceTree = "<group>"; };
 		4913E5C81A7D81D600C4C9BF /* CloudManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudManager.swift; sourceTree = "<group>"; };
 		4913E5CC1A7E893E00C4C9BF /* CloudSyncable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudSyncable.swift; sourceTree = "<group>"; };
 		491AD0F11A9EA64E0046FE00 /* CreatePencilNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePencilNavigationController.swift; sourceTree = "<group>"; };
@@ -136,6 +139,7 @@
 		497E0D611AA3D2E9007FA6A4 /* BigButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigButtonTableViewCell.swift; sourceTree = "<group>"; };
 		497E0D621AA3D2E9007FA6A4 /* BigButtonTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BigButtonTableViewCell.xib; sourceTree = "<group>"; };
 		497E0D651AA7E8D1007FA6A4 /* InventoryDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InventoryDetailTableViewController.swift; sourceTree = "<group>"; };
+		4988FEB91AB61F1B00AE2D89 /* SettingsMinimumStockTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsMinimumStockTableViewController.swift; sourceTree = "<group>"; };
 		49AC9E381A87D59D007CE68A /* SelectProductTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectProductTableViewController.swift; sourceTree = "<group>"; };
 		49AC9E3A1A87DD67007CE68A /* SelectPencilTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPencilTableViewController.swift; sourceTree = "<group>"; };
 		49AC9E3C1A87E120007CE68A /* DefaultDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultDetailTableViewCell.swift; sourceTree = "<group>"; };
@@ -328,6 +332,14 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
+		4988FEB81AB61EF500AE2D89 /* Inventory Management */ = {
+			isa = PBXGroup;
+			children = (
+				4988FEB91AB61F1B00AE2D89 /* SettingsMinimumStockTableViewController.swift */,
+			);
+			name = "Inventory Management";
+			sourceTree = "<group>";
+		};
 		49BB8F5C1A79D402007CFE3B /* Cloudkit */ = {
 			isa = PBXGroup;
 			children = (
@@ -496,7 +508,9 @@
 		49E8D8EA1A75CA0F0064E682 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				4988FEB81AB61EF500AE2D89 /* Inventory Management */,
 				49E8D8EF1A75D4760064E682 /* SettingsTableViewController.swift */,
+				490F20F31AB4BDE7005D50E0 /* SettingsNavigationController.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -636,6 +650,7 @@
 			files = (
 				49E8D8D21A7564400064E682 /* Inventory.swift in Sources */,
 				49E8D8E51A75C6940064E682 /* RootViewController.swift in Sources */,
+				4988FEBA1AB61F1B00AE2D89 /* SettingsMinimumStockTableViewController.swift in Sources */,
 				49E8D8E71A75C9420064E682 /* ContentTableViewController.swift in Sources */,
 				493803721A84503F00E62FC2 /* PencilNavigationController.swift in Sources */,
 				49F419D61A9AAAF600635EF3 /* UIColor+CDOExtensions.swift in Sources */,
@@ -660,6 +675,7 @@
 				49DF07F91A743A2800BF94D3 /* ViewController.swift in Sources */,
 				493FC6101A86ED5700D8D17F /* DefaultTableViewCell.swift in Sources */,
 				49E8D8C51A74474B0064E682 /* rainbow-fish.xcdatamodeld in Sources */,
+				490F20F41AB4BDE7005D50E0 /* SettingsNavigationController.swift in Sources */,
 				49DF07F71A743A2800BF94D3 /* AppDelegate.swift in Sources */,
 				4908EA7A1AACBC4A00E176E9 /* ProductFooterView.swift in Sources */,
 				493F6AD91A990E1E003636AE /* TextFieldTableViewCell.swift in Sources */,

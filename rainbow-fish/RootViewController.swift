@@ -30,7 +30,7 @@ class RootViewController: UITabBarController {
         viewControllers = [
                 InventoryNavigationController(),
                 PencilNavigationController(),
-                SettingsTableViewController(style: .Grouped)
+                SettingsNavigationController()
         ]
     }
     

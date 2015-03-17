@@ -22,11 +22,22 @@ class AppController {
         return Singleton.instance
     }
     
+    // MARK: setup and confiugration
+    
     func setup() {
         NSValueTransformer.setValueTransformer(ColorValueTransformer(), forName: "ColorValueTransformer")
         AppearanceManager.appearanceManager.setupAppearanceProxies()
         CoreDataKit.sharedStack = CoreDataStack(persistentStoreCoordinator: self.persistentStoreCoordinator)
     }
+
+    lazy var appConfiguration: ConfigurationSettings = {
+        var fetchResult = CoreDataKit.mainThreadContext.findFirst(ConfigurationSettings.self, predicate: nil, sortDescriptors: nil, offset: nil)
+        if let result = fetchResult.value()! {
+            return result
+        }
+        return ConfigurationSettings(managedObjectContext: CoreDataKit.mainThreadContext)
+    }()
+    
     
     // MARK: core data properties
     
