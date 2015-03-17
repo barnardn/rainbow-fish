@@ -34,6 +34,7 @@ class SettingsTableViewController: ContentTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.registerNib(UINib(nibName: NameValueTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: NameValueTableViewCell.nibName)
+        self.tableView.registerClass(ProductHeaderView.self, forHeaderFooterViewReuseIdentifier: "ProductHeaderView")
         AppController.appController.appConfiguration.addObserver(self, forKeyPath: "minInventoryQuantity", options: .New, context: &settingsContext)
     }
     
@@ -100,6 +101,16 @@ extension SettingsTableViewController: UITableViewDelegate {
             viewController = SettingsMinimumStockTableViewController()
         }
         self.navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier("ProductHeaderView") as ProductHeaderView
+        headerView.title = NSLocalizedString("Inventory Management", comment:"settings inventory mananagement section header")
+        return headerView
+    }
+    
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return ProductHeaderView.headerHeight
     }
     
 }
