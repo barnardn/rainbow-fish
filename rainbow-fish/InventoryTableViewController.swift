@@ -15,6 +15,8 @@ class InventoryTableViewController: ContentTableViewController {
     enum InventorySortModes: Int {
         case Alpha = 0, Quantity
     }
+
+    private var inventoryKVOContext = 0
     
     var inventory = [Inventory]()
     
@@ -65,10 +67,25 @@ class InventoryTableViewController: ContentTableViewController {
         self.tableView.registerNib(UINib(nibName: InventoryTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: InventoryTableViewCell.nibName)
         self.tableView.tableHeaderView = self.searchController.searchBar
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("didEditPencil:"), name: AppNotifications.DidEditPencil.rawValue, object: nil)
+        
         definesPresentationContext = true
         self.updateInventory()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        // because the app settings are lazy loaded must observe them after we've updated our badge count to avoid triggering kvo!
+        // may need to revisit this in the future
+        struct Static {
+            static var token: dispatch_once_t = 0
+        }
+        dispatch_once(&Static.token, { () -> Void in
+            AppController.appController.appConfiguration.addObserver(self, forKeyPath: "minInventoryQuantity", options: .New, context: &self.inventoryKVOContext)
+        })
+    }
+
+
     func segmentControlChanged(sender: UISegmentedControl) {
         println("\(sender.selectedSegmentIndex)")
     }
@@ -76,6 +93,7 @@ class InventoryTableViewController: ContentTableViewController {
     func updateInventory() {
         let results = Inventory.fullInventory(inContext: CoreDataKit.mainThreadContext)
         self.inventory = results ?? [Inventory]()
+        self.updateBadgeCount(reloadingVisibleRows: false)
         self.tableView.reloadData()
     }
     
@@ -83,6 +101,42 @@ class InventoryTableViewController: ContentTableViewController {
     
     func didEditPencil(notification: NSNotification) {
         self.updateInventory()
+    }
+    
+    // MARK: kvo 
+
+    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+        if context != &inventoryKVOContext {
+            super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
+            return
+        }
+        self.updateBadgeCount(reloadingVisibleRows: true)
+    }
+    
+    private func updateBadgeCount(#reloadingVisibleRows: Bool) {
+        
+        let minimumQuantity = AppController.appController.appConfiguration.minInventoryQuantity
+        if minimumQuantity == nil {
+            return
+        }
+        let lowStock = self.inventory.filter{ (lineItem: Inventory) -> Bool in
+            if let qty = lineItem.quantity {
+                let result = minimumQuantity!.compare(qty)
+                return (result != .OrderedAscending)
+            } else {
+                return true
+            }
+        }
+        self.tabBarItem.badgeValue = nil
+        if lowStock.count > 0 {
+            self.tabBarItem.badgeValue = "\(lowStock.count)"
+        }
+        if !reloadingVisibleRows {
+            return
+        }
+        if let indexPaths = self.tableView.indexPathsForVisibleRows() {
+            self.tableView.reloadRowsAtIndexPaths(indexPaths, withRowAnimation: .None)
+        }
     }
     
 }
@@ -141,6 +195,7 @@ extension InventoryTableViewController: UITableViewDelegate {
                 }
                 tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
             }
+            self.updateBadgeCount(reloadingVisibleRows: false)
         }
     }
     
@@ -158,10 +213,6 @@ extension InventoryTableViewController: UITableViewDelegate {
     }
     
 }
-
-
-
-
 
 extension InventoryTableViewController : UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating {
     
