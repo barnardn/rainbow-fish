@@ -120,7 +120,7 @@ class PencilViewController: ContentTableViewController {
     
 }
 
-extension PencilViewController: UITableViewDataSource, UITableViewDelegate {
+extension PencilViewController: UITableViewDataSource {
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return allManufacturers.count ?? 0
