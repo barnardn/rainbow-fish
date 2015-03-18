@@ -87,11 +87,16 @@ class InventoryTableViewController: ContentTableViewController {
 
 
     func segmentControlChanged(sender: UISegmentedControl) {
-        println("\(sender.selectedSegmentIndex)")
+        self.updateInventory()
     }
     
     func updateInventory() {
-        let results = Inventory.fullInventory(inContext: CoreDataKit.mainThreadContext)
+        var sortDescriptors = [NSSortDescriptor]()
+        sortDescriptors.append(NSSortDescriptor(key: InventoryAttributes.name.rawValue, ascending: true))
+        if self.sortMethodSegmentedControl.selectedSegmentIndex == InventorySortModes.Quantity.rawValue {
+            sortDescriptors = [NSSortDescriptor(key: InventoryAttributes.quantity.rawValue, ascending: true)]
+        }
+        let results = Inventory.fullInventory(inContext: CoreDataKit.mainThreadContext, sortedBy: sortDescriptors)
         self.inventory = results ?? [Inventory]()
         self.updateBadgeCount(reloadingVisibleRows: false)
         self.tableView.reloadData()
