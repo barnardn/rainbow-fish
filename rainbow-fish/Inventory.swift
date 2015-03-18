@@ -24,9 +24,14 @@ extension Inventory {
         self.pencil = pencil
     }
     
-    class func fullInventory(inContext context: NSManagedObjectContext) -> [Inventory]? {
-        let byName = NSSortDescriptor(key: InventoryAttributes.name.rawValue, ascending: true)
-        switch context.find(Inventory.self, predicate: nil, sortDescriptors: [byName], limit: nil, offset: nil) {
+    class func fullInventory(inContext context: NSManagedObjectContext, sortedBy sortDescriptors: [NSSortDescriptor]?) -> [Inventory]? {
+        var descriptors: [NSSortDescriptor]
+        if sortDescriptors == nil {
+            descriptors = [NSSortDescriptor(key: InventoryAttributes.name.rawValue, ascending: true)]
+        } else {
+            descriptors = sortDescriptors!
+        }
+        switch context.find(Inventory.self, predicate: nil, sortDescriptors: descriptors, limit: nil, offset: nil) {
         case let .Failure(error):
             assertionFailure(error.localizedDescription)
         case let .Success(boxedResults):
