@@ -167,6 +167,39 @@ extension InventoryTableViewController : UITableViewDataSource {
         cell.swatchColor = lineItem.color as? UIColor
         return cell
     }
+    
+    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return (tableView == self.tableView)
+    }
+    
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if tableView != self.tableView {
+            return
+        }
+        if editingStyle != .Delete {
+            return
+        }
+        let lineItem = self.inventory[indexPath.row]
+        self.inventory.removeAtIndex(indexPath.row)
+        tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+        CoreDataKit.mainThreadContext.createChildContext().performBlock({ (ctxt: NSManagedObjectContext) in
+            
+            let item = ctxt.objectWithID(lineItem.objectID)
+            ctxt.deleteObject(item)
+            return CommitAction.SaveToPersistentStore
+            
+        }, completionHandler: { [unowned self] (result: Result<CommitAction>) in
+            
+            if let error = result.error() as NSError? {
+                assertionFailure(error.localizedDescription)
+            } else {
+                self.updateBadgeCount(reloadingVisibleRows: false)
+            }
+            
+        })
+
+    }
+    
 }
 
 extension InventoryTableViewController: UITableViewDelegate {
