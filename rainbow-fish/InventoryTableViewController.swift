@@ -172,33 +172,9 @@ extension InventoryTableViewController : UITableViewDataSource {
     override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
         return (tableView == self.tableView)
     }
-    
-    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
-        if tableView != self.tableView {
-            return
-        }
-        if editingStyle != .Delete {
-            return
-        }
-        let lineItem = self.inventory[indexPath.row]
-        self.inventory.removeAtIndex(indexPath.row)
-        tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-        CoreDataKit.mainThreadContext.createChildContext().performBlock({ (ctxt: NSManagedObjectContext) in
-            
-            let item = ctxt.objectWithID(lineItem.objectID)
-            ctxt.deleteObject(item)
-            return CommitAction.SaveToPersistentStore
-            
-        }, completionHandler: { [unowned self] (result: Result<CommitAction>) in
-            
-            if let error = result.error() as NSError? {
-                assertionFailure(error.localizedDescription)
-            } else {
-                self.updateBadgeCount(reloadingVisibleRows: false)
-            }
-            
-        })
 
+    override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        // exists solely to allow editting
     }
     
 }
@@ -248,19 +224,26 @@ extension InventoryTableViewController: UITableViewDelegate {
         }
         addAction.backgroundColor = AppearanceManager.appearanceManager.brandColor
         
-        let subtractAction = UITableViewRowAction(style: .Normal, title: NSLocalizedString(" - ", comment:"subtract pencil")) { [unowned self] (action, indexPath) -> Void in
+        let subtractAction = UITableViewRowAction(style: .Normal, title: NSLocalizedString("- ", comment:"subtract pencil")) { [unowned self] (action, indexPath) -> Void in
             let lineItem = self.inventory[indexPath.row]
             self.quantityUpdateAction(lineItem: lineItem, atIndexPath: indexPath, addition: false)
         }
         subtractAction.backgroundColor = UIColor(white: 0.75, alpha: 1.0)
         
-        return [addAction, subtractAction]
+        let deleteAction = UITableViewRowAction(style: .Default, title: NSLocalizedString("Delete", comment:"delete action title")) { (_, indexPath) -> Void in
+            let lineItem = self.inventory[indexPath.row]
+            self.deleteLineItemAction(lineItem: lineItem, atIndexPath: indexPath)
+        }
+        
+        return [deleteAction, addAction, subtractAction]
     }
     
-    func quantityUpdateAction(#lineItem: Inventory, atIndexPath indexPath: NSIndexPath, addition: Bool) {
+    private func quantityUpdateAction(#lineItem: Inventory, atIndexPath indexPath: NSIndexPath, addition: Bool) {
 
         let context = lineItem.managedObjectContext!
+
         context.performBlock({ [unowned self]() -> Void in
+
             if var qty = lineItem.quantity {
                 if addition {
                     lineItem.quantity = qty.decimalNumberByAdding(NSDecimalNumber.one())
@@ -282,10 +265,31 @@ extension InventoryTableViewController: UITableViewDelegate {
 
             let cell = self.tableView.cellForRowAtIndexPath(indexPath) as InventoryTableViewCell
             cell.quantity = lineItem.quantity?.stringValue
+            self.updateBadgeCount(reloadingVisibleRows: false)
         })
 
     }
     
+    private func deleteLineItemAction(#lineItem: Inventory, atIndexPath indexPath: NSIndexPath) {
+        
+        self.inventory.removeAtIndex(indexPath.row)
+        tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+        CoreDataKit.mainThreadContext.createChildContext().performBlock({ (ctxt: NSManagedObjectContext) in
+            
+            let item = ctxt.objectWithID(lineItem.objectID)
+            ctxt.deleteObject(item)
+            return CommitAction.SaveToPersistentStore
+            
+            }, completionHandler: { [unowned self] (result: Result<CommitAction>) in
+                
+                if let error = result.error() as NSError? {
+                    assertionFailure(error.localizedDescription)
+                } else {
+                    self.updateBadgeCount(reloadingVisibleRows: false)
+                }
+                
+        })
+    }
     
     func findIndexOfItemByManagedObjectID( managedObjectID: NSManagedObjectID) -> Int {
         if self.inventory.count == 0 {
