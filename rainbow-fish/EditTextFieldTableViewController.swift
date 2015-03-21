@@ -45,6 +45,7 @@ class EditTextFieldTableViewController: UITableViewController {
     }
     
     func barButtonTapped(sender: UIBarButtonItem) {
+        self.tableView.endEditing(true)
         if let block = self.completion as EditTextFieldTableViewCompletionBlock? {
             if sender == self.cancelButton {
                 block(didSave: false, edittedText: self.defaultText, sender: nil)
