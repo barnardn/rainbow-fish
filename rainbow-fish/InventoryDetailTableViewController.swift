@@ -126,6 +126,7 @@ extension InventoryDetailTableViewController: UITableViewDataSource {
             let cell = tableView.dequeueReusableCellWithIdentifier(DefaultDetailTableViewCell.nibName, forIndexPath: indexPath) as DefaultDetailTableViewCell
             cell.textLabel?.text = self.lineItem.name
             cell.detailTextLabel?.text = self.lineItem.pencilIdentifier
+            cell.selectionStyle = .None
             return cell
         case (1, _):
             let cell = tableView.dequeueReusableCellWithIdentifier(PencilColorTableViewCell.nibName, forIndexPath: indexPath) as PencilColorTableViewCell
@@ -149,6 +150,7 @@ extension InventoryDetailTableViewController: UITableViewDataSource {
         } else {
             cell.textLabel?.text = self.lineItem.productName
         }
+        cell.selectionStyle = .None
     }
     
     private func configureColorSwatchCell(cell: PencilColorTableViewCell, atIndexPath indexPath: NSIndexPath) {
@@ -159,10 +161,11 @@ extension InventoryDetailTableViewController: UITableViewDataSource {
             cell.colorName = nil
             cell.swatchColor = nil
         }
+        cell.selectionStyle = .None
     }
     
     private func configureQuantityCell(cell: InventoryQuantityTableViewCell, atIndexPath indexPath: NSIndexPath ) {
-        cell.lineItem = self.lineItem
+        cell.lineItem = self.lineItem        
     }
     
     
