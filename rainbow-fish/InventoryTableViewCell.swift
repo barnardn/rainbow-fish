@@ -14,7 +14,7 @@ class InventoryTableViewCell: UITableViewCell {
     @IBOutlet private weak var quantityLabel: UILabel!
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var subTitleLabel: UILabel!
-    @IBOutlet weak var colorSwatchImageView: UIImageView!
+    @IBOutlet private weak var colorSwatchView: UIView!
     
     var title: String? {
         get {
@@ -44,10 +44,10 @@ class InventoryTableViewCell: UITableViewCell {
     
     var swatchColor: UIColor? {
         get {
-            return self.colorSwatchImageView.backgroundColor
+            return self.colorSwatchView.backgroundColor
         }
         set {
-            self.colorSwatchImageView.backgroundColor = newValue
+            self.colorSwatchView.backgroundColor = newValue
         }
     }
     
@@ -67,9 +67,9 @@ class InventoryTableViewCell: UITableViewCell {
         self.subTitleLabel.font = AppearanceManager.appearanceManager.subtitleFont
         self.subTitleLabel.textColor = AppearanceManager.appearanceManager.subTitleColor
         
-        self.colorSwatchImageView.layer.cornerRadius = 10.0;
-        self.colorSwatchImageView.layer.borderColor = AppearanceManager.appearanceManager.blackColor.CGColor;
-        self.colorSwatchImageView.layer.borderWidth = 1.0;
+        self.colorSwatchView.layer.cornerRadius = 10.0;
+        self.colorSwatchView.layer.borderColor = AppearanceManager.appearanceManager.blackColor.CGColor;
+        self.colorSwatchView.layer.borderWidth = 1.0;
         
     }
     
