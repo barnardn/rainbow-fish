@@ -128,6 +128,7 @@ class EditPencilTableViewController: UITableViewController {
     
     func saveButonTapped(sender: UIBarButtonItem) {
         
+        self.tableView.endEditing(true)
         sender.enabled = false
         self.context.performBlock(
             {(_) in
