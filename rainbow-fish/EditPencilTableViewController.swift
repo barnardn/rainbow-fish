@@ -91,6 +91,7 @@ class EditPencilTableViewController: UITableViewController {
     
     func saveButonTapped(sender: UIBarButtonItem) {
         
+        sender.enabled = false
         self.context.performBlock(
             {(_) in
                 if let lineItem = self.pencil.inventory {
@@ -100,6 +101,7 @@ class EditPencilTableViewController: UITableViewController {
             }, completionHandler: {[unowned self] (result: Result<CommitAction>) in
                 switch result {
                 case let .Failure(error):
+                    sender.enabled = true
                     println("cant save \(error)")
                 default:
                     let pencilRecord = self.pencil.toCKRecord()
@@ -131,6 +133,7 @@ class EditPencilTableViewController: UITableViewController {
         self.showHUD(header: nil, footer: nil)
         CloudManager.sharedManger.syncChangeSet(records){ [unowned self] (success, returnedRecords, error) -> Void in
             self.hideHUD()
+            self.saveButton.enabled = true
             assert(success, error!.localizedDescription)
             self.context.performBlock({(_) in
                 if let results = returnedRecords {

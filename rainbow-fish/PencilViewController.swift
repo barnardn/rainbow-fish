@@ -46,20 +46,23 @@ class PencilViewController: ContentTableViewController {
     // MARK: button action
     
     func addButtonTapped(sender: UIBarButtonItem) {
-        let viewController = EditManufacturerNavigationController(manufacturer: nil) { [unowned self] (didSave, edittedText) -> Void in
+        let viewController = EditManufacturerNavigationController(manufacturer: nil) { [unowned self] (didSave, edittedText, sender) -> Void in
             if !didSave {
                 self.dismissViewControllerAnimated(true, completion: nil)
                 return
             }
+            sender?.enabled = false
             let manufacturer = Manufacturer(managedObjectContext: CoreDataKit.mainThreadContext)
             let name = edittedText
             manufacturer.name = name
             var error: NSError?
             if !CoreDataKit.mainThreadContext.save(&error) {
+                sender?.enabled = true
                 assertionFailure(error!.localizedDescription)
             } else {
                 self.syncManufacturer(manufacturer, completionHandler: { [unowned self] (success: Bool, error: NSError?) -> Void in
                     if let error = error {
+                        sender?.enabled = true
                         assertionFailure(error.localizedDescription)
                     }
                     self.dismissViewControllerAnimated(true, completion: nil)
@@ -184,8 +187,9 @@ extension PencilViewController: UITableViewDelegate {
 extension PencilViewController: ProductFooterViewDelegate {
     
     func productFooterView(view: ProductFooterView, newProductForManufacturer manufacturer: Manufacturer) {
-        let viewController = EditProductNavigationController(product: nil) { [unowned self] (didSave, edittedText) -> Void in
+        let viewController = EditProductNavigationController(product: nil) { [unowned self] (didSave, edittedText, sender) -> Void in
             if didSave {
+                sender?.enabled = false
                 let name = edittedText
                 if let context = manufacturer.managedObjectContext {
                     let product = Product(managedObjectContext: context)
@@ -194,6 +198,9 @@ extension PencilViewController: ProductFooterViewDelegate {
                     var error: NSError?
                     let ok = context.save(&error)
                     assert(ok, "unable to save: \(error?.localizedDescription)")
+                    if !ok {
+                        sender?.enabled = true
+                    }
                     self.syncProduct(product, forManufacturer: manufacturer, completion: { [unowned self] (success, error) -> Void in
                         assert(success, error!.localizedDescription)
                         self.updateDatasource()

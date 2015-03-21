@@ -8,7 +8,7 @@
 
 import UIKit
 
-typealias EditTextFieldTableViewCompletionBlock = (didSave: Bool, edittedText: String?) -> Void
+typealias EditTextFieldTableViewCompletionBlock = (didSave: Bool, edittedText: String?, sender: UIBarButtonItem?) -> Void
 
 class EditTextFieldTableViewController: UITableViewController {
 
@@ -46,9 +46,9 @@ class EditTextFieldTableViewController: UITableViewController {
     func barButtonTapped(sender: UIBarButtonItem) {
         if let block = self.completion as EditTextFieldTableViewCompletionBlock? {
             if sender == self.cancelButton {
-                block(didSave: false, edittedText: self.defaultText)
+                block(didSave: false, edittedText: self.defaultText, sender: nil)
             } else {
-                block(didSave: true, edittedText: self.defaultText)
+                block(didSave: true, edittedText: self.defaultText, sender: sender)
             }
         }
     }
