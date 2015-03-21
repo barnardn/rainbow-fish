@@ -76,22 +76,31 @@ class InventoryQuantityTableViewCell: UITableViewCell {
 extension InventoryQuantityTableViewCell: UITextFieldDelegate {
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        if string.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) == 0 {
-            if let text = textField.text {
-                self.quantity = (text.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) == 0) ? NSDecimalNumber(int: 0) : NSDecimalNumber(string: text)
-            } else {
-                self.quantity = NSDecimalNumber(int: 0)
-            }
+        
+        var nsText: NSString = textField.text
+        
+        let existingDecimalRange = nsText.rangeOfString(".")
+        if existingDecimalRange.location != NSNotFound && string == "." {
+            return false
+        }
+        let valueString = nsText.stringByReplacingCharactersInRange(range, withString: string) as String
+        
+        if valueString.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) == 0 {
+            self.quantity = NSDecimalNumber(int: 0)
             return true
         }
-        var newtext = textField.text + string
-        let regex = NSRegularExpression(pattern: "^\\d+(\\.\\d+)?", options: NSRegularExpressionOptions.allZeros, error: nil) as NSRegularExpression!
-        let numMatches = regex.numberOfMatchesInString(newtext, options: NSMatchingOptions.allZeros, range: NSMakeRange(0, newtext.lengthOfBytesUsingEncoding(NSUTF8StringEncoding)))
-        if numMatches == 1 {
-            self.quantity = NSDecimalNumber(string: newtext)
+        
+        let regex = NSRegularExpression(pattern: "^\\d+(\\.{1}\\d+)?", options: NSRegularExpressionOptions.allZeros, error: nil) as NSRegularExpression!
+        
+        if let matchResult = regex.firstMatchInString(valueString, options: NSMatchingOptions.allZeros, range: NSMakeRange(0, valueString.lengthOfBytesUsingEncoding(NSUTF8StringEncoding))) {
+            let matchRange = matchResult.rangeAtIndex(0)
+            let nsStr = valueString as NSString
+            let matchString = nsStr.substringWithRange(matchRange)
+            self.quantity = NSDecimalNumber(string: matchString)
             self.lineItem?.quantity = self.quantity
+            return true
         }
-        return (numMatches == 1)
+        return false
     }
 }
 
