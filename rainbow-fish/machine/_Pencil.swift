@@ -49,7 +49,7 @@ class _Pencil: NSManagedObject {
     // func validateColor(value: AutoreleasingUnsafePointer<AnyObject>, error: NSErrorPointer) {}
 
     @NSManaged
-    var identifier: String
+    var identifier: String?
 
     // func validateIdentifier(value: AutoreleasingUnsafePointer<AnyObject>, error: NSErrorPointer) {}
 

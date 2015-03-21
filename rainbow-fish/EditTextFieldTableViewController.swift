@@ -39,8 +39,9 @@ class EditTextFieldTableViewController: UITableViewController {
         self.tableView.registerNib(UINib(nibName: TextFieldTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: TextFieldTableViewCell.nibName)
         self.tableView.backgroundColor = AppearanceManager.appearanceManager.appBackgroundColor;
         self.navigationItem.leftBarButtonItem = self.cancelButton
-        self.navigationItem.rightBarButtonItem = self.doneButton
-        self.doneButton.enabled = (self.defaultText?.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) > 0)
+        if self.defaultText?.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) > 0 {
+            self.navigationItem.rightBarButtonItem = self.doneButton
+        }
     }
     
     func barButtonTapped(sender: UIBarButtonItem) {
@@ -78,9 +79,10 @@ extension EditTextFieldTableViewController: TextFieldTableViewCellDelegate {
     func textFieldTableViewCell(cell: TextFieldTableViewCell, changedText: String?) {
         self.defaultText = changedText
         if let text = self.defaultText {
-            self.doneButton.enabled = (text.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) > 0)
+            var barButtonItem: UIBarButtonItem? = (text.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) > 0) ? self.doneButton : nil
+            self.navigationItem.setRightBarButtonItem(barButtonItem, animated: true)
         } else {
-            self.doneButton.enabled = false
+            self.navigationItem.setRightBarButtonItem(nil, animated: true)
         }
         
     }

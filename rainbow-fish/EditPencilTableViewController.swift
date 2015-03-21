@@ -14,10 +14,11 @@ import UIKit
 
 class EditPencilTableViewController: UITableViewController {
 
-    var pencil: Pencil!
-    var context: NSManagedObjectContext!
-    var newPencil: Bool = false
-    var product: Product?
+    private var pencil: Pencil!
+    private var context: NSManagedObjectContext!
+    private var newPencil: Bool = false
+    private var product: Product?
+    private var editPenilKVOContext = 0
     
     lazy var saveButton: UIBarButtonItem = {
         let button = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: Selector("saveButonTapped:"))
@@ -53,6 +54,10 @@ class EditPencilTableViewController: UITableViewController {
         self.pencil.product = self.context.objectWithID(self.product!.objectID) as? Product
     }
     
+    deinit {
+        self.observePencilChanges(false)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.modalPresentationStyle = .FullScreen
@@ -63,12 +68,42 @@ class EditPencilTableViewController: UITableViewController {
         self.navigationItem.rightBarButtonItem = self.editButton
         if self.newPencil {
             self.navigationItem.leftBarButtonItem = self.cancelButton
-            self.navigationItem.rightBarButtonItem = self.saveButton
+            self.navigationItem.rightBarButtonItem = nil
             self.tableView.editing = true
         }
-
+        self.observePencilChanges(true)
     }
 
+    // MARK: kvo notification handler
+    
+    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+        if context != &editPenilKVOContext {
+            super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
+            return
+        }
+        if !self.tableView.editing {
+            return
+        }
+        if self.pencil.canSave() {
+            self.navigationItem.setRightBarButtonItem(self.saveButton, animated: true)
+        } else {
+            self.navigationItem.setRightBarButtonItem(nil, animated: true)
+        }
+        
+    }
+    
+    private func observePencilChanges(observe: Bool) {
+        if observe {
+            self.pencil.addObserver(self, forKeyPath: PencilAttributes.name.rawValue, options: .New, context: &editPenilKVOContext)
+            self.pencil.addObserver(self, forKeyPath: PencilAttributes.identifier.rawValue, options: .New, context: &editPenilKVOContext)
+        } else {
+            self.pencil.removeObserver(self, forKeyPath: PencilAttributes.name.rawValue, context: &editPenilKVOContext)
+            self.pencil.removeObserver(self, forKeyPath: PencilAttributes.identifier.rawValue, context: &editPenilKVOContext)
+        }
+    }
+    
+    
+    
     // MARK: button actions
     
     func editButtonTapped(sender: UIBarButtonItem) {
@@ -82,11 +117,13 @@ class EditPencilTableViewController: UITableViewController {
             self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
             return
         }
+        self.observePencilChanges(false)
         self.navigationItem.setRightBarButtonItem(self.editButton, animated: true)
         self.navigationItem.setLeftBarButtonItem(nil, animated: true)
         self.context.rollback()
         self.pencil = self.context.objectWithID(self.pencil.objectID) as Pencil
         self.toggleEditing(false)
+        self.observePencilChanges(true)
     }
     
     func saveButonTapped(sender: UIBarButtonItem) {
@@ -125,6 +162,7 @@ class EditPencilTableViewController: UITableViewController {
         } else {
             self.tableView.insertSections(NSIndexSet(index: 2), withRowAnimation: .Automatic)
         }
+        self.tableView.reloadSections(NSIndexSet(index: 0), withRowAnimation: .Automatic)
         self.tableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: .Automatic)
         self.tableView.endUpdates()
     }

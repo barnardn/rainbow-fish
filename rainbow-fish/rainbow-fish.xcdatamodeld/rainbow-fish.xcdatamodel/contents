@@ -22,7 +22,7 @@
     </entity>
     <entity name="Pencil" representedClassName="Pencil" syncable="YES">
         <attribute name="color" optional="YES" attributeType="Transformable" valueTransformerName="ColorValueTransformer" syncable="YES"/>
-        <attribute name="identifier" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="identifier" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
         <attribute name="isNew" optional="YES" transient="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="modificationDate" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -44,11 +44,11 @@
         <relationship name="product" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Product" inverseName="syncInfo" inverseEntity="Product" syncable="YES"/>
     </entity>
     <elements>
+        <element name="ConfigurationSettings" positionX="-45" positionY="144" width="128" height="60"/>
         <element name="Inventory" positionX="97" positionY="117" width="128" height="163"/>
         <element name="Manufacturer" positionX="16" positionY="225" width="128" height="120"/>
         <element name="Pencil" positionX="-180" positionY="-4" width="128" height="163"/>
         <element name="Product" positionX="-171" positionY="162" width="128" height="148"/>
         <element name="SyncInfo" positionX="-45" positionY="144" width="128" height="73"/>
-        <element name="ConfigurationSettings" positionX="-45" positionY="144" width="128" height="60"/>
     </elements>
 </model>
