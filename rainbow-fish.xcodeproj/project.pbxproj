@@ -143,7 +143,7 @@
 		49BB8F5D1A79D431007CFE3B /* Seeder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Seeder.swift; sourceTree = "<group>"; };
 		49BB8F5F1A79D89C007CFE3B /* prismacolor-pencils.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "prismacolor-pencils.json"; sourceTree = "<group>"; };
 		49BEC0E21A7F094E00A601CF /* ProductHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductHeaderView.swift; sourceTree = "<group>"; };
-		49DF07F11A743A2800BF94D3 /* rainbow-fish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "rainbow-fish.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		49DF07F11A743A2800BF94D3 /* Rainbow Fish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Rainbow Fish.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		49DF07F51A743A2800BF94D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		49DF07F61A743A2800BF94D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49DF07F81A743A2800BF94D3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -354,7 +354,7 @@
 		49DF07F21A743A2800BF94D3 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				49DF07F11A743A2800BF94D3 /* rainbow-fish.app */,
+				49DF07F11A743A2800BF94D3 /* Rainbow Fish.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -538,7 +538,7 @@
 			);
 			name = "rainbow-fish";
 			productName = "rainbow-fish";
-			productReference = 49DF07F11A743A2800BF94D3 /* rainbow-fish.app */;
+			productReference = 49DF07F11A743A2800BF94D3 /* Rainbow Fish.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -816,7 +816,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "-DDEBUG";
 				PRODUCT_MODULE_NAME = RainbowFish;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Rainbow Fish";
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -835,9 +835,9 @@
 				INFOPLIST_FILE = "rainbow-fish/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_SWIFT_FLAGS = "-DDEBUG";
+				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_MODULE_NAME = RainbowFish;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Rainbow Fish";
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
