@@ -31,7 +31,7 @@ class ColorValueTransformer: NSValueTransformer {
     override func reverseTransformedValue(value: AnyObject?) -> AnyObject? {
         if let dataValue = value as? NSData {
             let stringValue = NSString(data: dataValue, encoding: NSUTF8StringEncoding) as String
-            let rgb = stringValue.componentsSeparatedByString(",")
+            let rgb: [String] = stringValue.componentsSeparatedByString(",")
             assert(rgb.count == 3, "string returned was not a triple: \(stringValue)")
             var red = rgb[0].toInt() ?? 0
             var green = rgb[1].toInt() ?? 0
