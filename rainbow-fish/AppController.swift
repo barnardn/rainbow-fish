@@ -9,6 +9,8 @@
 import Foundation
 import CoreData
 import CoreDataKit
+import Fabric
+import Crashlytics
 
 class AppController {
     
@@ -26,6 +28,7 @@ class AppController {
     
     func setup() {
         NSValueTransformer.setValueTransformer(ColorValueTransformer(), forName: "ColorValueTransformer")
+        Fabric.with([Crashlytics()])
         AppearanceManager.appearanceManager.setupAppearanceProxies()
         CoreDataKit.sharedStack = CoreDataStack(persistentStoreCoordinator: self.persistentStoreCoordinator)
     }
