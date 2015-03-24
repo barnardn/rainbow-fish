@@ -96,7 +96,7 @@ class InventoryTableViewController: ContentTableViewController {
         if self.sortMethodSegmentedControl.selectedSegmentIndex == InventorySortModes.Quantity.rawValue {
             sortDescriptors = [NSSortDescriptor(key: InventoryAttributes.quantity.rawValue, ascending: true)]
         }
-        let results = Inventory.fullInventory(inContext: CoreDataKit.mainThreadContext, sortedBy: sortDescriptors)
+        let results = Inventory.fullInventory(inContext: CDK.mainThreadContext, sortedBy: sortDescriptors)
         self.inventory = results ?? [Inventory]()
         self.updateBadgeCount(reloadingVisibleRows: false)
         self.tableView.reloadData()
@@ -274,7 +274,7 @@ extension InventoryTableViewController: UITableViewDelegate {
         
         self.inventory.removeAtIndex(indexPath.row)
         tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-        CoreDataKit.mainThreadContext.createChildContext().performBlock({ (ctxt: NSManagedObjectContext) in
+        CDK.mainThreadContext.createChildContext().performBlock({ (ctxt: NSManagedObjectContext) in
             
             let item = ctxt.objectWithID(lineItem.objectID)
             ctxt.deleteObject(item)

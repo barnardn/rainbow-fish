@@ -24,7 +24,7 @@ class PencilDataViewModel: NSObject {
     
     
     override init() {
-        childContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType, parentContext: CoreDataKit.mainThreadContext)
+        childContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType, parentContext: CDK.mainThreadContext)
         super.init()
     }
     

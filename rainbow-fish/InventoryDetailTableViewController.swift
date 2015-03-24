@@ -35,7 +35,7 @@ class InventoryDetailTableViewController: UITableViewController {
     
     convenience init(lineItem: Inventory) {
         self.init(style: UITableViewStyle.Grouped)
-        self.context = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType, parentContext: CoreDataKit.mainThreadContext)
+        self.context = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType, parentContext: CDK.mainThreadContext)
         self.context.undoManager = nil
         self.lineItem = self.context.objectWithID(lineItem.objectID) as? Inventory
         self.title = self.lineItem.name

@@ -37,7 +37,7 @@ class EditPencilTableViewController: UITableViewController {
     
     convenience init(pencil: Pencil?) {
         self.init(style: UITableViewStyle.Grouped)
-        self.context = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType, parentContext: CoreDataKit.mainThreadContext)
+        self.context = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType, parentContext: CDK.mainThreadContext)
         if let editPencil = pencil {
             self.title = editPencil.name ?? NSLocalizedString("Edit Pencil", comment:"edit an existing pencil view title")
             self.pencil = self.context.objectWithID(editPencil.objectID) as Pencil
