@@ -29,7 +29,6 @@
 		493803801A86BA7100E62FC2 /* NameValueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4938037E1A86BA7100E62FC2 /* NameValueTableViewCell.swift */; };
 		493803811A86BA7100E62FC2 /* NameValueTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4938037F1A86BA7100E62FC2 /* NameValueTableViewCell.xib */; };
 		493803871A86C46000E62FC2 /* PencilDataViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493803861A86C46000E62FC2 /* PencilDataViewModel.swift */; };
-		493F6AC31A8AE990003636AE /* CoreDataKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E8D8B71A7443C60064E682 /* CoreDataKit.framework */; };
 		493F6AC71A8AEB48003636AE /* EditPecilPropertyTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493F6AC51A8AEB48003636AE /* EditPecilPropertyTableViewCell.swift */; };
 		493F6AC81A8AEB48003636AE /* EditPecilPropertyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 493F6AC61A8AEB48003636AE /* EditPecilPropertyTableViewCell.xib */; };
 		493F6ACB1A8AEFBE003636AE /* PencilColorPickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493F6AC91A8AEFBE003636AE /* PencilColorPickerTableViewCell.swift */; };
@@ -52,6 +51,7 @@
 		497E0D641AA3D2E9007FA6A4 /* BigButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 497E0D621AA3D2E9007FA6A4 /* BigButtonTableViewCell.xib */; };
 		497E0D661AA7E8D1007FA6A4 /* InventoryDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497E0D651AA7E8D1007FA6A4 /* InventoryDetailTableViewController.swift */; };
 		4988FEBA1AB61F1B00AE2D89 /* SettingsMinimumStockTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4988FEB91AB61F1B00AE2D89 /* SettingsMinimumStockTableViewController.swift */; };
+		498AC94F1AC0EB8100C33954 /* CoreDataKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E8D8B71A7443C60064E682 /* CoreDataKit.framework */; };
 		49AB806B1ABE40D8009BEDE5 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AB80691ABE40D8009BEDE5 /* Crashlytics.framework */; };
 		49AB806C1ABE40D8009BEDE5 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AB806A1ABE40D8009BEDE5 /* Fabric.framework */; };
 		49AC9E3B1A87DD67007CE68A /* SelectPencilTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AC9E3A1A87DD67007CE68A /* SelectPencilTableViewController.swift */; };
@@ -190,7 +190,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				493F6AC31A8AE990003636AE /* CoreDataKit.framework in Frameworks */,
+				498AC94F1AC0EB8100C33954 /* CoreDataKit.framework in Frameworks */,
 				49AB806C1ABE40D8009BEDE5 /* Fabric.framework in Frameworks */,
 				49E8D8C11A7445670064E682 /* CloudKit.framework in Frameworks */,
 				49AB806B1ABE40D8009BEDE5 /* Crashlytics.framework in Frameworks */,

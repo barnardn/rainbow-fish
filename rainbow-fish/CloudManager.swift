@@ -88,7 +88,7 @@ class CloudManager {
     }
     
     func storePencilRecords(pencilRecords: [CKRecord], forProduct product: Product, completion: (Bool, NSError?)->Void) {
-        CoreDataKit.performBlockOnBackgroundContext({(context: NSManagedObjectContext) in
+        CDK.performBlockOnBackgroundContext({(context: NSManagedObjectContext) in
             var pencils = pencilRecords.map{ (record: CKRecord) -> Pencil in
                 var (pencil, error) = context.updateFromCKRecord(Pencil.self, record: record, createIfNotFound: true)
                 return pencil!
@@ -136,7 +136,7 @@ class CloudManager {
     
     func importManufacturer(manufacturerRecord: CKRecord, productRecords: [CKRecord]?, completion: ()->Void) {
 
-        CoreDataKit.performBlockOnBackgroundContext({(context: NSManagedObjectContext) in
+        CDK.performBlockOnBackgroundContext({(context: NSManagedObjectContext) in
             let (manufacturer, error) = context.updateFromCKRecord(Manufacturer.self, record: manufacturerRecord, createIfNotFound: true)
             assert(error == nil, "Unable to update manufacturer record \(error?.localizedDescription)")
             var products = productRecords?.map{ (prec: CKRecord) -> Product in

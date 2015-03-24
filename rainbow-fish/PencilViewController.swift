@@ -52,11 +52,11 @@ class PencilViewController: ContentTableViewController {
                 return
             }
             sender?.enabled = false
-            let manufacturer = Manufacturer(managedObjectContext: CoreDataKit.mainThreadContext)
+            let manufacturer = Manufacturer(managedObjectContext: CDK.mainThreadContext)
             let name = edittedText
             manufacturer.name = name
             var error: NSError?
-            if !CoreDataKit.mainThreadContext.save(&error) {
+            if !CDK.mainThreadContext.save(&error) {
                 sender?.enabled = true
                 assertionFailure(error!.localizedDescription)
             } else {
@@ -86,7 +86,7 @@ class PencilViewController: ContentTableViewController {
     
     
     func updateDatasource() {
-        switch CoreDataKit.mainThreadContext.find(Manufacturer.self, predicate: nil, sortDescriptors: [NSSortDescriptor(key: ManufacturerAttributes.name.rawValue, ascending: true)], limit: nil, offset: nil) {
+        switch CDK.mainThreadContext.find(Manufacturer.self, predicate: nil, sortDescriptors: [NSSortDescriptor(key: ManufacturerAttributes.name.rawValue, ascending: true)], limit: nil, offset: nil) {
             
         case let .Failure(error):
             assertionFailure(error.localizedDescription)
@@ -109,8 +109,8 @@ class PencilViewController: ContentTableViewController {
                 }
             }
             var saveError: NSError?
-            CoreDataKit.mainThreadContext.save(&saveError)
-            if let parentContext = CoreDataKit.mainThreadContext.parentContext {
+            CDK.mainThreadContext.save(&saveError)
+            if let parentContext = CDK.mainThreadContext.parentContext {
                 parentContext.save(&saveError)
             }
             if let error = saveError {
