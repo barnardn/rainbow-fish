@@ -70,7 +70,9 @@ class InventoryDetailTableViewController: UITableViewController {
                     assertionFailure(error.localizedDescription)
                 } else {
                     if let block = self.itemUpdatedBlock {
-                        block(lineItemWithIdentity: self.lineItem.objectID, wasDeleted: false)
+                        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                            block(lineItemWithIdentity: self.lineItem.objectID, wasDeleted: false)
+                        })
                     }
                 }
         })
