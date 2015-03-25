@@ -149,7 +149,9 @@ class EditPencilTableViewController: UITableViewController {
                         }
                     }
                     let userInfo = [AppNotificationInfoKeys.DidEditPencilPencilKey.rawValue : self.pencil]
-                    NSNotificationCenter.defaultCenter().postNotificationName(AppNotifications.DidEditPencil.rawValue, object: nil, userInfo: userInfo)                    
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        NSNotificationCenter.defaultCenter().postNotificationName(AppNotifications.DidEditPencil.rawValue, object: nil, userInfo: userInfo)
+                    })
                     self.cloudStoreRecords([pencilRecord])
                 }
         })
@@ -173,8 +175,12 @@ class EditPencilTableViewController: UITableViewController {
         CloudManager.sharedManger.syncChangeSet(records){ [unowned self] (success, returnedRecords, error) -> Void in
             self.hideHUD()
             self.saveButton.enabled = true
-            assert(success, error!.localizedDescription)
-            self.context.performBlock({(_) in
+            if !success {
+                println(error?.localizedDescription)
+                println(error?.userInfo)
+                assertionFailure("bummer: \(error?.localizedDescription)")
+            }
+            CDK.performBlockOnBackgroundContext({(_) in
                 if let results = returnedRecords {
                     if let rec = results.first {
                         self.pencil.populateFromCKRecord(rec)
@@ -182,13 +188,15 @@ class EditPencilTableViewController: UITableViewController {
                 }
                 return .SaveToPersistentStore
             }, completionHandler: { [unowned self] (result: Result<CommitAction>) in
-                if self.newPencil {
-                    self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
-                } else {
-                    self.toggleEditing(false)
-                    self.navigationItem.leftBarButtonItem = nil
-                    self.navigationItem.rightBarButtonItem = self.editButton
-                }
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    if self.newPencil {
+                        self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+                    } else {
+                        self.toggleEditing(false)
+                        self.navigationItem.leftBarButtonItem = nil
+                        self.navigationItem.rightBarButtonItem = self.editButton
+                    }
+                })
             })
         }
     }
@@ -197,22 +205,23 @@ class EditPencilTableViewController: UITableViewController {
     
     
     private func addPencilToInventory() {
-        self.context.performBlock({ [unowned self] (context: NSManagedObjectContext) in
-            let inventory = Inventory(managedObjectContext: self.context)
-            inventory.populateWithPencil(self.pencil)
-            return .SaveToPersistentStore
-        },
-        completionHandler: { [unowned self] (result: Result<CommitAction>) in
-            
-            switch result {
-            case let .Failure(error):
-                assertionFailure("Unable to save inventory: \(error)")
-            default:
-                var userInfo = [AppNotificationInfoKeys.DidEditPencilPencilKey.rawValue : self.pencil ]
-                NSNotificationCenter.defaultCenter().postNotificationName(AppNotifications.DidEditPencil.rawValue, object: nil, userInfo: userInfo)
-            }
-            
-        })
+        CDK.performBlockOnBackgroundContext({ [unowned self] (context: NSManagedObjectContext) in
+                let inventory = Inventory(managedObjectContext: context)
+                let pencil = context.objectWithID(self.pencil.objectID) as Pencil
+                inventory.populateWithPencil(pencil)
+                return .SaveToPersistentStore
+            },
+            completionHandler: { [unowned self] (result: Result<CommitAction>) in
+                
+                switch result {
+                case let .Failure(error):
+                    assertionFailure("Unable to save inventory: \(error)")
+                default:
+                    var userInfo = [AppNotificationInfoKeys.DidEditPencilPencilKey.rawValue : self.pencil ]
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        NSNotificationCenter.defaultCenter().postNotificationName(AppNotifications.DidEditPencil.rawValue, object: nil, userInfo: userInfo)
+                    })
+            }})
     }
     
 }
