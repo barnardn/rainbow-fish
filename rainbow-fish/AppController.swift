@@ -41,7 +41,6 @@ class AppController {
         return ConfigurationSettings(managedObjectContext: CDK.mainThreadContext)
     }()
     
-    
     // MARK: core data properties
     
     lazy var managedObjectModel: NSManagedObjectModel = {

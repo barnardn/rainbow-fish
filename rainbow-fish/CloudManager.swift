@@ -15,11 +15,43 @@ class CloudManager {
     
     private let container: CKContainer
     private let publicDb: CKDatabase
+    private let privateDb: CKDatabase
     
     init() {
         container = CKContainer.defaultContainer()
         publicDb = container.publicCloudDatabase
+        privateDb = container.privateCloudDatabase
     }
+    
+    // MARK: permissions methods
+    
+    func checkiCloudAccessibility(completion: ((isAvailable: Bool, errorMessage: String) -> Void)) {
+        self.container.accountStatusWithCompletionHandler { (status, error) -> Void in
+            var available: Bool = false
+            var message = ""
+            switch status {
+            case .Available:
+                available = true
+            case .NoAccount:
+                message = NSLocalizedString("You must set up an iCloud account to use Rainbow Fish.", comment:"create an iCloud account mesage")
+            default:
+                message = "iCloud returned the following error: \(error?.localizedFailureReason). You may have limited functionality"
+            }
+            dispatch_async(dispatch_get_main_queue()) { completion(isAvailable: available, errorMessage: message) }
+        }
+    }
+    
+    func fetchUserRecordID(completion: (recordID: String?, error: NSError?) -> Void) {
+        self.container.fetchUserRecordIDWithCompletionHandler { (recordID, error) -> Void in
+            var id: String?
+            if recordID != nil {
+                id = recordID.recordName
+            }
+            dispatch_async(dispatch_get_main_queue()) { completion(recordID: id, error: error) }
+        }
+    }
+    
+    
     
     // MARK: cloud methods
     
@@ -50,7 +82,7 @@ class CloudManager {
                 let rec = obj as CKRecord
                 return rec
             }
-            completion(productRecords, nil)
+            dispatch_async(dispatch_get_main_queue()) { completion(productRecords, nil) }
         }
     }
     
@@ -154,7 +186,7 @@ class CloudManager {
             if let error = result.error() {
                 assertionFailure("Unable to import to core data \(error.localizedDescription)")
             }
-            completion()
+            dispatch_async(dispatch_get_main_queue()) { completion() }
         })
     }
 

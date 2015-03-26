@@ -23,6 +23,7 @@ extension Product: CloudSyncable {
         self.recordID = record.recordID.recordName
         self.name = record.objectForKey(ProductAttributes.name.rawValue) as? String
         self.modificationDate = record.modificationDate
+        self.ownerRecordIdentifer = record.creatorUserRecordID.recordName
     }
 
     func toCKRecord() -> CKRecord {

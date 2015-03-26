@@ -9,6 +9,7 @@ enum PencilAttributes: String {
     case isNew = "isNew"
     case modificationDate = "modificationDate"
     case name = "name"
+    case ownerRecordIdentifer = "ownerRecordIdentifer"
     case recordID = "recordID"
 }
 
@@ -67,6 +68,11 @@ class _Pencil: NSManagedObject {
     var name: String?
 
     // func validateName(value: AutoreleasingUnsafePointer<AnyObject>, error: NSErrorPointer) {}
+
+    @NSManaged
+    var ownerRecordIdentifer: String?
+
+    // func validateOwnerRecordIdentifer(value: AutoreleasingUnsafePointer<AnyObject>, error: NSErrorPointer) {}
 
     @NSManaged
     var recordID: String?

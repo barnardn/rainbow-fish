@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 import CoreData
 import CoreDataKit
 
@@ -38,11 +39,12 @@ class RootViewController: UITabBarController {
         super.viewDidLoad()
         self.view.backgroundColor = AppearanceManager.appearanceManager.appBackgroundColor;
         
-#if SEED_CLOUD
-        self.makeRain()
-#else
-        self.updateProducts()
-#endif
+        if let cloudId = AppController.appController.appConfiguration.iCloudRecordID {
+            self.updateProducts()
+        } else {
+            self.obtainCloudRecordId(performUpdate: true)
+        }
+
     }
     
     func updateProductsNotificationHandler(notification: NSNotification) {
@@ -52,14 +54,48 @@ class RootViewController: UITabBarController {
     private func updateProducts() {
         self.showHUD(header: "Updating Pencils", footer: "Please wait...")
         CloudManager.sharedManger.refreshManufacturersAndProducts{ [unowned self] () in
-            self.hideHUD()
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                JHProgressHUD.sharedHUD.hide()
                 NSNotificationCenter.defaultCenter().postNotificationName(AppNotifications.DidFinishCloudUpdate.rawValue, object: nil)
             })
         }
-        
     }
-        
+    
+    private func obtainCloudRecordId(#performUpdate: Bool) {
+        self.showHUD()
+        CloudManager.sharedManger.fetchUserRecordID({ [unowned self] (recordID, error) -> Void in
+            if let e = error {
+                self.hideHUD()
+                self.askUserToLoginToiCloud()
+                return
+            }
+            AppController.appController.appConfiguration.iCloudRecordID = recordID
+            CDK.mainThreadContext.save(nil)
+            if !performUpdate {
+                return
+            }
+            CloudManager.sharedManger.refreshManufacturersAndProducts{ [unowned self] () in
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    JHProgressHUD.sharedHUD.hide()
+                    NSNotificationCenter.defaultCenter().postNotificationName(AppNotifications.DidFinishCloudUpdate.rawValue, object: nil)
+                })
+            }
+        })
+    }
+    
+    private func askUserToLoginToiCloud() {
+        let retryAlert = UIAlertController(title: NSLocalizedString("iCloud Login Required", comment:"icloud alert title"), message: NSLocalizedString("This app requires the use of iCloud. Please go to your settings and either log in or create an iCloud account.", comment:"icloud alert message"), preferredStyle: UIAlertControllerStyle.Alert);
+        let retryAction = UIAlertAction(title: NSLocalizedString("Retry", comment:"retry alert button"), style: UIAlertActionStyle.Default) {
+            [unowned self] (_) -> Void in
+                println("hey!!!")
+                self.obtainCloudRecordId(performUpdate: true)
+        }
+        retryAlert.addAction(retryAction)
+        self.presentViewController(retryAlert, animated: true, completion: nil)
+        retryAlert.view.tintColor = AppearanceManager.appearanceManager.brandColor
+    }
+    
+    
     //MARK: seed cloudkit
     //TODO: REMOVE BEFORE APP SUBMISSION!!
     

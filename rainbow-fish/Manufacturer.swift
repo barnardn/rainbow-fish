@@ -25,6 +25,7 @@ extension Manufacturer: CloudSyncable {
         self.recordID = record.recordID.recordName
         self.modificationDate = record.modificationDate
         self.name = record.objectForKey(ManufacturerAttributes.name.rawValue) as? String
+        self.ownerRecordIdentifer = record.creatorUserRecordID.recordName
     }
     
     func toCKRecord() -> CKRecord {

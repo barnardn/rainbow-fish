@@ -34,6 +34,7 @@ extension Pencil: CloudSyncable {
         self.modificationDate = record.modificationDate
         self.name = record.objectForKey(PencilAttributes.name.rawValue) as? String
         self.identifier = record.objectForKey(PencilAttributes.identifier.rawValue) as? String
+        self.ownerRecordIdentifer = record.creatorUserRecordID.recordName
     }
     
     func toCKRecord() -> CKRecord {
@@ -70,8 +71,6 @@ extension Pencil {
     }
     
     func canSave() -> Bool {
-        println("id: \(self.identifier)")
-        println("name: \(self.name)")
         if let identifierLength = self.identifier?.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) {
             if let nameLength = self.name?.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) {
                 return (identifierLength > 0 && nameLength > 0)
@@ -80,6 +79,14 @@ extension Pencil {
         return false
     }
     
+    func isMyPencil() -> Bool {
+        if let pencilOwnerId = self.ownerRecordIdentifer {
+            if let ownerId = AppController.appController.appConfiguration.iCloudRecordID {
+                return pencilOwnerId == ownerId
+            }
+        }
+        return false
+    }
     
     // MARK: cloud kit methods
     

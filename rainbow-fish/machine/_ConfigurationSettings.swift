@@ -4,6 +4,7 @@
 import CoreData
 
 enum ConfigurationSettingsAttributes: String {
+    case iCloudRecordID = "iCloudRecordID"
     case minInventoryQuantity = "minInventoryQuantity"
 }
 
@@ -32,6 +33,11 @@ class _ConfigurationSettings: NSManagedObject {
     }
 
     // MARK: - Properties
+
+    @NSManaged
+    var iCloudRecordID: String?
+
+    // func validateICloudRecordID(value: AutoreleasingUnsafePointer<AnyObject>, error: NSErrorPointer) {}
 
     @NSManaged
     var minInventoryQuantity: NSDecimalNumber?

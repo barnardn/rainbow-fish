@@ -65,7 +65,9 @@ class EditPencilTableViewController: UITableViewController {
         self.tableView.registerNib(UINib(nibName: PencilColorPickerTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: PencilColorPickerTableViewCell.nibName)
         self.tableView.registerNib(UINib(nibName: PencilColorTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: PencilColorTableViewCell.nibName)
         self.tableView.registerNib(UINib(nibName: BigButtonTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: BigButtonTableViewCell.nibName)
-        self.navigationItem.rightBarButtonItem = self.editButton
+        if self.pencil.isMyPencil() {
+            self.navigationItem.rightBarButtonItem = self.editButton
+        }
         if self.newPencil {
             self.navigationItem.leftBarButtonItem = self.cancelButton
             self.navigationItem.rightBarButtonItem = nil
