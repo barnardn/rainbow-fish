@@ -16,6 +16,7 @@ class AppController {
     
     private let modelName: String = "rainbow-fish"
     private let storeName: String = "rainbow-fish.sqlite"
+    private let LastUpdatedDateUserDefaultKey = "LastUpdatedDateUserDefaultKey"
     
     class var appController: AppController {
         struct Singleton {
@@ -40,6 +41,25 @@ class AppController {
         }
         return ConfigurationSettings(managedObjectContext: CDK.mainThreadContext)
     }()
+    
+    func shouldPerformAutomaticProductUpdates() -> Bool {
+        if let lastUpdatedDate = NSUserDefaults.standardUserDefaults().objectForKey(LastUpdatedDateUserDefaultKey) as NSDate? {
+            let dateComponents = NSCalendar.currentCalendar().components(NSCalendarUnit.DayCalendarUnit, fromDate: lastUpdatedDate, toDate: NSDate(), options: NSCalendarOptions.allZeros)
+            return (dateComponents.day >= 1)
+        }
+        return true
+    }
+
+    func updateLastUpdatedDateToNow() -> NSDate {
+        let now = NSDate()
+        NSUserDefaults.standardUserDefaults().setObject(now, forKey: LastUpdatedDateUserDefaultKey)
+        return now
+    }
+
+    func lastUpdatedDate() -> NSDate? {
+        let date = NSUserDefaults.standardUserDefaults().objectForKey(LastUpdatedDateUserDefaultKey) as NSDate?
+        return date
+    }
     
     // MARK: core data properties
     
