@@ -19,7 +19,7 @@ class RootViewController: UITabBarController {
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
         super.init(nibName: nil, bundle: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("updateProductsNotificationHandler:"), name: AppNotifications.StartCloudUpdate.rawValue, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("updateProductsNotificationHandler:"), name: UIApplicationDidBecomeActiveNotification, object: nil)
     }
     
     deinit {
@@ -38,17 +38,28 @@ class RootViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = AppearanceManager.appearanceManager.appBackgroundColor;
-        
-        if let cloudId = AppController.appController.appConfiguration.iCloudRecordID {
-            self.updateProducts()
-        } else {
-            self.obtainCloudRecordId(performUpdate: true)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        struct DispatchOnce {
+            static var dispatchToken: dispatch_once_t = 0
         }
-
+        dispatch_once(&DispatchOnce.dispatchToken) {
+            if let cloudId = AppController.appController.appConfiguration.iCloudRecordID {
+                self.updateProducts()
+            } else {
+                self.obtainCloudRecordId(performUpdate: true)
+            }
+        }
     }
     
     func updateProductsNotificationHandler(notification: NSNotification) {
-        self.updateProducts()
+        if let lastUpdatedDate = AppController.appController.lastUpdatedDate() as NSDate? {
+            if AppController.appController.shouldPerformAutomaticProductUpdates() {
+                self.updateProducts()
+            }
+        }
     }
     
     private func updateProducts() {
@@ -56,13 +67,14 @@ class RootViewController: UITabBarController {
         CloudManager.sharedManger.refreshManufacturersAndProducts{ [unowned self] () in
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
                 JHProgressHUD.sharedHUD.hide()
+                let _  = AppController.appController.updateLastUpdatedDateToNow()
                 NSNotificationCenter.defaultCenter().postNotificationName(AppNotifications.DidFinishCloudUpdate.rawValue, object: nil)
             })
         }
     }
     
     private func obtainCloudRecordId(#performUpdate: Bool) {
-        self.showHUD()
+        self.showHUD(header: "Performing Setup", footer: "Please Wait...")
         CloudManager.sharedManger.fetchUserRecordID({ [unowned self] (recordID, error) -> Void in
             if let e = error {
                 self.hideHUD()

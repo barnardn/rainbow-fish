@@ -15,7 +15,8 @@ extension UIViewController {
             if let (header, footer) = (header, footer) as (String?,String?)? {
                 JHProgressHUD.sharedHUD.showInView(self.view, withHeader: header, andFooter: footer)
             } else {
-                JHProgressHUD.sharedHUD.showInView(self.view)
+                var defaultFooter = NSLocalizedString("Please Wait", comment:"default hud footer message");
+                JHProgressHUD.sharedHUD.showInView(self.view, withHeader: nil, andFooter: defaultFooter)
             }
         })
     }
