@@ -42,6 +42,7 @@ class RootViewController: UITabBarController {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        
         struct DispatchOnce {
             static var dispatchToken: dispatch_once_t = 0
         }
@@ -64,12 +65,13 @@ class RootViewController: UITabBarController {
     
     private func updateProducts() {
         self.showHUD(header: "Updating Pencils", footer: "Please wait...")
-        CloudManager.sharedManger.refreshManufacturersAndProducts{ [unowned self] () in
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                JHProgressHUD.sharedHUD.hide()
-                let _  = AppController.appController.updateLastUpdatedDateToNow()
-                NSNotificationCenter.defaultCenter().postNotificationName(AppNotifications.DidFinishCloudUpdate.rawValue, object: nil)
-            })
+        CloudManager.sharedManger.refreshManufacturersAndProducts{ [unowned self] (success, error) in
+            if let e = error {
+                assertionFailure(e.localizedDescription)
+            }
+            self.hideHUD()
+            let _  = AppController.appController.updateLastUpdatedDateToNow()
+            NSNotificationCenter.defaultCenter().postNotificationName(AppNotifications.DidFinishCloudUpdate.rawValue, object: nil)
         }
     }
     
@@ -84,13 +86,15 @@ class RootViewController: UITabBarController {
             AppController.appController.appConfiguration.iCloudRecordID = recordID
             CDK.mainThreadContext.save(nil)
             if !performUpdate {
+                self.hideHUD()
                 return
             }
-            CloudManager.sharedManger.refreshManufacturersAndProducts{ [unowned self] () in
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    JHProgressHUD.sharedHUD.hide()
-                    NSNotificationCenter.defaultCenter().postNotificationName(AppNotifications.DidFinishCloudUpdate.rawValue, object: nil)
-                })
+            CloudManager.sharedManger.refreshManufacturersAndProducts{ [unowned self] (success, error) in
+                if let e = error {
+                    assertionFailure(e.localizedDescription)
+                }
+                self.hideHUD()
+                NSNotificationCenter.defaultCenter().postNotificationName(AppNotifications.DidFinishCloudUpdate.rawValue, object: nil)
             }
         })
     }
@@ -111,23 +115,23 @@ class RootViewController: UITabBarController {
     //MARK: seed cloudkit
     //TODO: REMOVE BEFORE APP SUBMISSION!!
     
-    private func makeRain() {
-        showHUD(header: "Making Rain", footer: "Please Wait...")
-        JHProgressHUD.sharedHUD.showInView(self.view, withHeader: "Making Rain", andFooter: "Please Wait...")
-        var seeder = Seeder(seedFile: "prismacolor-pencils")
-        seeder.seedPencilDatabase { [unowned self](countInserted, error) -> () in
-            self.hideHUD()
-            if error == nil {
-                println("inserted: \(countInserted)")
-                self.showHUD(header: "Updating Pencils", footer: "Please wait...")
-                CloudManager.sharedManger.refreshManufacturersAndProducts{ [unowned self] () in
-                    self.hideHUD()
-                }
-            } else {
-                println(error)
-            }
-        }
-    }
-    
+//    private func makeRain() {
+//        showHUD(header: "Making Rain", footer: "Please Wait...")
+//        JHProgressHUD.sharedHUD.showInView(self.view, withHeader: "Making Rain", andFooter: "Please Wait...")
+//        var seeder = Seeder(seedFile: "prismacolor-pencils")
+//        seeder.seedPencilDatabase { [unowned self](countInserted, error) -> () in
+//            self.hideHUD()
+//            if error == nil {
+//                println("inserted: \(countInserted)")
+//                self.showHUD(header: "Updating Pencils", footer: "Please wait...")
+//                CloudManager.sharedManger.refreshManufacturersAndProducts{ [unowned self] () in
+//                    self.hideHUD()
+//                }
+//            } else {
+//                println(error)
+//            }
+//        }
+//    }
+//    
     
 }

@@ -27,6 +27,10 @@ class PencilViewController: ContentTableViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("updateDatasource"), name: AppNotifications.DidFinishCloudUpdate.rawValue, object: nil)
     }
     
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self);
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.registerNib(UINib(nibName: ProductTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: ProductTableViewCell.nibName)
@@ -78,12 +82,14 @@ class PencilViewController: ContentTableViewController {
     }
     
     private func cloudUpdate() {
-        CloudManager.sharedManger.refreshManufacturersAndProducts { [unowned self] () in
+        CloudManager.sharedManger.refreshManufacturersAndProducts { [unowned self] (success, error) in
+            if let e = error {
+                assertionFailure(e.localizedDescription)
+            }
             self.refreshControl?.endRefreshing()
             self.updateDatasource()
         }
     }
-    
     
     func updateDatasource() {
         switch CDK.mainThreadContext.find(Manufacturer.self, predicate: nil, sortDescriptors: [NSSortDescriptor(key: ManufacturerAttributes.name.rawValue, ascending: true)], limit: nil, offset: nil) {
@@ -91,6 +97,7 @@ class PencilViewController: ContentTableViewController {
         case let .Failure(error):
             assertionFailure(error.localizedDescription)
         case let .Success(boxedResults):
+            println("pencilviewcontroller all manufacturer")
             self.allManufacturers = boxedResults()
         }
         self.tableView!.reloadData()

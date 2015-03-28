@@ -51,39 +51,63 @@ class CloudManager {
         }
     }
     
-    
-    
     // MARK: cloud methods
-    
-    func refreshManufacturersAndProducts(completionHandler: () -> Void ) {
-        var queryAll = CKQuery(recordType: Manufacturer.entityName(), predicate: NSPredicate(value: true))
 
+    func refreshManufacturersAndProducts(completionHandler: (success: Bool, error: NSError?) -> Void ) {
+        var queryAll = CKQuery(recordType: Manufacturer.entityName(), predicate: NSPredicate(value: true))
         publicDb.performQuery(queryAll, inZoneWithID: CKRecordZone.defaultRecordZone().zoneID) {[unowned self](results, error) in
-            for m in results {
-                let manufacturer = m as CKRecord
-                self.productsForManufacturer(manufacturer, completion: { (products, error) -> Void in
-                    assert(error == nil, "Can't get products \(error!.localizedDescription)")
-                    self.importManufacturer(manufacturer, productRecords: products, completionHandler)
-                })
+            if error != nil  {
+                dispatch_async(dispatch_get_main_queue()) { completionHandler(success: false, error: error) }
+                return
+            }
+            var queryOperations = results.map({ (o: AnyObject) -> CKRecord in
+                return o as CKRecord
+            }).map({ (mrec: CKRecord) -> CKQueryOperation in
+                var isLast = false
+                if let lastRec = results.last as? CKRecord {
+                    isLast = (lastRec == mrec)
+                }
+                return self.productsQuery(mrec, isLastOperation: isLast, importCompletion: completionHandler)
+            })
+            let lastOperation = queryOperations.last
+            for qop in queryOperations {
+                if qop != lastOperation {
+                    lastOperation?.addDependency(qop)
+                }
+                self.publicDb.addOperation(qop)
             }
         }
     }
-    
-    func productsForManufacturer(manufacturer: CKRecord, completion: ([CKRecord]?, NSError?)->Void) {
+
+    func productsQuery(manufacturer: CKRecord, isLastOperation: Bool, importCompletion: (success: Bool, error: NSError?) -> Void) -> CKQueryOperation {
         let manufactRef = CKReference(record: manufacturer, action: CKReferenceAction.DeleteSelf)
         let predicate = NSPredicate(format: "%K == %@", ProductRelationships.manufacturer.rawValue, manufactRef)
         var productQuery = CKQuery(recordType: Product.entityName(), predicate: predicate)
-        publicDb.performQuery(productQuery, inZoneWithID: nil) { (results, error) -> Void in
+        let queryOperation = CKQueryOperation(query: productQuery)
+        var productRecords = [CKRecord]()
+        queryOperation.recordFetchedBlock = {(record: CKRecord!) in
+            productRecords.append(record)
+        }
+        queryOperation.queryCompletionBlock = {[unowned self] (cursor: CKQueryCursor!, error: NSError!) in
             if error != nil {
-                completion(nil, error)
+                dispatch_async(dispatch_get_main_queue()) { importCompletion(success: false, error: error) }
                 return
             }
-            let productRecords = results.map{ (obj) -> CKRecord in
-                let rec = obj as CKRecord
-                return rec
+            if cursor != nil {
+                let fetchMoreOperation = CKQueryOperation(cursor: cursor)
+                fetchMoreOperation.recordFetchedBlock = queryOperation.recordFetchedBlock
+                fetchMoreOperation.completionBlock = queryOperation.completionBlock
+                self.publicDb.addOperation(fetchMoreOperation)
+            } else {
+                self.importManufacturer(manufacturer, productRecords: productRecords, completion: { () -> Void in
+                    if isLastOperation {
+                        dispatch_async(dispatch_get_main_queue()) { importCompletion(success: true, error: nil) }
+                    }
+                })
             }
-            dispatch_async(dispatch_get_main_queue()) { completion(productRecords, nil) }
+                
         }
+        return queryOperation
     }
     
     func importAllPencilsForProduct(product: Product, modifiedAfterDate: NSDate?, completion: (success: Bool, error: NSError?)->Void) {
@@ -186,7 +210,7 @@ class CloudManager {
             if let error = result.error() {
                 assertionFailure("Unable to import to core data \(error.localizedDescription)")
             }
-            dispatch_async(dispatch_get_main_queue()) { completion() }
+            completion()
         })
     }
 
