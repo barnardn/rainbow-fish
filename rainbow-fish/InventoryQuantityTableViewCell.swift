@@ -90,7 +90,7 @@ extension InventoryQuantityTableViewCell: UITextFieldDelegate {
             return true
         }
         
-        let regex = NSRegularExpression(pattern: "^\\d+(\\.{1}\\d+)?", options: NSRegularExpressionOptions.allZeros, error: nil) as NSRegularExpression!
+        let regex = NSRegularExpression(pattern: "^(\\d*)\\.?\\d*", options: NSRegularExpressionOptions.allZeros, error: nil) as NSRegularExpression!
         
         if let matchResult = regex.firstMatchInString(valueString, options: NSMatchingOptions.allZeros, range: NSMakeRange(0, valueString.lengthOfBytesUsingEncoding(NSUTF8StringEncoding))) {
             let matchRange = matchResult.rangeAtIndex(0)
