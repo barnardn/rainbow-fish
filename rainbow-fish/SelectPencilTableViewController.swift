@@ -136,14 +136,14 @@ class SelectPencilTableViewController: UITableViewController {
             return NSDate(timeIntervalSinceReferenceDate: 0)
         }
         let newestPencil =  pencils.reduce(pencils.first!) { (p1: Pencil, p2: Pencil) -> Pencil in
-            let date1 = p1.modificationDate!
-            let date2 = p2.modificationDate!
+            let date1 = p1.modificationDate ?? NSDate(timeIntervalSinceReferenceDate: 0)
+            let date2 = p2.modificationDate ?? NSDate(timeIntervalSinceReferenceDate: 0)
             if date1.compare(date2) == NSComparisonResult.OrderedDescending {
                 return p1
             }
             return p2
         }
-        return newestPencil.modificationDate!
+        return newestPencil.modificationDate ?? NSDate()
     }
 
 }
