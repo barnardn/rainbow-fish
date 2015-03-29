@@ -75,6 +75,14 @@ extension EditTextFieldTableViewController: UITableViewDataSource {
 
 }
 
+extension EditTextFieldTableViewController: UITableViewDelegate {
+    
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        cell.becomeFirstResponder()
+    }
+}
+
+
 extension EditTextFieldTableViewController: TextFieldTableViewCellDelegate {
     
     func textFieldTableViewCell(cell: TextFieldTableViewCell, changedText: String?) {
@@ -85,7 +93,6 @@ extension EditTextFieldTableViewController: TextFieldTableViewCellDelegate {
         } else {
             self.navigationItem.setRightBarButtonItem(nil, animated: true)
         }
-        
     }
     
 }

@@ -47,6 +47,10 @@ class TextFieldTableViewCell: UITableViewCell {
         }
     }
     
+    override func becomeFirstResponder() -> Bool {
+        return self.textField.becomeFirstResponder()
+    }
+    
     class var nibName: String {
         return "TextFieldTableViewCell"
     }
