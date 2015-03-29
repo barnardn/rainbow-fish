@@ -58,6 +58,10 @@ class EditPecilPropertyTableViewCell: UITableViewCell {
         }
     }
     
+    override func becomeFirstResponder() -> Bool {
+        return self.textfield.becomeFirstResponder()
+    }
+    
     override func setEditing(editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         self.textfield.enabled = editing

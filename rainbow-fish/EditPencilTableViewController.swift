@@ -116,6 +116,7 @@ class EditPencilTableViewController: UITableViewController {
 
     func cancelButtonTapped(sender: UIBarButtonItem) {
         if self.newPencil {
+            self.tableView.endEditing(true)
             self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
             return
         }
@@ -248,10 +249,10 @@ extension EditPencilTableViewController: UITableViewDataSource {
             cell.pencil = self.pencil
             if indexPath.row == 0 {
                 cell.placeholder = NSLocalizedString("Color Name", comment:"edit pencil color name placeholder")
-                cell.keyPath = "name"
+                cell.keyPath = PencilAttributes.name.rawValue
             } else {
                 cell.placeholder = NSLocalizedString("Color Code e.g. PC1097", comment:"edit pencil color code placeholder")
-                cell.keyPath = "identifier"
+                cell.keyPath = PencilAttributes.identifier.rawValue
             }
             return cell
         } else if indexPath.section == 1 {
@@ -297,6 +298,15 @@ extension EditPencilTableViewController: UITableViewDelegate {
         }
         return 44.0
     }
+    
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if self.tableView.editing && self.pencil.name == nil {
+            if indexPath.section == 0 && indexPath.row == 0 {
+                cell.becomeFirstResponder()
+            }
+        }
+    }
+    
     
     override func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
         return .None
