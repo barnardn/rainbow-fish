@@ -182,7 +182,7 @@ class EditPencilTableViewController: UITableViewController {
                 println(error?.userInfo)
                 assertionFailure("bummer: \(error?.localizedDescription)")
             }
-            CDK.performBlockOnBackgroundContext({(_) in
+            self.context.performBlock({ [unowned self] (_) in
                 if let results = returnedRecords {
                     if let rec = results.first {
                         self.pencil.populateFromCKRecord(rec)
