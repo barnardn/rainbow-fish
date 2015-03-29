@@ -60,6 +60,10 @@ class CloudManager {
                 dispatch_async(dispatch_get_main_queue()) { completionHandler(success: false, error: error) }
                 return
             }
+            if results.count == 0 {
+                dispatch_async(dispatch_get_main_queue()) { completionHandler(success: true, error: nil) }
+                return
+            }
             var queryOperations = results.map({ (o: AnyObject) -> CKRecord in
                 return o as CKRecord
             }).map({ (mrec: CKRecord) -> CKQueryOperation in
