@@ -275,7 +275,7 @@ extension InventoryTableViewController: UITableViewDelegate {
         
         self.inventory.removeAtIndex(indexPath.row)
         tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
-        CDK.mainThreadContext.createChildContext().performBlock({ (ctxt: NSManagedObjectContext) in
+        CDK.performBlockOnBackgroundContext({ (ctxt: NSManagedObjectContext) in
             
             let item = ctxt.objectWithID(lineItem.objectID)
             ctxt.deleteObject(item)
@@ -286,7 +286,7 @@ extension InventoryTableViewController: UITableViewDelegate {
                 if let error = result.error() as NSError? {
                     assertionFailure(error.localizedDescription)
                 } else {
-                    self.updateBadgeCount(reloadingVisibleRows: false)
+                    dispatch_async(dispatch_get_main_queue()) {self.updateBadgeCount(reloadingVisibleRows: false) }
                 }
                 
         })
