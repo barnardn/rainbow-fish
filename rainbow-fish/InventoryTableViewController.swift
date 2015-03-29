@@ -213,6 +213,7 @@ extension InventoryTableViewController: UITableViewDelegate {
             self.updateBadgeCount(reloadingVisibleRows: false)
         }
     }
+
     
     override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
         if tableView != self.tableView {

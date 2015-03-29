@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -30,16 +30,23 @@
                 <constraints>
                     <constraint firstAttribute="bottomMargin" secondItem="oUs-3z-osG" secondAttribute="bottom" id="7i6-Kg-0M6"/>
                     <constraint firstItem="EBY-SE-3qj" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="8Ph-gH-GD1"/>
-                    <constraint firstItem="oUs-3z-osG" firstAttribute="centerY" secondItem="EBY-SE-3qj" secondAttribute="centerY" id="ZS6-AX-DJN"/>
                     <constraint firstItem="oUs-3z-osG" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="bej-mR-h0U"/>
+                    <constraint firstItem="oUs-3z-osG" firstAttribute="centerY" secondItem="EBY-SE-3qj" secondAttribute="centerY" id="c2a-qx-gar"/>
                     <constraint firstItem="oUs-3z-osG" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="keT-At-EQT"/>
+                    <constraint firstAttribute="centerY" secondItem="oUs-3z-osG" secondAttribute="centerY" constant="-0.25" id="qNr-z0-Hd0"/>
                 </constraints>
+                <variation key="default">
+                    <mask key="constraints">
+                        <exclude reference="7i6-Kg-0M6"/>
+                        <exclude reference="keT-At-EQT"/>
+                    </mask>
+                </variation>
             </tableViewCellContentView>
             <connections>
                 <outlet property="inventoryQuantityField" destination="oUs-3z-osG" id="VAZ-qb-Wr3"/>
                 <outlet property="stepper" destination="EBY-SE-3qj" id="k4J-9h-3Ax"/>
             </connections>
-            <point key="canvasLocation" x="-538" y="176"/>
+            <point key="canvasLocation" x="-688" y="167"/>
         </tableViewCell>
     </objects>
 </document>
