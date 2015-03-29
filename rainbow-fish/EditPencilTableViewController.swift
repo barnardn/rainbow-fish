@@ -319,9 +319,6 @@ extension EditPencilTableViewController: UITableViewDelegate {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
-
-    
-    
 }
 
 extension EditPencilTableViewController: PencilColorPickerTableViewCellDelegate {
