@@ -53,6 +53,21 @@ extension Pencil: CloudSyncable {
         return record
     }
     
+    func toJson(includeRelationships: Bool = false ) -> NSDictionary {
+        
+        var jsonObject = NSMutableDictionary()
+        jsonObject[PencilAttributes.recordID.rawValue] = self.recordID
+        jsonObject[PencilAttributes.name.rawValue] = self.name
+        jsonObject[PencilAttributes.identifier.rawValue] = self.identifier
+        if let color = self.color as? UIColor {
+            jsonObject[PencilAttributes.color.rawValue] = color.rgbRepresentation
+        }
+        jsonObject[PencilAttributes.modificationDate.rawValue] = self.modificationDate?.timeIntervalSince1970
+        return jsonObject
+        
+    }
+    
+    
 }
 
 extension Pencil {

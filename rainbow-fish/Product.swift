@@ -38,6 +38,26 @@ extension Product: CloudSyncable {
         return record
     }
     
+    func toJson(includeRelationships: Bool = false ) -> NSDictionary {
+
+        var jsonObject = NSMutableDictionary()
+        jsonObject[ProductAttributes.recordID.rawValue] = self.recordID
+        jsonObject[ProductAttributes.name.rawValue] = self.name
+        jsonObject[ProductAttributes.modificationDate.rawValue] = self.modificationDate?.timeIntervalSince1970
+        
+        if includeRelationships {
+            var pencilJson = [NSDictionary]()
+            if let pencils = self.pencils.allObjects as? [Pencil] {
+                for pencil in pencils {
+                    pencilJson.append(pencil.toJson())
+                }
+            }
+            jsonObject[ProductRelationships.pencils.rawValue] = pencilJson
+        }
+        return jsonObject
+    }
+    
+    
 }
 
 extension Product {

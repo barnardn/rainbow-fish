@@ -47,6 +47,7 @@
 		49405C781AA7F69F002F2E83 /* InventoryQuantityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49405C761AA7F69F002F2E83 /* InventoryQuantityTableViewCell.xib */; };
 		4973DA701A7F05CB00619D06 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4973DA6F1A7F05CB00619D06 /* ProductTableViewCell.swift */; };
 		4973DA721A7F05E600619D06 /* ProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4973DA711A7F05E600619D06 /* ProductTableViewCell.xib */; };
+		49746BC81ACE191E0088C4E4 /* String+Hash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49746BC71ACE191E0088C4E4 /* String+Hash.swift */; };
 		497E0D631AA3D2E9007FA6A4 /* BigButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497E0D611AA3D2E9007FA6A4 /* BigButtonTableViewCell.swift */; };
 		497E0D641AA3D2E9007FA6A4 /* BigButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 497E0D621AA3D2E9007FA6A4 /* BigButtonTableViewCell.xib */; };
 		497E0D661AA7E8D1007FA6A4 /* InventoryDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497E0D651AA7E8D1007FA6A4 /* InventoryDetailTableViewController.swift */; };
@@ -135,6 +136,9 @@
 		49405C761AA7F69F002F2E83 /* InventoryQuantityTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InventoryQuantityTableViewCell.xib; sourceTree = "<group>"; };
 		4973DA6F1A7F05CB00619D06 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
 		4973DA711A7F05E600619D06 /* ProductTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductTableViewCell.xib; sourceTree = "<group>"; };
+		49746BC41ACE18270088C4E4 /* RainbowFishBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RainbowFishBridge.h; sourceTree = "<group>"; };
+		49746BC51ACE18430088C4E4 /* libcommonCrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcommonCrypto.dylib; path = usr/lib/system/libcommonCrypto.dylib; sourceTree = SDKROOT; };
+		49746BC71ACE191E0088C4E4 /* String+Hash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Hash.swift"; sourceTree = "<group>"; };
 		497E0D611AA3D2E9007FA6A4 /* BigButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigButtonTableViewCell.swift; sourceTree = "<group>"; };
 		497E0D621AA3D2E9007FA6A4 /* BigButtonTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BigButtonTableViewCell.xib; sourceTree = "<group>"; };
 		497E0D651AA7E8D1007FA6A4 /* InventoryDetailTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InventoryDetailTableViewController.swift; sourceTree = "<group>"; };
@@ -389,6 +393,7 @@
 		49DF07F41A743A2800BF94D3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				49746BC51ACE18430088C4E4 /* libcommonCrypto.dylib */,
 				49AB80691ABE40D8009BEDE5 /* Crashlytics.framework */,
 				49AB806A1ABE40D8009BEDE5 /* Fabric.framework */,
 				49BB8F5F1A79D89C007CFE3B /* prismacolor-pencils.json */,
@@ -397,6 +402,7 @@
 				49E8D8BD1A7445400064E682 /* CoreData.framework */,
 				49E8D8B71A7443C60064E682 /* CoreDataKit.framework */,
 				49DF07F51A743A2800BF94D3 /* Info.plist */,
+				49746BC41ACE18270088C4E4 /* RainbowFishBridge.h */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -458,6 +464,7 @@
 				49F419D31A9AAA5100635EF3 /* Int+CDOExtensions.swift */,
 				49F419D51A9AAAF600635EF3 /* UIColor+CDOExtensions.swift */,
 				491AD0F31A9EB9E70046FE00 /* CKRecord+AppExtensions.swift */,
+				49746BC71ACE191E0088C4E4 /* String+Hash.swift */,
 			);
 			name = "Categories & Extensions";
 			sourceTree = "<group>";
@@ -720,6 +727,7 @@
 				493803791A86AE8900E62FC2 /* EmbeddedPickerTableViewCell.swift in Sources */,
 				4913E5C91A7D81D600C4C9BF /* CloudManager.swift in Sources */,
 				49E8D8EC1A75CADE0064E682 /* InventoryTableViewController.swift in Sources */,
+				49746BC81ACE191E0088C4E4 /* String+Hash.swift in Sources */,
 				49E8D8DC1A7566E00064E682 /* AppController.swift in Sources */,
 				49E8D8F01A75D4760064E682 /* SettingsTableViewController.swift in Sources */,
 				491AD0F61AA2B6D60046FE00 /* _SyncInfo.swift in Sources */,
@@ -830,6 +838,7 @@
 				CODE_SIGN_ENTITLEMENTS = "rainbow-fish/rainbow-fish.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -838,10 +847,15 @@
 				INFOPLIST_FILE = "rainbow-fish/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/system",
+				);
 				OTHER_SWIFT_FLAGS = "-DDEBUG";
 				PRODUCT_MODULE_NAME = RainbowFish;
 				PRODUCT_NAME = "Rainbow Fish";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "rainbow-fish/RainbowFishBridge.h";
 			};
 			name = Debug;
 		};
@@ -852,6 +866,7 @@
 				CODE_SIGN_ENTITLEMENTS = "rainbow-fish/rainbow-fish.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEFINES_MODULE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -861,10 +876,15 @@
 				INFOPLIST_FILE = "rainbow-fish/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(SDKROOT)/usr/lib/system",
+				);
 				OTHER_SWIFT_FLAGS = "";
 				PRODUCT_MODULE_NAME = RainbowFish;
 				PRODUCT_NAME = "Rainbow Fish";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "rainbow-fish/RainbowFishBridge.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Release;
