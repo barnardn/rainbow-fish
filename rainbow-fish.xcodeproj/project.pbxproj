@@ -48,6 +48,7 @@
 		4973DA701A7F05CB00619D06 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4973DA6F1A7F05CB00619D06 /* ProductTableViewCell.swift */; };
 		4973DA721A7F05E600619D06 /* ProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4973DA711A7F05E600619D06 /* ProductTableViewCell.xib */; };
 		49746BC81ACE191E0088C4E4 /* String+Hash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49746BC71ACE191E0088C4E4 /* String+Hash.swift */; };
+		497CD06E1AD1D44E00A3E3C9 /* CloudImport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497CD06D1AD1D44E00A3E3C9 /* CloudImport.swift */; };
 		497CD0701AD1D8B200A3E3C9 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 497CD06F1AD1D8B200A3E3C9 /* SwiftyJSON.framework */; };
 		497E0D631AA3D2E9007FA6A4 /* BigButtonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497E0D611AA3D2E9007FA6A4 /* BigButtonTableViewCell.swift */; };
 		497E0D641AA3D2E9007FA6A4 /* BigButtonTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 497E0D621AA3D2E9007FA6A4 /* BigButtonTableViewCell.xib */; };
@@ -140,6 +141,7 @@
 		49746BC41ACE18270088C4E4 /* RainbowFishBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RainbowFishBridge.h; sourceTree = "<group>"; };
 		49746BC51ACE18430088C4E4 /* libcommonCrypto.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libcommonCrypto.dylib; path = usr/lib/system/libcommonCrypto.dylib; sourceTree = SDKROOT; };
 		49746BC71ACE191E0088C4E4 /* String+Hash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Hash.swift"; sourceTree = "<group>"; };
+		497CD06D1AD1D44E00A3E3C9 /* CloudImport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudImport.swift; sourceTree = "<group>"; };
 		497CD06F1AD1D8B200A3E3C9 /* SwiftyJSON.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftyJSON.framework; path = ../Carthage/Build/iOS/SwiftyJSON.framework; sourceTree = "<group>"; };
 		497E0D611AA3D2E9007FA6A4 /* BigButtonTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BigButtonTableViewCell.swift; sourceTree = "<group>"; };
 		497E0D621AA3D2E9007FA6A4 /* BigButtonTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BigButtonTableViewCell.xib; sourceTree = "<group>"; };
@@ -352,6 +354,7 @@
 			children = (
 				49BB8F5D1A79D431007CFE3B /* Seeder.swift */,
 				4913E5C81A7D81D600C4C9BF /* CloudManager.swift */,
+				497CD06D1AD1D44E00A3E3C9 /* CloudImport.swift */,
 			);
 			name = Cloudkit;
 			sourceTree = "<group>";
@@ -647,6 +650,7 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/CoreDataKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
 			);
 			name = "Carthage copy frameworks";
 			outputPaths = (
@@ -694,6 +698,7 @@
 				49E8D8BB1A7443F50064E682 /* JHProgressHUD.swift in Sources */,
 				491AD0F21A9EA64E0046FE00 /* CreatePencilNavigationController.swift in Sources */,
 				49F9146B1A7727C70042EA0D /* InventoryTableViewCell.swift in Sources */,
+				497CD06E1AD1D44E00A3E3C9 /* CloudImport.swift in Sources */,
 				49405C771AA7F69F002F2E83 /* InventoryQuantityTableViewCell.swift in Sources */,
 				4938036D1A8447EB00E62FC2 /* UIViewController+JHProgressHUD.swift in Sources */,
 				49E8D8DE1A7567FF0064E682 /* AppearanceManager.swift in Sources */,

@@ -29,6 +29,10 @@ class SettingsTableViewController: ContentTableViewController {
     private var settingsContext = 0
     private var allowDataImportSection = false
     
+    private lazy var cloudImporter: CloudImport = {
+        return CloudImport()
+    }()
+    
     let sectionInfo = [ [InventoryRows.MinimumInventory.rawValue], [DataManagementRows.DataExport.rawValue, DataManagementRows.DataImport.rawValue] ]
     
     convenience init() {
@@ -101,6 +105,18 @@ class SettingsTableViewController: ContentTableViewController {
         
     }
     
+    func seedCloudDatabase() {
+        
+        self.showHUD(header: "Seeding Cloud", footer: nil)
+        self.cloudImporter.seedToCloud({ (success, error) -> Void in
+            self.hideHUD()
+            if let err = error {
+                assertionFailure(err.localizedDescription)
+            } else {
+                println("Yay")
+            }
+        })
+    }
     
 }
 
@@ -165,7 +181,6 @@ extension SettingsTableViewController: UITableViewDataSource {
         return "\(wholeNumber)"
     }
 
-
 }
 
 extension SettingsTableViewController: UITableViewDelegate {
@@ -185,7 +200,7 @@ extension SettingsTableViewController: UITableViewDelegate {
                 }
             })
         case (Sections.DataManagement.rawValue, DataManagementRows.DataImport.rawValue):
-            println("Not Implemented")
+            self.seedCloudDatabase()
         default:
             viewController = SettingsMinimumStockTableViewController()
         }
