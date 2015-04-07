@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import CoreData
+import CoreDataKit
 import CloudKit
 
 class Seeder {
@@ -33,7 +35,7 @@ class Seeder {
                 return
             }
             let manufacturer = manufacturerWithName("Prismacolor")
-            let product = productWithName("Premier", manufacturer: manufacturer)
+            let product = productWithName("Premier Softcore", manufacturer: manufacturer)
             let pencils = pencilsWithInfo(jsonData!, forProduct: product)
             var changeSet = [manufacturer, product]
             for p in pencils {
@@ -78,6 +80,10 @@ class Seeder {
             return pencil
         }
         return pencilRecords
+
     }
+    
+
+    
     
 }

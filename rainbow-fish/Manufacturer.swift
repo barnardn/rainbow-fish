@@ -40,6 +40,27 @@ extension Manufacturer: CloudSyncable {
         return record
     }
     
+    func toJson(includeRelationships: Bool = false ) -> NSDictionary {
+        
+        var jsonObject = NSMutableDictionary()
+        jsonObject[ManufacturerAttributes.recordID.rawValue] = self.recordID
+        jsonObject[ManufacturerAttributes.name.rawValue] = self.name
+        jsonObject[ManufacturerAttributes.modificationDate.rawValue] = self.modificationDate?.timeIntervalSince1970
+        
+        if includeRelationships {
+            var productJson = [NSDictionary]()
+            if let products = self.products.allObjects as? [Product] {
+                for product in products {
+                    productJson.append(product.toJson(includeRelationships: includeRelationships))
+                }
+            }
+            jsonObject[ManufacturerRelationships.products.rawValue] = productJson
+        }
+        return jsonObject
+    }
+    
+    
+    
 }
 
 extension Manufacturer {

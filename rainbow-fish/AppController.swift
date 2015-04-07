@@ -17,6 +17,7 @@ class AppController {
     private let modelName: String = "rainbow-fish"
     private let storeName: String = "rainbow-fish.sqlite"
     private let LastUpdatedDateUserDefaultKey = "LastUpdatedDateUserDefaultKey"
+    private let DataImportKey = "CDOImportIdentifier"
     
     class var appController: AppController {
         struct Singleton {
@@ -40,6 +41,16 @@ class AppController {
             return result
         }
         return ConfigurationSettings(managedObjectContext: CDK.mainThreadContext)
+    }()
+    
+    lazy var dataImportKey: String = {
+        if let infoDict = NSBundle.mainBundle().infoDictionary as [NSString: AnyObject]? {
+            if let importKey = infoDict[self.DataImportKey] as? String {
+                println("import key \(importKey)")
+                return importKey
+            }
+        }
+        return ""
     }()
     
     func shouldPerformAutomaticProductUpdates() -> Bool {
