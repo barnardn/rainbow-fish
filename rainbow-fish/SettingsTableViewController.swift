@@ -107,6 +107,8 @@ class SettingsTableViewController: ContentTableViewController {
     
     func seedCloudDatabase() {
         
+        // check existence of "database.json"
+        
         self.showHUD(header: "Seeding Cloud", footer: nil)
         self.cloudImporter.seedToCloud({ (success, error) -> Void in
             self.hideHUD()
