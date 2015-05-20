@@ -14,8 +14,8 @@ class SettingsNavigationController: UINavigationController {
         super.init(coder: aDecoder)
     }
     
-    convenience init() {
-        self.init()
+    init() {
+        super.init(nibName: nil, bundle: nil)
         self.viewControllers = [SettingsTableViewController()]
     }
 

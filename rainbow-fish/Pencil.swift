@@ -31,6 +31,8 @@ extension Pencil: CloudSyncable {
         self.name = record.objectForKey(PencilAttributes.name.rawValue) as? String
         self.identifier = record.objectForKey(PencilAttributes.identifier.rawValue) as? String
         self.ownerRecordIdentifer = record.creatorUserRecordID.recordName
+        println("creator record id: \(record.creatorUserRecordID.recordName)")
+        println("modifier record id: \(record.lastModifiedUserRecordID.recordName)")
     }
     
     func toCKRecord() -> CKRecord {

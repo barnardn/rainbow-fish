@@ -27,11 +27,11 @@ class JHProgressHUD: UIView
         return Static.instance!
     }
     
-    convenience init()
-    {
-        //Initialising Code
-        self.init()
-    }
+//    init()
+//    {
+//        //Initialising Code
+//        super.init()
+//    }
 
     required init(coder aDecoder: NSCoder)
     {

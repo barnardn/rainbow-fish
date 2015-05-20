@@ -365,7 +365,6 @@
 		49DF07E81A743A2800BF94D3 = {
 			isa = PBXGroup;
 			children = (
-				494BA7CD1B0AC9FE0026B2AE /* UIKit.framework */,
 				49DF07F31A743A2800BF94D3 /* rainbow-fish */,
 				49DF07F21A743A2800BF94D3 /* Products */,
 			);
@@ -412,6 +411,7 @@
 				49E8D8C01A7445670064E682 /* CloudKit.framework */,
 				49E8D8BD1A7445400064E682 /* CoreData.framework */,
 				49E8D8B71A7443C60064E682 /* CoreDataKit.framework */,
+				494BA7CD1B0AC9FE0026B2AE /* UIKit.framework */,
 				49DF07F51A743A2800BF94D3 /* Info.plist */,
 				49746BC41ACE18270088C4E4 /* RainbowFishBridge.h */,
 			);
