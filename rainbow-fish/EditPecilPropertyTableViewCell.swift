@@ -25,7 +25,7 @@ class EditPecilPropertyTableViewCell: UITableViewCell {
     var pencil: Pencil! {
         didSet {
             if let keypath = self.keyPath {
-                self.textfield.text = self.pencil.valueForKeyPath(keypath) as String?
+                self.textfield.text = self.pencil.valueForKeyPath(keypath) as! String?
             }
         }
     }
@@ -33,7 +33,7 @@ class EditPecilPropertyTableViewCell: UITableViewCell {
     var keyPath: String! {
         didSet {
             if self.pencil != nil {
-                self.textfield.text = self.pencil.valueForKeyPath(self.keyPath) as String?
+                self.textfield.text = self.pencil.valueForKeyPath(self.keyPath) as! String?
             }
         }
     }

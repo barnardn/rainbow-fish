@@ -40,7 +40,7 @@ class EditPencilTableViewController: UITableViewController {
         self.context = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType, parentContext: CDK.mainThreadContext)
         if let editPencil = pencil {
             self.title = editPencil.name ?? NSLocalizedString("Edit Pencil", comment:"edit an existing pencil view title")
-            self.pencil = self.context.objectWithID(editPencil.objectID) as Pencil
+            self.pencil = self.context.objectWithID(editPencil.objectID) as! Pencil
         } else {
             self.title = NSLocalizedString("New Pencil", comment:"new pencil view title")
             self.pencil = Pencil(managedObjectContext: self.context)
@@ -124,7 +124,7 @@ class EditPencilTableViewController: UITableViewController {
         self.navigationItem.setRightBarButtonItem(self.editButton, animated: true)
         self.navigationItem.setLeftBarButtonItem(nil, animated: true)
         self.context.rollback()
-        self.pencil = self.context.objectWithID(self.pencil.objectID) as Pencil
+        self.pencil = self.context.objectWithID(self.pencil.objectID) as! Pencil
         self.toggleEditing(false)
         self.observePencilChanges(true)
     }
@@ -210,7 +210,7 @@ class EditPencilTableViewController: UITableViewController {
     private func addPencilToInventory() {
         CDK.performBlockOnBackgroundContext({ [unowned self] (context: NSManagedObjectContext) in
                 let inventory = Inventory(managedObjectContext: context)
-                let pencil = context.objectWithID(self.pencil.objectID) as Pencil
+                let pencil = context.objectWithID(self.pencil.objectID) as! Pencil
                 inventory.populateWithPencil(pencil)
                 return .SaveToPersistentStore
             },
@@ -245,7 +245,7 @@ extension EditPencilTableViewController: UITableViewDataSource {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            var cell = tableView.dequeueReusableCellWithIdentifier(EditPecilPropertyTableViewCell.nibName, forIndexPath: indexPath) as EditPecilPropertyTableViewCell
+            var cell = tableView.dequeueReusableCellWithIdentifier(EditPecilPropertyTableViewCell.nibName, forIndexPath: indexPath) as! EditPecilPropertyTableViewCell
             cell.pencil = self.pencil
             if indexPath.row == 0 {
                 cell.placeholder = NSLocalizedString("Color Name", comment:"edit pencil color name placeholder")
@@ -257,19 +257,19 @@ extension EditPencilTableViewController: UITableViewDataSource {
             return cell
         } else if indexPath.section == 1 {
             if !self.tableView.editing {
-                var cell = tableView.dequeueReusableCellWithIdentifier(PencilColorTableViewCell.nibName, forIndexPath: indexPath) as PencilColorTableViewCell
+                var cell = tableView.dequeueReusableCellWithIdentifier(PencilColorTableViewCell.nibName, forIndexPath: indexPath) as! PencilColorTableViewCell
                 let color = self.pencil.color as? UIColor ?? UIColor.blackColor()
                 cell.swatchColor = color
                 cell.colorName = color.hexRepresentation
                 return cell
             }
-            var cell = tableView.dequeueReusableCellWithIdentifier(PencilColorPickerTableViewCell.nibName, forIndexPath: indexPath) as PencilColorPickerTableViewCell
-            cell.defaultColor = self.pencil.color as UIColor? ?? UIColor.blackColor()
+            var cell = tableView.dequeueReusableCellWithIdentifier(PencilColorPickerTableViewCell.nibName, forIndexPath: indexPath) as! PencilColorPickerTableViewCell
+            cell.defaultColor = self.pencil.color as! UIColor? ?? UIColor.blackColor()
             cell.delegate = self
             return cell
         } else {
             var title = (self.pencil.inventory != nil) ? NSLocalizedString("You own this pencil.", comment:"edit pencil button title") : NSLocalizedString("Add Pencil To My Inventory", comment:"edit pencil add pencil to inventory button title")
-            var cell = tableView.dequeueReusableCellWithIdentifier(BigButtonTableViewCell.nibName) as BigButtonTableViewCell
+            var cell = tableView.dequeueReusableCellWithIdentifier(BigButtonTableViewCell.nibName) as! BigButtonTableViewCell
             cell.title = title
             cell.disabled = (self.pencil.inventory != nil)
             return cell
@@ -320,7 +320,7 @@ extension EditPencilTableViewController: UITableViewDelegate {
         if indexPath.section != 2 {
             return
         }
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as BigButtonTableViewCell
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! BigButtonTableViewCell
         if !cell.disabled {
             self.addPencilToInventory()
             cell.title = NSLocalizedString("You own this pencil.", comment:"edit pencil button title")

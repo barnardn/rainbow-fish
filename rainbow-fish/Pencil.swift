@@ -18,10 +18,6 @@ class Pencil: _Pencil, NamedManagedObject {
         self.isNew = false
     }
     
-    // MARK: NamedManagedObject    
-    
-    class var entityName: String { return self.entityName() }
-
 }
 
 extension Pencil: CloudSyncable {
@@ -81,8 +77,9 @@ extension Pencil {
         case let .Failure(error):
             assertionFailure(error.localizedDescription)
         case let .Success(boxedResults):
-            return boxedResults()
+            return boxedResults.value
         }
+        return nil
     }
     
     func canSave() -> Bool {

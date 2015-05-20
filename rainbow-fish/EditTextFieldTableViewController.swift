@@ -66,7 +66,7 @@ extension EditTextFieldTableViewController: UITableViewDataSource {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(TextFieldTableViewCell.nibName, forIndexPath: indexPath) as TextFieldTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(TextFieldTableViewCell.nibName, forIndexPath: indexPath) as! TextFieldTableViewCell
         cell.defaultText = self.defaultText
         cell.placeholder = self.placeholder
         cell.delegate = self

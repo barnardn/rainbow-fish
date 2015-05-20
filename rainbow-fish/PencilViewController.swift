@@ -98,7 +98,7 @@ class PencilViewController: ContentTableViewController {
             assertionFailure(error.localizedDescription)
         case let .Success(boxedResults):
             println("pencilviewcontroller all manufacturer")
-            self.allManufacturers = boxedResults()
+            self.allManufacturers = boxedResults.value
         }
         self.tableView!.reloadData()
     }
@@ -142,7 +142,7 @@ extension PencilViewController: UITableViewDataSource {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(ProductTableViewCell.nibName, forIndexPath: indexPath) as ProductTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(ProductTableViewCell.nibName, forIndexPath: indexPath) as! ProductTableViewCell
         let product = productAtIndexPath(indexPath)
         cell.title = product?.name
         return cell
@@ -167,14 +167,14 @@ extension PencilViewController: UITableViewDelegate {
     }
     
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier("ProductHeaderView") as ProductHeaderView
+        let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier("ProductHeaderView") as! ProductHeaderView
         let manufacturer = allManufacturers[section] as Manufacturer
         headerView.title = manufacturer.name
         return headerView
     }
 
     override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footerview = tableView.dequeueReusableHeaderFooterViewWithIdentifier("ProductFooterView") as ProductFooterView
+        let footerview = tableView.dequeueReusableHeaderFooterViewWithIdentifier("ProductFooterView") as! ProductFooterView
         let manufacturer = allManufacturers[section] as Manufacturer
         footerview.manufacturer = manufacturer
         footerview.delegate = self

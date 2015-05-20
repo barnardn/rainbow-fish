@@ -148,7 +148,7 @@ extension SettingsTableViewController: UITableViewDataSource {
     }
     
     private func configureInventoryCell(indexPath: NSIndexPath) -> NameValueTableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(NameValueTableViewCell.nibName, forIndexPath: indexPath) as NameValueTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(NameValueTableViewCell.nibName, forIndexPath: indexPath) as! NameValueTableViewCell
         cell.name = NSLocalizedString("Minimum Inventory", comment:"settings pencil remaining title")
         if let quantity = AppController.appController.appConfiguration.minInventoryQuantity {
             cell.value = formatDecimalQuantity(quantity)
@@ -160,13 +160,13 @@ extension SettingsTableViewController: UITableViewDataSource {
     }
     
     private func configureDataImportCell(indexPath: NSIndexPath) -> BigButtonTableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(BigButtonTableViewCell.nibName, forIndexPath: indexPath) as BigButtonTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(BigButtonTableViewCell.nibName, forIndexPath: indexPath) as! BigButtonTableViewCell
         cell.title = NSLocalizedString("Seed Database", comment:"seed database admin function")
         return cell
     }
     
     private func configureDataExportCell(indexPath: NSIndexPath) -> BigButtonTableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(BigButtonTableViewCell.nibName, forIndexPath: indexPath) as BigButtonTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(BigButtonTableViewCell.nibName, forIndexPath: indexPath) as! BigButtonTableViewCell
         cell.title = NSLocalizedString("Export Database", comment:"export database admin function")
         return cell
     }
@@ -213,7 +213,7 @@ extension SettingsTableViewController: UITableViewDelegate {
     }
     
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier("ProductHeaderView") as ProductHeaderView
+        let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier("ProductHeaderView") as! ProductHeaderView
         let title = (section == Sections.MinimumInventory.rawValue) ? NSLocalizedString("Inventory Management", comment:"settings inventory mananagement section header") : "Data Management"
         headerView.title = title
         return headerView

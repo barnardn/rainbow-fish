@@ -22,12 +22,12 @@ class _Inventory: NSManagedObject {
 
     // MARK: - Class methods
 
-    class func entityName () -> String {
+    class var entityName : String {
         return "Inventory"
     }
 
     class func entity(managedObjectContext: NSManagedObjectContext!) -> NSEntityDescription! {
-        return NSEntityDescription.entityForName(self.entityName(), inManagedObjectContext: managedObjectContext);
+        return NSEntityDescription.entityForName(self.entityName, inManagedObjectContext: managedObjectContext);
     }
 
     // MARK: - Life cycle methods

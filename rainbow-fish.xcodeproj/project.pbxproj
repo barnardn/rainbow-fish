@@ -45,6 +45,7 @@
 		493FC6111A86ED5700D8D17F /* DefaultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 493FC60F1A86ED5700D8D17F /* DefaultTableViewCell.xib */; };
 		49405C771AA7F69F002F2E83 /* InventoryQuantityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49405C751AA7F69F002F2E83 /* InventoryQuantityTableViewCell.swift */; };
 		49405C781AA7F69F002F2E83 /* InventoryQuantityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49405C761AA7F69F002F2E83 /* InventoryQuantityTableViewCell.xib */; };
+		494BA7CE1B0AC9FF0026B2AE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 494BA7CD1B0AC9FE0026B2AE /* UIKit.framework */; };
 		4973DA701A7F05CB00619D06 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4973DA6F1A7F05CB00619D06 /* ProductTableViewCell.swift */; };
 		4973DA721A7F05E600619D06 /* ProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4973DA711A7F05E600619D06 /* ProductTableViewCell.xib */; };
 		49746BC81ACE191E0088C4E4 /* String+Hash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49746BC71ACE191E0088C4E4 /* String+Hash.swift */; };
@@ -136,6 +137,7 @@
 		493FC60F1A86ED5700D8D17F /* DefaultTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultTableViewCell.xib; sourceTree = "<group>"; };
 		49405C751AA7F69F002F2E83 /* InventoryQuantityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InventoryQuantityTableViewCell.swift; sourceTree = "<group>"; };
 		49405C761AA7F69F002F2E83 /* InventoryQuantityTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InventoryQuantityTableViewCell.xib; sourceTree = "<group>"; };
+		494BA7CD1B0AC9FE0026B2AE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		4973DA6F1A7F05CB00619D06 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
 		4973DA711A7F05E600619D06 /* ProductTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductTableViewCell.xib; sourceTree = "<group>"; };
 		49746BC41ACE18270088C4E4 /* RainbowFishBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RainbowFishBridge.h; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				494BA7CE1B0AC9FF0026B2AE /* UIKit.framework in Frameworks */,
 				497CD0701AD1D8B200A3E3C9 /* SwiftyJSON.framework in Frameworks */,
 				498AC94F1AC0EB8100C33954 /* CoreDataKit.framework in Frameworks */,
 				49AB806C1ABE40D8009BEDE5 /* Fabric.framework in Frameworks */,
@@ -362,6 +365,7 @@
 		49DF07E81A743A2800BF94D3 = {
 			isa = PBXGroup;
 			children = (
+				494BA7CD1B0AC9FE0026B2AE /* UIKit.framework */,
 				49DF07F31A743A2800BF94D3 /* rainbow-fish */,
 				49DF07F21A743A2800BF94D3 /* Products */,
 			);
@@ -548,7 +552,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 49DF08101A743A2800BF94D3 /* Build configuration list for PBXNativeTarget "rainbow-fish" */;
 			buildPhases = (
-				49E8D8C81A75630C0064E682 /* Mogenerator */,
 				49DF07ED1A743A2800BF94D3 /* Sources */,
 				49DF07EE1A743A2800BF94D3 /* Frameworks */,
 				49E8D8BC1A7444190064E682 /* Carthage copy frameworks */,
@@ -658,20 +661,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
-		49E8D8C81A75630C0064E682 /* Mogenerator */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = Mogenerator;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/bin/mogenerator --v2 --swift -m $SRCROOT/$TARGET_NAME/$TARGET_NAME.xcdatamodeld/$TARGET_NAME.xcdatamodel -H $SRCROOT/$TARGET_NAME -M $SRCROOT/$TARGET_NAME/machine";
 		};
 /* End PBXShellScriptBuildPhase section */
 

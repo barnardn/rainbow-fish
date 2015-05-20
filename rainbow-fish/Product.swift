@@ -12,8 +12,6 @@ class Product: _Product, NamedManagedObject {
         self.isNew = true
     }
     
-    // MARK: NamedManagedObject
-    class var entityName: String { return self.entityName() }
     class var UpdateIntervalInSeconds: NSTimeInterval { return 60.0 * 60.0 }
 }
 

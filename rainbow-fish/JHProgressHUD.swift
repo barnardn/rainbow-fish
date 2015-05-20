@@ -27,10 +27,10 @@ class JHProgressHUD: UIView
         return Static.instance!
     }
     
-    override init()
+    convenience init()
     {
         //Initialising Code
-        super.init()
+        self.init()
     }
 
     required init(coder aDecoder: NSCoder)
@@ -222,7 +222,7 @@ class JHProgressHUD: UIView
     // MARK: -Set Font
     func boldFontWithFont(font : UIFont?) -> UIFont
     {
-        var fontDescriptor : UIFontDescriptor = font!.fontDescriptor().fontDescriptorWithSymbolicTraits(.TraitBold)
+        var fontDescriptor : UIFontDescriptor = font!.fontDescriptor().fontDescriptorWithSymbolicTraits(.TraitBold)!
         return UIFont(descriptor: fontDescriptor, size: 0)
     }
     

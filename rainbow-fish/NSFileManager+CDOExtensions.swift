@@ -13,7 +13,7 @@ extension NSFileManager {
     func applicationSupportDirectory() -> NSURL {
         
         let urls = NSFileManager.defaultManager().URLsForDirectory(.ApplicationSupportDirectory, inDomains: .UserDomainMask)
-        var appSupport =  urls.last as NSURL
+        var appSupport =  urls.last as! NSURL
         
         var error: NSError? = nil
         if !appSupport.checkResourceIsReachableAndReturnError(&error) {

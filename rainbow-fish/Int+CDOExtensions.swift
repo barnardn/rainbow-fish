@@ -11,7 +11,7 @@ extension Int {
     
     // return an hex representation of an Int
     func toHex() -> String {
-        var string: String = NSString(format: "%02X", self)
+        var string: String = NSString(format: "%02X", self) as String
         return string
     }
     

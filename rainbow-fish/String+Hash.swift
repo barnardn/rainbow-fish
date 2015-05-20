@@ -18,7 +18,7 @@ extension String  {
         for byte in shasum {
             outString.appendFormat("%02x", byte)
         }
-        return outString
+        return outString as String
     }
 
     func md5() -> String {
@@ -29,7 +29,7 @@ extension String  {
         for byte in md5sum {
             outString.appendFormat("%02x", byte)
         }
-        return outString
+        return outString as String
     }
     
     

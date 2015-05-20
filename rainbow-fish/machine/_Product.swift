@@ -22,12 +22,12 @@ class _Product: NSManagedObject {
 
     // MARK: - Class methods
 
-    class func entityName () -> String {
+    class var entityName : String {
         return "Product"
     }
 
     class func entity(managedObjectContext: NSManagedObjectContext!) -> NSEntityDescription! {
-        return NSEntityDescription.entityForName(self.entityName(), inManagedObjectContext: managedObjectContext);
+        return NSEntityDescription.entityForName(self.entityName, inManagedObjectContext: managedObjectContext);
     }
 
     // MARK: - Life cycle methods
@@ -88,27 +88,27 @@ class _Product: NSManagedObject {
 extension _Product {
 
     func addPencils(objects: NSSet) {
-        let mutable = self.pencils.mutableCopy() as NSMutableSet
-        mutable.unionSet(objects)
-        self.pencils = mutable.copy() as NSSet
+        let mutable = self.pencils.mutableCopy() as! NSMutableSet
+        mutable.unionSet(objects as Set<NSObject>)
+        self.pencils = mutable.copy() as! NSSet
     }
 
     func removePencils(objects: NSSet) {
-        let mutable = self.pencils.mutableCopy() as NSMutableSet
-        mutable.minusSet(objects)
-        self.pencils = mutable.copy() as NSSet
+        let mutable = self.pencils.mutableCopy() as! NSMutableSet
+        mutable.minusSet(objects as Set<NSObject>)
+        self.pencils = mutable.copy() as! NSSet
     }
 
     func addPencilsObject(value: Pencil!) {
-        let mutable = self.pencils.mutableCopy() as NSMutableSet
+        let mutable = self.pencils.mutableCopy() as! NSMutableSet
         mutable.addObject(value)
-        self.pencils = mutable.copy() as NSSet
+        self.pencils = mutable.copy() as! NSSet
     }
 
     func removePencilsObject(value: Pencil!) {
-        let mutable = self.pencils.mutableCopy() as NSMutableSet
+        let mutable = self.pencils.mutableCopy() as! NSMutableSet
         mutable.removeObject(value)
-        self.pencils = mutable.copy() as NSSet
+        self.pencils = mutable.copy() as! NSSet
     }
 
 }

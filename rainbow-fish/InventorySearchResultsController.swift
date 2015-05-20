@@ -22,7 +22,7 @@ class InventorySearchResultsTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(InventoryTableViewCell.nibName, forIndexPath: indexPath) as InventoryTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(InventoryTableViewCell.nibName, forIndexPath: indexPath) as! InventoryTableViewCell
         let lineItem = self.searchResults[indexPath.row]
         cell.title = lineItem.name
         if let qty = lineItem.quantity {

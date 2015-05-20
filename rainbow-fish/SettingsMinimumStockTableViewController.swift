@@ -15,7 +15,7 @@ class SettingsMinimumStockTableViewController: UITableViewController {
     var values = [NSDecimalNumber]()
     let halfSymbol = "½"
     
-    convenience override init() {
+    convenience init() {
         self.init(style: .Grouped)
         self.title = NSLocalizedString("Minimum Inventory", comment:"settings minimum inventory view title")
     }
@@ -23,7 +23,7 @@ class SettingsMinimumStockTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.allowsMultipleSelection = false
-        self.tableView.registerNib(UINib(nibName: DefaultTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: DefaultTableViewCell.nibName)
+        self.tableView.registerNib(UINib(nibName: DefaultTableViewCell.nibName as String, bundle: nil), forCellReuseIdentifier: DefaultTableViewCell.nibName as String)
         
         let wholeNumbers = [0,0,1,1,2,2,3]
         for var i = 0; i < wholeNumbers.count; i++ {
@@ -60,7 +60,7 @@ extension SettingsMinimumStockTableViewController: UITableViewDataSource {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(DefaultTableViewCell.nibName, forIndexPath: indexPath) as DefaultTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(DefaultTableViewCell.nibName as String, forIndexPath: indexPath) as! DefaultTableViewCell
         cell.tintColor = AppearanceManager.appearanceManager.brandColor
         cell.selectionStyle = .None
         let value = self.values[indexPath.row]

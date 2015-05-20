@@ -22,7 +22,7 @@ class PencilSearchResultsTableViewController: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(DefaultDetailTableViewCell.nibName, forIndexPath: indexPath) as DefaultDetailTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(DefaultDetailTableViewCell.nibName, forIndexPath: indexPath) as! DefaultDetailTableViewCell
         let pencil = searchResults[indexPath.row]
         cell.textLabel?.text = pencil.name;
         cell.detailTextLabel?.text = pencil.identifier

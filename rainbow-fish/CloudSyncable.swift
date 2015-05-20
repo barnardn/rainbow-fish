@@ -35,7 +35,7 @@ extension NSManagedObjectContext {
             returnResult = (nil,error)
             
         case let .Success(boxedResult):
-            if let managedObject = boxedResult() as T! {
+            if let managedObject = boxedResult.value as T! {
                 if let moDate = managedObject.valueForKeyPath("modificationDate") as? NSDate {
                     if moDate.compare(record.modificationDate)  == .OrderedAscending {
                         managedObject.populateFromCKRecord(record)

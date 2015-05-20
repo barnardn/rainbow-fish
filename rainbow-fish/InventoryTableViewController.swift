@@ -153,7 +153,7 @@ extension InventoryTableViewController : UITableViewDataSource {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(InventoryTableViewCell.nibName, forIndexPath: indexPath) as InventoryTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(InventoryTableViewCell.nibName, forIndexPath: indexPath) as! InventoryTableViewCell
         let lineItem = self.inventory[indexPath.row]
         cell.title = lineItem.name
         if let qty = lineItem.quantity {
@@ -264,7 +264,7 @@ extension InventoryTableViewController: UITableViewDelegate {
             context.save(nil)
             context.parentContext?.save(nil)
 
-            let cell = self.tableView.cellForRowAtIndexPath(indexPath) as InventoryTableViewCell
+            let cell = self.tableView.cellForRowAtIndexPath(indexPath) as! InventoryTableViewCell
             cell.quantity = lineItem.quantity?.stringValue
             self.updateBadgeCount(reloadingVisibleRows: false)
         })
@@ -314,7 +314,7 @@ extension InventoryTableViewController : UISearchBarDelegate, UISearchController
     }
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
-        let resultsController = searchController.searchResultsController as InventorySearchResultsTableViewController
+        let resultsController = searchController.searchResultsController as! InventorySearchResultsTableViewController
         
         let whitespaceCharacterSet = NSCharacterSet.whitespaceCharacterSet()
         let strippedString = searchController.searchBar.text.stringByTrimmingCharactersInSet(whitespaceCharacterSet)
@@ -326,7 +326,7 @@ extension InventoryTableViewController : UISearchBarDelegate, UISearchController
             let manufacturerPredicate = NSPredicate(format: "%K contains[cd] %@", InventoryAttributes.manufacturerName.rawValue, searchText)
             let productPredicate = NSPredicate(format: "%K contains[cd] %@", InventoryAttributes.productName.rawValue, searchText)
             let identifierPredicate = NSPredicate(format: "%K contains[cd] %@", InventoryAttributes.pencilIdentifier.rawValue, searchText)
-            let subpredicate = NSCompoundPredicate(type: .OrPredicateType, subpredicates: [namePredicate!, identifierPredicate!, manufacturerPredicate!, productPredicate!])
+            let subpredicate = NSCompoundPredicate(type: .OrPredicateType, subpredicates: [namePredicate, identifierPredicate, manufacturerPredicate, productPredicate])
             subpredicates.append(subpredicate)
         }
         let searchPredicate = NSCompoundPredicate(type: .OrPredicateType, subpredicates: subpredicates)

@@ -25,11 +25,11 @@ class Seeder {
 
     func seedPencilDatabase(completion: (countInserted: Int, error: NSError?) -> ()) {
         
-        let seedURL = NSBundle.mainBundle().URLForResource(seedFile, withExtension: "json")
+        let seedURL = NSBundle.mainBundle().URLForResource(seedFile as String, withExtension: "json")
         assert(seedURL != nil, "can't find seed json file")
         if let seedJsonData = NSData(contentsOfURL: seedURL!) {
             var error: NSError? = nil
-            let jsonData = NSJSONSerialization.JSONObjectWithData(seedJsonData, options: .AllowFragments, error: &error) as [[String:String]]?
+            let jsonData = NSJSONSerialization.JSONObjectWithData(seedJsonData, options: .AllowFragments, error: &error) as! [[String:String]]?
             if error != nil {
                 completion(countInserted: 0, error: error)
                 return
@@ -56,13 +56,13 @@ class Seeder {
     }
     
     func manufacturerWithName(name: String) -> CKRecord {
-        let manufacturer = CKRecord(recordType: Manufacturer.entityName())
+        let manufacturer = CKRecord(recordType: Manufacturer.entityName)
         manufacturer.setObject(name, forKey: ManufacturerAttributes.name.rawValue)
         return manufacturer
     }
     
     func productWithName(name: String, manufacturer: CKRecord) -> CKRecord {
-        let product = CKRecord(recordType: Product.entityName())
+        let product = CKRecord(recordType: Product.entityName)
         product.setObject(name, forKey: ProductAttributes.name.rawValue)
         
         let manufactRef = CKReference(record: manufacturer, action: CKReferenceAction.DeleteSelf)
@@ -72,7 +72,7 @@ class Seeder {
     
     func pencilsWithInfo(pencilInfo: [[String:String]], forProduct product: CKRecord) -> [CKRecord] {
         let pencilRecords = pencilInfo.map{ (p: [String:String]) -> CKRecord in
-            let pencil = CKRecord(recordType: Pencil.entityName())
+            let pencil = CKRecord(recordType: Pencil.entityName)
             pencil.setObject(p[PencilAttributes.name.rawValue], forKey: PencilAttributes.name.rawValue)
             pencil.setObject(p[PencilAttributes.identifier.rawValue], forKey: PencilAttributes.identifier.rawValue)
             let productRef = CKReference(record: product, action: .DeleteSelf)

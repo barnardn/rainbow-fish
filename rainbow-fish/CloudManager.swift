@@ -54,7 +54,7 @@ class CloudManager {
     // MARK: cloud methods
 
     func refreshManufacturersAndProducts(completionHandler: (success: Bool, error: NSError?) -> Void ) {
-        var queryAll = CKQuery(recordType: Manufacturer.entityName(), predicate: NSPredicate(value: true))
+        var queryAll = CKQuery(recordType: Manufacturer.entityName, predicate: NSPredicate(value: true))
         publicDb.performQuery(queryAll, inZoneWithID: CKRecordZone.defaultRecordZone().zoneID) {[unowned self](results, error) in
             if error != nil  {
                 dispatch_async(dispatch_get_main_queue()) { completionHandler(success: false, error: error) }
@@ -65,7 +65,7 @@ class CloudManager {
                 return
             }
             var queryOperations = results.map({ (o: AnyObject) -> CKRecord in
-                return o as CKRecord
+                return o as! CKRecord
             }).map({ (mrec: CKRecord) -> CKQueryOperation in
                 var isLast = false
                 if let lastRec = results.last as? CKRecord {
@@ -86,7 +86,7 @@ class CloudManager {
     func productsQuery(manufacturer: CKRecord, isLastOperation: Bool, importCompletion: (success: Bool, error: NSError?) -> Void) -> CKQueryOperation {
         let manufactRef = CKReference(record: manufacturer, action: CKReferenceAction.DeleteSelf)
         let predicate = NSPredicate(format: "%K == %@", ProductRelationships.manufacturer.rawValue, manufactRef)
-        var productQuery = CKQuery(recordType: Product.entityName(), predicate: predicate)
+        var productQuery = CKQuery(recordType: Product.entityName, predicate: predicate)
         let queryOperation = CKQueryOperation(query: productQuery)
         var productRecords = [CKRecord]()
         queryOperation.recordFetchedBlock = {(record: CKRecord!) in
@@ -119,10 +119,10 @@ class CloudManager {
         let productRecordId = CKRecordID(recordName: product.recordID!)
         let productRef = CKReference(recordID: productRecordId, action: .DeleteSelf)
         let byProduct = NSPredicate(format: "%K == %@", PencilRelationships.product.rawValue, productRef)
-        var subpredicates = [byProduct!]
+        var subpredicates = [byProduct]
         if let modDate = modifiedAfterDate {
             let afterDate = NSPredicate(format: "%K > %@", PencilAttributes.modificationDate.rawValue, modDate)
-            subpredicates.append(afterDate!)
+            subpredicates.append(afterDate)
         }
         let predicate = NSCompoundPredicate(type: NSCompoundPredicateType.AndPredicateType, subpredicates: subpredicates)
         let pencilQuery = CKQuery(recordType: Pencil.entityName, predicate: predicate)
@@ -153,7 +153,7 @@ class CloudManager {
                 var (pencil, error) = context.updateFromCKRecord(Pencil.self, record: record, createIfNotFound: true)
                 return pencil!
             }.filter{ return $0.isNew!.boolValue }
-            let localProduct = context.objectWithID(product.objectID) as Product
+            let localProduct = context.objectWithID(product.objectID) as! Product
     
             if pencils.count > 0 {
                 localProduct.addPencils(NSSet(array: pencils))
@@ -185,7 +185,7 @@ class CloudManager {
                 dispatch_async(dispatch_get_main_queue()) { completion(success: false, savedRecords: nil, error: e) }
             }
             let savedRecords = saved.map({ (o: AnyObject) -> CKRecord in
-                return o as CKRecord
+                return o as! CKRecord
             })
             dispatch_async(dispatch_get_main_queue()) { completion(success: true, savedRecords: savedRecords, error: nil) }
         }

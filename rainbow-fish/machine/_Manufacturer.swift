@@ -20,12 +20,12 @@ class _Manufacturer: NSManagedObject {
 
     // MARK: - Class methods
 
-    class func entityName () -> String {
+    class var entityName : String {
         return "Manufacturer"
     }
 
     class func entity(managedObjectContext: NSManagedObjectContext!) -> NSEntityDescription! {
-        return NSEntityDescription.entityForName(self.entityName(), inManagedObjectContext: managedObjectContext);
+        return NSEntityDescription.entityForName(self.entityName, inManagedObjectContext: managedObjectContext);
     }
 
     // MARK: - Life cycle methods
@@ -76,27 +76,27 @@ class _Manufacturer: NSManagedObject {
 extension _Manufacturer {
 
     func addProducts(objects: NSSet) {
-        let mutable = self.products.mutableCopy() as NSMutableSet
-        mutable.unionSet(objects)
-        self.products = mutable.copy() as NSSet
+        let mutable = self.products.mutableCopy() as! NSMutableSet
+        mutable.unionSet(objects as Set<NSObject>)
+        self.products = mutable.copy() as! NSSet
     }
 
     func removeProducts(objects: NSSet) {
-        let mutable = self.products.mutableCopy() as NSMutableSet
-        mutable.minusSet(objects)
-        self.products = mutable.copy() as NSSet
+        let mutable = self.products.mutableCopy() as! NSMutableSet
+        mutable.minusSet(objects as Set<NSObject>)
+        self.products = mutable.copy() as! NSSet
     }
 
     func addProductsObject(value: Product!) {
-        let mutable = self.products.mutableCopy() as NSMutableSet
+        let mutable = self.products.mutableCopy() as! NSMutableSet
         mutable.addObject(value)
-        self.products = mutable.copy() as NSSet
+        self.products = mutable.copy() as! NSSet
     }
 
     func removeProductsObject(value: Product!) {
-        let mutable = self.products.mutableCopy() as NSMutableSet
+        let mutable = self.products.mutableCopy() as! NSMutableSet
         mutable.removeObject(value)
-        self.products = mutable.copy() as NSSet
+        self.products = mutable.copy() as! NSSet
     }
 
 }

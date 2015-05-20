@@ -6,10 +6,6 @@ import Foundation
 @objc(Inventory)
 class Inventory: _Inventory, NamedManagedObject {
 
-	// Custom logic goes here.
-
-    class var entityName: String { return self.entityName() }
-    
 }
 
 extension Inventory {
@@ -35,8 +31,9 @@ extension Inventory {
         case let .Failure(error):
             assertionFailure(error.localizedDescription)
         case let .Success(boxedResults):
-            return boxedResults()
+            return boxedResults.value
         }
+        return nil
     }
     
     

@@ -86,7 +86,7 @@ class SelectPencilTableViewController: UITableViewController {
                 let row = self.pencils.insertionIndexOf(pencil, isOrderedBefore: { (p1: Pencil, p2: Pencil) -> Bool in
                     return p1.identifier == p2.identifier
                 })
-                if let visibleRows = self.tableView.indexPathsForVisibleRows() as [NSIndexPath]? {
+                if let visibleRows = self.tableView.indexPathsForVisibleRows() as! [NSIndexPath]? {
                     let results = visibleRows.filter{(indexPath: NSIndexPath) in
                         return indexPath.row == row
                     }
@@ -157,7 +157,7 @@ extension SelectPencilTableViewController: UITableViewDataSource {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(PencilTableViewCell.nibName, forIndexPath: indexPath) as PencilTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(PencilTableViewCell.nibName, forIndexPath: indexPath) as! PencilTableViewCell
         cell.accessoryType = .DisclosureIndicator
         let pencil = self.pencils[indexPath.row]
         cell.name = pencil.name
@@ -192,7 +192,7 @@ extension SelectPencilTableViewController: UISearchBarDelegate, UISearchControll
     }
     
     func updateSearchResultsForSearchController(searchController: UISearchController) {
-        let resultsController = searchController.searchResultsController as PencilSearchResultsTableViewController
+        let resultsController = searchController.searchResultsController as! PencilSearchResultsTableViewController
         
         let whitespaceCharacterSet = NSCharacterSet.whitespaceCharacterSet()
         let strippedString = searchController.searchBar.text.stringByTrimmingCharactersInSet(whitespaceCharacterSet)
@@ -202,7 +202,7 @@ extension SelectPencilTableViewController: UISearchBarDelegate, UISearchControll
         for searchText in searchItems {
             let namePredicate = NSPredicate(format: "name contains[cd] %@ ", searchText)
             let identifierPredicate = NSPredicate(format: "identifier contains[cd] %@", searchText)
-            let subpredicate = NSCompoundPredicate(type: .OrPredicateType, subpredicates: [namePredicate!, identifierPredicate!])
+            let subpredicate = NSCompoundPredicate(type: .OrPredicateType, subpredicates: [namePredicate, identifierPredicate])
             subpredicates.append(subpredicate)
         }
         let searchPredicate = NSCompoundPredicate(type: .OrPredicateType, subpredicates: subpredicates)

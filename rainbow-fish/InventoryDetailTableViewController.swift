@@ -46,7 +46,7 @@ class InventoryDetailTableViewController: UITableViewController {
         self.tableView.backgroundColor = AppearanceManager.appearanceManager.appBackgroundColor
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = CGFloat(44.0)
-        self.tableView.registerNib(UINib(nibName: DefaultTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: DefaultTableViewCell.nibName)
+        self.tableView.registerNib(UINib(nibName: DefaultTableViewCell.nibName as String, bundle: nil), forCellReuseIdentifier: DefaultTableViewCell.nibName as String)
         self.tableView.registerNib(UINib(nibName: DefaultDetailTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: DefaultDetailTableViewCell.nibName)
         self.tableView.registerNib(UINib(nibName: InventoryQuantityTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: InventoryQuantityTableViewCell.nibName)
         self.tableView.registerNib(UINib(nibName: PencilColorTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: PencilColorTableViewCell.nibName)
@@ -121,25 +121,25 @@ extension InventoryDetailTableViewController: UITableViewDataSource {
 
         switch (indexPath.section, indexPath.row) {
         case (0,0...1):
-            let cell = tableView.dequeueReusableCellWithIdentifier(DefaultTableViewCell.nibName, forIndexPath: indexPath) as DefaultTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(DefaultTableViewCell.nibName as String, forIndexPath: indexPath) as! DefaultTableViewCell
             configureDetailCell(cell, atIndexPath: indexPath)
             return cell
         case (0, 2):
-            let cell = tableView.dequeueReusableCellWithIdentifier(DefaultDetailTableViewCell.nibName, forIndexPath: indexPath) as DefaultDetailTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(DefaultDetailTableViewCell.nibName, forIndexPath: indexPath) as! DefaultDetailTableViewCell
             cell.textLabel?.text = self.lineItem.name
             cell.detailTextLabel?.text = self.lineItem.pencilIdentifier
             cell.selectionStyle = .None
             return cell
         case (1, _):
-            let cell = tableView.dequeueReusableCellWithIdentifier(PencilColorTableViewCell.nibName, forIndexPath: indexPath) as PencilColorTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(PencilColorTableViewCell.nibName, forIndexPath: indexPath) as! PencilColorTableViewCell
             configureColorSwatchCell(cell, atIndexPath: indexPath)
             return cell
         case (2, _) :
-            let cell = tableView.dequeueReusableCellWithIdentifier(InventoryQuantityTableViewCell.nibName, forIndexPath: indexPath) as InventoryQuantityTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(InventoryQuantityTableViewCell.nibName, forIndexPath: indexPath) as! InventoryQuantityTableViewCell
             configureQuantityCell(cell, atIndexPath: indexPath)
             return cell
         default:
-            let cell = tableView.dequeueReusableCellWithIdentifier(BigButtonTableViewCell.nibName, forIndexPath: indexPath) as BigButtonTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(BigButtonTableViewCell.nibName, forIndexPath: indexPath) as! BigButtonTableViewCell
             configureButtonCell(cell, atIndexPath: indexPath)
             return cell
         }

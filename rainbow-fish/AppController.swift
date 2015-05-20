@@ -44,7 +44,7 @@ class AppController {
     }()
     
     lazy var dataImportKey: String = {
-        if let infoDict = NSBundle.mainBundle().infoDictionary as [NSString: AnyObject]? {
+        if let infoDict = NSBundle.mainBundle().infoDictionary as! [NSString: AnyObject]? {
             if let importKey = infoDict[self.DataImportKey] as? String {
                 println("import key \(importKey)")
                 return importKey
@@ -54,8 +54,8 @@ class AppController {
     }()
     
     func shouldPerformAutomaticProductUpdates() -> Bool {
-        if let lastUpdatedDate = NSUserDefaults.standardUserDefaults().objectForKey(LastUpdatedDateUserDefaultKey) as NSDate? {
-            let dateComponents = NSCalendar.currentCalendar().components(NSCalendarUnit.DayCalendarUnit, fromDate: lastUpdatedDate, toDate: NSDate(), options: NSCalendarOptions.allZeros)
+        if let lastUpdatedDate = NSUserDefaults.standardUserDefaults().objectForKey(LastUpdatedDateUserDefaultKey) as! NSDate? {
+            let dateComponents = NSCalendar.currentCalendar().components(NSCalendarUnit.CalendarUnitDay, fromDate: lastUpdatedDate, toDate: NSDate(), options: NSCalendarOptions.allZeros)
             return (dateComponents.day >= 1)
         }
         return true
@@ -68,7 +68,7 @@ class AppController {
     }
 
     func lastUpdatedDate() -> NSDate? {
-        let date = NSUserDefaults.standardUserDefaults().objectForKey(LastUpdatedDateUserDefaultKey) as NSDate?
+        let date = NSUserDefaults.standardUserDefaults().objectForKey(LastUpdatedDateUserDefaultKey) as! NSDate?
         return date
     }
     

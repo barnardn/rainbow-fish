@@ -26,8 +26,8 @@ class RootViewController: UITabBarController {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
-    override init() {
-        super.init()
+    convenience init() {
+        self.init()
         viewControllers = [
                 InventoryNavigationController(),
                 PencilNavigationController(),

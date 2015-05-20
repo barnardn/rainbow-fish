@@ -11,12 +11,7 @@ class Manufacturer: _Manufacturer, NamedManagedObject {
     override func awakeFromInsert() {
         super.awakeFromInsert()
         self.isNew = true
-    }
-    
-    // MARK: NamedManagedObject
-    class var entityName: String { return self.entityName() }
-
-    // MARK: CloudSyncable
+    }    
 }
 
 extension Manufacturer: CloudSyncable {
