@@ -39,7 +39,16 @@ class InventoryDetailTableViewController: UITableViewController {
         self.context.undoManager = nil
         self.lineItem = self.context.objectWithID(lineItem.objectID) as? Inventory
         self.title = self.lineItem.name
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("contextDidChange:"), name: NSManagedObjectContextObjectsDidChangeNotification, object: self.context)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("contextWillSave:"), name: NSManagedObjectContextWillSaveNotification, object: self.context)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("contextDidSave:"), name: NSManagedObjectContextDidSaveNotification, object: self.context)
     }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,12 +60,6 @@ class InventoryDetailTableViewController: UITableViewController {
         self.tableView.registerNib(UINib(nibName: InventoryQuantityTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: InventoryQuantityTableViewCell.nibName)
         self.tableView.registerNib(UINib(nibName: PencilColorTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: PencilColorTableViewCell.nibName)
         self.tableView.registerNib(UINib(nibName: BigButtonTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: BigButtonTableViewCell.nibName)
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("contextDidChange:"), name: NSManagedObjectContextObjectsDidChangeNotification, object: self.context)
-
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("contextWillSave:"), name: NSManagedObjectContextWillSaveNotification, object: self.context)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("contextDidSave:"), name: NSManagedObjectContextDidSaveNotification, object: self.context)
-        
     }
 
     // MARK: done button handler

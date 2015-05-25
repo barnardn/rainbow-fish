@@ -102,6 +102,16 @@ class InventoryTableViewController: ContentTableViewController {
         self.tableView.reloadData()
     }
     
+    func sortCurrentInventoryByQuantity() {
+        var sorted = self.inventory.sorted { (item1: Inventory, item2: Inventory) -> Bool in
+            if item1.quantity?.doubleValue == item2.quantity?.doubleValue {
+                return item1.name < item2.name
+            }
+            return item1.quantity?.doubleValue < item2.quantity?.doubleValue
+        }
+        self.inventory = sorted
+    }
+    
     // MARK: NSNotification handler
     
     func didEditPencil(notification: NSNotification) {
@@ -190,7 +200,7 @@ extension InventoryTableViewController: UITableViewDelegate {
         let lineItem = datasource[indexPath.row]
         let viewController = InventoryDetailTableViewController(lineItem: lineItem)
         self.navigationController?.pushViewController(viewController, animated: true)
-        
+                
         viewController.itemUpdatedBlock = { [unowned self] (itemID : NSManagedObjectID, wasDeleted: Bool) in
             if wasDeleted {
                 if tableView == self.searchResultsTableController.tableView {
@@ -207,8 +217,13 @@ extension InventoryTableViewController: UITableViewDelegate {
             } else {
                 if tableView == self.searchResultsTableController.tableView {
                     self.tableView.reloadData()
+                } else if self.sortMethodSegmentedControl.selectedSegmentIndex == InventorySortModes.Quantity.rawValue {
+                    self.sortCurrentInventoryByQuantity()
+                    tableView.reloadData()
+                } else {
+                    tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
                 }
-                tableView.reloadRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+
             }
             self.updateBadgeCount(reloadingVisibleRows: false)
         }
@@ -309,7 +324,7 @@ extension InventoryTableViewController: UITableViewDelegate {
 
 extension InventoryTableViewController : UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating {
     
-    func searchBarBookmarkButtonClicked(searchBar: UISearchBar) {
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
     
