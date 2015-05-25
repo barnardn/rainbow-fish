@@ -19,6 +19,7 @@ class EditPencilTableViewController: UITableViewController {
     private var newPencil: Bool = false
     private var product: Product?
     private var editPenilKVOContext = 0
+    private var recordCreatorID : String? = ""       // thread safety!
     
     lazy var saveButton: UIBarButtonItem = {
         let button = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: Selector("saveButonTapped:"))
@@ -37,6 +38,7 @@ class EditPencilTableViewController: UITableViewController {
     
     convenience init(pencil: Pencil?) {
         self.init(style: UITableViewStyle.Grouped)
+        self.recordCreatorID = AppController.appController.appConfiguration.iCloudRecordID
         self.context = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType, parentContext: CDK.mainThreadContext)
         if let editPencil = pencil {
             self.title = editPencil.name ?? NSLocalizedString("Edit Pencil", comment:"edit an existing pencil view title")
@@ -44,8 +46,10 @@ class EditPencilTableViewController: UITableViewController {
         } else {
             self.title = NSLocalizedString("New Pencil", comment:"new pencil view title")
             self.pencil = Pencil(managedObjectContext: self.context)
+            self.pencil.ownerRecordIdentifier = self.recordCreatorID
             self.newPencil = true
         }
+
     }
     
     convenience init(product: Product) {

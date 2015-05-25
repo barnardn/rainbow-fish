@@ -13,6 +13,7 @@ import CoreDataKit
 class PencilViewController: ContentTableViewController {
 
     var allManufacturers =  [Manufacturer]()
+    var recordCreatorID : String? = ""              // needed for thread safety
     
     lazy var backButton: UIBarButtonItem = {
         let button = UIBarButtonItem(title: NSLocalizedString("Catalog", comment:"all pencils back button title"), style: .Plain, target: nil, action: nil)
@@ -45,6 +46,7 @@ class PencilViewController: ContentTableViewController {
         addButton.tintColor = UIColor.whiteColor()
         navigationItem.rightBarButtonItem = addButton
         navigationItem.backBarButtonItem = self.backButton;
+        self.recordCreatorID = AppController.appController.appConfiguration.iCloudRecordID;
     }
     
     // MARK: button action
@@ -57,6 +59,7 @@ class PencilViewController: ContentTableViewController {
             }
             sender?.enabled = false
             let manufacturer = Manufacturer(managedObjectContext: CDK.mainThreadContext)
+            manufacturer.ownerRecordIdentifier = self.recordCreatorID
             let name = edittedText
             manufacturer.name = name
             var error: NSError?
@@ -201,6 +204,7 @@ extension PencilViewController: ProductFooterViewDelegate {
                 if let context = manufacturer.managedObjectContext {
                     let product = Product(managedObjectContext: context)
                     product.name = name
+                    product.ownerRecordIdentifier = self.recordCreatorID
                     manufacturer.addProductsObject(product)
                     var error: NSError?
                     let ok = context.save(&error)

@@ -45,7 +45,8 @@ class CloudManager {
         self.container.fetchUserRecordIDWithCompletionHandler { (recordID, error) -> Void in
             var id: String?
             if recordID != nil {
-                id = recordID.recordName
+                println("found iCloud record id: \(recordID.recordName)")
+                id = recordID.recordName.sha1()
             }
             dispatch_async(dispatch_get_main_queue()) { completion(recordID: id, error: error) }
         }

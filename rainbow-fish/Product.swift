@@ -26,7 +26,7 @@ extension Product: CloudSyncable {
         self.recordID = record.recordID.recordName
         self.name = record.objectForKey(ProductAttributes.name.rawValue) as? String
         self.modificationDate = record.modificationDate
-        self.ownerRecordIdentifer = record.creatorUserRecordID.recordName
+        self.ownerRecordIdentifier = record.objectForKey(ProductAttributes.ownerRecordIdentifier.rawValue) as? String
     }
 
     func toCKRecord() -> CKRecord {
@@ -37,6 +37,7 @@ extension Product: CloudSyncable {
         } else {
             record = CKRecord(recordType: Product.entityName)
         }
+        record.setValue(self.ownerRecordIdentifier, forKey: ProductAttributes.ownerRecordIdentifier.rawValue)
         record.setValue(self.name, forKey: ProductAttributes.name.rawValue)
         return record
     }
@@ -47,6 +48,7 @@ extension Product: CloudSyncable {
         jsonObject[ProductAttributes.recordID.rawValue] = self.recordID
         jsonObject[ProductAttributes.name.rawValue] = self.name
         jsonObject[ProductAttributes.modificationDate.rawValue] = self.modificationDate?.timeIntervalSince1970
+        jsonObject[ProductAttributes.ownerRecordIdentifier.rawValue] = self.ownerRecordIdentifier
         
         if includeRelationships {
             var pencilJson = [NSDictionary]()

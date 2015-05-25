@@ -34,9 +34,7 @@ extension Pencil: CloudSyncable {
         self.modificationDate = record.modificationDate
         self.name = record.objectForKey(PencilAttributes.name.rawValue) as? String
         self.identifier = record.objectForKey(PencilAttributes.identifier.rawValue) as? String
-        self.ownerRecordIdentifer = record.creatorUserRecordID.recordName
-        println("creator record id: \(record.creatorUserRecordID.recordName)")
-        println("modifier record id: \(record.lastModifiedUserRecordID.recordName)")
+        self.ownerRecordIdentifier = record.objectForKey(PencilAttributes.ownerRecordIdentifier.rawValue) as? String
     }
     
     func toCKRecord() -> CKRecord {
@@ -49,6 +47,7 @@ extension Pencil: CloudSyncable {
         }
         record.setValue(self.name, forKey: PencilAttributes.name.rawValue)
         record.setValue(self.identifier, forKey: PencilAttributes.identifier.rawValue)
+        record.setValue(self.ownerRecordIdentifier, forKey: PencilAttributes.ownerRecordIdentifier.rawValue)
         if let color = self.color as? UIColor {
             record.setValue(color.rgbRepresentation, forKey: PencilAttributes.color.rawValue)
         }
@@ -65,6 +64,7 @@ extension Pencil: CloudSyncable {
             jsonObject[PencilAttributes.color.rawValue] = color.rgbRepresentation
         }
         jsonObject[PencilAttributes.modificationDate.rawValue] = self.modificationDate?.timeIntervalSince1970
+        jsonObject[PencilAttributes.ownerRecordIdentifier.rawValue] = self.ownerRecordIdentifier
         return jsonObject
         
     }
@@ -98,7 +98,7 @@ extension Pencil {
     }
     
     func isMyPencil() -> Bool {
-        if let pencilOwnerId = self.ownerRecordIdentifer {
+        if let pencilOwnerId = self.ownerRecordIdentifier {
             if let ownerId = AppController.appController.appConfiguration.iCloudRecordID {
                 return pencilOwnerId == ownerId
             }
