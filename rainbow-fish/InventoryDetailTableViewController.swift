@@ -93,16 +93,14 @@ class InventoryDetailTableViewController: UITableViewController {
     }
     
     func contextDidSave(notification: NSNotification) {
-        if let userInfo = notification.userInfo {
-            if let itemSet = userInfo[NSDeletedObjectsKey] as? NSSet {
-                if itemSet.count > 0 {
-                    if let block = self.itemUpdatedBlock {
-                        block(lineItemWithIdentity: self.lineItem.objectID, wasDeleted: true)
-                    }
-                }
-            }
-        }
-        self.navigationController?.popViewControllerAnimated(true)        
+        
+        if  let userInfo = notification.userInfo,
+            let itemSet = userInfo[NSDeletedObjectsKey] as? NSSet,
+            let block = self.itemUpdatedBlock
+            where itemSet.count > 0 {
+                block(lineItemWithIdentity: self.lineItem.objectID, wasDeleted: true)
+        }        
+        self.navigationController?.popViewControllerAnimated(true)
     }
     
 }
