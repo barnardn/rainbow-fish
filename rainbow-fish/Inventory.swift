@@ -4,8 +4,12 @@ import CoreDataKit
 import Foundation
 
 @objc(Inventory)
-class Inventory: _Inventory, NamedManagedObject {
+public  class Inventory: _Inventory, NamedManagedObject {
 
+    public class var entityName : String {
+        return self.mogen_entityName()
+    }
+    
 }
 
 extension Inventory {

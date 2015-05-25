@@ -4,10 +4,14 @@ import CoreDataKit
 
 
 @objc(ConfigurationSettings)
-class ConfigurationSettings: _ConfigurationSettings, NamedManagedObject {
+public class ConfigurationSettings: _ConfigurationSettings, NamedManagedObject {
 
-    override func awakeFromInsert() {
+    override public func awakeFromInsert() {
         super.awakeFromInsert()
+    }
+    
+    public class var entityName : String {
+        return self.mogen_entityName()
     }
 
 }

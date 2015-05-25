@@ -3,16 +3,21 @@ import CoreDataKit
 
 
 @objc(Product)
-class Product: _Product, NamedManagedObject {
+public class Product: _Product, NamedManagedObject {
     
     // MARK: NSManagedObject overrides
     
-    override func awakeFromInsert() {
+    override public func awakeFromInsert() {
         super.awakeFromInsert()
         self.isNew = true
     }
     
     class var UpdateIntervalInSeconds: NSTimeInterval { return 60.0 * 60.0 }
+    
+    public class var entityName : String {
+        return self.mogen_entityName()
+    }
+    
 }
 
 extension Product: CloudSyncable {

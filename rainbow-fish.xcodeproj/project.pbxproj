@@ -552,6 +552,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 49DF08101A743A2800BF94D3 /* Build configuration list for PBXNativeTarget "rainbow-fish" */;
 			buildPhases = (
+				494BA7CF1B1377300026B2AE /* Generate managed objects (mogenerator) */,
 				49DF07ED1A743A2800BF94D3 /* Sources */,
 				49DF07EE1A743A2800BF94D3 /* Frameworks */,
 				49E8D8BC1A7444190064E682 /* Carthage copy frameworks */,
@@ -632,6 +633,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		494BA7CF1B1377300026B2AE /* Generate managed objects (mogenerator) */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Generate managed objects (mogenerator)";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "mogenerator --v2 --swift --template-path '/Users/barnardn/Library/Application Support/mogenerator' --model $SRCROOT/$TARGET_NAME/$TARGET_NAME.xcdatamodeld/ --machine-dir $SRCROOT/$TARGET_NAME/machine --human-dir $SRCROOT/$TARGET_NAME";
+		};
 		49AB80681ABE4045009BEDE5 /* Crashlytics */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
