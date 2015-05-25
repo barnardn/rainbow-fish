@@ -4,14 +4,19 @@ import CoreDataKit
 import CloudKit
 
 @objc(Manufacturer)
-class Manufacturer: _Manufacturer, NamedManagedObject {
+public class Manufacturer: _Manufacturer, NamedManagedObject {
     
     // MARK: NSManagedObject overrides
 
-    override func awakeFromInsert() {
+    override public func awakeFromInsert() {
         super.awakeFromInsert()
         self.isNew = true
-    }    
+    }
+    
+    public class var entityName : String {
+        return self.mogen_entityName()
+    }
+    
 }
 
 extension Manufacturer: CloudSyncable {

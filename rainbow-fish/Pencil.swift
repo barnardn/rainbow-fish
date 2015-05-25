@@ -4,18 +4,22 @@ import CoreDataKit
 import UIKit
 
 @objc(Pencil)
-class Pencil: _Pencil, NamedManagedObject {
+public class Pencil: _Pencil, NamedManagedObject {
 
     // MARK: NSManagedObject overrides
     
-    override func awakeFromInsert() {
+    override public func awakeFromInsert() {
         super.awakeFromInsert()
         self.isNew = true
     }
 
-    override func awakeFromFetch() {
+    override public func awakeFromFetch() {
         super.awakeFromFetch()
         self.isNew = false
+    }
+    
+    public class var entityName : String {
+        return self.mogen_entityName()
     }
     
 }
