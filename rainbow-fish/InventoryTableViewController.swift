@@ -200,7 +200,7 @@ extension InventoryTableViewController: UITableViewDelegate {
         let lineItem = datasource[indexPath.row]
         let viewController = InventoryDetailTableViewController(lineItem: lineItem)
         self.navigationController?.pushViewController(viewController, animated: true)
-                
+        
         viewController.itemUpdatedBlock = { [unowned self] (itemID : NSManagedObjectID, wasDeleted: Bool) in
             if wasDeleted {
                 if tableView == self.searchResultsTableController.tableView {
