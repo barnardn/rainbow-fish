@@ -53,11 +53,8 @@ class SettingsTableViewController: ContentTableViewController {
         
         self.tableView.registerClass(ProductHeaderView.self, forHeaderFooterViewReuseIdentifier: "ProductHeaderView")
         AppController.appController.appConfiguration.addObserver(self, forKeyPath: "minInventoryQuantity", options: .New, context: &settingsContext)
-        if let ownerCloudId = AppController.appController.appConfiguration.iCloudRecordID {
-            println("cloud \(ownerCloudId)")
-            let checkKey = ownerCloudId.sha1()
-            println("check \(checkKey)")
-            if checkKey == AppController.appController.dataImportKey {
+        if let ownerCloudId = AppController.appController.appConfiguration.iCloudRecordID  {
+            if ownerCloudId == AppController.appController.dataImportKey {
                 allowDataImportSection = true
             }
         }

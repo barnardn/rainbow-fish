@@ -63,6 +63,7 @@ class CloudImport {
 
         var mfgRec = self.createCKRecord(Manufacturer.entityName, json: json)
         mfgRec.setValue(json[ManufacturerAttributes.name.rawValue].string, forKey: ManufacturerAttributes.name.rawValue)
+        mfgRec.setValue(json[ManufacturerAttributes.ownerRecordIdentifier.rawValue].string, forKey: ManufacturerAttributes.ownerRecordIdentifier.rawValue)
         accumulator.append(mfgRec)
         if let products = json[ManufacturerRelationships.products.rawValue].array {
             let productRecords = self.productTree(productJSON: products, mfg: mfgRec)
@@ -78,6 +79,7 @@ class CloudImport {
         for json in productJSON {
             var prodRec = self.createCKRecord(Product.entityName, json: json)
             prodRec.setValue(json[ProductAttributes.name.rawValue].string, forKey: ProductAttributes.name.rawValue)
+            prodRec.setValue(json[ProductAttributes.ownerRecordIdentifier.rawValue].string, forKey: ProductAttributes.ownerRecordIdentifier.rawValue)
             let mfgRelation = CKReference(record: mfg, action: .DeleteSelf)
             prodRec.setObject(mfgRelation, forKey: ProductRelationships.manufacturer.rawValue)
             accumulator.append(prodRec)
@@ -98,6 +100,7 @@ class CloudImport {
             pencilRec.setValue(json[PencilAttributes.name.rawValue].string, forKey: PencilAttributes.name.rawValue)
             pencilRec.setValue(json[PencilAttributes.identifier.rawValue].string, forKey: PencilAttributes.identifier.rawValue)
             pencilRec.setValue(json[PencilAttributes.color.rawValue].string, forKey: PencilAttributes.color.rawValue)
+            pencilRec.setValue(json[PencilAttributes.ownerRecordIdentifier.rawValue].string, forKey: PencilAttributes.ownerRecordIdentifier.rawValue)
             let prodRelation = CKReference(record: product, action: .DeleteSelf)
             pencilRec.setObject(prodRelation, forKey: PencilRelationships.product.rawValue)
             return pencilRec

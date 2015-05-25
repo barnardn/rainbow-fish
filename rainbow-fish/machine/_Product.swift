@@ -16,7 +16,7 @@ public enum ProductAttributes: String {
     case isNew = "isNew"
     case modificationDate = "modificationDate"
     case name = "name"
-    case ownerRecordIdentifer = "ownerRecordIdentifer"
+    case ownerRecordIdentifier = "ownerRecordIdentifier"
     case recordID = "recordID"
 }
 
@@ -68,9 +68,9 @@ class _Product: NSManagedObject {
     // func validateName(value: AutoreleasingUnsafeMutablePointer<AnyObject>, error: NSErrorPointer) -> Bool {}
 
     @NSManaged public
-    var ownerRecordIdentifer: String?
+    var ownerRecordIdentifier: String?
 
-    // func validateOwnerRecordIdentifer(value: AutoreleasingUnsafeMutablePointer<AnyObject>, error: NSErrorPointer) -> Bool {}
+    // func validateOwnerRecordIdentifier(value: AutoreleasingUnsafeMutablePointer<AnyObject>, error: NSErrorPointer) -> Bool {}
 
     @NSManaged public
     var recordID: String?

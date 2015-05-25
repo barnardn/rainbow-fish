@@ -25,7 +25,7 @@ extension Manufacturer: CloudSyncable {
         self.recordID = record.recordID.recordName
         self.modificationDate = record.modificationDate
         self.name = record.objectForKey(ManufacturerAttributes.name.rawValue) as? String
-        self.ownerRecordIdentifer = record.creatorUserRecordID.recordName
+        self.ownerRecordIdentifier = record.objectForKey(ManufacturerAttributes.ownerRecordIdentifier.rawValue) as? String
     }
     
     func toCKRecord() -> CKRecord {
@@ -37,6 +37,7 @@ extension Manufacturer: CloudSyncable {
             record = CKRecord(recordType: Manufacturer.entityName)
         }
         record.setValue(self.name, forKey: ManufacturerAttributes.name.rawValue)
+        record.setValue(self.ownerRecordIdentifier, forKey: ManufacturerAttributes.ownerRecordIdentifier.rawValue)
         return record
     }
     
@@ -46,6 +47,7 @@ extension Manufacturer: CloudSyncable {
         jsonObject[ManufacturerAttributes.recordID.rawValue] = self.recordID
         jsonObject[ManufacturerAttributes.name.rawValue] = self.name
         jsonObject[ManufacturerAttributes.modificationDate.rawValue] = self.modificationDate?.timeIntervalSince1970
+        jsonObject[ManufacturerAttributes.ownerRecordIdentifier.rawValue] = self.ownerRecordIdentifier;
         
         if includeRelationships {
             var productJson = [NSDictionary]()
