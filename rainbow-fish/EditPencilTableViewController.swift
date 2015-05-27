@@ -43,7 +43,7 @@ class EditPencilTableViewController: UITableViewController {
         if let editPencil = pencil {
             self.title = editPencil.name ?? NSLocalizedString("Edit Pencil", comment:"edit an existing pencil view title")
             self.pencil = self.context.objectWithID(editPencil.objectID) as! Pencil
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "inventoryDeletedNotificationHandler:", name: NSManagedObjectContextDidSaveNotification, object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("inventoryDeletedNotificationHandler:"), name: NSManagedObjectContextDidSaveNotification, object: nil)
         } else {
             self.title = NSLocalizedString("New Pencil", comment:"new pencil view title")
             self.pencil = Pencil(managedObjectContext: self.context)
