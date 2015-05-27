@@ -81,8 +81,10 @@ class SelectPencilTableViewController: UITableViewController {
     }
     
     func inventoryDidUpdate(notification: NSNotification) {
-        if let userInfo = notification.userInfo {
-            if let pencil = userInfo[AppNotificationInfoKeys.DidEditPencilPencilKey.rawValue] as? Pencil {
+        if let userInfo = notification.userInfo,
+           let pencilObjectID = userInfo[AppNotificationInfoKeys.DidEditPencilPencilKey.rawValue] as? NSManagedObjectID {
+            
+                let pencil = self.product.managedObjectContext?.objectWithID(pencilObjectID) as! Pencil
                 let row = self.pencils.insertionIndexOf(pencil, isOrderedBefore: { (p1: Pencil, p2: Pencil) -> Bool in
                     return p1.identifier == p2.identifier
                 })
@@ -94,7 +96,7 @@ class SelectPencilTableViewController: UITableViewController {
                         self.tableView.reloadRowsAtIndexPaths(results, withRowAnimation: .Automatic)
                     }
                 }
-            }
+            
         }
     }
     

@@ -43,6 +43,7 @@ class EditPencilTableViewController: UITableViewController {
         if let editPencil = pencil {
             self.title = editPencil.name ?? NSLocalizedString("Edit Pencil", comment:"edit an existing pencil view title")
             self.pencil = self.context.objectWithID(editPencil.objectID) as! Pencil
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "inventoryDeletedNotificationHandler:", name: NSManagedObjectContextDidSaveNotification, object: nil)
         } else {
             self.title = NSLocalizedString("New Pencil", comment:"new pencil view title")
             self.pencil = Pencil(managedObjectContext: self.context)
@@ -60,6 +61,7 @@ class EditPencilTableViewController: UITableViewController {
     
     deinit {
         self.observePencilChanges(false)
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
     override func viewDidLoad() {
@@ -79,7 +81,7 @@ class EditPencilTableViewController: UITableViewController {
         }
         self.observePencilChanges(true)
     }
-
+    
     // MARK: kvo notification handler
     
     override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
@@ -95,7 +97,6 @@ class EditPencilTableViewController: UITableViewController {
         } else {
             self.navigationItem.setRightBarButtonItem(nil, animated: true)
         }
-        
     }
     
     private func observePencilChanges(observe: Bool) {
@@ -108,7 +109,18 @@ class EditPencilTableViewController: UITableViewController {
         }
     }
     
+    // MARK: managedObjectContext changed notification handler
     
+    func inventoryDeletedNotificationHandler(notification: NSNotification) {
+        if let deletedSet = notification.userInfo?[NSDeletedObjectsKey] as? NSSet,
+            let deletedObjects = deletedSet.allObjects as? [NSManagedObject]  {
+            let matching = deletedObjects.filter{ $0.objectID == self.pencil.inventory?.objectID }
+            if matching.count > 0 {
+                self.context.mergeChangesFromContextDidSaveNotification(notification)
+                self.tableView.reloadData()
+            }
+        }
+    }
     
     // MARK: button actions
     
@@ -138,7 +150,7 @@ class EditPencilTableViewController: UITableViewController {
         self.tableView.endEditing(true)
         sender.enabled = false
         self.context.performBlock(
-            {(_) in
+            { [unowned self] (_) in
                 if let lineItem = self.pencil.inventory {
                     lineItem.populateWithPencil(self.pencil)
                 }
@@ -212,7 +224,8 @@ class EditPencilTableViewController: UITableViewController {
     
     
     private func addPencilToInventory() {
-        CDK.performBlockOnBackgroundContext({ [unowned self] (context: NSManagedObjectContext) in
+        
+        self.context.performBlock({ [unowned self] (context: NSManagedObjectContext) in
                 let inventory = Inventory(managedObjectContext: context)
                 let pencil = context.objectWithID(self.pencil.objectID) as! Pencil
                 inventory.populateWithPencil(pencil)
@@ -224,7 +237,7 @@ class EditPencilTableViewController: UITableViewController {
                 case let .Failure(error):
                     assertionFailure("Unable to save inventory: \(error)")
                 default:
-                    var userInfo = [AppNotificationInfoKeys.DidEditPencilPencilKey.rawValue : self.pencil ]
+                    var userInfo = [AppNotificationInfoKeys.DidEditPencilPencilKey.rawValue : self.pencil.objectID ]
                     dispatch_async(dispatch_get_main_queue(), { () -> Void in
                         NSNotificationCenter.defaultCenter().postNotificationName(AppNotifications.DidEditPencil.rawValue, object: nil, userInfo: userInfo)
                     })
