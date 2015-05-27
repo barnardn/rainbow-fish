@@ -23,7 +23,7 @@
 		491AD0FC1AA3C23F0046FE00 /* PencilTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 491AD0FA1AA3C23F0046FE00 /* PencilTableViewCell.xib */; };
 		4938036D1A8447EB00E62FC2 /* UIViewController+JHProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4938036C1A8447EB00E62FC2 /* UIViewController+JHProgressHUD.swift */; };
 		493803701A8449AA00E62FC2 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4938036F1A8449AA00E62FC2 /* Types.swift */; };
-		493803721A84503F00E62FC2 /* PencilNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493803711A84503F00E62FC2 /* PencilNavigationController.swift */; };
+		493803721A84503F00E62FC2 /* CatalogNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493803711A84503F00E62FC2 /* CatalogNavigationController.swift */; };
 		493803791A86AE8900E62FC2 /* EmbeddedPickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493803771A86AE8900E62FC2 /* EmbeddedPickerTableViewCell.swift */; };
 		4938037A1A86AE8900E62FC2 /* EmbeddedPickerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 493803781A86AE8900E62FC2 /* EmbeddedPickerTableViewCell.xib */; };
 		493803801A86BA7100E62FC2 /* NameValueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4938037E1A86BA7100E62FC2 /* NameValueTableViewCell.swift */; };
@@ -87,7 +87,7 @@
 		49E8D8E51A75C6940064E682 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8E41A75C6940064E682 /* RootViewController.swift */; };
 		49E8D8E71A75C9420064E682 /* ContentTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8E61A75C9420064E682 /* ContentTableViewController.swift */; };
 		49E8D8EC1A75CADE0064E682 /* InventoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8EB1A75CADE0064E682 /* InventoryTableViewController.swift */; };
-		49E8D8EE1A75D2A50064E682 /* PencilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8ED1A75D2A50064E682 /* PencilViewController.swift */; };
+		49E8D8EE1A75D2A50064E682 /* CatalogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8ED1A75D2A50064E682 /* CatalogViewController.swift */; };
 		49E8D8F01A75D4760064E682 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8EF1A75D4760064E682 /* SettingsTableViewController.swift */; };
 		49F419D11A9AA61900635EF3 /* PencilColorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F419CF1A9AA61900635EF3 /* PencilColorTableViewCell.swift */; };
 		49F419D21A9AA61900635EF3 /* PencilColorTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F419D01A9AA61900635EF3 /* PencilColorTableViewCell.xib */; };
@@ -115,7 +115,7 @@
 		491AD0FA1AA3C23F0046FE00 /* PencilTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PencilTableViewCell.xib; sourceTree = "<group>"; };
 		4938036C1A8447EB00E62FC2 /* UIViewController+JHProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+JHProgressHUD.swift"; sourceTree = "<group>"; };
 		4938036F1A8449AA00E62FC2 /* Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
-		493803711A84503F00E62FC2 /* PencilNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PencilNavigationController.swift; sourceTree = "<group>"; };
+		493803711A84503F00E62FC2 /* CatalogNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatalogNavigationController.swift; sourceTree = "<group>"; };
 		493803771A86AE8900E62FC2 /* EmbeddedPickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmbeddedPickerTableViewCell.swift; sourceTree = "<group>"; };
 		493803781A86AE8900E62FC2 /* EmbeddedPickerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EmbeddedPickerTableViewCell.xib; sourceTree = "<group>"; };
 		4938037E1A86BA7100E62FC2 /* NameValueTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameValueTableViewCell.swift; sourceTree = "<group>"; };
@@ -184,7 +184,7 @@
 		49E8D8E41A75C6940064E682 /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		49E8D8E61A75C9420064E682 /* ContentTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentTableViewController.swift; sourceTree = "<group>"; };
 		49E8D8EB1A75CADE0064E682 /* InventoryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InventoryTableViewController.swift; sourceTree = "<group>"; };
-		49E8D8ED1A75D2A50064E682 /* PencilViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PencilViewController.swift; sourceTree = "<group>"; };
+		49E8D8ED1A75D2A50064E682 /* CatalogViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatalogViewController.swift; sourceTree = "<group>"; };
 		49E8D8EF1A75D4760064E682 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		49F419CF1A9AA61900635EF3 /* PencilColorTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PencilColorTableViewCell.swift; sourceTree = "<group>"; };
 		49F419D01A9AA61900635EF3 /* PencilColorTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PencilColorTableViewCell.xib; sourceTree = "<group>"; };
@@ -484,7 +484,7 @@
 			isa = PBXGroup;
 			children = (
 				49E8D8EA1A75CA0F0064E682 /* Settings */,
-				49E8D8E91A75C9F60064E682 /* Pencils */,
+				49E8D8E91A75C9F60064E682 /* Catalog */,
 				49E8D8E81A75C9E50064E682 /* Inventory */,
 				49E8D8E31A75C67C0064E682 /* Main & Base */,
 			);
@@ -513,16 +513,16 @@
 			name = Inventory;
 			sourceTree = "<group>";
 		};
-		49E8D8E91A75C9F60064E682 /* Pencils */ = {
+		49E8D8E91A75C9F60064E682 /* Catalog */ = {
 			isa = PBXGroup;
 			children = (
 				493803821A86BFA100E62FC2 /* Edit Pencil */,
 				4973DA6E1A7F058700619D06 /* Cells */,
-				49E8D8ED1A75D2A50064E682 /* PencilViewController.swift */,
-				493803711A84503F00E62FC2 /* PencilNavigationController.swift */,
+				49E8D8ED1A75D2A50064E682 /* CatalogViewController.swift */,
+				493803711A84503F00E62FC2 /* CatalogNavigationController.swift */,
 				49AC9E3A1A87DD67007CE68A /* SelectPencilTableViewController.swift */,
 			);
-			name = Pencils;
+			name = Catalog;
 			sourceTree = "<group>";
 		};
 		49E8D8EA1A75CA0F0064E682 /* Settings */ = {
@@ -688,7 +688,7 @@
 				49E8D8E51A75C6940064E682 /* RootViewController.swift in Sources */,
 				4988FEBA1AB61F1B00AE2D89 /* SettingsMinimumStockTableViewController.swift in Sources */,
 				49E8D8E71A75C9420064E682 /* ContentTableViewController.swift in Sources */,
-				493803721A84503F00E62FC2 /* PencilNavigationController.swift in Sources */,
+				493803721A84503F00E62FC2 /* CatalogNavigationController.swift in Sources */,
 				49F419D61A9AAAF600635EF3 /* UIColor+CDOExtensions.swift in Sources */,
 				493803701A8449AA00E62FC2 /* Types.swift in Sources */,
 				493F6AC71A8AEB48003636AE /* EditPecilPropertyTableViewCell.swift in Sources */,
@@ -728,7 +728,7 @@
 				493F6ADE1A99230C003636AE /* EditManufacturerNavigationController.swift in Sources */,
 				493F6ACB1A8AEFBE003636AE /* PencilColorPickerTableViewCell.swift in Sources */,
 				49AC9E3E1A87E120007CE68A /* DefaultDetailTableViewCell.swift in Sources */,
-				49E8D8EE1A75D2A50064E682 /* PencilViewController.swift in Sources */,
+				49E8D8EE1A75D2A50064E682 /* CatalogViewController.swift in Sources */,
 				49F914681A75DDDD0042EA0D /* InventoryNavigationController.swift in Sources */,
 				493F6AE01A99253A003636AE /* EditProductNavigationController.swift in Sources */,
 				49E8D8D31A7564400064E682 /* _Inventory.swift in Sources */,

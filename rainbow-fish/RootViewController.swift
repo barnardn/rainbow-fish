@@ -23,7 +23,7 @@ class RootViewController: UITabBarController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("updateProductsNotificationHandler:"), name: UIApplicationDidBecomeActiveNotification, object: nil)
         viewControllers = [
                 InventoryNavigationController(),
-                PencilNavigationController(),
+                CatalogNavigationController(),
                 SettingsNavigationController()
         ]
     }

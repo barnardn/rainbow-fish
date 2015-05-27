@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PencilNavigationController: UINavigationController {
+class CatalogNavigationController: UINavigationController {
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -16,7 +16,7 @@ class PencilNavigationController: UINavigationController {
     
     init() {
         super.init(nibName: nil, bundle: nil)
-        self.viewControllers = [PencilViewController()]
+        self.viewControllers = [CatalogViewController()]
     }
     
 }
