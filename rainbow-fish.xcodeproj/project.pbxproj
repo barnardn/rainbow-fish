@@ -46,6 +46,7 @@
 		49405C771AA7F69F002F2E83 /* InventoryQuantityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49405C751AA7F69F002F2E83 /* InventoryQuantityTableViewCell.swift */; };
 		49405C781AA7F69F002F2E83 /* InventoryQuantityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49405C761AA7F69F002F2E83 /* InventoryQuantityTableViewCell.xib */; };
 		494BA7CE1B0AC9FF0026B2AE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 494BA7CD1B0AC9FE0026B2AE /* UIKit.framework */; };
+		494BA7D21B154E280026B2AE /* EditMfgTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494BA7D11B154E280026B2AE /* EditMfgTableViewController.swift */; };
 		4973DA701A7F05CB00619D06 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4973DA6F1A7F05CB00619D06 /* ProductTableViewCell.swift */; };
 		4973DA721A7F05E600619D06 /* ProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4973DA711A7F05E600619D06 /* ProductTableViewCell.xib */; };
 		49746BC81ACE191E0088C4E4 /* String+Hash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49746BC71ACE191E0088C4E4 /* String+Hash.swift */; };
@@ -138,6 +139,7 @@
 		49405C751AA7F69F002F2E83 /* InventoryQuantityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InventoryQuantityTableViewCell.swift; sourceTree = "<group>"; };
 		49405C761AA7F69F002F2E83 /* InventoryQuantityTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InventoryQuantityTableViewCell.xib; sourceTree = "<group>"; };
 		494BA7CD1B0AC9FE0026B2AE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		494BA7D11B154E280026B2AE /* EditMfgTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditMfgTableViewController.swift; sourceTree = "<group>"; };
 		4973DA6F1A7F05CB00619D06 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
 		4973DA711A7F05E600619D06 /* ProductTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductTableViewCell.xib; sourceTree = "<group>"; };
 		49746BC41ACE18270088C4E4 /* RainbowFishBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RainbowFishBridge.h; sourceTree = "<group>"; };
@@ -332,6 +334,14 @@
 			name = Xibs;
 			sourceTree = "<group>";
 		};
+		494BA7D01B154DF40026B2AE /* Edit Mfg & Products */ = {
+			isa = PBXGroup;
+			children = (
+				494BA7D11B154E280026B2AE /* EditMfgTableViewController.swift */,
+			);
+			name = "Edit Mfg & Products";
+			sourceTree = "<group>";
+		};
 		4973DA6E1A7F058700619D06 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -516,6 +526,7 @@
 		49E8D8E91A75C9F60064E682 /* Catalog */ = {
 			isa = PBXGroup;
 			children = (
+				494BA7D01B154DF40026B2AE /* Edit Mfg & Products */,
 				493803821A86BFA100E62FC2 /* Edit Pencil */,
 				4973DA6E1A7F058700619D06 /* Cells */,
 				49E8D8ED1A75D2A50064E682 /* CatalogViewController.swift */,
@@ -734,6 +745,7 @@
 				49E8D8D31A7564400064E682 /* _Inventory.swift in Sources */,
 				4973DA701A7F05CB00619D06 /* ProductTableViewCell.swift in Sources */,
 				49E8D8D91A7564400064E682 /* Product.swift in Sources */,
+				494BA7D21B154E280026B2AE /* EditMfgTableViewController.swift in Sources */,
 				491AD0FB1AA3C23F0046FE00 /* PencilTableViewCell.swift in Sources */,
 				493F6ACE1A911996003636AE /* EditPencilTableViewController.swift in Sources */,
 				493803871A86C46000E62FC2 /* PencilDataViewModel.swift in Sources */,

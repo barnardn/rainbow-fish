@@ -16,7 +16,9 @@ class CatalogNavigationController: UINavigationController {
     
     init() {
         super.init(nibName: nil, bundle: nil)
+        var image = UIImage(named: "tabbar-icon-pencils")?.imageWithRenderingMode(.AlwaysTemplate)
+        self.tabBarItem = UITabBarItem(title: NSLocalizedString("Catalog", comment:"all pencils tab bar item title"), image: image, tag: 1)
+        self.title = NSLocalizedString("Catalog", comment:"browse all pencils navigation title")        
         self.viewControllers = [CatalogViewController()]
     }
-    
 }

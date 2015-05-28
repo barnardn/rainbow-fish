@@ -12,8 +12,8 @@ import CoreDataKit
 
 class CatalogViewController: ContentTableViewController {
 
-    var allManufacturers =  [Manufacturer]()
-    var recordCreatorID : String? = ""              // needed for thread safety
+    private var allManufacturers =  [Manufacturer]()
+    private var recordCreatorID : String? = ""              // needed for thread safety
     
     lazy var backButton: UIBarButtonItem = {
         let button = UIBarButtonItem(title: NSLocalizedString("Catalog", comment:"all pencils back button title"), style: .Plain, target: nil, action: nil)
@@ -25,11 +25,8 @@ class CatalogViewController: ContentTableViewController {
         return button
     }()
     
-    
     convenience init() {
         self.init(style: UITableViewStyle.Grouped)
-        var image = UIImage(named: "tabbar-icon-pencils")?.imageWithRenderingMode(.AlwaysTemplate)
-        self.tabBarItem = UITabBarItem(title: NSLocalizedString("Catalog", comment:"all pencils tab bar item title"), image: image, tag: 1)
         self.title = NSLocalizedString("Catalog", comment:"browse all pencils navigation title")
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("updateDatasource"), name: AppNotifications.DidFinishCloudUpdate.rawValue, object: nil)
     }
@@ -54,9 +51,15 @@ class CatalogViewController: ContentTableViewController {
         navigationItem.backBarButtonItem = self.backButton
         navigationItem.leftBarButtonItem = self.editButton
         self.recordCreatorID = AppController.appController.appConfiguration.iCloudRecordID;
+        self.updateDatasource()
     }
     
     // MARK: button action
+    
+    func editButtonTapped(sender: UIBarButtonItem) {
+        let editViewController = EditMfgTableViewController()
+        self.navigationController?.setViewControllers([editViewController], animated: false)
+    }
     
     func addButtonTapped(sender: UIBarButtonItem) {
         let viewController = EditManufacturerNavigationController(manufacturer: nil) { [unowned self] (didSave, edittedText, sender) -> Void in
@@ -86,11 +89,6 @@ class CatalogViewController: ContentTableViewController {
         }
         self.presentViewController(viewController, animated: true, completion: nil)
     }
-    
-    func editButtonTapped(sender: UIBarButtonItem) {
-        self.tableView.setEditing(!self.tableView.editing, animated: true);
-    }
-    
     
     func refreshControlDidChange(sender: UIRefreshControl) {
         self.cloudUpdate()
