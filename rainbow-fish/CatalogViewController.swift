@@ -27,7 +27,7 @@ class CatalogViewController: ContentTableViewController {
     
     convenience init() {
         self.init(style: UITableViewStyle.Grouped)
-        self.title = NSLocalizedString("Catalog", comment:"browse all pencils navigation title")
+//        self.title = NSLocalizedString("Catalog", comment:"browse all pencils navigation title")
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("updateDatasource"), name: AppNotifications.DidFinishCloudUpdate.rawValue, object: nil)
     }
     
@@ -58,7 +58,7 @@ class CatalogViewController: ContentTableViewController {
     
     func editButtonTapped(sender: UIBarButtonItem) {
         let editViewController = EditMfgTableViewController()
-        self.navigationController?.setViewControllers([editViewController], animated: false)
+        self.navigationController?.setViewControllers([editViewController], animated: true)
     }
     
     func addButtonTapped(sender: UIBarButtonItem) {

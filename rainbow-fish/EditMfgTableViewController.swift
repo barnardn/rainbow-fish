@@ -21,7 +21,7 @@ class EditMfgTableViewController: UITableViewController {
     
     convenience init() {
         self.init(style: UITableViewStyle.Grouped)
-        self.title = NSLocalizedString("Edit", comment:"edit mfg and products title")
+//        self.title = NSLocalizedString("Catalog", comment:"edit mfg and products title")
     }
     
     override func viewDidLoad() {
@@ -44,7 +44,7 @@ class EditMfgTableViewController: UITableViewController {
     
     func cancelButtonTapped(sender: UIBarButtonItem) {
         let viewController = CatalogViewController()
-        self.navigationController?.setViewControllers([viewController], animated: false)
+        self.navigationController?.setViewControllers([viewController], animated: true)
     }
     
 }
