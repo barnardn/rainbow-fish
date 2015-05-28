@@ -39,7 +39,6 @@ extension NSManagedObjectContext {
                 if let moDate = managedObject.valueForKeyPath("modificationDate") as? NSDate {
                     if moDate.compare(record.modificationDate)  == .OrderedAscending {
                         managedObject.populateFromCKRecord(record)
-                        managedObject.ownerRecordIdentifier = record.creatorUserRecordID.recordName
                     }
                 }
                 returnResult = (managedObject, nil)
@@ -47,7 +46,6 @@ extension NSManagedObjectContext {
                 if createIfNotFound {
                     var managedObject = self.create(T).value()
                     managedObject?.populateFromCKRecord(record)
-                    managedObject?.ownerRecordIdentifier = record.creatorUserRecordID.recordName
                     returnResult = (managedObject, nil)
                 }
             }
