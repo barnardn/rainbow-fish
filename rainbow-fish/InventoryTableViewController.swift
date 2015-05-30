@@ -143,8 +143,10 @@ class InventoryTableViewController: ContentTableViewController {
             }
         }
         self.tabBarItem.badgeValue = nil
+        AppController.appController.setAppIconBadgeNumber(badgeNumber: 0)
         if lowStock.count > 0 {
             self.tabBarItem.badgeValue = "\(lowStock.count)"
+            AppController.appController.setAppIconBadgeNumber(badgeNumber: lowStock.count)
         }
         if !reloadingVisibleRows {
             return

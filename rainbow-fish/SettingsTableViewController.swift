@@ -59,6 +59,15 @@ class SettingsTableViewController: ContentTableViewController {
         }
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if !AppController.appController.allowsAppIconBadge() {
+            let settings = UIUserNotificationSettings(forTypes: .Badge, categories: nil)
+            UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+        }
+    }
+    
+
     // MARK: kvo 
     
     override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {

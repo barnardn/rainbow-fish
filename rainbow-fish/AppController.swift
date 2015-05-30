@@ -11,6 +11,7 @@ import CoreData
 import CoreDataKit
 import Fabric
 import Crashlytics
+import UIKit
 
 class AppController {
     
@@ -70,6 +71,17 @@ class AppController {
     func lastUpdatedDate() -> NSDate? {
         let date = NSUserDefaults.standardUserDefaults().objectForKey(LastUpdatedDateUserDefaultKey) as! NSDate?
         return date
+    }
+    
+    func allowsAppIconBadge() -> Bool {
+        var notificationSettings = UIApplication.sharedApplication().currentUserNotificationSettings()
+        return (notificationSettings.types & UIUserNotificationType.Badge) != nil
+    }
+    
+    func setAppIconBadgeNumber(badgeNumber value: Int) {
+        if allowsAppIconBadge() {
+            UIApplication.sharedApplication().applicationIconBadgeNumber = value
+        }
     }
     
     // MARK: core data properties
