@@ -27,7 +27,6 @@ class CatalogViewController: ContentTableViewController {
     
     convenience init() {
         self.init(style: UITableViewStyle.Grouped)
-//        self.title = NSLocalizedString("Catalog", comment:"browse all pencils navigation title")
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("updateDatasource"), name: AppNotifications.DidFinishCloudUpdate.rawValue, object: nil)
     }
     
