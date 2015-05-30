@@ -10,21 +10,23 @@ import UIKit
 import CoreData
 import CoreDataKit
 
-class PencilViewController: ContentTableViewController {
+class CatalogViewController: ContentTableViewController {
 
-    var allManufacturers =  [Manufacturer]()
-    var recordCreatorID : String? = ""              // needed for thread safety
+    private var allManufacturers =  [Manufacturer]()
+    private var recordCreatorID : String? = ""              // needed for thread safety
     
     lazy var backButton: UIBarButtonItem = {
         let button = UIBarButtonItem(title: NSLocalizedString("Catalog", comment:"all pencils back button title"), style: .Plain, target: nil, action: nil)
         return button
     }()
     
+    lazy var editButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: Selector("editButtonTapped:"))
+        return button
+    }()
+    
     convenience init() {
         self.init(style: UITableViewStyle.Grouped)
-        var image = UIImage(named: "tabbar-icon-pencils")?.imageWithRenderingMode(.AlwaysTemplate)
-        self.tabBarItem = UITabBarItem(title: NSLocalizedString("Catalog", comment:"all pencils tab bar item title"), image: image, tag: 1)
-        self.title = NSLocalizedString("Catalog", comment:"browse all pencils navigation title")
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("updateDatasource"), name: AppNotifications.DidFinishCloudUpdate.rawValue, object: nil)
     }
     
@@ -45,11 +47,18 @@ class PencilViewController: ContentTableViewController {
         let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: Selector("addButtonTapped:"))
         addButton.tintColor = UIColor.whiteColor()
         navigationItem.rightBarButtonItem = addButton
-        navigationItem.backBarButtonItem = self.backButton;
+        navigationItem.backBarButtonItem = self.backButton
+        navigationItem.leftBarButtonItem = self.editButton
         self.recordCreatorID = AppController.appController.appConfiguration.iCloudRecordID;
+        self.updateDatasource()
     }
     
     // MARK: button action
+    
+    func editButtonTapped(sender: UIBarButtonItem) {
+        let editViewController = EditMfgTableViewController()
+        self.navigationController?.setViewControllers([editViewController], animated: true)
+    }
     
     func addButtonTapped(sender: UIBarButtonItem) {
         let viewController = EditManufacturerNavigationController(manufacturer: nil) { [unowned self] (didSave, edittedText, sender) -> Void in
@@ -133,7 +142,7 @@ class PencilViewController: ContentTableViewController {
     
 }
 
-extension PencilViewController: UITableViewDataSource {
+extension CatalogViewController: UITableViewDataSource {
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return allManufacturers.count ?? 0
@@ -161,7 +170,7 @@ extension PencilViewController: UITableViewDataSource {
     
 }
 
-extension PencilViewController: UITableViewDelegate {
+extension CatalogViewController: UITableViewDelegate {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if let product = productAtIndexPath(indexPath) {
@@ -194,7 +203,7 @@ extension PencilViewController: UITableViewDelegate {
     
 }
 
-extension PencilViewController: ProductFooterViewDelegate {
+extension CatalogViewController: ProductFooterViewDelegate {
     
     func productFooterView(view: ProductFooterView, newProductForManufacturer manufacturer: Manufacturer) {
         let viewController = EditProductNavigationController(product: nil) { [unowned self] (didSave, edittedText, sender) -> Void in
