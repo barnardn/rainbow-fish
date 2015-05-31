@@ -3,15 +3,18 @@
     <entity name="ConfigurationSettings" representedClassName="ConfigurationSettings" syncable="YES">
         <attribute name="iCloudRecordID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="minInventoryQuantity" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="ownerRecordIdentifier" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="recordID" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
     </entity>
     <entity name="Inventory" representedClassName="Inventory" syncable="YES">
         <attribute name="color" optional="YES" attributeType="Transformable" valueTransformerName="ColorValueTransformer" syncable="YES"/>
-        <attribute name="identity" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="manufacturerName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ownerRecordIdentifier" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="pencilIdentifier" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="productName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="quantity" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="recordID" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="pencil" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pencil" inverseName="inventory" inverseEntity="Pencil" syncable="YES"/>
     </entity>
     <entity name="Manufacturer" representedClassName="Manufacturer" syncable="YES">
@@ -48,8 +51,8 @@
         <relationship name="product" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Product" inverseName="syncInfo" inverseEntity="Product" syncable="YES"/>
     </entity>
     <elements>
-        <element name="ConfigurationSettings" positionX="-45" positionY="144" width="128" height="75"/>
-        <element name="Inventory" positionX="97" positionY="117" width="128" height="163"/>
+        <element name="ConfigurationSettings" positionX="-45" positionY="144" width="128" height="105"/>
+        <element name="Inventory" positionX="97" positionY="117" width="128" height="180"/>
         <element name="Manufacturer" positionX="16" positionY="225" width="128" height="135"/>
         <element name="Pencil" positionX="-180" positionY="-4" width="128" height="180"/>
         <element name="Product" positionX="-171" positionY="162" width="128" height="165"/>
