@@ -30,6 +30,7 @@ class InventoryDetailTableViewController: UITableViewController {
     
     private var context: NSManagedObjectContext!
     private var lineItem: Inventory!
+    private var editPencilColor: Bool = false
 
     var itemUpdatedBlock: ((lineItemWithIdentity: NSManagedObjectID, wasDeleted: Bool) -> Void)?
     
@@ -60,6 +61,7 @@ class InventoryDetailTableViewController: UITableViewController {
         self.tableView.registerNib(UINib(nibName: InventoryQuantityTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: InventoryQuantityTableViewCell.nibName)
         self.tableView.registerNib(UINib(nibName: PencilColorTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: PencilColorTableViewCell.nibName)
         self.tableView.registerNib(UINib(nibName: BigButtonTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: BigButtonTableViewCell.nibName)
+        self.tableView.registerNib(UINib(nibName: PencilColorPickerTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: PencilColorPickerTableViewCell.nibName)
     }
 
     // MARK: done button handler
@@ -132,6 +134,11 @@ extension InventoryDetailTableViewController: UITableViewDataSource {
             cell.selectionStyle = .None
             return cell
         case (1, _):
+            if self.editPencilColor {
+                let cell = tableView.dequeueReusableCellWithIdentifier(PencilColorPickerTableViewCell.nibName, forIndexPath: indexPath) as! PencilColorPickerTableViewCell
+                self.configureColorPickerCell(cell, atIndexPath: indexPath)
+                return cell
+            }
             let cell = tableView.dequeueReusableCellWithIdentifier(PencilColorTableViewCell.nibName, forIndexPath: indexPath) as! PencilColorTableViewCell
             configureColorSwatchCell(cell, atIndexPath: indexPath)
             return cell
@@ -164,7 +171,13 @@ extension InventoryDetailTableViewController: UITableViewDataSource {
             cell.colorName = nil
             cell.swatchColor = nil
         }
+        cell.accessoryType = .DisclosureIndicator
         cell.selectionStyle = .None
+    }
+    
+    private func configureColorPickerCell(cell: PencilColorPickerTableViewCell, atIndexPath indexPath: NSIndexPath) {
+        cell.defaultColor = self.lineItem.color as! UIColor? ?? UIColor.blackColor()
+        cell.delegate = self
     }
     
     private func configureQuantityCell(cell: InventoryQuantityTableViewCell, atIndexPath indexPath: NSIndexPath ) {
@@ -184,6 +197,13 @@ extension InventoryDetailTableViewController: UITableViewDataSource {
 extension InventoryDetailTableViewController: UITableViewDelegate {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if indexPath.section == InventorySection.Color.rawValue {
+            self.editPencilColor = !self.editPencilColor // ? false : true
+            tableView.reloadSections(NSIndexSet(index: indexPath.section), withRowAnimation: .Automatic)
+            return
+        }
+
         if indexPath.section != InventorySection.Delete.rawValue {
             tableView.deselectRowAtIndexPath(indexPath, animated: false)
             return
@@ -213,6 +233,8 @@ extension InventoryDetailTableViewController: UITableViewDelegate {
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if indexPath.section == 2 {
             return 46.0
+        } else if indexPath.section == InventorySection.Color.rawValue && self.editPencilColor {
+            return PencilColorPickerTableViewCell.preferredRowHeight
         }
         return 44.0
     }
@@ -231,7 +253,54 @@ extension InventoryDetailTableViewController: UITableViewDelegate {
         }
     }
     
+}
+
+extension InventoryDetailTableViewController: PencilColorPickerTableViewCellDelegate, UITextFieldDelegate {
     
+    func colorPickerTableViewCell(cell: PencilColorPickerTableViewCell, didChangeColor color: UIColor) {
+        self.lineItem.color = color
+    }
+    
+    func colorPickerTableViewCell(cell: PencilColorPickerTableViewCell, didRequestHexCodeWithColor color: UIColor?) {
+        
+        var hexTextField: UITextField?
+        
+        let alertController = UIAlertController(title: NSLocalizedString("Enter Hex Code", comment:"hex alert title"), message: NSLocalizedString("Enter the color code in hexadecimal e.g. \"0A41CD\"", comment:"hex alert message"), preferredStyle: .Alert)
+        
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment:"ok button title"), style: .Default) { [unowned self] (_) -> Void in
+            if  let hexStr = hexTextField?.text,
+                let color = UIColor.colorFromHexString(hexStr) {
+                    self.lineItem.color = color
+                    self.tableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: .None)
+            }
+            })
+        
+        alertController.addTextFieldWithConfigurationHandler { [unowned self] (textField) -> Void in
+            hexTextField = textField
+            hexTextField?.textAlignment = .Center
+            hexTextField?.delegate = self
+        }
+        
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment:"cancel button title"), style: .Cancel, handler: nil))
+        
+        alertController.view.tintColor = AppearanceManager.appearanceManager.brandColor
+        self.presentViewController(alertController, animated: true, completion: nil)
+        
+    }
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        if count(string) == 0 {
+            return true
+        }
+        if count(textField.text) + count(string) > 6 {
+            return false
+        }
+        let nonHexChars = NSCharacterSet(charactersInString: "0123456789ABCDEFabcdef").invertedSet
+        if let foundRange = string.rangeOfCharacterFromSet(nonHexChars, options: NSStringCompareOptions.CaseInsensitiveSearch) {
+            return false
+        }
+        return true
+    }
     
     
 }
