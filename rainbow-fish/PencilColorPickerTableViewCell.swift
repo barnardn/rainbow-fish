@@ -11,6 +11,7 @@ import UIKit
 
 protocol PencilColorPickerTableViewCellDelegate {
     func colorPickerTableViewCell(cell: PencilColorPickerTableViewCell, didChangeColor color: UIColor)
+    func colorPickerTableViewCell(cell: PencilColorPickerTableViewCell, didRequestHexCodeWithColor color: UIColor?)
 }
 
 
@@ -28,6 +29,7 @@ class PencilColorPickerTableViewCell: UITableViewCell {
     @IBOutlet weak var redLabel: UILabel!
     @IBOutlet weak var greenLabel: UILabel!
     @IBOutlet weak var blueLabel: UILabel!
+    @IBOutlet weak var hexEntryButton: UIButton!
     
     var color: UIColor?
     
@@ -39,10 +41,15 @@ class PencilColorPickerTableViewCell: UITableViewCell {
             var alpha: CGFloat = 0
             if let color = inValue {
                 (red, green, blue, alpha) = color.getCGFloatValues()
+                hexValueLabel.text = color.hexRepresentation
+                swatchView.backgroundColor = color
             }
             redSlider.CGFloatValue = red
             greenSlider.CGFloatValue = green
             blueSlider.CGFloatValue = blue
+            redValueLabel.text = "\(Int(red * 255.0))"
+            greenValueLabel.text = "\(Int(green * 255.0))"
+            blueValueLabel.text = "\(Int(blue * 255.0))"
         }
     }
     
@@ -60,6 +67,8 @@ class PencilColorPickerTableViewCell: UITableViewCell {
         redSlider.addTarget(self, action: Selector("sliderValueChanged:"), forControlEvents: .ValueChanged)
         greenSlider.addTarget(self, action: Selector("sliderValueChanged:"), forControlEvents: .ValueChanged)
         blueSlider.addTarget(self, action: Selector("sliderValueChanged:"), forControlEvents: .ValueChanged)
+        hexEntryButton.addTarget(self, action: Selector("hexEntryButtonTapped:"), forControlEvents: .TouchUpInside)
+        hexEntryButton.setTitleColor(AppearanceManager.appearanceManager.brandColor, forState: .Normal)
         sliders = [redSlider, greenSlider, blueSlider]
         
         self.selectionStyle = .None
@@ -95,8 +104,18 @@ class PencilColorPickerTableViewCell: UITableViewCell {
         }
     }
     
+    func hexEntryButtonTapped(sender: UIButton) {
+        if let delegate = self.delegate {
+            delegate.colorPickerTableViewCell(self, didRequestHexCodeWithColor: self.color)
+        }
+    }
+    
     class var nibName: String {
         return "PencilColorPickerTableViewCell"
+    }
+    
+    class var preferredRowHeight: CGFloat {
+        return 200.0
     }
     
 }

@@ -55,4 +55,21 @@ extension UIColor {
         return UIColor.blackColor()
     }
     
+    class func colorFromHexString(hexString: String) -> UIColor? {
+        var str = hexString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).uppercaseString as String
+        while str.hasPrefix("#") {
+            str = str.substringFromIndex(advance(str.startIndex, 1))
+        }
+        while str.hasPrefix("0X") {
+            str = str.substringFromIndex(advance(str.startIndex, 2))
+        }
+        if count(str) != 6 {
+            return nil
+        }
+        var rgbValue : UInt32 = 0
+        NSScanner(string: str).scanHexInt(&rgbValue)
+        
+        return UIColor(red: CGFloat((rgbValue & 0xFF0000)>>16) / 255.0, green: CGFloat((rgbValue & 0x00FF00)>>8) / 255.0, blue: CGFloat(rgbValue & 0x0000FF) / 255.0, alpha: CGFloat(1.0))
+    }
+    
 }
