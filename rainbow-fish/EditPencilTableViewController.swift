@@ -310,7 +310,7 @@ extension EditPencilTableViewController: UITableViewDelegate {
             if indexPath.section == 0 {
                 return 50.0
             } else {
-                return 159.0
+                return PencilColorPickerTableViewCell.preferredRowHeight
             }
         }
         return 44.0
@@ -348,11 +348,53 @@ extension EditPencilTableViewController: UITableViewDelegate {
     
 }
 
-extension EditPencilTableViewController: PencilColorPickerTableViewCellDelegate {
+extension EditPencilTableViewController: PencilColorPickerTableViewCellDelegate, UITextFieldDelegate {
     
     func colorPickerTableViewCell(cell: PencilColorPickerTableViewCell, didChangeColor color: UIColor) {
         self.pencil.color = color
     }
+    
+    func colorPickerTableViewCell(cell: PencilColorPickerTableViewCell, didRequestHexCodeWithColor color: UIColor?) {
+        
+        var hexTextField: UITextField?
+        
+        let alertController = UIAlertController(title: NSLocalizedString("Enter Hex Code", comment:"hex alert title"), message: NSLocalizedString("Enter the color code in hexadecimal e.g. \"0A41CD\"", comment:"hex alert message"), preferredStyle: .Alert)
+
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("OK", comment:"ok button title"), style: .Default) { [unowned self] (_) -> Void in
+            if  let hexStr = hexTextField?.text,
+                let color = UIColor.colorFromHexString(hexStr) {
+                self.pencil.color = color
+                self.tableView.reloadSections(NSIndexSet(index: 1), withRowAnimation: .None)
+            }
+        })
+
+        alertController.addTextFieldWithConfigurationHandler { [unowned self] (textField) -> Void in
+            hexTextField = textField
+            hexTextField?.textAlignment = .Center
+            hexTextField?.delegate = self
+        }
+        
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment:"cancel button title"), style: .Cancel, handler: nil))
+        
+        alertController.view.tintColor = AppearanceManager.appearanceManager.brandColor
+        self.presentViewController(alertController, animated: true, completion: nil)
+        
+    }
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        if count(string) == 0 {
+            return true
+        }
+        if count(textField.text) + count(string) > 6 {
+            return false
+        }
+        let nonHexChars = NSCharacterSet(charactersInString: "0123456789ABCDEFabcdef").invertedSet
+        if let foundRange = string.rangeOfCharacterFromSet(nonHexChars, options: NSStringCompareOptions.CaseInsensitiveSearch) {
+            return false
+        }
+        return true
+    }
+    
     
 }
 
