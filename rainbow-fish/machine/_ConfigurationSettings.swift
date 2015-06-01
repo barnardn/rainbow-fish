@@ -15,6 +15,8 @@ import CoreData
 public enum ConfigurationSettingsAttributes: String {
     case iCloudRecordID = "iCloudRecordID"
     case minInventoryQuantity = "minInventoryQuantity"
+    case ownerRecordIdentifier = "ownerRecordIdentifier"
+    case recordID = "recordID"
 }
 
 @objc public
@@ -52,6 +54,16 @@ class _ConfigurationSettings: NSManagedObject {
     var minInventoryQuantity: NSDecimalNumber?
 
     // func validateMinInventoryQuantity(value: AutoreleasingUnsafeMutablePointer<AnyObject>, error: NSErrorPointer) -> Bool {}
+
+    @NSManaged public
+    var ownerRecordIdentifier: String?
+
+    // func validateOwnerRecordIdentifier(value: AutoreleasingUnsafeMutablePointer<AnyObject>, error: NSErrorPointer) -> Bool {}
+
+    @NSManaged public
+    var recordID: NSNumber?
+
+    // func validateRecordID(value: AutoreleasingUnsafeMutablePointer<AnyObject>, error: NSErrorPointer) -> Bool {}
 
     // MARK: - Relationships
 

@@ -14,12 +14,13 @@ import CoreData
 
 public enum InventoryAttributes: String {
     case color = "color"
-    case identity = "identity"
     case manufacturerName = "manufacturerName"
     case name = "name"
+    case ownerRecordIdentifier = "ownerRecordIdentifier"
     case pencilIdentifier = "pencilIdentifier"
     case productName = "productName"
     case quantity = "quantity"
+    case recordID = "recordID"
 }
 
 public enum InventoryRelationships: String {
@@ -58,11 +59,6 @@ class _Inventory: NSManagedObject {
     // func validateColor(value: AutoreleasingUnsafeMutablePointer<AnyObject>, error: NSErrorPointer) -> Bool {}
 
     @NSManaged public
-    var identity: String?
-
-    // func validateIdentity(value: AutoreleasingUnsafeMutablePointer<AnyObject>, error: NSErrorPointer) -> Bool {}
-
-    @NSManaged public
     var manufacturerName: String?
 
     // func validateManufacturerName(value: AutoreleasingUnsafeMutablePointer<AnyObject>, error: NSErrorPointer) -> Bool {}
@@ -71,6 +67,11 @@ class _Inventory: NSManagedObject {
     var name: String?
 
     // func validateName(value: AutoreleasingUnsafeMutablePointer<AnyObject>, error: NSErrorPointer) -> Bool {}
+
+    @NSManaged public
+    var ownerRecordIdentifier: String?
+
+    // func validateOwnerRecordIdentifier(value: AutoreleasingUnsafeMutablePointer<AnyObject>, error: NSErrorPointer) -> Bool {}
 
     @NSManaged public
     var pencilIdentifier: String?
@@ -86,6 +87,11 @@ class _Inventory: NSManagedObject {
     var quantity: NSDecimalNumber?
 
     // func validateQuantity(value: AutoreleasingUnsafeMutablePointer<AnyObject>, error: NSErrorPointer) -> Bool {}
+
+    @NSManaged public
+    var recordID: String?
+
+    // func validateRecordID(value: AutoreleasingUnsafeMutablePointer<AnyObject>, error: NSErrorPointer) -> Bool {}
 
     // MARK: - Relationships
 
