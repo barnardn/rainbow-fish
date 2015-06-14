@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14D136" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="ConfigurationSettings" representedClassName="ConfigurationSettings" syncable="YES">
-        <attribute name="iCloudRecordID" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="minInventoryQuantity" optional="YES" attributeType="Decimal" defaultValueString="0.0" syncable="YES"/>
-        <attribute name="ownerRecordIdentifier" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="recordID" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
-    </entity>
     <entity name="Inventory" representedClassName="Inventory" syncable="YES">
         <attribute name="color" optional="YES" attributeType="Transformable" valueTransformerName="ColorValueTransformer" syncable="YES"/>
         <attribute name="manufacturerName" optional="YES" attributeType="String" syncable="YES"/>
@@ -51,7 +45,6 @@
         <relationship name="product" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Product" inverseName="syncInfo" inverseEntity="Product" syncable="YES"/>
     </entity>
     <elements>
-        <element name="ConfigurationSettings" positionX="-45" positionY="144" width="128" height="105"/>
         <element name="Inventory" positionX="97" positionY="117" width="128" height="180"/>
         <element name="Manufacturer" positionX="16" positionY="225" width="128" height="135"/>
         <element name="Pencil" positionX="-180" positionY="-4" width="128" height="180"/>

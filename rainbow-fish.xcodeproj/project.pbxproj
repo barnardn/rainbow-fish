@@ -10,8 +10,6 @@
 		4908EA751AABAF2200E176E9 /* DoneEditingInputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4908EA741AABAF2200E176E9 /* DoneEditingInputAccessoryView.swift */; };
 		4908EA781AABE80700E176E9 /* InventorySearchResultsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4908EA771AABE80700E176E9 /* InventorySearchResultsController.swift */; };
 		4908EA7A1AACBC4A00E176E9 /* ProductFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4908EA791AACBC4A00E176E9 /* ProductFooterView.swift */; };
-		490F20F01AB4BC47005D50E0 /* _ConfigurationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490F20EF1AB4BC47005D50E0 /* _ConfigurationSettings.swift */; };
-		490F20F21AB4BC51005D50E0 /* ConfigurationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490F20F11AB4BC51005D50E0 /* ConfigurationSettings.swift */; };
 		490F20F41AB4BDE7005D50E0 /* SettingsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490F20F31AB4BDE7005D50E0 /* SettingsNavigationController.swift */; };
 		4913E5C91A7D81D600C4C9BF /* CloudManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4913E5C81A7D81D600C4C9BF /* CloudManager.swift */; };
 		4913E5CD1A7E893E00C4C9BF /* CloudSyncable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4913E5CC1A7E893E00C4C9BF /* CloudSyncable.swift */; };
@@ -21,6 +19,7 @@
 		491AD0F81AA2B6E30046FE00 /* SyncInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491AD0F71AA2B6E30046FE00 /* SyncInfo.swift */; };
 		491AD0FB1AA3C23F0046FE00 /* PencilTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491AD0F91AA3C23F0046FE00 /* PencilTableViewCell.swift */; };
 		491AD0FC1AA3C23F0046FE00 /* PencilTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 491AD0FA1AA3C23F0046FE00 /* PencilTableViewCell.xib */; };
+		492EBCF31B2CFF120054C59F /* ConfigurationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492EBCF21B2CFF120054C59F /* ConfigurationSettings.swift */; };
 		4938036D1A8447EB00E62FC2 /* UIViewController+ProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4938036C1A8447EB00E62FC2 /* UIViewController+ProgressHUD.swift */; };
 		493803701A8449AA00E62FC2 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4938036F1A8449AA00E62FC2 /* Types.swift */; };
 		493803721A84503F00E62FC2 /* CatalogNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493803711A84503F00E62FC2 /* CatalogNavigationController.swift */; };
@@ -103,8 +102,6 @@
 		4908EA741AABAF2200E176E9 /* DoneEditingInputAccessoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoneEditingInputAccessoryView.swift; sourceTree = "<group>"; };
 		4908EA771AABE80700E176E9 /* InventorySearchResultsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InventorySearchResultsController.swift; sourceTree = "<group>"; };
 		4908EA791AACBC4A00E176E9 /* ProductFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductFooterView.swift; sourceTree = "<group>"; };
-		490F20EF1AB4BC47005D50E0 /* _ConfigurationSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = _ConfigurationSettings.swift; sourceTree = "<group>"; };
-		490F20F11AB4BC51005D50E0 /* ConfigurationSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationSettings.swift; sourceTree = "<group>"; };
 		490F20F31AB4BDE7005D50E0 /* SettingsNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsNavigationController.swift; sourceTree = "<group>"; };
 		4913E5C81A7D81D600C4C9BF /* CloudManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudManager.swift; sourceTree = "<group>"; };
 		4913E5CC1A7E893E00C4C9BF /* CloudSyncable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloudSyncable.swift; sourceTree = "<group>"; };
@@ -114,6 +111,7 @@
 		491AD0F71AA2B6E30046FE00 /* SyncInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncInfo.swift; sourceTree = "<group>"; };
 		491AD0F91AA3C23F0046FE00 /* PencilTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PencilTableViewCell.swift; sourceTree = "<group>"; };
 		491AD0FA1AA3C23F0046FE00 /* PencilTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PencilTableViewCell.xib; sourceTree = "<group>"; };
+		492EBCF21B2CFF120054C59F /* ConfigurationSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationSettings.swift; sourceTree = "<group>"; };
 		4938036C1A8447EB00E62FC2 /* UIViewController+ProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+ProgressHUD.swift"; sourceTree = "<group>"; };
 		4938036F1A8449AA00E62FC2 /* Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		493803711A84503F00E62FC2 /* CatalogNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatalogNavigationController.swift; sourceTree = "<group>"; };
@@ -439,7 +437,6 @@
 		49E8D8C21A7447180064E682 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
-				490F20F11AB4BC51005D50E0 /* ConfigurationSettings.swift */,
 				491AD0F71AA2B6E30046FE00 /* SyncInfo.swift */,
 				49E8D8C91A7564400064E682 /* Inventory.swift */,
 				49E8D8CA1A7564400064E682 /* machine */,
@@ -456,7 +453,6 @@
 		49E8D8CA1A7564400064E682 /* machine */ = {
 			isa = PBXGroup;
 			children = (
-				490F20EF1AB4BC47005D50E0 /* _ConfigurationSettings.swift */,
 				491AD0F51AA2B6D60046FE00 /* _SyncInfo.swift */,
 				49E8D8CB1A7564400064E682 /* _Inventory.swift */,
 				49E8D8CC1A7564400064E682 /* _Manufacturer.swift */,
@@ -472,6 +468,7 @@
 				49DF07F61A743A2800BF94D3 /* AppDelegate.swift */,
 				49E8D8DB1A7566E00064E682 /* AppController.swift */,
 				49E8D8DD1A7567FF0064E682 /* AppearanceManager.swift */,
+				492EBCF21B2CFF120054C59F /* ConfigurationSettings.swift */,
 			);
 			name = "App Config";
 			sourceTree = "<group>";
@@ -728,14 +725,13 @@
 				493F6AD91A990E1E003636AE /* TextFieldTableViewCell.swift in Sources */,
 				493F6AE21A992BE6003636AE /* Array+CDOExtensions.swift in Sources */,
 				497E0D631AA3D2E9007FA6A4 /* BigButtonTableViewCell.swift in Sources */,
-				490F20F21AB4BC51005D50E0 /* ConfigurationSettings.swift in Sources */,
 				49E8D8C71A7547770064E682 /* ColorValueTransformer.swift in Sources */,
 				49E8D8E11A7571960064E682 /* NSFileManager+CDOExtensions.swift in Sources */,
 				4908EA781AABE80700E176E9 /* InventorySearchResultsController.swift in Sources */,
-				490F20F01AB4BC47005D50E0 /* _ConfigurationSettings.swift in Sources */,
 				49E8D8D71A7564400064E682 /* Manufacturer.swift in Sources */,
 				493F6AD21A956833003636AE /* PencilSearchResultsTableViewController.swift in Sources */,
 				497E0D661AA7E8D1007FA6A4 /* InventoryDetailTableViewController.swift in Sources */,
+				492EBCF31B2CFF120054C59F /* ConfigurationSettings.swift in Sources */,
 				493F6ADE1A99230C003636AE /* EditManufacturerNavigationController.swift in Sources */,
 				493F6ACB1A8AEFBE003636AE /* PencilColorPickerTableViewCell.swift in Sources */,
 				49AC9E3E1A87E120007CE68A /* DefaultDetailTableViewCell.swift in Sources */,

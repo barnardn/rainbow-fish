@@ -19,6 +19,7 @@ class AppController {
     private let storeName: String = "rainbow-fish.sqlite"
     private let LastUpdatedDateUserDefaultKey = "LastUpdatedDateUserDefaultKey"
     private let DataImportKey = "CDOImportIdentifier"
+    private let config = ConfigurationSettings()
     
     class var appController: AppController {
         struct Singleton {
@@ -36,13 +37,9 @@ class AppController {
         CDK.sharedStack = CoreDataStack(persistentStoreCoordinator: self.persistentStoreCoordinator)
     }
 
-    lazy var appConfiguration: ConfigurationSettings = {
-        var fetchResult = CDK.mainThreadContext.findFirst(ConfigurationSettings.self, predicate: nil, sortDescriptors: nil, offset: nil)
-        if let result = fetchResult.value()! {
-            return result
-        }
-        return ConfigurationSettings(managedObjectContext: CDK.mainThreadContext)
-    }()
+    var appConfiguration: ConfigurationSettings  {
+        return self.config
+    }
     
     lazy var dataImportKey: String = {
         if let infoDict = NSBundle.mainBundle().infoDictionary as! [NSString: AnyObject]? {
