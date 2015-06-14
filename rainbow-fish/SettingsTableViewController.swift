@@ -114,7 +114,7 @@ class SettingsTableViewController: ContentTableViewController {
         
         // check existence of "database.json"
         
-        self.showHUD(header: "Seeding Cloud", footer: nil)
+        self.showHUD(message:"Seeding Cloud")
         self.cloudImporter.seedToCloud({ (success, error) -> Void in
             self.hideHUD()
             if let err = error {
@@ -199,7 +199,7 @@ extension SettingsTableViewController: UITableViewDelegate {
         
         switch ixPath {
         case (Sections.DataManagement.rawValue, DataManagementRows.DataExport.rawValue):
-            self.showHUD(header: "Creating Export", footer: nil)
+            self.showHUD(message: "Creating Export")
             self.exportDatabase({ (success, error) -> Void in
                 self.hideHUD()
                 if let e = error {

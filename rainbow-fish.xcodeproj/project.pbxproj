@@ -21,7 +21,7 @@
 		491AD0F81AA2B6E30046FE00 /* SyncInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491AD0F71AA2B6E30046FE00 /* SyncInfo.swift */; };
 		491AD0FB1AA3C23F0046FE00 /* PencilTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491AD0F91AA3C23F0046FE00 /* PencilTableViewCell.swift */; };
 		491AD0FC1AA3C23F0046FE00 /* PencilTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 491AD0FA1AA3C23F0046FE00 /* PencilTableViewCell.xib */; };
-		4938036D1A8447EB00E62FC2 /* UIViewController+JHProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4938036C1A8447EB00E62FC2 /* UIViewController+JHProgressHUD.swift */; };
+		4938036D1A8447EB00E62FC2 /* UIViewController+ProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4938036C1A8447EB00E62FC2 /* UIViewController+ProgressHUD.swift */; };
 		493803701A8449AA00E62FC2 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4938036F1A8449AA00E62FC2 /* Types.swift */; };
 		493803721A84503F00E62FC2 /* CatalogNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493803711A84503F00E62FC2 /* CatalogNavigationController.swift */; };
 		493803791A86AE8900E62FC2 /* EmbeddedPickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493803771A86AE8900E62FC2 /* EmbeddedPickerTableViewCell.swift */; };
@@ -45,6 +45,7 @@
 		493FC6111A86ED5700D8D17F /* DefaultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 493FC60F1A86ED5700D8D17F /* DefaultTableViewCell.xib */; };
 		49405C771AA7F69F002F2E83 /* InventoryQuantityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49405C751AA7F69F002F2E83 /* InventoryQuantityTableViewCell.swift */; };
 		49405C781AA7F69F002F2E83 /* InventoryQuantityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49405C761AA7F69F002F2E83 /* InventoryQuantityTableViewCell.xib */; };
+		494366DE1B2CD80C00868F1F /* SwiftLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494366DD1B2CD80C00868F1F /* SwiftLoader.swift */; };
 		494BA7CE1B0AC9FF0026B2AE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 494BA7CD1B0AC9FE0026B2AE /* UIKit.framework */; };
 		494BA7D21B154E280026B2AE /* EditMfgTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494BA7D11B154E280026B2AE /* EditMfgTableViewController.swift */; };
 		4973DA701A7F05CB00619D06 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4973DA6F1A7F05CB00619D06 /* ProductTableViewCell.swift */; };
@@ -69,7 +70,6 @@
 		49DF07F91A743A2800BF94D3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DF07F81A743A2800BF94D3 /* ViewController.swift */; };
 		49DF07FE1A743A2800BF94D3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49DF07FD1A743A2800BF94D3 /* Images.xcassets */; };
 		49DF08011A743A2800BF94D3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49DF07FF1A743A2800BF94D3 /* LaunchScreen.xib */; };
-		49E8D8BB1A7443F50064E682 /* JHProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8BA1A7443F50064E682 /* JHProgressHUD.swift */; };
 		49E8D8BE1A7445400064E682 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E8D8BD1A7445400064E682 /* CoreData.framework */; };
 		49E8D8C11A7445670064E682 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E8D8C01A7445670064E682 /* CloudKit.framework */; };
 		49E8D8C51A74474B0064E682 /* rainbow-fish.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8C31A74474B0064E682 /* rainbow-fish.xcdatamodeld */; };
@@ -114,7 +114,7 @@
 		491AD0F71AA2B6E30046FE00 /* SyncInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SyncInfo.swift; sourceTree = "<group>"; };
 		491AD0F91AA3C23F0046FE00 /* PencilTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PencilTableViewCell.swift; sourceTree = "<group>"; };
 		491AD0FA1AA3C23F0046FE00 /* PencilTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PencilTableViewCell.xib; sourceTree = "<group>"; };
-		4938036C1A8447EB00E62FC2 /* UIViewController+JHProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+JHProgressHUD.swift"; sourceTree = "<group>"; };
+		4938036C1A8447EB00E62FC2 /* UIViewController+ProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+ProgressHUD.swift"; sourceTree = "<group>"; };
 		4938036F1A8449AA00E62FC2 /* Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		493803711A84503F00E62FC2 /* CatalogNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatalogNavigationController.swift; sourceTree = "<group>"; };
 		493803771A86AE8900E62FC2 /* EmbeddedPickerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmbeddedPickerTableViewCell.swift; sourceTree = "<group>"; };
@@ -138,6 +138,7 @@
 		493FC60F1A86ED5700D8D17F /* DefaultTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultTableViewCell.xib; sourceTree = "<group>"; };
 		49405C751AA7F69F002F2E83 /* InventoryQuantityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InventoryQuantityTableViewCell.swift; sourceTree = "<group>"; };
 		49405C761AA7F69F002F2E83 /* InventoryQuantityTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InventoryQuantityTableViewCell.xib; sourceTree = "<group>"; };
+		494366DD1B2CD80C00868F1F /* SwiftLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftLoader.swift; sourceTree = "<group>"; };
 		494BA7CD1B0AC9FE0026B2AE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		494BA7D11B154E280026B2AE /* EditMfgTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditMfgTableViewController.swift; sourceTree = "<group>"; };
 		4973DA6F1A7F05CB00619D06 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
@@ -166,7 +167,6 @@
 		49DF07FD1A743A2800BF94D3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		49DF08001A743A2800BF94D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		49E8D8B71A7443C60064E682 /* CoreDataKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreDataKit.framework; path = ../Carthage/Build/iOS/CoreDataKit.framework; sourceTree = "<group>"; };
-		49E8D8BA1A7443F50064E682 /* JHProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHProgressHUD.swift; sourceTree = "<group>"; };
 		49E8D8BD1A7445400064E682 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		49E8D8BF1A7445620064E682 /* rainbow-fish.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = "rainbow-fish.entitlements"; sourceTree = "<group>"; };
 		49E8D8C01A7445670064E682 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
@@ -334,6 +334,14 @@
 			name = Xibs;
 			sourceTree = "<group>";
 		};
+		494366DC1B2CD7EF00868F1F /* SwiftLoader */ = {
+			isa = PBXGroup;
+			children = (
+				494366DD1B2CD80C00868F1F /* SwiftLoader.swift */,
+			);
+			name = SwiftLoader;
+			sourceTree = "<group>";
+		};
 		494BA7D01B154DF40026B2AE /* Edit Mfg & Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -391,6 +399,7 @@
 		49DF07F31A743A2800BF94D3 /* rainbow-fish */ = {
 			isa = PBXGroup;
 			children = (
+				494366DC1B2CD7EF00868F1F /* SwiftLoader */,
 				4908EA731AABAEDE00E176E9 /* Views */,
 				493803851A86C42700E62FC2 /* View Models */,
 				4938037C1A86B69300E62FC2 /* Tableview Cells */,
@@ -400,7 +409,6 @@
 				49E8D8DF1A7570DF0064E682 /* Categories & Extensions */,
 				49E8D8DA1A7566570064E682 /* App Config */,
 				49E8D8C21A7447180064E682 /* Core Data */,
-				49E8D8B91A7443E00064E682 /* JHProgressHUD */,
 				49DF07F81A743A2800BF94D3 /* ViewController.swift */,
 				49DF07FD1A743A2800BF94D3 /* Images.xcassets */,
 				49DF07FF1A743A2800BF94D3 /* LaunchScreen.xib */,
@@ -426,14 +434,6 @@
 				49746BC41ACE18270088C4E4 /* RainbowFishBridge.h */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		49E8D8B91A7443E00064E682 /* JHProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-				49E8D8BA1A7443F50064E682 /* JHProgressHUD.swift */,
-			);
-			name = JHProgressHUD;
 			sourceTree = "<group>";
 		};
 		49E8D8C21A7447180064E682 /* Core Data */ = {
@@ -480,7 +480,7 @@
 			isa = PBXGroup;
 			children = (
 				49E8D8E01A7571960064E682 /* NSFileManager+CDOExtensions.swift */,
-				4938036C1A8447EB00E62FC2 /* UIViewController+JHProgressHUD.swift */,
+				4938036C1A8447EB00E62FC2 /* UIViewController+ProgressHUD.swift */,
 				493F6AE11A992BE6003636AE /* Array+CDOExtensions.swift */,
 				49F419D31A9AAA5100635EF3 /* Int+CDOExtensions.swift */,
 				49F419D51A9AAAF600635EF3 /* UIColor+CDOExtensions.swift */,
@@ -710,15 +710,15 @@
 				491AD0F41A9EB9E70046FE00 /* CKRecord+AppExtensions.swift in Sources */,
 				49AC9E3B1A87DD67007CE68A /* SelectPencilTableViewController.swift in Sources */,
 				491AD0F81AA2B6E30046FE00 /* SyncInfo.swift in Sources */,
-				49E8D8BB1A7443F50064E682 /* JHProgressHUD.swift in Sources */,
 				491AD0F21A9EA64E0046FE00 /* CreatePencilNavigationController.swift in Sources */,
 				49F9146B1A7727C70042EA0D /* InventoryTableViewCell.swift in Sources */,
 				497CD06E1AD1D44E00A3E3C9 /* CloudImport.swift in Sources */,
 				49405C771AA7F69F002F2E83 /* InventoryQuantityTableViewCell.swift in Sources */,
-				4938036D1A8447EB00E62FC2 /* UIViewController+JHProgressHUD.swift in Sources */,
+				4938036D1A8447EB00E62FC2 /* UIViewController+ProgressHUD.swift in Sources */,
 				49E8D8DE1A7567FF0064E682 /* AppearanceManager.swift in Sources */,
 				49E8D8D41A7564400064E682 /* _Manufacturer.swift in Sources */,
 				49E8D8D51A7564400064E682 /* _Pencil.swift in Sources */,
+				494366DE1B2CD80C00868F1F /* SwiftLoader.swift in Sources */,
 				49DF07F91A743A2800BF94D3 /* ViewController.swift in Sources */,
 				493FC6101A86ED5700D8D17F /* DefaultTableViewCell.swift in Sources */,
 				49E8D8C51A74474B0064E682 /* rainbow-fish.xcdatamodeld in Sources */,
