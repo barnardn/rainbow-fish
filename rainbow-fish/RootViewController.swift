@@ -81,7 +81,7 @@ class RootViewController: UITabBarController {
                 return
             }
             AppController.appController.appConfiguration.iCloudRecordID = recordID
-            CDK.mainThreadContext.save(nil)
+            AppController.appController.appConfiguration.save()
             if !performUpdate {
                 self.hideHUD()
                 return

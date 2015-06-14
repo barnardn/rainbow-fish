@@ -35,22 +35,6 @@ class SettingsMinimumStockTableViewController: UITableViewController {
         }
     }
     
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        if let context = AppController.appController.appConfiguration.managedObjectContext {
-            if !context.hasChanges {
-                return
-            }
-            context.performBlock({(_) in
-                return .SaveToPersistentStore
-            }, completionHandler: {(result: Result<CommitAction>) in
-                if let error = result.error() as NSError? {
-                    assertionFailure(error.localizedDescription)
-                }
-            })
-        }
-    }
-
 }
 
 extension SettingsMinimumStockTableViewController: UITableViewDataSource {
@@ -94,6 +78,7 @@ extension SettingsMinimumStockTableViewController: UITableViewDelegate {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         AppController.appController.appConfiguration.minInventoryQuantity = self.values[indexPath.row]
+        AppController.appController.appConfiguration.save()
         let cell = tableView.cellForRowAtIndexPath(indexPath)
         cell?.accessoryType = .Checkmark
     }
