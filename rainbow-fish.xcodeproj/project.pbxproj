@@ -45,6 +45,7 @@
 		493FC6111A86ED5700D8D17F /* DefaultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 493FC60F1A86ED5700D8D17F /* DefaultTableViewCell.xib */; };
 		49405C771AA7F69F002F2E83 /* InventoryQuantityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49405C751AA7F69F002F2E83 /* InventoryQuantityTableViewCell.swift */; };
 		49405C781AA7F69F002F2E83 /* InventoryQuantityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49405C761AA7F69F002F2E83 /* InventoryQuantityTableViewCell.xib */; };
+		494366DE1B2CD80C00868F1F /* SwiftLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494366DD1B2CD80C00868F1F /* SwiftLoader.swift */; };
 		494BA7CE1B0AC9FF0026B2AE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 494BA7CD1B0AC9FE0026B2AE /* UIKit.framework */; };
 		494BA7D21B154E280026B2AE /* EditMfgTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494BA7D11B154E280026B2AE /* EditMfgTableViewController.swift */; };
 		4973DA701A7F05CB00619D06 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4973DA6F1A7F05CB00619D06 /* ProductTableViewCell.swift */; };
@@ -138,6 +139,7 @@
 		493FC60F1A86ED5700D8D17F /* DefaultTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultTableViewCell.xib; sourceTree = "<group>"; };
 		49405C751AA7F69F002F2E83 /* InventoryQuantityTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InventoryQuantityTableViewCell.swift; sourceTree = "<group>"; };
 		49405C761AA7F69F002F2E83 /* InventoryQuantityTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InventoryQuantityTableViewCell.xib; sourceTree = "<group>"; };
+		494366DD1B2CD80C00868F1F /* SwiftLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftLoader.swift; sourceTree = "<group>"; };
 		494BA7CD1B0AC9FE0026B2AE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		494BA7D11B154E280026B2AE /* EditMfgTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditMfgTableViewController.swift; sourceTree = "<group>"; };
 		4973DA6F1A7F05CB00619D06 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
@@ -334,6 +336,14 @@
 			name = Xibs;
 			sourceTree = "<group>";
 		};
+		494366DC1B2CD7EF00868F1F /* SwiftLoader */ = {
+			isa = PBXGroup;
+			children = (
+				494366DD1B2CD80C00868F1F /* SwiftLoader.swift */,
+			);
+			name = SwiftLoader;
+			sourceTree = "<group>";
+		};
 		494BA7D01B154DF40026B2AE /* Edit Mfg & Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -391,6 +401,7 @@
 		49DF07F31A743A2800BF94D3 /* rainbow-fish */ = {
 			isa = PBXGroup;
 			children = (
+				494366DC1B2CD7EF00868F1F /* SwiftLoader */,
 				4908EA731AABAEDE00E176E9 /* Views */,
 				493803851A86C42700E62FC2 /* View Models */,
 				4938037C1A86B69300E62FC2 /* Tableview Cells */,
@@ -719,6 +730,7 @@
 				49E8D8DE1A7567FF0064E682 /* AppearanceManager.swift in Sources */,
 				49E8D8D41A7564400064E682 /* _Manufacturer.swift in Sources */,
 				49E8D8D51A7564400064E682 /* _Pencil.swift in Sources */,
+				494366DE1B2CD80C00868F1F /* SwiftLoader.swift in Sources */,
 				49DF07F91A743A2800BF94D3 /* ViewController.swift in Sources */,
 				493FC6101A86ED5700D8D17F /* DefaultTableViewCell.swift in Sources */,
 				49E8D8C51A74474B0064E682 /* rainbow-fish.xcdatamodeld in Sources */,

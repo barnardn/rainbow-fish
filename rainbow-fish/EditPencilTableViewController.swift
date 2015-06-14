@@ -190,7 +190,7 @@ class EditPencilTableViewController: UITableViewController {
     }
     
     private func cloudStoreRecords(records: [CKRecord]) {
-        self.showHUD(header: nil, footer: nil)
+        self.showHUD()
         CloudManager.sharedManger.syncChangeSet(records){ [unowned self] (success, returnedRecords, error) -> Void in
             self.hideHUD()
             self.saveButton.enabled = true

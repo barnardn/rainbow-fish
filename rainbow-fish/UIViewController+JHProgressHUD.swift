@@ -10,24 +10,20 @@ import UIKit
 
 extension UIViewController {
     
-    func showHUD(#header: String?, footer: String?) {
+    func showHUD(#message: String?) {
+        
         dispatch_async(dispatch_get_main_queue(), {[unowned self] () -> Void in
-            if let (header, footer) = (header, footer) as (String?,String?)? {
-                JHProgressHUD.sharedHUD.showInView(self.view, withHeader: header, andFooter: footer)
-            } else {
-                var defaultFooter = NSLocalizedString("Please Wait", comment:"default hud footer message");
-                JHProgressHUD.sharedHUD.showInView(self.view, withHeader: nil, andFooter: defaultFooter)
-            }
+            SwiftFullScreenLoader.show(title: message)
         })
     }
     
     func showHUD() {
-        return showHUD(header: nil, footer: nil)
+        self.showHUD(message: nil)
     }
     
     func hideHUD() {
         dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            JHProgressHUD.sharedHUD.hide()
+            SwiftFullScreenLoader.hide()
         })
     }
     

@@ -81,7 +81,14 @@ class AppearanceManager {
     // MARK: methods
     
     func setupAppearanceProxies() {
-        
+        var hudConfig = SwiftLoaderConfig()
+        hudConfig.size = 120.0
+        hudConfig.backgroundColor = UIColor(white: 0.0, alpha: 0.5)
+        hudConfig.spinnerColor = self.brandColor
+        hudConfig.titleTextColor = self.brandColor
+        hudConfig.spinnerLineWidth = 4.0
+        SwiftLoader.sharedInstance.config = hudConfig
+        SwiftFullScreenLoader.sharedInstance.config = hudConfig
         UINavigationBar.appearance().barTintColor = self.brandColor
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
         UIBarButtonItem.appearance().tintColor = UIColor.whiteColor()
