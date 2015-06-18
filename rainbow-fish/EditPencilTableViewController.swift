@@ -12,7 +12,7 @@ import CoreDataKit
 import UIKit
 
 
-class EditPencilTableViewController: UITableViewController {
+class EditPencilTableViewController: ContentTableViewController {
 
     private var pencil: Pencil!
     private var context: NSManagedObjectContext!

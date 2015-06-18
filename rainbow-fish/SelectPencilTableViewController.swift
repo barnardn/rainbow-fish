@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 import CoreDataKit
 
-class SelectPencilTableViewController: UITableViewController {
+class SelectPencilTableViewController: ContentTableViewController {
 
     var product: Product!
     var pencils =  [Pencil]()

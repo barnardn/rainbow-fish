@@ -14,6 +14,7 @@ class CatalogViewController: ContentTableViewController {
 
     private var allManufacturers =  [Manufacturer]()
     private var recordCreatorID : String? = ""              // needed for thread safety
+    private var catalogContext = 0
     
     lazy var backButton: UIBarButtonItem = {
         let button = UIBarButtonItem(title: NSLocalizedString("Catalog", comment:"all pencils back button title"), style: .Plain, target: nil, action: nil)
@@ -51,7 +52,9 @@ class CatalogViewController: ContentTableViewController {
         navigationItem.leftBarButtonItem = self.editButton
         self.recordCreatorID = AppController.appController.appConfiguration.iCloudRecordID;
         self.updateDatasource()
+        
     }
+    
     
     // MARK: button action
     

@@ -51,7 +51,9 @@ class SettingsTableViewController: ContentTableViewController {
         self.tableView.registerNib(UINib(nibName: BigButtonTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: BigButtonTableViewCell.nibName)
         
         self.tableView.registerClass(ProductHeaderView.self, forHeaderFooterViewReuseIdentifier: "ProductHeaderView")
+        
         AppController.appController.appConfiguration.addObserver(self, forKeyPath: "minInventoryQuantity", options: .New, context: &settingsContext)
+        
         if let ownerCloudId = AppController.appController.appConfiguration.iCloudRecordID  {
             if ownerCloudId == AppController.appController.dataImportKey {
                 allowDataImportSection = true

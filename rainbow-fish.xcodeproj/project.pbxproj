@@ -20,6 +20,7 @@
 		491AD0FB1AA3C23F0046FE00 /* PencilTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491AD0F91AA3C23F0046FE00 /* PencilTableViewCell.swift */; };
 		491AD0FC1AA3C23F0046FE00 /* PencilTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 491AD0FA1AA3C23F0046FE00 /* PencilTableViewCell.xib */; };
 		492EBCF31B2CFF120054C59F /* ConfigurationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492EBCF21B2CFF120054C59F /* ConfigurationSettings.swift */; };
+		492EBCF51B2E04670054C59F /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 492EBCF41B2E04670054C59F /* iAd.framework */; };
 		4938036D1A8447EB00E62FC2 /* UIViewController+ProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4938036C1A8447EB00E62FC2 /* UIViewController+ProgressHUD.swift */; };
 		493803701A8449AA00E62FC2 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4938036F1A8449AA00E62FC2 /* Types.swift */; };
 		493803721A84503F00E62FC2 /* CatalogNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493803711A84503F00E62FC2 /* CatalogNavigationController.swift */; };
@@ -112,6 +113,7 @@
 		491AD0F91AA3C23F0046FE00 /* PencilTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PencilTableViewCell.swift; sourceTree = "<group>"; };
 		491AD0FA1AA3C23F0046FE00 /* PencilTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PencilTableViewCell.xib; sourceTree = "<group>"; };
 		492EBCF21B2CFF120054C59F /* ConfigurationSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationSettings.swift; sourceTree = "<group>"; };
+		492EBCF41B2E04670054C59F /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		4938036C1A8447EB00E62FC2 /* UIViewController+ProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+ProgressHUD.swift"; sourceTree = "<group>"; };
 		4938036F1A8449AA00E62FC2 /* Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		493803711A84503F00E62FC2 /* CatalogNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatalogNavigationController.swift; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				492EBCF51B2E04670054C59F /* iAd.framework in Frameworks */,
 				494BA7CE1B0AC9FF0026B2AE /* UIKit.framework in Frameworks */,
 				497CD0701AD1D8B200A3E3C9 /* SwiftyJSON.framework in Frameworks */,
 				498AC94F1AC0EB8100C33954 /* CoreDataKit.framework in Frameworks */,
@@ -418,18 +421,19 @@
 		49DF07F41A743A2800BF94D3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				497CD06F1AD1D8B200A3E3C9 /* SwiftyJSON.framework */,
-				49746BC51ACE18430088C4E4 /* libcommonCrypto.dylib */,
-				49AB80691ABE40D8009BEDE5 /* Crashlytics.framework */,
-				49AB806A1ABE40D8009BEDE5 /* Fabric.framework */,
-				49BB8F5F1A79D89C007CFE3B /* prismacolor-pencils.json */,
-				49E8D8BF1A7445620064E682 /* rainbow-fish.entitlements */,
 				49E8D8C01A7445670064E682 /* CloudKit.framework */,
 				49E8D8BD1A7445400064E682 /* CoreData.framework */,
 				49E8D8B71A7443C60064E682 /* CoreDataKit.framework */,
-				494BA7CD1B0AC9FE0026B2AE /* UIKit.framework */,
+				49AB80691ABE40D8009BEDE5 /* Crashlytics.framework */,
+				49AB806A1ABE40D8009BEDE5 /* Fabric.framework */,
+				492EBCF41B2E04670054C59F /* iAd.framework */,
 				49DF07F51A743A2800BF94D3 /* Info.plist */,
+				49746BC51ACE18430088C4E4 /* libcommonCrypto.dylib */,
+				49BB8F5F1A79D89C007CFE3B /* prismacolor-pencils.json */,
+				49E8D8BF1A7445620064E682 /* rainbow-fish.entitlements */,
 				49746BC41ACE18270088C4E4 /* RainbowFishBridge.h */,
+				497CD06F1AD1D8B200A3E3C9 /* SwiftyJSON.framework */,
+				494BA7CD1B0AC9FE0026B2AE /* UIKit.framework */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
