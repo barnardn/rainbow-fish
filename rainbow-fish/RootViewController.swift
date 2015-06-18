@@ -10,9 +10,17 @@ import UIKit
 
 import CoreData
 import CoreDataKit
+import iAd
 
 class RootViewController: UITabBarController {
 
+    private var showingAd: Bool = false
+    
+    private lazy var adBannerView : ADBannerView = {
+        let bannerView = ADBannerView(adType: ADAdType.Banner)
+        return bannerView
+    }()
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
@@ -35,6 +43,8 @@ class RootViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = AppearanceManager.appearanceManager.appBackgroundColor;
+        self.view.insertSubview(self.adBannerView, belowSubview: self.tabBar)
+        self.adBannerView.delegate = self
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -50,6 +60,11 @@ class RootViewController: UITabBarController {
                 self.obtainCloudRecordId(performUpdate: true)
             }
         }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        self.adBannerView.frame = CGRect(x: CGFloat(0.0), y: CGRectGetMinY(self.tabBar.frame), width: CGRectGetWidth(self.view.bounds), height: CGFloat(50))
     }
     
     func updateProductsNotificationHandler(notification: NSNotification) {
@@ -108,27 +123,32 @@ class RootViewController: UITabBarController {
         retryAlert.view.tintColor = AppearanceManager.appearanceManager.brandColor
     }
     
+}
+
+
+extension RootViewController: ADBannerViewDelegate {
     
-    //MARK: seed cloudkit
-    //TODO: REMOVE BEFORE APP SUBMISSION!!
+    func bannerViewDidLoadAd(banner: ADBannerView!) {
+        if (!AppController.appController.bannerAdIsVisible) {
+            UIView.animateWithDuration(0.5, animations: {() -> Void in
+                banner.frame = CGRectOffset(banner.frame, 0, -CGRectGetHeight(banner.frame))
+            }, completion: { (_) -> Void in
+                AppController.appController.bannerAdIsVisible = true
+            })
+        }
+    }
     
-//    private func makeRain() {
-//        showHUD(header: "Making Rain", footer: "Please Wait...")
-//        JHProgressHUD.sharedHUD.showInView(self.view, withHeader: "Making Rain", andFooter: "Please Wait...")
-//        var seeder = Seeder(seedFile: "prismacolor-pencils")
-//        seeder.seedPencilDatabase { [unowned self](countInserted, error) -> () in
-//            self.hideHUD()
-//            if error == nil {
-//                println("inserted: \(countInserted)")
-//                self.showHUD(header: "Updating Pencils", footer: "Please wait...")
-//                CloudManager.sharedManger.refreshManufacturersAndProducts{ [unowned self] () in
-//                    self.hideHUD()
-//                }
-//            } else {
-//                println(error)
-//            }
-//        }
-//    }
-//    
+    func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: NSError!) {
+        if (!AppController.appController.bannerAdIsVisible) {
+            return
+        }
+        UIView.animateWithDuration(0.5, animations: { () -> Void in
+            banner.frame = CGRectOffset(banner.frame, 0, CGRectGetHeight(banner.frame))
+        }, completion: { (_) -> Void in
+            AppController.appController.bannerAdIsVisible = false
+        })
+    }
     
 }
+
+

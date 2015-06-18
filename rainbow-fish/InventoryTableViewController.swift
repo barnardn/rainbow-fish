@@ -47,6 +47,8 @@ class InventoryTableViewController: ContentTableViewController {
         return controller
     }()
     
+
+    
     convenience init() {
         self.init(style: UITableViewStyle.Plain)
         var image = UIImage(named:"tabbar-icon-inventory")?.imageWithRenderingMode(.AlwaysTemplate)
@@ -60,7 +62,6 @@ class InventoryTableViewController: ContentTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.navigationItem.titleView = sortMethodSegmentedControl
         self.tableView.rowHeight = UITableViewAutomaticDimension;
         self.tableView.estimatedRowHeight = 60.0

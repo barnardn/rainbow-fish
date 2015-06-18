@@ -10,7 +10,7 @@ import CoreData
 import CoreDataKit
 import UIKit
 
-class InventoryDetailTableViewController: UITableViewController {
+class InventoryDetailTableViewController: ContentTableViewController {
 
     enum InventorySection: Int {
         case Details, Color, Quantity, Delete

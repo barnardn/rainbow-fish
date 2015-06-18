@@ -13,7 +13,9 @@ import Fabric
 import Crashlytics
 import UIKit
 
-class AppController {
+class AppController: NSObject {
+    
+    dynamic var bannerAdIsVisible: Bool = false
     
     private let modelName: String = "rainbow-fish"
     private let storeName: String = "rainbow-fish.sqlite"

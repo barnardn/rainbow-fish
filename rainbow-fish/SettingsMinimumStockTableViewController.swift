@@ -10,7 +10,7 @@ import CoreData
 import CoreDataKit
 import UIKit
 
-class SettingsMinimumStockTableViewController: UITableViewController {
+class SettingsMinimumStockTableViewController: ContentTableViewController {
 
     var values = [NSDecimalNumber]()
     let halfSymbol = "½"
