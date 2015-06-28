@@ -44,11 +44,9 @@ class AppController: NSObject {
     }
     
     lazy var dataImportKey: String = {
-        if let infoDict = NSBundle.mainBundle().infoDictionary as! [NSString: AnyObject]? {
-            if let importKey = infoDict[self.DataImportKey] as? String {
-                println("import key \(importKey)")
+        if  let infoDict = NSBundle.mainBundle().infoDictionary as! [NSString: AnyObject]?,
+            let importKey = infoDict[self.DataImportKey] as? String {
                 return importKey
-            }
         }
         return ""
     }()
