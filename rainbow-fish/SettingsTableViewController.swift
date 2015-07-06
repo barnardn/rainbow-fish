@@ -14,11 +14,16 @@ class SettingsTableViewController: ContentTableViewController {
 
     enum Sections: Int {
         case MinimumInventory
+        case AppPurchase
         case DataManagement
     }
     
     enum InventoryRows: Int {
         case MinimumInventory
+    }
+    
+    enum AppPurchaseRows: Int {
+        case InAppPurchaseRow
     }
     
     enum DataManagementRows: Int {
@@ -33,7 +38,7 @@ class SettingsTableViewController: ContentTableViewController {
         return CloudImport()
     }()
     
-    let sectionInfo = [ [InventoryRows.MinimumInventory.rawValue], [DataManagementRows.DataExport.rawValue, DataManagementRows.DataImport.rawValue] ]
+    let sectionInfo = [ [InventoryRows.MinimumInventory.rawValue], [AppPurchaseRows.InAppPurchaseRow.rawValue], [DataManagementRows.DataExport.rawValue, DataManagementRows.DataImport.rawValue] ]
     
     convenience init() {
         self.init(style: .Grouped)
@@ -148,7 +153,8 @@ extension SettingsTableViewController: UITableViewDataSource {
             return self.configureDataExportCell(indexPath)
         case  (Sections.DataManagement.rawValue, 1):
             return self.configureDataImportCell(indexPath)
-            
+        case (Sections.AppPurchase.rawValue, AppPurchaseRows.InAppPurchaseRow.rawValue):
+            return self.configureInAppPurchaseCell(indexPath)
         default:
             return self.configureInventoryCell(indexPath)
         }
@@ -162,6 +168,14 @@ extension SettingsTableViewController: UITableViewDataSource {
         } else {
             cell.value = "0"
         }
+        cell.accessoryType = .DisclosureIndicator
+        return cell
+    }
+    
+    private func configureInAppPurchaseCell(indexPath: NSIndexPath) -> NameValueTableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(NameValueTableViewCell.nibName, forIndexPath: indexPath) as! NameValueTableViewCell
+        cell.name = NSLocalizedString("Support the Developer", comment:"in app purchase title")
+        cell.value = "YES"      // should show "thanks!" if user has purchase
         cell.accessoryType = .DisclosureIndicator
         return cell
     }
@@ -210,6 +224,8 @@ extension SettingsTableViewController: UITableViewDelegate {
             })
         case (Sections.DataManagement.rawValue, DataManagementRows.DataImport.rawValue):
             self.seedCloudDatabase()
+        case (Sections.AppPurchase.rawValue, _):
+            viewController = SettingsPurchaseOptionsTableViewController()
         default:
             viewController = SettingsMinimumStockTableViewController()
         }
@@ -221,8 +237,16 @@ extension SettingsTableViewController: UITableViewDelegate {
     
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier("ProductHeaderView") as! ProductHeaderView
-        let title = (section == Sections.MinimumInventory.rawValue) ? NSLocalizedString("Inventory Management", comment:"settings inventory mananagement section header") : "Data Management"
-        headerView.title = title
+        
+        switch section {
+        case Sections.MinimumInventory.rawValue:
+            headerView.title = NSLocalizedString("Inventory Management", comment:"settings inventory mananagement section header")
+        case Sections.AppPurchase.rawValue:
+            headerView.title = NSLocalizedString("Buy", comment:"settings in app purchase section")
+        default:
+            headerView.title = "Data Management"
+        }
+        
         return headerView
     }
     

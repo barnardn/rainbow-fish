@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Options</key>
+	<array>
+		<dict>
+			<key>productID</key>
+			<string>CDO_RF_0001</string>
+			<key>name</key>
+			<string>Basic Option</string>
+			<key>summary</key>
+			<string>This option removes the banner ads from the app and allows you to contribute to the catalog.</string>
+		</dict>
+		<dict>
+			<key>details</key>
+			<string>Independent software developers depend on the generous support from people like yourself to pay the bills. If you like Rainbow Fish, please consider contributing a little extra to keep the things you enjoy from disappearing.</string>
+			<key>summary</key>
+			<string>Same as the basic option, but helps out indie developers!</string>
+			<key>productID</key>
+			<string>CDO_RF_0002</string>
+			<key>name</key>
+			<string>Basic + Donation</string>
+		</dict>
+	</array>
+</dict>
+</plist>
