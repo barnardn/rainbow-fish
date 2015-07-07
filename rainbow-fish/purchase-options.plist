@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Options</key>
+	<array>
+		<dict>
+			<key>productID</key>
+			<string>com.clamdango.rainbowfish.basic</string>
+			<key>name</key>
+			<string>Remove Ads</string>
+			<key>summary</key>
+			<string>This option removes the banner ads from the app and allows you to contribute to the catalog.</string>
+		</dict>
+		<dict>
+			<key>details</key>
+			<string>Independent software developers depend on the generous support from people like yourself to pay the bills. If you like Rainbow Fish, please consider contributing a little extra to keep indie developers remain in business.</string>
+			<key>summary</key>
+			<string>Same as the basic option as well as helping the developer pay the bills!</string>
+			<key>productID</key>
+			<string>com.clamdango.rainbowfish.donate</string>
+			<key>name</key>
+			<string>Remove Ads + Donate</string>
+		</dict>
+	</array>
+</dict>
+</plist>

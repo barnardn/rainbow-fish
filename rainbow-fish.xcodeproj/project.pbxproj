@@ -66,6 +66,11 @@
 		49BB8F5E1A79D431007CFE3B /* Seeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BB8F5D1A79D431007CFE3B /* Seeder.swift */; };
 		49BB8F601A79D89C007CFE3B /* prismacolor-pencils.json in Resources */ = {isa = PBXBuildFile; fileRef = 49BB8F5F1A79D89C007CFE3B /* prismacolor-pencils.json */; };
 		49BEC0E31A7F094E00A601CF /* ProductHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BEC0E21A7F094E00A601CF /* ProductHeaderView.swift */; };
+		49CA53361B407ED500D3E138 /* SettingsPurchaseOptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CA53351B407ED500D3E138 /* SettingsPurchaseOptionsTableViewController.swift */; };
+		49CA53381B409EBB00D3E138 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49CA53371B409EBB00D3E138 /* StoreKit.framework */; };
+		49CA533A1B40A09500D3E138 /* purchase-options.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49CA53391B40A09500D3E138 /* purchase-options.plist */; };
+		49DA95CB1B49A03900502991 /* StoreKitProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DA95CA1B49A03900502991 /* StoreKitProduct.swift */; };
+		49DA95CE1B49A8FF00502991 /* StoreKitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DA95CD1B49A8FF00502991 /* StoreKitController.swift */; };
 		49DF07F71A743A2800BF94D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DF07F61A743A2800BF94D3 /* AppDelegate.swift */; };
 		49DF07F91A743A2800BF94D3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DF07F81A743A2800BF94D3 /* ViewController.swift */; };
 		49DF07FE1A743A2800BF94D3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49DF07FD1A743A2800BF94D3 /* Images.xcassets */; };
@@ -160,6 +165,11 @@
 		49BB8F5D1A79D431007CFE3B /* Seeder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Seeder.swift; sourceTree = "<group>"; };
 		49BB8F5F1A79D89C007CFE3B /* prismacolor-pencils.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "prismacolor-pencils.json"; sourceTree = "<group>"; };
 		49BEC0E21A7F094E00A601CF /* ProductHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductHeaderView.swift; sourceTree = "<group>"; };
+		49CA53351B407ED500D3E138 /* SettingsPurchaseOptionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsPurchaseOptionsTableViewController.swift; sourceTree = "<group>"; };
+		49CA53371B409EBB00D3E138 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		49CA53391B40A09500D3E138 /* purchase-options.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "purchase-options.plist"; sourceTree = "<group>"; };
+		49DA95CA1B49A03900502991 /* StoreKitProduct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreKitProduct.swift; sourceTree = "<group>"; };
+		49DA95CD1B49A8FF00502991 /* StoreKitController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreKitController.swift; sourceTree = "<group>"; };
 		49DF07F11A743A2800BF94D3 /* Rainbow Fish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Rainbow Fish.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		49DF07F51A743A2800BF94D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		49DF07F61A743A2800BF94D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -202,6 +212,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				49CA53381B409EBB00D3E138 /* StoreKit.framework in Frameworks */,
 				492EBCF51B2E04670054C59F /* iAd.framework in Frameworks */,
 				494BA7CE1B0AC9FF0026B2AE /* UIKit.framework in Frameworks */,
 				497CD0701AD1D8B200A3E3C9 /* SwiftyJSON.framework in Frameworks */,
@@ -381,6 +392,23 @@
 			name = Cloudkit;
 			sourceTree = "<group>";
 		};
+		49CA53341B407EA600D3E138 /* App Purchase */ = {
+			isa = PBXGroup;
+			children = (
+				49CA53351B407ED500D3E138 /* SettingsPurchaseOptionsTableViewController.swift */,
+			);
+			name = "App Purchase";
+			sourceTree = "<group>";
+		};
+		49DA95CC1B49A8CD00502991 /* In-App Purchase */ = {
+			isa = PBXGroup;
+			children = (
+				49DA95CA1B49A03900502991 /* StoreKitProduct.swift */,
+				49DA95CD1B49A8FF00502991 /* StoreKitController.swift */,
+			);
+			name = "In-App Purchase";
+			sourceTree = "<group>";
+		};
 		49DF07E81A743A2800BF94D3 = {
 			isa = PBXGroup;
 			children = (
@@ -408,7 +436,7 @@
 				49BB8F5C1A79D402007CFE3B /* Cloudkit */,
 				49E8D8E21A75C66B0064E682 /* View Controllers */,
 				49E8D8DF1A7570DF0064E682 /* Categories & Extensions */,
-				49E8D8DA1A7566570064E682 /* App Config */,
+				49E8D8DA1A7566570064E682 /* Classes */,
 				49E8D8C21A7447180064E682 /* Core Data */,
 				49DF07F81A743A2800BF94D3 /* ViewController.swift */,
 				49DF07FD1A743A2800BF94D3 /* Images.xcassets */,
@@ -421,6 +449,7 @@
 		49DF07F41A743A2800BF94D3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				49CA53371B409EBB00D3E138 /* StoreKit.framework */,
 				49E8D8C01A7445670064E682 /* CloudKit.framework */,
 				49E8D8BD1A7445400064E682 /* CoreData.framework */,
 				49E8D8B71A7443C60064E682 /* CoreDataKit.framework */,
@@ -434,6 +463,7 @@
 				49746BC41ACE18270088C4E4 /* RainbowFishBridge.h */,
 				497CD06F1AD1D8B200A3E3C9 /* SwiftyJSON.framework */,
 				494BA7CD1B0AC9FE0026B2AE /* UIKit.framework */,
+				49CA53391B40A09500D3E138 /* purchase-options.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -466,15 +496,16 @@
 			path = machine;
 			sourceTree = "<group>";
 		};
-		49E8D8DA1A7566570064E682 /* App Config */ = {
+		49E8D8DA1A7566570064E682 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				49DA95CC1B49A8CD00502991 /* In-App Purchase */,
 				49DF07F61A743A2800BF94D3 /* AppDelegate.swift */,
 				49E8D8DB1A7566E00064E682 /* AppController.swift */,
 				49E8D8DD1A7567FF0064E682 /* AppearanceManager.swift */,
 				492EBCF21B2CFF120054C59F /* ConfigurationSettings.swift */,
 			);
-			name = "App Config";
+			name = Classes;
 			sourceTree = "<group>";
 		};
 		49E8D8DF1A7570DF0064E682 /* Categories & Extensions */ = {
@@ -540,6 +571,7 @@
 		49E8D8EA1A75CA0F0064E682 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				49CA53341B407EA600D3E138 /* App Purchase */,
 				4988FEB81AB61EF500AE2D89 /* Inventory Management */,
 				49E8D8EF1A75D4760064E682 /* SettingsTableViewController.swift */,
 				490F20F31AB4BDE7005D50E0 /* SettingsNavigationController.swift */,
@@ -631,6 +663,7 @@
 				4973DA721A7F05E600619D06 /* ProductTableViewCell.xib in Resources */,
 				49F419D21A9AA61900635EF3 /* PencilColorTableViewCell.xib in Resources */,
 				493803811A86BA7100E62FC2 /* NameValueTableViewCell.xib in Resources */,
+				49CA533A1B40A09500D3E138 /* purchase-options.plist in Resources */,
 				49BB8F601A79D89C007CFE3B /* prismacolor-pencils.json in Resources */,
 				493F6ADA1A990E1E003636AE /* TextFieldTableViewCell.xib in Resources */,
 				49DF07FE1A743A2800BF94D3 /* Images.xcassets in Resources */,
@@ -728,6 +761,7 @@
 				4908EA7A1AACBC4A00E176E9 /* ProductFooterView.swift in Sources */,
 				493F6AD91A990E1E003636AE /* TextFieldTableViewCell.swift in Sources */,
 				493F6AE21A992BE6003636AE /* Array+CDOExtensions.swift in Sources */,
+				49DA95CE1B49A8FF00502991 /* StoreKitController.swift in Sources */,
 				497E0D631AA3D2E9007FA6A4 /* BigButtonTableViewCell.swift in Sources */,
 				49E8D8C71A7547770064E682 /* ColorValueTransformer.swift in Sources */,
 				49E8D8E11A7571960064E682 /* NSFileManager+CDOExtensions.swift in Sources */,
@@ -742,6 +776,7 @@
 				49E8D8EE1A75D2A50064E682 /* CatalogViewController.swift in Sources */,
 				49F914681A75DDDD0042EA0D /* InventoryNavigationController.swift in Sources */,
 				493F6AE01A99253A003636AE /* EditProductNavigationController.swift in Sources */,
+				49DA95CB1B49A03900502991 /* StoreKitProduct.swift in Sources */,
 				49E8D8D31A7564400064E682 /* _Inventory.swift in Sources */,
 				4973DA701A7F05CB00619D06 /* ProductTableViewCell.swift in Sources */,
 				49E8D8D91A7564400064E682 /* Product.swift in Sources */,
@@ -761,6 +796,7 @@
 				49BEC0E31A7F094E00A601CF /* ProductHeaderView.swift in Sources */,
 				4908EA751AABAF2200E176E9 /* DoneEditingInputAccessoryView.swift in Sources */,
 				49F419D41A9AAA5100635EF3 /* Int+CDOExtensions.swift in Sources */,
+				49CA53361B407ED500D3E138 /* SettingsPurchaseOptionsTableViewController.swift in Sources */,
 				493803801A86BA7100E62FC2 /* NameValueTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
