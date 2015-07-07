@@ -19,7 +19,8 @@ class SettingsPurchaseOptionsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.registerNib(UINib(nibName: BigButtonTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: BigButtonTableViewCell.nibName)
+        self.title = NSLocalizedString("Purchases", comment:"settings in app purchase view title")
+        tableView.registerNib(UINib(nibName: NameValueTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: NameValueTableViewCell.nibName)
         if !self.storeKitController.canMakePayments() {
             self.displayCantPayAlert()
             return
@@ -27,9 +28,12 @@ class SettingsPurchaseOptionsTableViewController: UITableViewController {
         self.showHUD(message: NSLocalizedString("Fetching Prices...", comment:"fetching prices from app store message"))
         self.storeKitController.validateProductIdentifiers { [unowned self] (products) -> Void in
             self.hideHUD()
-            self.products = products.sorted({ (p1: StoreKitProduct, p2: StoreKitProduct) -> Bool in
+            var allProducts = [self.storeKitController.restorePurchasesProduct]
+            let storeKitProducts = products.sorted({ (p1: StoreKitProduct, p2: StoreKitProduct) -> Bool in
                 return p1.displayPriceValue < p2.displayPriceValue
             })
+            allProducts.extend(storeKitProducts)
+            self.products = allProducts
             self.tableView.reloadData()
         }
     }
@@ -57,9 +61,11 @@ extension SettingsPurchaseOptionsTableViewController: UITableViewDataSource, UIT
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(BigButtonTableViewCell.nibName, forIndexPath: indexPath) as! BigButtonTableViewCell
-        let product = self.products?[indexPath.section]
-        cell.title = "\(product?.name): \(product?.displayPrice)"
+        let cell = tableView.dequeueReusableCellWithIdentifier(NameValueTableViewCell.nibName, forIndexPath: indexPath) as! NameValueTableViewCell
+        let product = self.products?[indexPath.section] as StoreKitProduct!
+        cell.name = product.name
+        cell.value = product.displayPrice
+        cell.accessoryType = .DisclosureIndicator
         return cell
     }
     

@@ -242,7 +242,7 @@ extension SettingsTableViewController: UITableViewDelegate {
         case Sections.MinimumInventory.rawValue:
             headerView.title = NSLocalizedString("Inventory Management", comment:"settings inventory mananagement section header")
         case Sections.AppPurchase.rawValue:
-            headerView.title = NSLocalizedString("Buy", comment:"settings in app purchase section")
+            headerView.title = NSLocalizedString("Purchase", comment:"settings in app purchase section")
         default:
             headerView.title = "Data Management"
         }
