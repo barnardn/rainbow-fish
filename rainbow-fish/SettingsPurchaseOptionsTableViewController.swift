@@ -19,7 +19,7 @@ class SettingsPurchaseOptionsTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = NSLocalizedString("Purchases", comment:"settings in app purchase view title")
+        self.title = NSLocalizedString("Purchase", comment:"settings in app purchase view title")
         tableView.registerNib(UINib(nibName: NameValueTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: NameValueTableViewCell.nibName)
         if !self.storeKitController.canMakePayments() {
             self.displayCantPayAlert()
@@ -62,14 +62,19 @@ extension SettingsPurchaseOptionsTableViewController: UITableViewDataSource, UIT
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(NameValueTableViewCell.nibName, forIndexPath: indexPath) as! NameValueTableViewCell
+        cell.selectionStyle = .None
         let product = self.products?[indexPath.section] as StoreKitProduct!
         cell.name = product.name
         cell.value = product.displayPrice
-        cell.accessoryType = .DisclosureIndicator
+        cell.tintColor = AppearanceManager.appearanceManager.brandColor
+        if let details = product.details {
+            cell.accessoryType = .DetailDisclosureButton
+        } else {
+            cell.accessoryType = .DisclosureIndicator
+        }
         return cell
     }
     
- 
     //MARK: table view delegate
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -82,6 +87,11 @@ extension SettingsPurchaseOptionsTableViewController: UITableViewDataSource, UIT
         return product?.summary
     }
     
+    override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
+        let product = self.products?[indexPath.section]
+        let viewController = ThankYouViewController(message: product?.details)
+        self.presentViewController(viewController, animated: true, completion: nil)
+    }
     
 }
 

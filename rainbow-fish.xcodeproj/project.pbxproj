@@ -21,6 +21,8 @@
 		491AD0FC1AA3C23F0046FE00 /* PencilTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 491AD0FA1AA3C23F0046FE00 /* PencilTableViewCell.xib */; };
 		492EBCF31B2CFF120054C59F /* ConfigurationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492EBCF21B2CFF120054C59F /* ConfigurationSettings.swift */; };
 		492EBCF51B2E04670054C59F /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 492EBCF41B2E04670054C59F /* iAd.framework */; };
+		4930BBA01B519458009A2A22 /* ThankYouViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4930BB9E1B519458009A2A22 /* ThankYouViewController.swift */; };
+		4930BBA11B519458009A2A22 /* ThankYouView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4930BB9F1B519458009A2A22 /* ThankYouView.xib */; };
 		4938036D1A8447EB00E62FC2 /* UIViewController+ProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4938036C1A8447EB00E62FC2 /* UIViewController+ProgressHUD.swift */; };
 		493803701A8449AA00E62FC2 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4938036F1A8449AA00E62FC2 /* Types.swift */; };
 		493803721A84503F00E62FC2 /* CatalogNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493803711A84503F00E62FC2 /* CatalogNavigationController.swift */; };
@@ -119,6 +121,8 @@
 		491AD0FA1AA3C23F0046FE00 /* PencilTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PencilTableViewCell.xib; sourceTree = "<group>"; };
 		492EBCF21B2CFF120054C59F /* ConfigurationSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationSettings.swift; sourceTree = "<group>"; };
 		492EBCF41B2E04670054C59F /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		4930BB9E1B519458009A2A22 /* ThankYouViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThankYouViewController.swift; sourceTree = "<group>"; };
+		4930BB9F1B519458009A2A22 /* ThankYouView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThankYouView.xib; sourceTree = "<group>"; };
 		4938036C1A8447EB00E62FC2 /* UIViewController+ProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+ProgressHUD.swift"; sourceTree = "<group>"; };
 		4938036F1A8449AA00E62FC2 /* Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		493803711A84503F00E62FC2 /* CatalogNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatalogNavigationController.swift; sourceTree = "<group>"; };
@@ -528,19 +532,21 @@
 				49E8D8EA1A75CA0F0064E682 /* Settings */,
 				49E8D8E91A75C9F60064E682 /* Catalog */,
 				49E8D8E81A75C9E50064E682 /* Inventory */,
-				49E8D8E31A75C67C0064E682 /* Main & Base */,
+				49E8D8E31A75C67C0064E682 /* Common */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
 		};
-		49E8D8E31A75C67C0064E682 /* Main & Base */ = {
+		49E8D8E31A75C67C0064E682 /* Common */ = {
 			isa = PBXGroup;
 			children = (
 				493F6ADB1A9911CF003636AE /* EditTextFieldTableViewController.swift */,
 				49E8D8E41A75C6940064E682 /* RootViewController.swift */,
 				49E8D8E61A75C9420064E682 /* ContentTableViewController.swift */,
+				4930BB9E1B519458009A2A22 /* ThankYouViewController.swift */,
+				4930BB9F1B519458009A2A22 /* ThankYouView.xib */,
 			);
-			name = "Main & Base";
+			name = Common;
 			sourceTree = "<group>";
 		};
 		49E8D8E81A75C9E50064E682 /* Inventory */ = {
@@ -662,6 +668,7 @@
 				49DF08011A743A2800BF94D3 /* LaunchScreen.xib in Resources */,
 				4973DA721A7F05E600619D06 /* ProductTableViewCell.xib in Resources */,
 				49F419D21A9AA61900635EF3 /* PencilColorTableViewCell.xib in Resources */,
+				4930BBA11B519458009A2A22 /* ThankYouView.xib in Resources */,
 				493803811A86BA7100E62FC2 /* NameValueTableViewCell.xib in Resources */,
 				49CA533A1B40A09500D3E138 /* purchase-options.plist in Resources */,
 				49BB8F601A79D89C007CFE3B /* prismacolor-pencils.json in Resources */,
@@ -788,6 +795,7 @@
 				4913E5C91A7D81D600C4C9BF /* CloudManager.swift in Sources */,
 				49E8D8EC1A75CADE0064E682 /* InventoryTableViewController.swift in Sources */,
 				49746BC81ACE191E0088C4E4 /* String+Hash.swift in Sources */,
+				4930BBA01B519458009A2A22 /* ThankYouViewController.swift in Sources */,
 				49E8D8DC1A7566E00064E682 /* AppController.swift in Sources */,
 				49E8D8F01A75D4760064E682 /* SettingsTableViewController.swift in Sources */,
 				491AD0F61AA2B6D60046FE00 /* _SyncInfo.swift in Sources */,
