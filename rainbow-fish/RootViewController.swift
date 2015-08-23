@@ -76,7 +76,7 @@ class RootViewController: UITabBarController {
     }
     
     private func updateProducts() {
-        self.showHUD(message: "Updating Pencils...")
+        self.showHUD(message: "Updating...")
         CloudManager.sharedManger.refreshManufacturersAndProducts{ [unowned self] (success, error) in
             if let e = error {
                 assertionFailure(e.localizedDescription)
@@ -88,7 +88,7 @@ class RootViewController: UITabBarController {
     }
     
     private func obtainCloudRecordId(#performUpdate: Bool) {
-        self.showHUD(message: "Performing Setup...")
+        self.showHUD(message: "Setup...")
         CloudManager.sharedManger.fetchUserRecordID({ [unowned self] (recordID, error) -> Void in
             if let e = error {
                 self.hideHUD()

@@ -13,7 +13,7 @@ import CoreDataKit
 class CatalogViewController: ContentTableViewController {
 
     private var allManufacturers =  [Manufacturer]()
-    private var recordCreatorID : String? = ""              // needed for thread safety
+    private var recordCreatorID : String? = ""
     private var catalogContext = 0
     
     lazy var backButton: UIBarButtonItem = {

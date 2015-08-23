@@ -27,4 +27,16 @@ extension UIViewController {
         })
     }
     
+    func showSmallHUD(#message: String?) {
+        dispatch_async(dispatch_get_main_queue(), { [unowned self] () -> Void in
+            SwiftLoader.show(title: message, animated: true)
+        })
+    }
+    
+    func hideSmallHUD() {
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+            SwiftLoader.hide()
+        })
+    }
+    
 }
