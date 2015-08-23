@@ -11,22 +11,48 @@ import Foundation
 class ConfigurationSettings: NSObject {
 
     enum ConfigurationSettingsKey: String {
-        case icloudKey = "com.clamdango.ranbow-fish.icloudid"
-        case minInventoryQuantityKey = "com.clamdango.ranbow-fish.minqty"
+        case ICloudKey = "com.clamdango.ranbow-fish.icloudid"
+        case MinInventoryQuantityKey = "com.clamdango.ranbow-fish.minqty"
+        case AppPurchaseStatusKey = "com.clamdango.ranbow-fish.purchase-status"
+        case PurchasedProductIdentifierKey = "com.clamdango.ranbow-fish.product"
+        case AppPurchaseErrorKey = "com.clamdango.ranbow-fish.purchase-error"
     }
     
     dynamic var iCloudRecordID: String?
     dynamic var minInventoryQuantity: NSDecimalNumber?
+    dynamic var purchaseStatus: NSNumber?
+    
+    var purchasedProduct: String? {
+        get {
+            return NSUserDefaults.standardUserDefaults().stringForKey(ConfigurationSettingsKey.PurchasedProductIdentifierKey.rawValue)
+        }
+        set {
+            NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: ConfigurationSettingsKey.PurchasedProductIdentifierKey.rawValue)
+        }
+    }
+    
+    var lastTransactionError: String? {
+        get {
+            return NSUserDefaults.standardUserDefaults().stringForKey(ConfigurationSettingsKey.AppPurchaseErrorKey.rawValue)
+        }
+        set {
+            NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: ConfigurationSettingsKey.AppPurchaseErrorKey.rawValue)
+        }
+    }
     
     override init() {
         super.init()
-        iCloudRecordID = NSUserDefaults.standardUserDefaults().stringForKey(ConfigurationSettingsKey.icloudKey.rawValue)
-        minInventoryQuantity = NSUserDefaults.standardUserDefaults().objectForKey(ConfigurationSettingsKey.minInventoryQuantityKey.rawValue) as? NSDecimalNumber
+        iCloudRecordID = NSUserDefaults.standardUserDefaults().stringForKey(ConfigurationSettingsKey.ICloudKey.rawValue)
+        minInventoryQuantity = NSUserDefaults.standardUserDefaults().objectForKey(ConfigurationSettingsKey.MinInventoryQuantityKey.rawValue) as? NSDecimalNumber
+        purchaseStatus = NSUserDefaults.standardUserDefaults().objectForKey(ConfigurationSettingsKey.AppPurchaseStatusKey.rawValue) as? NSNumber
     }
     
     func save() {
-        NSUserDefaults.standardUserDefaults().setObject(self.iCloudRecordID, forKey: ConfigurationSettingsKey.icloudKey.rawValue)
-        NSUserDefaults.standardUserDefaults().setObject(self.minInventoryQuantity, forKey: ConfigurationSettingsKey.minInventoryQuantityKey.rawValue)
+        NSUserDefaults.standardUserDefaults().setObject(self.iCloudRecordID, forKey: ConfigurationSettingsKey.ICloudKey.rawValue)
+        NSUserDefaults.standardUserDefaults().setObject(self.minInventoryQuantity, forKey: ConfigurationSettingsKey.MinInventoryQuantityKey.rawValue)
     }
+    
+    
+    
     
 }

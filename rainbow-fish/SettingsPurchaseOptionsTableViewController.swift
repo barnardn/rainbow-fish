@@ -78,8 +78,11 @@ extension SettingsPurchaseOptionsTableViewController: UITableViewDataSource, UIT
     //MARK: table view delegate
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let product = self.products?[indexPath.section]
-        println(product)
+        if  let product = self.products?[indexPath.section],
+            let appStoreProduct = self.storeKitController.skProduct(forProduct: product) {
+            let viewController = SettingsConfirmPurchaseTableViewController(selectedProduct: product, appStoreProduct: appStoreProduct)
+            self.navigationController?.pushViewController(viewController, animated: true)
+        }
     }
     
     override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {

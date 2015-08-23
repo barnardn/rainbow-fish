@@ -51,6 +51,9 @@ class StoreKitController: NSObject {
         return results.first
     }
     
+    func skProduct(forProduct product: StoreKitProduct) -> SKProduct? {
+        return self.forSaleProducts?[product.productID]
+    }
     
     func formattedPrice(price: NSDecimalNumber, forLocale locale: NSLocale) -> String {
         var numberFormatter = NSNumberFormatter()

@@ -23,6 +23,8 @@
 		492EBCF51B2E04670054C59F /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 492EBCF41B2E04670054C59F /* iAd.framework */; };
 		4930BBA01B519458009A2A22 /* ThankYouViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4930BB9E1B519458009A2A22 /* ThankYouViewController.swift */; };
 		4930BBA11B519458009A2A22 /* ThankYouView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4930BB9F1B519458009A2A22 /* ThankYouView.xib */; };
+		4930BBA31B51BCEA009A2A22 /* SettingsConfirmPurchaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4930BBA21B51BCEA009A2A22 /* SettingsConfirmPurchaseTableViewController.swift */; };
+		4930BBA51B51F0D3009A2A22 /* StoreKitPaymentObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4930BBA41B51F0D3009A2A22 /* StoreKitPaymentObserver.swift */; };
 		4938036D1A8447EB00E62FC2 /* UIViewController+ProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4938036C1A8447EB00E62FC2 /* UIViewController+ProgressHUD.swift */; };
 		493803701A8449AA00E62FC2 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4938036F1A8449AA00E62FC2 /* Types.swift */; };
 		493803721A84503F00E62FC2 /* CatalogNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493803711A84503F00E62FC2 /* CatalogNavigationController.swift */; };
@@ -123,6 +125,8 @@
 		492EBCF41B2E04670054C59F /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		4930BB9E1B519458009A2A22 /* ThankYouViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThankYouViewController.swift; sourceTree = "<group>"; };
 		4930BB9F1B519458009A2A22 /* ThankYouView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThankYouView.xib; sourceTree = "<group>"; };
+		4930BBA21B51BCEA009A2A22 /* SettingsConfirmPurchaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsConfirmPurchaseTableViewController.swift; sourceTree = "<group>"; };
+		4930BBA41B51F0D3009A2A22 /* StoreKitPaymentObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreKitPaymentObserver.swift; sourceTree = "<group>"; };
 		4938036C1A8447EB00E62FC2 /* UIViewController+ProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+ProgressHUD.swift"; sourceTree = "<group>"; };
 		4938036F1A8449AA00E62FC2 /* Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		493803711A84503F00E62FC2 /* CatalogNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatalogNavigationController.swift; sourceTree = "<group>"; };
@@ -400,6 +404,7 @@
 			isa = PBXGroup;
 			children = (
 				49CA53351B407ED500D3E138 /* SettingsPurchaseOptionsTableViewController.swift */,
+				4930BBA21B51BCEA009A2A22 /* SettingsConfirmPurchaseTableViewController.swift */,
 			);
 			name = "App Purchase";
 			sourceTree = "<group>";
@@ -409,6 +414,7 @@
 			children = (
 				49DA95CA1B49A03900502991 /* StoreKitProduct.swift */,
 				49DA95CD1B49A8FF00502991 /* StoreKitController.swift */,
+				4930BBA41B51F0D3009A2A22 /* StoreKitPaymentObserver.swift */,
 			);
 			name = "In-App Purchase";
 			sourceTree = "<group>";
@@ -747,6 +753,7 @@
 				49E8D8D61A7564400064E682 /* _Product.swift in Sources */,
 				4913E5CD1A7E893E00C4C9BF /* CloudSyncable.swift in Sources */,
 				49F419D11A9AA61900635EF3 /* PencilColorTableViewCell.swift in Sources */,
+				4930BBA51B51F0D3009A2A22 /* StoreKitPaymentObserver.swift in Sources */,
 				49E8D8D81A7564400064E682 /* Pencil.swift in Sources */,
 				491AD0F41A9EB9E70046FE00 /* CKRecord+AppExtensions.swift in Sources */,
 				49AC9E3B1A87DD67007CE68A /* SelectPencilTableViewController.swift in Sources */,
@@ -762,6 +769,7 @@
 				494366DE1B2CD80C00868F1F /* SwiftLoader.swift in Sources */,
 				49DF07F91A743A2800BF94D3 /* ViewController.swift in Sources */,
 				493FC6101A86ED5700D8D17F /* DefaultTableViewCell.swift in Sources */,
+				4930BBA31B51BCEA009A2A22 /* SettingsConfirmPurchaseTableViewController.swift in Sources */,
 				49E8D8C51A74474B0064E682 /* rainbow-fish.xcdatamodeld in Sources */,
 				490F20F41AB4BDE7005D50E0 /* SettingsNavigationController.swift in Sources */,
 				49DF07F71A743A2800BF94D3 /* AppDelegate.swift in Sources */,
