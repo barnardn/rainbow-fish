@@ -87,7 +87,10 @@ class CloudManager {
     func productsQuery(manufacturer: CKRecord, isLastOperation: Bool, importCompletion: (success: Bool, error: NSError?) -> Void) -> CKQueryOperation {
         let manufactRef = CKReference(record: manufacturer, action: CKReferenceAction.DeleteSelf)
         let predicate = NSPredicate(format: "%K == %@", ProductRelationships.manufacturer.rawValue, manufactRef)
+        
         var productQuery = CKQuery(recordType: Product.entityName, predicate: predicate)
+        productQuery.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        
         let queryOperation = CKQueryOperation(query: productQuery)
         var productRecords = [CKRecord]()
         queryOperation.recordFetchedBlock = {(record: CKRecord!) in
@@ -99,10 +102,7 @@ class CloudManager {
                 return
             }
             if cursor != nil {
-                let fetchMoreOperation = CKQueryOperation(cursor: cursor)
-                fetchMoreOperation.recordFetchedBlock = queryOperation.recordFetchedBlock
-                fetchMoreOperation.completionBlock = queryOperation.completionBlock
-                self.publicDb.addOperation(fetchMoreOperation)
+                self.continueProductsQuery(manufacturer, cursor: cursor, productRecords: productRecords, isLastOperation: isLastOperation, completion: importCompletion)
             } else {
                 self.storeManufacturer(manufacturer, productRecords: productRecords, completion: { () -> Void in
                     if isLastOperation {
@@ -114,6 +114,31 @@ class CloudManager {
         }
         return queryOperation
     }
+    
+    func continueProductsQuery(manufacturer: CKRecord, cursor: CKQueryCursor, var productRecords: [CKRecord], isLastOperation: Bool, completion: (success: Bool, error: NSError?) -> Void) {
+        
+        let operation = CKQueryOperation(cursor: cursor)
+        operation.recordFetchedBlock = {(record: CKRecord!) in
+            productRecords.append(record)
+        }
+        
+        operation.queryCompletionBlock = {[unowned self] (continueCursor: CKQueryCursor!, error: NSError!) in
+            if error != nil {
+                dispatch_async(dispatch_get_main_queue(), { completion(success: false, error: error) })
+            } else {
+                if continueCursor != nil {
+                    self.continueProductsQuery(manufacturer, cursor: continueCursor, productRecords: productRecords, isLastOperation: isLastOperation, completion: completion)
+                } else {
+                    if isLastOperation {
+                        dispatch_async(dispatch_get_main_queue()) { completion(success: true, error: nil) }
+                    }
+                }
+            }
+        }
+        self.publicDb.addOperation(operation)
+    }
+    
+    
     
     func importAllPencilsForProduct(product: Product, modifiedAfterDate: NSDate?, completion: (success: Bool, error: NSError?)->Void) {
         assert(product.recordID != nil, "Must have a CKRecordID")
