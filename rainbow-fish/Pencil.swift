@@ -66,9 +66,7 @@ extension Pencil: CloudSyncable {
         jsonObject[PencilAttributes.modificationDate.rawValue] = self.modificationDate?.timeIntervalSince1970
         jsonObject[PencilAttributes.ownerRecordIdentifier.rawValue] = self.ownerRecordIdentifier
         return jsonObject
-        
     }
-    
     
 }
 

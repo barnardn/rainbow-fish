@@ -104,7 +104,7 @@ class CloudManager {
                 fetchMoreOperation.completionBlock = queryOperation.completionBlock
                 self.publicDb.addOperation(fetchMoreOperation)
             } else {
-                self.importManufacturer(manufacturer, productRecords: productRecords, completion: { () -> Void in
+                self.storeManufacturer(manufacturer, productRecords: productRecords, completion: { () -> Void in
                     if isLastOperation {
                         dispatch_async(dispatch_get_main_queue()) { importCompletion(success: true, error: nil) }
                     }
@@ -122,15 +122,21 @@ class CloudManager {
         let productRef = CKReference(recordID: productRecordId, action: .DeleteSelf)
         let byProduct = NSPredicate(format: "%K == %@", PencilRelationships.product.rawValue, productRef)
         var subpredicates = [byProduct]
+        
         if let modDate = modifiedAfterDate {
             let afterDate = NSPredicate(format: "%K > %@", PencilAttributes.modificationDate.rawValue, modDate)
             subpredicates.append(afterDate)
         }
+        
         let predicate = NSCompoundPredicate(type: NSCompoundPredicateType.AndPredicateType, subpredicates: subpredicates)
         let pencilQuery = CKQuery(recordType: Pencil.entityName, predicate: predicate)
+        pencilQuery.sortDescriptors = [ NSSortDescriptor(key: "name", ascending: true)]
+        
         var pencilRecords = [CKRecord]()
     
         let operation = CKQueryOperation(query: pencilQuery)
+        operation.resultsLimit = CKQueryOperationMaximumResults
+        
         operation.recordFetchedBlock = {(record: CKRecord!) in
             pencilRecords.append(record)
         }
@@ -138,19 +144,14 @@ class CloudManager {
         operation.queryCompletionBlock = {[unowned self](cursor: CKQueryCursor!, error: NSError!) in
             if error != nil {
                 dispatch_async(dispatch_get_main_queue()) { completion(success: false, error: error) }
-                return
-            }
-            if cursor != nil {
-                self.createQueryOperation(product, cursor: cursor, results: pencilRecords, completion: completion)
             } else {
-                self.storePencilRecords(pencilRecords, forProduct: product, completion: completion)
+                if cursor != nil {
+                    self.createQueryOperation(product, cursor: cursor, results: pencilRecords, completion: completion)
+                } else {
+                    self.storePencilRecords(pencilRecords, forProduct: product, completion: completion)
+                }
             }
         }
-        
-        operation.completionBlock = {()
-            println("First operation is done!")
-        }
-        
         self.publicDb.addOperation(operation)
     }
     
@@ -163,29 +164,25 @@ class CloudManager {
             results.append(record)
         }
         
-        
         queryOperation.queryCompletionBlock = { [unowned self] (nextCursor: CKQueryCursor!, error: NSError!) in
             if error != nil {
                 dispatch_async(dispatch_get_main_queue()) { completion(success: false, error: error) }
-            }
-            if nextCursor != nil {
-                self.createQueryOperation(product, cursor: nextCursor, results: results, completion: completion)
             } else {
-                self.storePencilRecords(results, forProduct: product, completion: completion)
+                if nextCursor != nil {
+                    self.createQueryOperation(product, cursor: nextCursor, results: results, completion: completion)
+                } else {
+                    self.storePencilRecords(results, forProduct: product, completion: completion)
+                }
             }
         }
-        
-        queryOperation.completionBlock = {()
-            println("results count: \(results.count)")
-            println("Subsequent operation is done!")
-        }
-        
-        
         self.publicDb.addOperation(queryOperation)
     }
 
     
     func storePencilRecords(pencilRecords: [CKRecord], forProduct product: Product, completion: (Bool, NSError?)->Void) {
+        
+        println("Storing \(pencilRecords.count) pencil records")
+        
         CDK.performBlockOnBackgroundContext({(context: NSManagedObjectContext) in
             var pencils = pencilRecords.map{ (record: CKRecord) -> Pencil in
                 var (pencil, error) = context.updateFromCKRecord(Pencil.self, record: record, createIfNotFound: true)
@@ -231,7 +228,7 @@ class CloudManager {
     
     // MARK: core data
     
-    func importManufacturer(manufacturerRecord: CKRecord, productRecords: [CKRecord]?, completion: ()->Void) {
+    func storeManufacturer(manufacturerRecord: CKRecord, productRecords: [CKRecord]?, completion: ()->Void) {
 
         CDK.performBlockOnBackgroundContext({(context: NSManagedObjectContext) in
             let (manufacturer, error) = context.updateFromCKRecord(Manufacturer.self, record: manufacturerRecord, createIfNotFound: true)
