@@ -117,6 +117,7 @@ class CloudManager {
     
     func importAllPencilsForProduct(product: Product, modifiedAfterDate: NSDate?, completion: (success: Bool, error: NSError?)->Void) {
         assert(product.recordID != nil, "Must have a CKRecordID")
+
         let productRecordId = CKRecordID(recordName: product.recordID!)
         let productRef = CKReference(recordID: productRecordId, action: .DeleteSelf)
         let byProduct = NSPredicate(format: "%K == %@", PencilRelationships.product.rawValue, productRef)
@@ -127,26 +128,62 @@ class CloudManager {
         }
         let predicate = NSCompoundPredicate(type: NSCompoundPredicateType.AndPredicateType, subpredicates: subpredicates)
         let pencilQuery = CKQuery(recordType: Pencil.entityName, predicate: predicate)
-        let queryOperation = CKQueryOperation(query: pencilQuery) as CKQueryOperation
         var pencilRecords = [CKRecord]()
-        queryOperation.recordFetchedBlock = {(record: CKRecord!) in
+    
+        let operation = CKQueryOperation(query: pencilQuery)
+        operation.recordFetchedBlock = {(record: CKRecord!) in
             pencilRecords.append(record)
         }
-        queryOperation.queryCompletionBlock = {[unowned self] (cursor: CKQueryCursor!, error: NSError!) in
+    
+        operation.queryCompletionBlock = {[unowned self](cursor: CKQueryCursor!, error: NSError!) in
             if error != nil {
                 dispatch_async(dispatch_get_main_queue()) { completion(success: false, error: error) }
+                return
             }
             if cursor != nil {
-                let fetchMoreOperation = CKQueryOperation(cursor: cursor)
-                fetchMoreOperation.recordFetchedBlock = queryOperation.recordFetchedBlock
-                fetchMoreOperation.queryCompletionBlock = queryOperation.queryCompletionBlock
-                self.publicDb.addOperation(fetchMoreOperation)
+                self.createQueryOperation(product, cursor: cursor, results: pencilRecords, completion: completion)
             } else {
                 self.storePencilRecords(pencilRecords, forProduct: product, completion: completion)
             }
         }
+        
+        operation.completionBlock = {()
+            println("First operation is done!")
+        }
+        
+        self.publicDb.addOperation(operation)
+    }
+    
+    
+    private func createQueryOperation(product: Product, cursor: CKQueryCursor!, var results: [CKRecord], completion: (success: Bool, error: NSError?)->Void) -> Void {
+        var queryOperation = CKQueryOperation(cursor: cursor)
+        queryOperation.resultsLimit = CKQueryOperationMaximumResults
+        
+        queryOperation.recordFetchedBlock = {(record: CKRecord!) in
+            results.append(record)
+        }
+        
+        
+        queryOperation.queryCompletionBlock = { [unowned self] (nextCursor: CKQueryCursor!, error: NSError!) in
+            if error != nil {
+                dispatch_async(dispatch_get_main_queue()) { completion(success: false, error: error) }
+            }
+            if nextCursor != nil {
+                self.createQueryOperation(product, cursor: nextCursor, results: results, completion: completion)
+            } else {
+                self.storePencilRecords(results, forProduct: product, completion: completion)
+            }
+        }
+        
+        queryOperation.completionBlock = {()
+            println("results count: \(results.count)")
+            println("Subsequent operation is done!")
+        }
+        
+        
         self.publicDb.addOperation(queryOperation)
     }
+
     
     func storePencilRecords(pencilRecords: [CKRecord], forProduct product: Product, completion: (Bool, NSError?)->Void) {
         CDK.performBlockOnBackgroundContext({(context: NSManagedObjectContext) in
@@ -165,7 +202,6 @@ class CloudManager {
                 localProduct.syncInfo = SyncInfo(managedObjectContext: context)
                 localProduct.syncInfo?.lastRefreshTime = NSDate()
             }
-            println("New pencils: \(pencils.count) total records \(pencilRecords.count)")
             return .SaveToPersistentStore
             
             }, completionHandler: { (result: Result<CommitAction>) in

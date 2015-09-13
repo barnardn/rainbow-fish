@@ -25,9 +25,9 @@ class SettingsPurchaseOptionsTableViewController: UITableViewController {
             self.displayCantPayAlert()
             return
         }
-        self.showHUD(message: NSLocalizedString("Fetching Prices...", comment:"fetching prices from app store message"))
+        self.showSmallHUD(message: NSLocalizedString("Fetching Prices...", comment:"fetching prices from app store message"))
         self.storeKitController.validateProductIdentifiers { [unowned self] (products) -> Void in
-            self.hideHUD()
+            self.hideSmallHUD()
             var allProducts = [self.storeKitController.restorePurchasesProduct]
             let storeKitProducts = products.sorted({ (p1: StoreKitProduct, p2: StoreKitProduct) -> Bool in
                 return p1.displayPriceValue < p2.displayPriceValue

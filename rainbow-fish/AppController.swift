@@ -90,6 +90,14 @@ class AppController: NSObject {
     
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         let storeURL = self.urlForResourceInApplicationSupport(resourceName: self.storeName)
+        
+        var error: NSError?
+        if (storeURL.checkResourceIsReachableAndReturnError(&error)) {
+            var rmError: NSError?
+            NSFileManager.defaultManager().removeItemAtURL(storeURL, error: &rmError)
+        }
+        
+        
         println("Store URL: \(storeURL)")
         return NSPersistentStoreCoordinator(automigrating: true, deleteOnMismatch: true, URL: storeURL, managedObjectModel: self.managedObjectModel)!
     }()

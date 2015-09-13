@@ -116,13 +116,11 @@ class SelectPencilTableViewController: ContentTableViewController {
         }
         if !forced {
             self.showSmallHUD(message: nil)
-//            self.showHUD()
         }
         let modificationDate = recentModificationDate(inPencils: pencils)
         CloudManager.sharedManger.importAllPencilsForProduct(self.product, modifiedAfterDate: modificationDate ){ (success, error) in
             if !forced {
                 self.hideSmallHUD()
-//                self.hideHUD()
             } else {
                 self.refreshControl?.endRefreshing()
             }

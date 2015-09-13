@@ -175,7 +175,7 @@ extension SettingsTableViewController: UITableViewDataSource {
     private func configureInAppPurchaseCell(indexPath: NSIndexPath) -> NameValueTableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(NameValueTableViewCell.nibName, forIndexPath: indexPath) as! NameValueTableViewCell
         cell.name = NSLocalizedString("Support the Developer", comment:"in app purchase title")
-        cell.value = "YES"      // should show "thanks!" if user has purchase
+        cell.value = "YES Please!"      // should show "thanks!" if user has purchase
         cell.accessoryType = .DisclosureIndicator
         return cell
     }

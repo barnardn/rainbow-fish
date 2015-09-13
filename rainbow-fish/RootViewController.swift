@@ -11,10 +11,12 @@ import UIKit
 import CoreData
 import CoreDataKit
 import iAd
+import StoreKit
 
 class RootViewController: UITabBarController {
 
     private var showingAd: Bool = false
+    private var skPaymentObserver: StoreKitPaymentObserver = StoreKitPaymentObserver()
     
     private lazy var adBannerView : ADBannerView = {
         let bannerView = ADBannerView(adType: ADAdType.Banner)
@@ -25,15 +27,16 @@ class RootViewController: UITabBarController {
         super.init(coder: aDecoder)
     }
     
-    
     init() {
         super.init(nibName: nil, bundle: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("updateProductsNotificationHandler:"), name: UIApplicationDidBecomeActiveNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("updateStoreKitPurchaseStatus:"), name: StoreKitPurchaseNotificationName, object: nil)
         viewControllers = [
                 InventoryNavigationController(),
                 CatalogNavigationController(),
                 SettingsNavigationController()
         ]
+        SKPaymentQueue.defaultQueue().addTransactionObserver(self.skPaymentObserver)
     }
 
     deinit {
@@ -67,6 +70,8 @@ class RootViewController: UITabBarController {
         self.adBannerView.frame = CGRect(x: CGFloat(0.0), y: CGRectGetMinY(self.tabBar.frame), width: CGRectGetWidth(self.view.bounds), height: CGFloat(50))
     }
     
+    // MARK: --= notification handlers =--
+    
     func updateProductsNotificationHandler(notification: NSNotification) {
         if let lastUpdatedDate = AppController.appController.lastUpdatedDate() as NSDate? {
             if AppController.appController.shouldPerformAutomaticProductUpdates() {
@@ -74,6 +79,30 @@ class RootViewController: UITabBarController {
             }
         }
     }
+    
+    func updateStoreKitPurchaseStatus(notification: NSNotification) {
+        if let userInfo = notification.userInfo as? [String:AnyObject] {
+            var message: String = ""
+            let purchaseResult = userInfo[StoreKitPurchaseResultTypeKey] as! String
+            switch purchaseResult {
+            case StoreKitPurchaseResultType.Completed.rawValue:
+                message = NSLocalizedString("Thank you for your purchase!", comment:"completed store kit purchase message")
+            case StoreKitPurchaseResultType.Failed.rawValue:
+                message = NSLocalizedString("Your purchase could not be processed.", comment:"failed store kit purchase default message")
+                if let error = userInfo[StoreKitPurchaseErrorUserInfoKey] as? NSError {
+                    message = error.localizedDescription
+                }
+            case StoreKitPurchaseResultType.Deferred.rawValue:
+                message = NSLocalizedString("Your transaction is being processed. If \"Ask To Buy\" has been enabled for your account, you will have to wait for this purchase to be approved.", comment:"deferred store kit purchase message")
+            default:
+                println("status returned \(purchaseResult)")
+            }
+            assert(message.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) > 0, "empty message for storekit notification")
+            self.presentStoreKitTransactionMessage(message)
+        }
+    }
+    
+    // MARK: --= private methods =--
     
     private func updateProducts() {
         self.showHUD(message: "Updating...")
@@ -123,8 +152,18 @@ class RootViewController: UITabBarController {
         retryAlert.view.tintColor = AppearanceManager.appearanceManager.brandColor
     }
     
+    private func presentStoreKitTransactionMessage(message: String) {
+        let alertController = UIAlertController(title: NSLocalizedString("In-App Purchase", comment:"app store alert title"), message: message, preferredStyle: .Alert)
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("Dismiss", comment:"dismiss alert button title"), style: UIAlertActionStyle.Default, handler: nil))
+        alertController.view.tintColor = AppearanceManager.appearanceManager.brandColor
+        
+        let viewController = self.presentedViewController ?? self
+        viewController.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
 }
 
+// MARK: --= iAd banner delegate =--
 
 extension RootViewController: ADBannerViewDelegate {
     
