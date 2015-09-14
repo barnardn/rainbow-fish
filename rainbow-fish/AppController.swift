@@ -23,6 +23,8 @@ class AppController: NSObject {
     private let DataImportKey = "CDOImportIdentifier"
     private let config = ConfigurationSettings()
     
+    var shouldFetchCatalogOnDisplay: Bool = false
+    
     class var appController: AppController {
         struct Singleton {
             static let instance = AppController()

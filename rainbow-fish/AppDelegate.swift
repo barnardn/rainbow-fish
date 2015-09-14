@@ -15,6 +15,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        application.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
+        
         AppController.appController.setup()
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
         window!.backgroundColor = UIColor.whiteColor()
@@ -24,6 +27,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
+    func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        CloudManager.sharedManger.refreshManufacturersAndProducts(AppController.appController.lastUpdatedDate()) { (success: Bool, error: NSError?) -> Void in
+            if success {
+                completionHandler(UIBackgroundFetchResult.NewData)
+                AppController.appController.updateLastUpdatedDateToNow()
+                AppController.appController.shouldFetchCatalogOnDisplay = true
+            } else {
+                completionHandler(UIBackgroundFetchResult.Failed)
+            }
+        }
+    }
+    
 
 }
 
