@@ -28,6 +28,7 @@ class CatalogViewController: ContentTableViewController {
     
     convenience init() {
         self.init(style: UITableViewStyle.Grouped)
+        self.title = NSLocalizedString("Catalog", comment:"catalog navigation title")
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("updateDatasource"), name: AppNotifications.DidFinishCloudUpdate.rawValue, object: nil)
     }
     
@@ -44,15 +45,26 @@ class CatalogViewController: ContentTableViewController {
         self.refreshControl = UIRefreshControl()
         self.refreshControl?.tintColor = AppearanceManager.appearanceManager.brandColor
         self.refreshControl?.addTarget(self, action: Selector("refreshControlDidChange:"), forControlEvents: .ValueChanged)
-            
-        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: Selector("addButtonTapped:"))
-        addButton.tintColor = UIColor.whiteColor()
-        navigationItem.rightBarButtonItem = addButton
-        navigationItem.backBarButtonItem = self.backButton
-        navigationItem.leftBarButtonItem = self.editButton
-        self.recordCreatorID = AppController.appController.appConfiguration.iCloudRecordID;
-        self.updateDatasource()
+
+// NOTE: not allowing product and manufacturer inserts/edits at this point
         
+//        let addButton = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: Selector("addButtonTapped:"))
+//        addButton.tintColor = UIColor.whiteColor()
+//        navigationItem.rightBarButtonItem = addButton
+//        navigationItem.leftBarButtonItem = self.editButton
+        
+        navigationItem.backBarButtonItem = self.backButton
+        
+        self.recordCreatorID = AppController.appController.appConfiguration.iCloudRecordID;
+        AppController.appController.shouldFetchCatalogOnDisplay = false
+        self.updateDatasource()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if AppController.appController.shouldFetchCatalogOnDisplay {
+            self.updateDatasource()
+        }
     }
     
     
@@ -114,6 +126,7 @@ class CatalogViewController: ContentTableViewController {
         case let .Success(boxedResults):
             println("pencilviewcontroller all manufacturer")
             self.allManufacturers = boxedResults.value
+            AppController.appController.updateLastUpdatedDateToNow()
         }
         self.tableView!.reloadData()
     }
@@ -188,13 +201,16 @@ extension CatalogViewController: UITableViewDelegate {
         return headerView
     }
 
-    override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let footerview = tableView.dequeueReusableHeaderFooterViewWithIdentifier("ProductFooterView") as! ProductFooterView
-        let manufacturer = allManufacturers[section] as Manufacturer
-        footerview.manufacturer = manufacturer
-        footerview.delegate = self
-        return footerview
-    }
+// REMOVED FOR NOW: need to research how to properly support this for multiple users!
+//
+    
+//    override func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+//        let footerview = tableView.dequeueReusableHeaderFooterViewWithIdentifier("ProductFooterView") as! ProductFooterView
+//        let manufacturer = allManufacturers[section] as Manufacturer
+//        footerview.manufacturer = manufacturer
+//        footerview.delegate = self
+//        return footerview
+//    }
     
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return ProductHeaderView.headerHeight;

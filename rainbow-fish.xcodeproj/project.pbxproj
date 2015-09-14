@@ -637,6 +637,9 @@
 						CreatedOnToolsVersion = 6.1.1;
 						DevelopmentTeam = FA5W6TJ34U;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.iCloud = {
 								enabled = 1;
 							};

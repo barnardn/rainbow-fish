@@ -54,9 +54,15 @@ class CloudManager {
     
     // MARK: cloud methods
 
-    func refreshManufacturersAndProducts(completionHandler: (success: Bool, error: NSError?) -> Void ) {
-        var queryAll = CKQuery(recordType: Manufacturer.entityName, predicate: NSPredicate(value: true))
-        publicDb.performQuery(queryAll, inZoneWithID: CKRecordZone.defaultRecordZone().zoneID) {[unowned self](results, error) in
+    func refreshManufacturersAndProducts(sinceDate: NSDate?, completionHandler: (success: Bool, error: NSError?) -> Void) {
+        
+        var query = CKQuery(recordType: Manufacturer.entityName, predicate: NSPredicate(value: true))
+        if let lastModifiedDate = sinceDate {
+            let predicate = NSPredicate(format: "%K > %@", ManufacturerAttributes.modificationDate.rawValue, lastModifiedDate)
+            query = CKQuery(recordType: Manufacturer.entityName, predicate: predicate)
+        }
+        
+        publicDb.performQuery(query, inZoneWithID: CKRecordZone.defaultRecordZone().zoneID) {[unowned self](results, error) in
             if error != nil  {
                 dispatch_async(dispatch_get_main_queue()) { completionHandler(success: false, error: error) }
                 return
@@ -74,6 +80,7 @@ class CloudManager {
                 }
                 return self.productsQuery(mrec, isLastOperation: isLast, importCompletion: completionHandler)
             })
+            
             let lastOperation = queryOperations.last
             for qop in queryOperations {
                 if qop != lastOperation {
@@ -82,6 +89,10 @@ class CloudManager {
                 self.publicDb.addOperation(qop)
             }
         }
+    }
+    
+    func refreshManufacturersAndProducts(completionHandler: (success: Bool, error: NSError?) -> Void ) {
+        self.refreshManufacturersAndProducts(nil, completionHandler: completionHandler)
     }
 
     func productsQuery(manufacturer: CKRecord, isLastOperation: Bool, importCompletion: (success: Bool, error: NSError?) -> Void) -> CKQueryOperation {

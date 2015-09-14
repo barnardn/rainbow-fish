@@ -87,19 +87,17 @@ extension Pencil {
     }
     
     func canSave() -> Bool {
-        if let identifierLength = self.identifier?.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) {
-            if let nameLength = self.name?.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) {
+        if  let identifierLength = self.identifier?.lengthOfBytesUsingEncoding(NSUTF8StringEncoding),
+            let nameLength = self.name?.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) {
                 return (identifierLength > 0 && nameLength > 0)
-            }
         }
         return false
     }
     
     func isMyPencil() -> Bool {
-        if let pencilOwnerId = self.ownerRecordIdentifier {
-            if let ownerId = AppController.appController.appConfiguration.iCloudRecordID {
+        if let pencilOwnerId = self.ownerRecordIdentifier,
+           let ownerId = AppController.appController.appConfiguration.iCloudRecordID {
                 return pencilOwnerId == ownerId
-            }
         }
         return false
     }
