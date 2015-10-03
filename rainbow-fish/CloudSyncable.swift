@@ -32,6 +32,10 @@ extension NSManagedObjectContext {
                 managedObject.populateFromCKRecord(record)
                 return managedObject
             }
+        } else if createIfNotFound {
+            let managedObject = try self.create(T)
+            managedObject.populateFromCKRecord(record)
+            return managedObject
         }
         return nil
     }

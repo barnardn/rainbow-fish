@@ -27,6 +27,9 @@ class CloudImport {
          
             let databaseUrl = AppController.appController.urlForResourceInApplicationSupport(resourceName: self.ImportFilename)
             let jsonData = NSData(contentsOfURL: databaseUrl)
+            if jsonData == nil {
+                assertionFailure("Cant load seed file")
+            }
             var readError: NSError?
             let databaseJSON = JSON(data: jsonData!, error: &readError)
             if let err = readError {

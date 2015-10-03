@@ -58,6 +58,7 @@ class CatalogViewController: ContentTableViewController {
         self.recordCreatorID = AppController.appController.appConfiguration.iCloudRecordID;
         AppController.appController.shouldFetchCatalogOnDisplay = false
         self.updateDatasource()
+        self.cloudUpdate()
     }
     
     override func viewDidAppear(animated: Bool) {
