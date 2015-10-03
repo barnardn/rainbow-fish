@@ -43,7 +43,7 @@ extension Manufacturer: CloudSyncable {
     
     func toJson(includeRelationships: Bool = false ) -> NSDictionary {
         
-        var jsonObject = NSMutableDictionary()
+        let jsonObject = NSMutableDictionary()
         jsonObject[ManufacturerAttributes.recordID.rawValue] = self.recordID
         jsonObject[ManufacturerAttributes.name.rawValue] = self.name
         jsonObject[ManufacturerAttributes.modificationDate.rawValue] = self.modificationDate?.timeIntervalSince1970
@@ -53,7 +53,7 @@ extension Manufacturer: CloudSyncable {
             var productJson = [NSDictionary]()
             if let products = self.products.allObjects as? [Product] {
                 for product in products {
-                    productJson.append(product.toJson(includeRelationships: includeRelationships))
+                    productJson.append(product.toJson(includeRelationships))
                 }
             }
             jsonObject[ManufacturerRelationships.products.rawValue] = productJson
@@ -69,7 +69,7 @@ extension Manufacturer {
     
     func sortedProducts() -> [Product]? {
         if let products = self.products.allObjects as? [Product] {
-            return products.sorted{(p1: Product, p2: Product) in
+            return products.sort{(p1: Product, p2: Product) in
                 let name1 = p1.name as String!
                 let name2 = p2.name as String!
                 return ((name1.localizedCaseInsensitiveCompare(name2)) == .OrderedAscending)

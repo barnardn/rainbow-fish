@@ -31,13 +31,15 @@ extension Inventory {
         } else {
             descriptors = sortDescriptors!
         }
-        switch context.find(Inventory.self, predicate: nil, sortDescriptors: descriptors, limit: nil, offset: nil) {
-        case let .Failure(error):
-            assertionFailure(error.localizedDescription)
-        case let .Success(boxedResults):
-            return boxedResults.value
+        do {
+            let results = try context.find(Inventory.self, predicate: nil, sortDescriptors: descriptors, limit: nil, offset: nil)
+            return results
+        } catch CoreDataKitError.CoreDataError(let error) {
+            print("Error \(error)")
+            return nil
+        } catch {
+            return nil
         }
-        return nil
     }
     
     

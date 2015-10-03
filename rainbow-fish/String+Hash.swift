@@ -14,7 +14,7 @@ extension String  {
         let data = self.dataUsingEncoding(NSUTF8StringEncoding)!
         var shasum = [UInt8](count: Int(CC_SHA1_DIGEST_LENGTH), repeatedValue: 0)
         CC_SHA1(data.bytes, CC_LONG(data.length), &shasum)
-        var outString = NSMutableString(capacity: shasum.count)
+        let outString = NSMutableString(capacity: shasum.count)
         for byte in shasum {
             outString.appendFormat("%02x", byte)
         }
@@ -25,7 +25,7 @@ extension String  {
         let data = self.dataUsingEncoding(NSUTF8StringEncoding)!
         var md5sum = [UInt8](count: Int(CC_MD5_DIGEST_LENGTH), repeatedValue: 0)
         CC_MD5(data.bytes, CC_LONG(data.length), &md5sum)
-        var outString = NSMutableString(capacity: md5sum.count)
+        let outString = NSMutableString(capacity: md5sum.count)
         for byte in md5sum {
             outString.appendFormat("%02x", byte)
         }

@@ -12,13 +12,13 @@ class CatalogNavigationController: UINavigationController {
 
     private var navigationControllerDelegate: UINavigationControllerDelegate?
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
     init() {
         super.init(nibName: nil, bundle: nil)
-        var image = UIImage(named: "tabbar-icon-pencils")?.imageWithRenderingMode(.AlwaysTemplate)
+        let image = UIImage(named: "tabbar-icon-pencils")?.imageWithRenderingMode(.AlwaysTemplate)
         self.tabBarItem = UITabBarItem(title: NSLocalizedString("Catalog", comment:"all pencils tab bar item title"), image: image, tag: 1)
         self.title = NSLocalizedString("Catalog", comment:"browse all pencils navigation title")
         navigationControllerDelegate = CatalogNavigationControllerDelegate()
@@ -49,7 +49,7 @@ class CatalogNavigationControllerDelegate: NSObject, UINavigationControllerDeleg
 
 extension CatalogNavigationControllerDelegate: UIViewControllerAnimatedTransitioning {
     
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
+    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
         return 0.5
     }
     
@@ -59,7 +59,7 @@ extension CatalogNavigationControllerDelegate: UIViewControllerAnimatedTransitio
             let fromViewcontroller = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey) {
             
                 let containerView = transitionContext.containerView()
-                containerView.addSubview(toViewController.view)
+                containerView!.addSubview(toViewController.view)
                 toViewController.view.alpha = 0.0
                 
                 UIView.animateWithDuration(self.transitionDuration(transitionContext),

@@ -17,7 +17,7 @@ class DoneEditingInputAccessoryView: UIView {
     var delegate: DoneEditingInputAccessoryDelegate?
     lazy var doneButton: UIButton = {
         let button = UIButton(frame: CGRectZero)
-        button.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
+        button.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
         button.setTitle(NSLocalizedString("Done", comment:"quantity input accessory done button title"), forState: .Normal)
         button.setTitleColor(AppearanceManager.appearanceManager.brandColor, forState: .Normal)
         button.addTarget(self, action: Selector("doneButtonTapped:"), forControlEvents: .TouchUpInside)
@@ -58,7 +58,7 @@ class DoneEditingInputAccessoryView: UIView {
         self.bottomLine.frame = CGRectMake(0.0, CGRectGetHeight(self.bounds), CGRectGetWidth(self.bounds), 1.0)
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     

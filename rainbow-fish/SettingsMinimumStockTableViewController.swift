@@ -35,14 +35,12 @@ class SettingsMinimumStockTableViewController: ContentTableViewController {
         }
     }
     
-}
-
-extension SettingsMinimumStockTableViewController: UITableViewDataSource {
-
+    // MARK: --= tableivew data source =---
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.values.count
     }
-
+    
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(DefaultTableViewCell.nibName as String, forIndexPath: indexPath) as! DefaultTableViewCell
         cell.tintColor = AppearanceManager.appearanceManager.brandColor
@@ -60,9 +58,8 @@ extension SettingsMinimumStockTableViewController: UITableViewDataSource {
         return cell
     }
     
-}
-
-extension SettingsMinimumStockTableViewController: UITableViewDelegate {
+    
+    // MARK: --= tableview delegate =---
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         let value = self.values[indexPath.row]
@@ -92,5 +89,5 @@ extension SettingsMinimumStockTableViewController: UITableViewDelegate {
         return NSLocalizedString("This number represents the fewest number of pencils you have on-hand before you need to replenish your stock.", comment:"settings minimum stock instructions")
     }
     
-    
 }
+

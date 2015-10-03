@@ -62,7 +62,6 @@
 		497E0D661AA7E8D1007FA6A4 /* InventoryDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497E0D651AA7E8D1007FA6A4 /* InventoryDetailTableViewController.swift */; };
 		4988FEBA1AB61F1B00AE2D89 /* SettingsMinimumStockTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4988FEB91AB61F1B00AE2D89 /* SettingsMinimumStockTableViewController.swift */; };
 		498AC94F1AC0EB8100C33954 /* CoreDataKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E8D8B71A7443C60064E682 /* CoreDataKit.framework */; };
-		49AB806B1ABE40D8009BEDE5 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AB80691ABE40D8009BEDE5 /* Crashlytics.framework */; };
 		49AB806C1ABE40D8009BEDE5 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AB806A1ABE40D8009BEDE5 /* Fabric.framework */; };
 		49AC9E3B1A87DD67007CE68A /* SelectPencilTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AC9E3A1A87DD67007CE68A /* SelectPencilTableViewController.swift */; };
 		49AC9E3E1A87E120007CE68A /* DefaultDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AC9E3C1A87E120007CE68A /* DefaultDetailTableViewCell.swift */; };
@@ -227,7 +226,6 @@
 				498AC94F1AC0EB8100C33954 /* CoreDataKit.framework in Frameworks */,
 				49AB806C1ABE40D8009BEDE5 /* Fabric.framework in Frameworks */,
 				49E8D8C11A7445670064E682 /* CloudKit.framework in Frameworks */,
-				49AB806B1ABE40D8009BEDE5 /* Crashlytics.framework in Frameworks */,
 				49E8D8BE1A7445400064E682 /* CoreData.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -613,7 +611,6 @@
 				49DF07EE1A743A2800BF94D3 /* Frameworks */,
 				49E8D8BC1A7444190064E682 /* Carthage copy frameworks */,
 				49DF07EF1A743A2800BF94D3 /* Resources */,
-				49AB80681ABE4045009BEDE5 /* Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -630,7 +627,9 @@
 		49DF07E91A743A2800BF94D3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = Clamdango;
 				TargetAttributes = {
 					49DF07F01A743A2800BF94D3 = {
@@ -707,20 +706,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "mogenerator --v2 --swift --template-path '/Users/barnardn/Library/Application Support/mogenerator' --model $SRCROOT/$TARGET_NAME/$TARGET_NAME.xcdatamodeld/ --machine-dir $SRCROOT/$TARGET_NAME/machine --human-dir $SRCROOT/$TARGET_NAME";
-		};
-		49AB80681ABE4045009BEDE5 /* Crashlytics */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = Crashlytics;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run d1a134a3064cf181e5ca3939ce43f13f95c094ca b20d3e488424d20c08c47aedc30f6ce8534749d8207597ef125838e764073e7e";
 		};
 		49E8D8BC1A7444190064E682 /* Carthage copy frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -854,6 +839,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -932,6 +918,7 @@
 					"$(SDKROOT)/usr/lib/system",
 				);
 				OTHER_SWIFT_FLAGS = "-DDEBUG";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.clamdango.rainbow-fish";
 				PRODUCT_MODULE_NAME = RainbowFish;
 				PRODUCT_NAME = "Rainbow Fish";
 				PROVISIONING_PROFILE = "";
@@ -961,6 +948,7 @@
 					"$(SDKROOT)/usr/lib/system",
 				);
 				OTHER_SWIFT_FLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.clamdango.rainbow-fish";
 				PRODUCT_MODULE_NAME = RainbowFish;
 				PRODUCT_NAME = "Rainbow Fish";
 				PROVISIONING_PROFILE = "";

@@ -21,14 +21,10 @@ class ProductHeaderView: UITableViewHeaderFooterView {
         }
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame);
-    }
-    
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         
-        var label = UILabel(frame: CGRectZero)
+        let label = UILabel(frame: CGRectZero)
         
         self.contentView.addSubview(label)
         label.font = AppearanceManager.appearanceManager.nameLabelFont
@@ -37,7 +33,7 @@ class ProductHeaderView: UITableViewHeaderFooterView {
         self.titleLabel = label;
     }
 
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     

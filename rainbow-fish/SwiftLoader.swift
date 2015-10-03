@@ -61,8 +61,7 @@ class SwiftFullScreenLoader: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor(white: 0.0, alpha: 0.1)
-        let screenBounds = UIScreen.mainScreen().bounds
-        self.loadingView = SwiftLoadingView(frame: CGRectMake(CGRectGetMidX(self.frame) - (self.config.size/2.0), CGRectGetMidY(self.frame) - (self.config.size/2.0) - 24.0, self.config.size, self.config.size))
+        self.loadingView = SwiftLoadingView(frame: CGRectMake(CGRectGetMidX(self.bounds) - (self.config.size/2.0), CGRectGetMidY(self.bounds) - (self.config.size/2.0) - 24.0, self.config.size, self.config.size))
         self.backgroundView = UIView(frame: CGRectZero)
         self.backgroundView.backgroundColor = UIColor(white: 0.0, alpha: 0.5)
         self.backgroundView.layer.cornerRadius = 8
@@ -70,7 +69,7 @@ class SwiftFullScreenLoader: UIView {
         self.addSubview(self.loadingView)
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
@@ -87,8 +86,8 @@ class SwiftFullScreenLoader: UIView {
         }
     }
     
-    class func show(#title: String?) {
-        var currentWindow : UIWindow = UIApplication.sharedApplication().windows.last as! UIWindow
+    class func show(title title: String?) {
+        let currentWindow : UIWindow = UIApplication.sharedApplication().windows.last as UIWindow!
         let fullScreenLoader = SwiftFullScreenLoader.sharedInstance
         fullScreenLoader.title = title
 
@@ -164,13 +163,14 @@ class SwiftLoader: UIView {
         return Singleton.instance
     }
     
-    class func show(#animated: Bool) {
+    class func show(animated animated: Bool) {
         self.show(title: nil, animated: animated)
     }
     
     
-    class func show(#title: String?, animated : Bool) {
-        var currentWindow : UIWindow = UIApplication.sharedApplication().windows.last as! UIWindow
+    class func show(title title: String?, animated : Bool) {
+        
+        let currentWindow: UIWindow? = UIApplication.sharedApplication().windows.last as UIWindow?
         
         let loader = SwiftLoader.sharedInstance
         loader.canUpdated = true
@@ -178,18 +178,18 @@ class SwiftLoader: UIView {
         loader.title = title
         loader.update()
         
-        var height : CGFloat = UIScreen.mainScreen().bounds.size.height
-        var width : CGFloat = UIScreen.mainScreen().bounds.size.width
+        let height : CGFloat = UIScreen.mainScreen().bounds.size.height
+        let width : CGFloat = UIScreen.mainScreen().bounds.size.width
         
         let w = ceilf(Float(width)/2.0)
         let h = ceilf(Float(height)/2.0 - Float(SwiftLoaderConfig().size)/2.0)
         
-        var center : CGPoint = CGPointMake(CGFloat(w), CGFloat(h))
+        let center : CGPoint = CGPointMake(CGFloat(w), CGFloat(h))
 
         loader.center = center
         
         if (loader.superview == nil) {
-            currentWindow.addSubview(loader)
+            currentWindow?.addSubview(loader)
             loader.start()
         }
     }
@@ -246,7 +246,7 @@ class SwiftLoader: UIView {
     private func update() {
         self.backgroundColor = self.config.backgroundColor
         self.layer.cornerRadius = self.config.cornerRadius
-        var loadingViewSize = self.frame.size.width - (loaderSpinnerMarginSide * 2)
+        let loadingViewSize = self.frame.size.width - (loaderSpinnerMarginSide * 2)
         
         if (self.loadingView == nil) {
             self.loadingView = SwiftLoadingView(frame: self.frameForSpinner())
@@ -273,10 +273,10 @@ class SwiftLoader: UIView {
     }
     
     func frameForSpinner() -> CGRect {
-        var loadingViewSize = self.frame.size.width - (loaderSpinnerMarginSide * 2)
+        let loadingViewSize = self.frame.size.width - (loaderSpinnerMarginSide * 2)
         
         if (self.title == nil) {
-            var yOffset = (self.frame.size.height - loadingViewSize) / 2
+            let yOffset = (self.frame.size.height - loadingViewSize) / 2
             return CGRectMake(loaderSpinnerMarginSide, yOffset, loadingViewSize, loadingViewSize)
         }
         return CGRectMake(loaderSpinnerMarginSide, loaderSpinnerMarginTop, loadingViewSize, loadingViewSize)
@@ -287,7 +287,7 @@ class SwiftLoader: UIView {
         self.setup()
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
@@ -315,7 +315,7 @@ private class SwiftLoadingView : UIView {
         self.setup()
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
     
@@ -356,20 +356,20 @@ private class SwiftLoadingView : UIView {
     
     override func drawRect(rect: CGRect) {
         self.backgroundLayer?.frame = self.bounds
-        self.backgroundLayer?.mask.frame = self.bounds
+        self.backgroundLayer?.mask!.frame = self.bounds
     }
     
     private func drawBackgroundCircle(partial : Bool) {
-        var startAngle : CGFloat = CGFloat(M_PI) / CGFloat(2.0)
+        let startAngle : CGFloat = CGFloat(M_PI) / CGFloat(2.0)
         var endAngle : CGFloat = (2.0 * CGFloat(M_PI)) + startAngle
         
         let x: Float = ceilf(Float(self.bounds.size.width / 2))
         let y: Float = ceilf(Float(self.bounds.size.height / 2.0))
         
-        var center : CGPoint = CGPointMake(CGFloat(x), CGFloat(y))
-        var radius : CGFloat = (CGFloat(self.bounds.size.width) - CGFloat(self.lineWidth!)) / CGFloat(2.0)
+        let center : CGPoint = CGPointMake(CGFloat(x), CGFloat(y))
+        let radius : CGFloat = (CGFloat(self.bounds.size.width) - CGFloat(self.lineWidth!)) / CGFloat(2.0)
         
-        var processBackgroundPath : UIBezierPath = UIBezierPath()
+        let processBackgroundPath : UIBezierPath = UIBezierPath()
         processBackgroundPath.lineWidth = CGFloat(self.lineWidth!)
         
         if (partial) {
@@ -388,7 +388,7 @@ private class SwiftLoadingView : UIView {
         self.isSpinning? = true
         self.drawBackgroundCircle(false)
         
-        var rotationAnimation : CABasicAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
+        let rotationAnimation : CABasicAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
         rotationAnimation.toValue = NSNumber(double: M_PI * 2.0)
         rotationAnimation.duration = 1.0;
         rotationAnimation.cumulative = true;

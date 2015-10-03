@@ -55,11 +55,9 @@ class EditTextFieldTableViewController: UITableViewController {
         }
     }
     
-}
 
-// MARK: - Table view data source
+    // MARK: - Table view data source
 
-extension EditTextFieldTableViewController: UITableViewDataSource {
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1;
@@ -73,9 +71,7 @@ extension EditTextFieldTableViewController: UITableViewDataSource {
         return cell
     }
 
-}
-
-extension EditTextFieldTableViewController: UITableViewDelegate {
+    // MARK: - Table view data source
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         cell.becomeFirstResponder()
@@ -88,7 +84,7 @@ extension EditTextFieldTableViewController: TextFieldTableViewCellDelegate {
     func textFieldTableViewCell(cell: TextFieldTableViewCell, changedText: String?) {
         self.defaultText = changedText
         if let text = self.defaultText {
-            var barButtonItem: UIBarButtonItem? = (text.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) > 0) ? self.doneButton : nil
+            let barButtonItem: UIBarButtonItem? = (text.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) > 0) ? self.doneButton : nil
             self.navigationItem.setRightBarButtonItem(barButtonItem, animated: true)
         } else {
             self.navigationItem.setRightBarButtonItem(nil, animated: true)

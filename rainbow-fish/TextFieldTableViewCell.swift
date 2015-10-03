@@ -61,7 +61,7 @@ extension TextFieldTableViewCell: UITextFieldDelegate {
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         if let delegate = self.delegate {
-            var text: NSString = self.textField.text
+            let text: NSString = self.textField.text!
             delegate.textFieldTableViewCell(self, changedText: text.stringByReplacingCharactersInRange(range, withString: string))
         }
         return true

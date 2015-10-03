@@ -35,10 +35,10 @@ class BigButtonTableViewCell: UITableViewCell {
         didSet {
             if self.destructiveButton {
                 self.titleLabel.textColor = UIColor.redColor()
-                self.selectedBackgroundView.backgroundColor = UIColor.redColor()
+                self.selectedBackgroundView?.backgroundColor = UIColor.redColor()
             } else {
                 self.titleLabel.textColor = AppearanceManager.appearanceManager.brandColor
-                self.selectedBackgroundView.backgroundColor = AppearanceManager.appearanceManager.selectedCellBackgroundColor
+                self.selectedBackgroundView?.backgroundColor = AppearanceManager.appearanceManager.selectedCellBackgroundColor
             }
         }
     }
@@ -49,7 +49,7 @@ class BigButtonTableViewCell: UITableViewCell {
         self.titleLabel.font = AppearanceManager.appearanceManager.standardFont
         self.titleLabel.textColor = AppearanceManager.appearanceManager.brandColorAlternate
         self.selectedBackgroundView = UIView()
-        self.selectedBackgroundView.backgroundColor = AppearanceManager.appearanceManager.selectedCellBackgroundColor
+        self.selectedBackgroundView?.backgroundColor = AppearanceManager.appearanceManager.selectedCellBackgroundColor
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

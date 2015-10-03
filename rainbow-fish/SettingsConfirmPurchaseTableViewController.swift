@@ -26,13 +26,8 @@ class SettingsConfirmPurchaseTableViewController: UITableViewController {
         self.tableView.registerNib(UINib(nibName: BigButtonTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: BigButtonTableViewCell.nibName)
         self.tableView.contentInset = UIEdgeInsets(top: 40.0, left: 0, bottom: 0, right: 0)
     }
-
-}
-
-// MARK: - Table view data source
-
-extension SettingsConfirmPurchaseTableViewController: UITableViewDataSource {
     
+    // MARK: - Table view data source
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
@@ -43,14 +38,10 @@ extension SettingsConfirmPurchaseTableViewController: UITableViewDataSource {
         return cell
     }
     
-}
-
-// MARK: - Table view delegate
-
-extension SettingsConfirmPurchaseTableViewController: UITableViewDelegate {
+    // MARK: - Table view delegate
     
     override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        var headerLabel = UILabel(frame: CGRect(x: 0.0, y: 0.0, width: Double(self.view.bounds.width), height: 24.0))
+        let headerLabel = UILabel(frame: CGRect(x: 0.0, y: 0.0, width: Double(self.view.bounds.width), height: 24.0))
         headerLabel.textAlignment = .Center
         headerLabel.font = AppearanceManager.appearanceManager.nameLabelFont
         headerLabel.textColor = UIColor.darkGrayColor()
@@ -69,9 +60,9 @@ extension SettingsConfirmPurchaseTableViewController: UITableViewDelegate {
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        var payment = SKMutablePayment(product: self.appStoreProduct)
+        let payment = SKMutablePayment(product: self.appStoreProduct)
         payment.quantity = 1
-        payment.applicationUsername = AppController.appController.appConfiguration.iCloudRecordID
+        payment.applicationUsername = AppController.appController.appConfiguration.iCloudRecordID!
         SKPaymentQueue.defaultQueue().addPayment(payment)
     }
     

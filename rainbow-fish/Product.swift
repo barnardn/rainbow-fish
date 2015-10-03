@@ -44,7 +44,7 @@ extension Product: CloudSyncable {
     
     func toJson(includeRelationships: Bool = false ) -> NSDictionary {
 
-        var jsonObject = NSMutableDictionary()
+        let jsonObject = NSMutableDictionary()
         jsonObject[ProductAttributes.recordID.rawValue] = self.recordID
         jsonObject[ProductAttributes.name.rawValue] = self.name
         jsonObject[ProductAttributes.modificationDate.rawValue] = self.modificationDate?.timeIntervalSince1970
@@ -80,7 +80,7 @@ extension Product {
     
     func sortedPencils() -> [Pencil]? {
         if let pencils = self.pencils.allObjects as? [Pencil] {
-            return pencils.sorted({ (p1: Pencil, p2: Pencil) -> Bool in
+            return pencils.sort({ (p1: Pencil, p2: Pencil) -> Bool in
                 let name1 = p1.name as String!
                 let name2 = p2.name as String!
                 return (name1.localizedCaseInsensitiveCompare(name2) == .OrderedDescending)

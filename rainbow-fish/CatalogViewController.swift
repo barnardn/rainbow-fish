@@ -87,10 +87,8 @@ class CatalogViewController: ContentTableViewController {
             let name = edittedText
             manufacturer.name = name
             var error: NSError?
-            if !CDK.mainThreadContext.save(&error) {
-                sender?.enabled = true
-                assertionFailure(error!.localizedDescription)
-            } else {
+            do {
+                try CDK.mainThreadContext.save()
                 self.syncManufacturer(manufacturer, completionHandler: { [unowned self] (success: Bool, error: NSError?) -> Void in
                     if let error = error {
                         sender?.enabled = true
@@ -99,6 +97,12 @@ class CatalogViewController: ContentTableViewController {
                     self.dismissViewControllerAnimated(true, completion: nil)
                     self.updateDatasource()
                 })
+            } catch let error1 as NSError {
+                error = error1
+                sender?.enabled = true
+                assertionFailure(error!.localizedDescription)
+            } catch {
+                fatalError()
             }
         }
         self.presentViewController(viewController, animated: true, completion: nil)
@@ -119,13 +123,10 @@ class CatalogViewController: ContentTableViewController {
     }
     
     func updateDatasource() {
-        switch CDK.mainThreadContext.find(Manufacturer.self, predicate: nil, sortDescriptors: [NSSortDescriptor(key: ManufacturerAttributes.name.rawValue, ascending: true)], limit: nil, offset: nil) {
-            
-        case let .Failure(error):
-            assertionFailure(error.localizedDescription)
-        case let .Success(boxedResults):
-            println("pencilviewcontroller all manufacturer")
-            self.allManufacturers = boxedResults.value
+        
+        let results = try? CDK.mainThreadContext.find(Manufacturer.self, predicate: nil, sortDescriptors: [NSSortDescriptor(key: ManufacturerAttributes.name.rawValue, ascending: true)], limit: nil, offset: nil)
+        if let results = results {
+            self.allManufacturers = results
             AppController.appController.updateLastUpdatedDateToNow()
         }
         self.tableView!.reloadData()
@@ -144,9 +145,21 @@ class CatalogViewController: ContentTableViewController {
                 }
             }
             var saveError: NSError?
-            CDK.mainThreadContext.save(&saveError)
+            do {
+                try CDK.mainThreadContext.save()
+            } catch let error as NSError {
+                saveError = error
+            } catch {
+                fatalError()
+            }
             if let parentContext = CDK.mainThreadContext.parentContext {
-                parentContext.save(&saveError)
+                do {
+                    try parentContext.save()
+                } catch let error as NSError {
+                    saveError = error
+                } catch {
+                    fatalError()
+                }
             }
             if let error = saveError {
                 dispatch_async(dispatch_get_main_queue()) { completionHandler(false, error) }
@@ -156,9 +169,6 @@ class CatalogViewController: ContentTableViewController {
         })
     }
     
-}
-
-extension CatalogViewController: UITableViewDataSource {
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return allManufacturers.count ?? 0
@@ -177,16 +187,13 @@ extension CatalogViewController: UITableViewDataSource {
     }
     
     func productAtIndexPath(indexPath: NSIndexPath) -> Product? {
-        var manufacturer = allManufacturers[indexPath.section] as Manufacturer
+        let manufacturer = allManufacturers[indexPath.section] as Manufacturer
         if let products = manufacturer.sortedProducts() {
             return products[indexPath.row]
         }
         return nil
     }
     
-}
-
-extension CatalogViewController: UITableViewDelegate {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if let product = productAtIndexPath(indexPath) {
@@ -235,7 +242,16 @@ extension CatalogViewController: ProductFooterViewDelegate {
                     product.ownerRecordIdentifier = self.recordCreatorID
                     manufacturer.addProductsObject(product)
                     var error: NSError?
-                    let ok = context.save(&error)
+                    let ok: Bool
+                    do {
+                        try context.save()
+                        ok = true
+                    } catch let error1 as NSError {
+                        error = error1
+                        ok = false
+                    } catch {
+                        fatalError()
+                    }
                     assert(ok, "unable to save: \(error?.localizedDescription)")
                     if !ok {
                         sender?.enabled = true
@@ -267,11 +283,12 @@ extension CatalogViewController: ProductFooterViewDelegate {
                     }
                 }
                 return .SaveToPersistentStore
-                }, completionHandler: { [unowned self] (result: Result<CommitAction>) in
-                    if let error = result.error() {
-                        completion(false, error)
-                    } else {
-                        completion(true, nil)
+                }, completionHandler: { (result) -> Void in
+                    do {
+                        try result()
+                        completion(false, nil)
+                    } catch let error as NSError {
+                        completion(true, error)
                     }
             })
             

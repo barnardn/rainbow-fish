@@ -70,17 +70,18 @@ class InventoryDetailTableViewController: ContentTableViewController {
         self.view.endEditing(true)
         self.context.performBlock( {(ctx: NSManagedObjectContext) in
             return .SaveToPersistentStore
-            }, completionHandler: {(result: Result<CommitAction>) in
-                if let error = result.error() as NSError? {
-                    assertionFailure(error.localizedDescription)
-                } else {
+            }, completionHandler: {[unowned self] (result) in
+                do {
+                    try result()
                     if let block = self.itemUpdatedBlock {
                         dispatch_async(dispatch_get_main_queue(), { () -> Void in
                             block(lineItemWithIdentity: self.lineItem.objectID, wasDeleted: false)
                         })
                     }
+                } catch {
+                    assertionFailure()
                 }
-        })
+            })
     }
     
     
@@ -105,12 +106,8 @@ class InventoryDetailTableViewController: ContentTableViewController {
         self.navigationController?.popViewControllerAnimated(true)
     }
     
-}
+    // MARK: - Table view data source
 
-// MARK: - Table view data source
-
-extension InventoryDetailTableViewController: UITableViewDataSource {
-    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return self.sectionInfo.count
     }
@@ -190,12 +187,8 @@ extension InventoryDetailTableViewController: UITableViewDataSource {
         cell.title = NSLocalizedString("Remove From My Inventory", comment:"remove pencil from inventory button title")
     }
     
-}
+    // MARK: - Table view delegate
 
-// MARK: - Table view delegate
-
-extension InventoryDetailTableViewController: UITableViewDelegate {
-    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         if indexPath.section == InventorySection.Color.rawValue {
@@ -219,9 +212,11 @@ extension InventoryDetailTableViewController: UITableViewDelegate {
                 context.deleteObject(self.lineItem)
                 
                 return .SaveToPersistentStore
-                }, completionHandler: {(result: Result<CommitAction>) in
-                    if let error = result.error() as NSError? {
-                        assertionFailure(error.localizedDescription)
+                }, completionHandler: {(result) in
+                    do {
+                        try result()
+                    } catch {
+                        assertionFailure()
                     }
             })
         }))
@@ -289,14 +284,14 @@ extension InventoryDetailTableViewController: PencilColorPickerTableViewCellDele
     }
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        if count(string) == 0 {
+        if string.characters.count == 0 {
             return true
         }
-        if count(textField.text) + count(string) > 6 {
+        if (textField.text?.characters.count)! + string.characters.count > 6 {
             return false
         }
         let nonHexChars = NSCharacterSet(charactersInString: "0123456789ABCDEFabcdef").invertedSet
-        if let foundRange = string.rangeOfCharacterFromSet(nonHexChars, options: NSStringCompareOptions.CaseInsensitiveSearch) {
+        if let _ = string.rangeOfCharacterFromSet(nonHexChars, options: NSStringCompareOptions.CaseInsensitiveSearch) {
             return false
         }
         return true

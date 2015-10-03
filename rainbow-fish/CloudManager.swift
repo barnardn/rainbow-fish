@@ -44,8 +44,8 @@ class CloudManager {
     func fetchUserRecordID(completion: (recordID: String?, error: NSError?) -> Void) {
         self.container.fetchUserRecordIDWithCompletionHandler { (recordID, error) -> Void in
             var id: String?
-            if recordID != nil {
-                println("found iCloud record id: \(recordID.recordName)")
+            if let recordID = recordID {
+                print("found iCloud record id: \(recordID.recordName)")
                 id = recordID.recordName.sha1()
             }
             dispatch_async(dispatch_get_main_queue()) { completion(recordID: id, error: error) }
@@ -67,22 +67,22 @@ class CloudManager {
                 dispatch_async(dispatch_get_main_queue()) { completionHandler(success: false, error: error) }
                 return
             }
-            if results.count == 0 {
+            if results?.count == 0 {
                 dispatch_async(dispatch_get_main_queue()) { completionHandler(success: true, error: nil) }
                 return
             }
-            var queryOperations = results.map({ (o: AnyObject) -> CKRecord in
+            let queryOperations = results?.map({ (o: AnyObject) -> CKRecord in
                 return o as! CKRecord
             }).map({ (mrec: CKRecord) -> CKQueryOperation in
                 var isLast = false
-                if let lastRec = results.last as? CKRecord {
+                if let lastRec = results?.last as CKRecord! {
                     isLast = (lastRec == mrec)
                 }
                 return self.productsQuery(mrec, isLastOperation: isLast, importCompletion: completionHandler)
             })
             
-            let lastOperation = queryOperations.last
-            for qop in queryOperations {
+            let lastOperation = queryOperations!.last
+            for qop in queryOperations! {
                 if qop != lastOperation {
                     lastOperation?.addDependency(qop)
                 }
@@ -99,21 +99,21 @@ class CloudManager {
         let manufactRef = CKReference(record: manufacturer, action: CKReferenceAction.DeleteSelf)
         let predicate = NSPredicate(format: "%K == %@", ProductRelationships.manufacturer.rawValue, manufactRef)
         
-        var productQuery = CKQuery(recordType: Product.entityName, predicate: predicate)
+        let productQuery = CKQuery(recordType: Product.entityName, predicate: predicate)
         productQuery.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
         
         let queryOperation = CKQueryOperation(query: productQuery)
         var productRecords = [CKRecord]()
-        queryOperation.recordFetchedBlock = {(record: CKRecord!) in
+        queryOperation.recordFetchedBlock = {(record: CKRecord) in
             productRecords.append(record)
         }
-        queryOperation.queryCompletionBlock = {[unowned self] (cursor: CKQueryCursor!, error: NSError!) in
+        queryOperation.queryCompletionBlock = {[unowned self] (cursor: CKQueryCursor?, error: NSError?) in
             if error != nil {
                 dispatch_async(dispatch_get_main_queue()) { importCompletion(success: false, error: error) }
                 return
             }
             if cursor != nil {
-                self.continueProductsQuery(manufacturer, cursor: cursor, productRecords: productRecords, isLastOperation: isLastOperation, completion: importCompletion)
+                self.continueProductsQuery(manufacturer, cursor: cursor!, productRecords: productRecords, isLastOperation: isLastOperation, completion: importCompletion)
             } else {
                 self.storeManufacturer(manufacturer, productRecords: productRecords, completion: { () -> Void in
                     if isLastOperation {
@@ -129,16 +129,16 @@ class CloudManager {
     func continueProductsQuery(manufacturer: CKRecord, cursor: CKQueryCursor, var productRecords: [CKRecord], isLastOperation: Bool, completion: (success: Bool, error: NSError?) -> Void) {
         
         let operation = CKQueryOperation(cursor: cursor)
-        operation.recordFetchedBlock = {(record: CKRecord!) in
+        operation.recordFetchedBlock = {(record: CKRecord) in
             productRecords.append(record)
         }
         
-        operation.queryCompletionBlock = {[unowned self] (continueCursor: CKQueryCursor!, error: NSError!) in
+        operation.queryCompletionBlock = {[unowned self] (continueCursor: CKQueryCursor?, error: NSError?) in
             if error != nil {
                 dispatch_async(dispatch_get_main_queue(), { completion(success: false, error: error) })
             } else {
                 if continueCursor != nil {
-                    self.continueProductsQuery(manufacturer, cursor: continueCursor, productRecords: productRecords, isLastOperation: isLastOperation, completion: completion)
+                    self.continueProductsQuery(manufacturer, cursor: continueCursor!, productRecords: productRecords, isLastOperation: isLastOperation, completion: completion)
                 } else {
                     if isLastOperation {
                         dispatch_async(dispatch_get_main_queue()) { completion(success: true, error: nil) }
@@ -173,16 +173,16 @@ class CloudManager {
         let operation = CKQueryOperation(query: pencilQuery)
         operation.resultsLimit = CKQueryOperationMaximumResults
         
-        operation.recordFetchedBlock = {(record: CKRecord!) in
+        operation.recordFetchedBlock = {(record: CKRecord) in
             pencilRecords.append(record)
         }
     
-        operation.queryCompletionBlock = {[unowned self](cursor: CKQueryCursor!, error: NSError!) in
+        operation.queryCompletionBlock = {[unowned self](cursor: CKQueryCursor?, error: NSError?) in
             if error != nil {
                 dispatch_async(dispatch_get_main_queue()) { completion(success: false, error: error) }
             } else {
                 if cursor != nil {
-                    self.createQueryOperation(product, cursor: cursor, results: pencilRecords, completion: completion)
+                    self.createQueryOperation(product, cursor: cursor!, results: pencilRecords, completion: completion)
                 } else {
                     self.storePencilRecords(pencilRecords, forProduct: product, completion: completion)
                 }
@@ -193,19 +193,19 @@ class CloudManager {
     
     
     private func createQueryOperation(product: Product, cursor: CKQueryCursor!, var results: [CKRecord], completion: (success: Bool, error: NSError?)->Void) -> Void {
-        var queryOperation = CKQueryOperation(cursor: cursor)
+        let queryOperation = CKQueryOperation(cursor: cursor)
         queryOperation.resultsLimit = CKQueryOperationMaximumResults
         
-        queryOperation.recordFetchedBlock = {(record: CKRecord!) in
+        queryOperation.recordFetchedBlock = {(record: CKRecord) in
             results.append(record)
         }
         
-        queryOperation.queryCompletionBlock = { [unowned self] (nextCursor: CKQueryCursor!, error: NSError!) in
+        queryOperation.queryCompletionBlock = { [unowned self] (nextCursor: CKQueryCursor?, error: NSError?) in
             if error != nil {
                 dispatch_async(dispatch_get_main_queue()) { completion(success: false, error: error) }
             } else {
                 if nextCursor != nil {
-                    self.createQueryOperation(product, cursor: nextCursor, results: results, completion: completion)
+                    self.createQueryOperation(product, cursor: nextCursor!, results: results, completion: completion)
                 } else {
                     self.storePencilRecords(results, forProduct: product, completion: completion)
                 }
@@ -217,13 +217,20 @@ class CloudManager {
     
     func storePencilRecords(pencilRecords: [CKRecord], forProduct product: Product, completion: (Bool, NSError?)->Void) {
         
-        println("Storing \(pencilRecords.count) pencil records")
+        print("Storing \(pencilRecords.count) pencil records")
         
         CDK.performBlockOnBackgroundContext({(context: NSManagedObjectContext) in
-            var pencils = pencilRecords.map{ (record: CKRecord) -> Pencil in
-                var (pencil, error) = context.updateFromCKRecord(Pencil.self, record: record, createIfNotFound: true)
-                return pencil!
-            }.filter{ return $0.isNew!.boolValue }
+            
+            var pencilObjects = [Pencil]()
+            for record in pencilRecords {
+                do {
+                    if let pencil = try? context.updateFromCKRecord(Pencil.self, record: record, createIfNotFound: true) {
+                        pencilObjects.append(pencil!)
+                    }
+                }
+            }
+            let pencils = pencilObjects.filter{ return ($0.isNew?.boolValue)! }
+            
             let localProduct = context.objectWithID(product.objectID) as! Product
     
             if pencils.count > 0 {
@@ -237,24 +244,26 @@ class CloudManager {
             }
             return .SaveToPersistentStore
             
-            }, completionHandler: { (result: Result<CommitAction>) in
-                if let error = result.error() {
-                    dispatch_async(dispatch_get_main_queue()) { completion(false, error) }
-                } else {
+            }, completionHandler: { (result) in
+                do {
+                    try result()
                     dispatch_async(dispatch_get_main_queue()) { completion(true, nil) }
+                } catch {
+                    let nserror = NSError(domain: "com.clamdango.rainbowfish", code: 100, userInfo: [NSLocalizedDescriptionKey : "store pencil failure"])
+                    dispatch_async(dispatch_get_main_queue()) { completion(false, nserror) }
                 }
         })
     }
     
     func syncChangeSet(changeSet: [CKRecord], completion: (success: Bool, savedRecords:[CKRecord]?, error: NSError?) -> Void) {
-        var saveOp =  CKModifyRecordsOperation(recordsToSave: changeSet, recordIDsToDelete: nil)
+        let saveOp =  CKModifyRecordsOperation(recordsToSave: changeSet, recordIDsToDelete: nil)
         saveOp.database = self.publicDb
         saveOp.savePolicy = .AllKeys
         saveOp.modifyRecordsCompletionBlock = {(saved, deleted, error) in
             if let e = error {
                 dispatch_async(dispatch_get_main_queue()) { completion(success: false, savedRecords: nil, error: e) }
             }
-            let savedRecords = saved.map({ (o: AnyObject) -> CKRecord in
+            let savedRecords = saved?.map({ (o: AnyObject) -> CKRecord in
                 return o as! CKRecord
             })
             dispatch_async(dispatch_get_main_queue()) { completion(success: true, savedRecords: savedRecords, error: nil) }
@@ -267,24 +276,36 @@ class CloudManager {
     func storeManufacturer(manufacturerRecord: CKRecord, productRecords: [CKRecord]?, completion: ()->Void) {
 
         CDK.performBlockOnBackgroundContext({(context: NSManagedObjectContext) in
-            let (manufacturer, error) = context.updateFromCKRecord(Manufacturer.self, record: manufacturerRecord, createIfNotFound: true)
-            assert(error == nil, "Unable to update manufacturer record \(error?.localizedDescription)")
-            var products = productRecords?.map{ (prec: CKRecord) -> Product in
-                var (product, prodError) = context.updateFromCKRecord(Product.self, record: prec, createIfNotFound: true)
-                assert(prodError == nil, "Unable to save product \(prodError?.localizedDescription)")
-                return product!
-            }
-            if let products = products {
-                manufacturer?.products = NSSet(array:products)
-            } else {
-                manufacturer?.products = NSSet()
+            
+            if let value = try? context.updateFromCKRecord(Manufacturer.self, record: manufacturerRecord, createIfNotFound: true),
+               let manufacturer = value
+            {
+                if let productRecords = productRecords {
+                    
+                    var products = [Product]()
+                    for record in productRecords {
+                        if let product = try? context.updateFromCKRecord(Product.self, record: record, createIfNotFound: true) {
+                            products.append(product!)
+                        } else {
+                            assertionFailure()
+                        }
+                    }
+                    manufacturer.products = NSSet(array: products)
+                } else {
+                    manufacturer.products = NSSet()
+                }
             }
             return .SaveToPersistentStore
-        }, completionHandler: {(result: Result<CommitAction>) in
-            if let error = result.error() {
-                assertionFailure("Unable to import to core data \(error.localizedDescription)")
+            
+        }, completionHandler: {(result) in
+            do {
+                try result()
+                completion()
+            } catch CoreDataKitError.CoreDataError(let coreDataError) {
+                assertionFailure("Core Data Error \(coreDataError)")
+            } catch {
+                assertionFailure()
             }
-            completion()
         })
     }
 

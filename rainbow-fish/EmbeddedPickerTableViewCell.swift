@@ -57,7 +57,7 @@ extension EmbeddedPickerTableViewCell: UIPickerViewDataSource, UIPickerViewDeleg
     
     // MARK: pickerview delegate
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String! {
+    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if let delegate = self.delegate {
             return delegate.embeddedPickerTableViewCell(self, titleForRow: row)
         }

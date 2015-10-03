@@ -78,7 +78,7 @@ class SettingsTableViewController: ContentTableViewController {
 
     // MARK: kvo 
     
-    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         if context != &settingsContext {
             super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
             return
@@ -90,30 +90,31 @@ class SettingsTableViewController: ContentTableViewController {
     
     // MARK: methods
     
-    func exportDatabase (completionHandler: (success: Bool, error: NSError?) -> Void ){
+    func exportDatabase (completionHandler: (success: Bool, error: NSError?) -> Void ) throws {
         CDK.performBlockOnBackgroundContext({ (context: NSManagedObjectContext) in
-            let results = context.find(Manufacturer.self)
-            if let dbError = results.error() {
-                dispatch_async(dispatch_get_main_queue()) { completionHandler(success: false, error: dbError) }
-                return .DoNothing
-            } else {
-                if let allMfg = results.value() {
-                    var database = NSMutableArray(capacity: allMfg.count)
-                    for mfg in allMfg {
-                        database.addObject(mfg.toJson(includeRelationships: true))
-                    }
-                    let outUrl = AppController.appController.urlForResourceInApplicationSupport(resourceName: "database.json")
-                    var jsonError: NSError?
-                    let obj = NSJSONSerialization.dataWithJSONObject(database, options: .PrettyPrinted, error: &jsonError) as NSData?
-                    if let jsonError = jsonError {
-                        dispatch_async(dispatch_get_main_queue()) { completionHandler(success: false, error: jsonError) }
-                    } else {
-                        obj!.writeToURL(outUrl, atomically: true)
-                        dispatch_async(dispatch_get_main_queue()) { completionHandler(success: true, error: nil) }
-                    }
+
+            do {
+                let results = try context.find(Manufacturer.self)
+                let database = NSMutableArray(capacity: results.count)
+                for mfg in results {
+                    database.addObject(mfg.toJson(true))
                 }
+                let outUrl = AppController.appController.urlForResourceInApplicationSupport(resourceName: "database.json")
+                if let obj = try? NSJSONSerialization.dataWithJSONObject(database, options: .PrettyPrinted) {
+                    obj.writeToURL(outUrl, atomically: true)
+                    dispatch_async(dispatch_get_main_queue()) { completionHandler(success: true, error: nil) }
+                }
+                
+            } catch CoreDataKitError.CoreDataError(let coreDataError) {
+                let nserror = NSError(domain: "com.clamdango.rainbowfish", code: 100, userInfo: [NSLocalizedDescriptionKey : "\(coreDataError)"])
+                completionHandler(success: false, error: nserror)
+                
+            } catch {
+                completionHandler(success: false, error: nil)
             }
+            
             return CommitAction.DoNothing
+            
             }, completionHandler: nil)
         
     }
@@ -128,15 +129,12 @@ class SettingsTableViewController: ContentTableViewController {
             if let err = error {
                 assertionFailure(err.localizedDescription)
             } else {
-                println("Yay")
+                print("Yay")
             }
         })
     }
     
-}
-
-
-extension SettingsTableViewController: UITableViewDataSource {
+    //MARK: tableview data source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return (self.allowDataImportSection) ? self.sectionInfo.count : self.sectionInfo.count - 1
@@ -205,9 +203,8 @@ extension SettingsTableViewController: UITableViewDataSource {
         return "\(wholeNumber)"
     }
 
-}
-
-extension SettingsTableViewController: UITableViewDelegate {
+    
+    // MARK: tableview delegate
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         var viewController: UIViewController?
@@ -217,12 +214,16 @@ extension SettingsTableViewController: UITableViewDelegate {
         switch ixPath {
         case (Sections.DataManagement.rawValue, DataManagementRows.DataExport.rawValue):
             self.showHUD(message: "Creating Export")
-            self.exportDatabase({ (success, error) -> Void in
-                self.hideHUD()
-                if let e = error {
-                    assertionFailure(e.localizedDescription)
-                }
-            })
+            do {
+                try self.exportDatabase({ (success, error) -> Void in
+                    self.hideHUD()
+                    if let e = error {
+                        assertionFailure(e.localizedDescription)
+                    }
+                })
+            } catch {
+                assertionFailure("Database export failed")
+            }
         case (Sections.DataManagement.rawValue, DataManagementRows.DataImport.rawValue):
             self.seedCloudDatabase()
         case (Sections.AppPurchase.rawValue, _):

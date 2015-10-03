@@ -10,7 +10,7 @@ import Foundation
 
 extension Array {
     
-    func insertionIndexOf(item: T, isOrderedBefore: (T,T) -> Bool) -> Int {
+    func insertionIndexOf(item: Element, isOrderedBefore: (Element,Element) -> Bool) -> Int {
         if self.count == 0 {
             return 0
         } else if self.count == 1 {

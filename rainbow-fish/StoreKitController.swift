@@ -35,10 +35,10 @@ class StoreKitController: NSObject {
 
     func validateProductIdentifiers(completion:([StoreKitProduct])->Void) {
         let identifiers = self.configuredProducts.map { (product)  in
-            return product.productID as NSString
+            return product.productID as String
         }
         let productIdentifiers = Set(identifiers)
-        var request = SKProductsRequest(productIdentifiers: productIdentifiers)
+        let request = SKProductsRequest(productIdentifiers: productIdentifiers)
         request.delegate = self
         self.productRequestCompletion = completion
         request.start()
@@ -56,7 +56,7 @@ class StoreKitController: NSObject {
     }
     
     func formattedPrice(price: NSDecimalNumber, forLocale locale: NSLocale) -> String {
-        var numberFormatter = NSNumberFormatter()
+        let numberFormatter = NSNumberFormatter()
         numberFormatter.formatterBehavior = NSNumberFormatterBehavior.Behavior10_4
         numberFormatter.locale = locale
         numberFormatter.numberStyle = .CurrencyStyle
@@ -67,10 +67,10 @@ class StoreKitController: NSObject {
 
 extension StoreKitController: SKProductsRequestDelegate {
     
-    func productsRequest(request: SKProductsRequest!, didReceiveResponse response: SKProductsResponse!) {
+    func productsRequest(request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
         var forSale = [String:SKProduct]()
         var productListings = [StoreKitProduct]()
-        for prod in response.products as! [SKProduct]  {
+        for prod in response.products {
             let identifier = prod.productIdentifier as String
             forSale[identifier] = prod
             if var prodListing = self.productListingForIdentifier(identifier) {

@@ -56,7 +56,7 @@ extension Pencil: CloudSyncable {
     
     func toJson(includeRelationships: Bool = false ) -> NSDictionary {
         
-        var jsonObject = NSMutableDictionary()
+        let jsonObject = NSMutableDictionary()
         jsonObject[PencilAttributes.recordID.rawValue] = self.recordID
         jsonObject[PencilAttributes.name.rawValue] = self.name
         jsonObject[PencilAttributes.identifier.rawValue] = self.identifier
@@ -74,16 +74,10 @@ extension Pencil {
     
     // MARK: core data methods
     
-    class func allPencils(forProduct product: Product,  context: NSManagedObjectContext) -> [Pencil]? {
+    class func allPencils(forProduct product: Product,  context: NSManagedObjectContext) throws -> [Pencil]? {
         let predicate = NSPredicate(format: "%K == %@", PencilRelationships.product.rawValue, product)
         let byName = NSSortDescriptor(key: PencilAttributes.name.rawValue, ascending: true)
-        switch context.find(Pencil.self, predicate: predicate, sortDescriptors: [byName], limit: nil, offset: nil) {
-        case let .Failure(error):
-            assertionFailure(error.localizedDescription)
-        case let .Success(boxedResults):
-            return boxedResults.value
-        }
-        return nil
+        return try context.find(Pencil.self, predicate: predicate, sortDescriptors: [byName], limit: nil, offset: nil)
     }
     
     func canSave() -> Bool {

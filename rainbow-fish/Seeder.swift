@@ -28,10 +28,11 @@ class Seeder {
         let seedURL = NSBundle.mainBundle().URLForResource(seedFile as String, withExtension: "json")
         assert(seedURL != nil, "can't find seed json file")
         if let seedJsonData = NSData(contentsOfURL: seedURL!) {
-            var error: NSError? = nil
-            let jsonData = NSJSONSerialization.JSONObjectWithData(seedJsonData, options: .AllowFragments, error: &error) as! [[String:String]]?
-            if error != nil {
-                completion(countInserted: 0, error: error)
+            
+            let jsonData = try? NSJSONSerialization.JSONObjectWithData(seedJsonData, options: .AllowFragments) as! [[String:String]]
+            if jsonData == nil {
+                let jsonError = NSError(domain: "com.clamdango.rainbowfish", code: 1, userInfo: [NSLocalizedDescriptionKey : "json parsing error"])
+                completion(countInserted: 0, error: jsonError)
                 return
             }
             let manufacturer = manufacturerWithName("Prismacolor")
@@ -41,7 +42,7 @@ class Seeder {
             for p in pencils {
                 changeSet.append(p)
             }
-            var saveOp =  CKModifyRecordsOperation(recordsToSave: changeSet, recordIDsToDelete: nil)
+            let saveOp = CKModifyRecordsOperation(recordsToSave: changeSet, recordIDsToDelete: nil)
             saveOp.database = self.publicDb
             saveOp.savePolicy = .AllKeys
             saveOp.modifyRecordsCompletionBlock = {(saved, deleted, error) -> Void in

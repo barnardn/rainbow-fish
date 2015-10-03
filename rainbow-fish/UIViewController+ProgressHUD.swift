@@ -10,9 +10,9 @@ import UIKit
 
 extension UIViewController {
     
-    func showHUD(#message: String?) {
+    func showHUD(message message: String?) {
         
-        dispatch_async(dispatch_get_main_queue(), {[unowned self] () -> Void in
+        dispatch_async(dispatch_get_main_queue(), {() -> Void in
             SwiftFullScreenLoader.show(title: message)
         })
     }
@@ -27,8 +27,8 @@ extension UIViewController {
         })
     }
     
-    func showSmallHUD(#message: String?) {
-        dispatch_async(dispatch_get_main_queue(), { [unowned self] () -> Void in
+    func showSmallHUD(message message: String?) {
+        dispatch_async(dispatch_get_main_queue(), { () -> Void in
             SwiftLoader.show(title: message, animated: true)
         })
     }

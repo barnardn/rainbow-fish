@@ -28,7 +28,7 @@ extension UIColor {
     
     var hexRepresentation: String {
         get {
-            let (r,g,b,alpha) = self.getIntegerValues()
+            let (r,g,b,_) = self.getIntegerValues()
             return "#\(r.toHex())\(g.toHex())\(b.toHex())"
         }
     }
@@ -49,7 +49,7 @@ extension UIColor {
             if rgbParts.count != 3 {
                 return UIColor.blackColor()
             }
-            let rgbValues = rgbParts.map{(str: String) in Float(str.toInt()!)/256.0 }
+            let rgbValues = rgbParts.map{(str: String) in Float(Int(str)!)/256.0 }
             return UIColor(red: CGFloat(rgbValues[0]), green: CGFloat(rgbValues[1]), blue: CGFloat(rgbValues[2]), alpha: 1.0)
         }
         return UIColor.blackColor()
@@ -58,12 +58,12 @@ extension UIColor {
     class func colorFromHexString(hexString: String) -> UIColor? {
         var str = hexString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).uppercaseString as String
         while str.hasPrefix("#") {
-            str = str.substringFromIndex(advance(str.startIndex, 1))
+            str = str.substringFromIndex(str.startIndex.advancedBy(1))
         }
         while str.hasPrefix("0X") {
-            str = str.substringFromIndex(advance(str.startIndex, 2))
+            str = str.substringFromIndex(str.startIndex.advancedBy(2))
         }
-        if count(str) != 6 {
+        if str.characters.count != 6 {
             return nil
         }
         var rgbValue : UInt32 = 0

@@ -84,7 +84,7 @@ class PencilColorPickerTableViewCell: UITableViewCell {
     }
 
     func sliderValueChanged(slider: UISlider) {
-        var value = Int(slider.value * 255.0)
+        let value = Int(slider.value * 255.0)
         switch slider {
         case redSlider:
             redValueLabel.text = String(value)

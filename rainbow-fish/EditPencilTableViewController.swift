@@ -84,7 +84,7 @@ class EditPencilTableViewController: ContentTableViewController {
     
     // MARK: kvo notification handler
     
-    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         if context != &editPenilKVOContext {
             super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
             return
@@ -155,12 +155,9 @@ class EditPencilTableViewController: ContentTableViewController {
                     lineItem.populateWithPencil(self.pencil)
                 }
                 return .SaveToPersistentStore
-            }, completionHandler: {[unowned self] (result: Result<CommitAction>) in
-                switch result {
-                case let .Failure(error):
-                    sender.enabled = true
-                    println("cant save \(error)")
-                default:
+            }, completionHandler: {[unowned self] (result) in
+                do {
+                    try result()
                     let pencilRecord = self.pencil.toCKRecord()
                     if self.newPencil {
                         if let product = self.product {
@@ -172,6 +169,8 @@ class EditPencilTableViewController: ContentTableViewController {
                         NSNotificationCenter.defaultCenter().postNotificationName(AppNotifications.DidEditPencil.rawValue, object: nil, userInfo: userInfo)
                     })
                     self.cloudStoreRecords([pencilRecord])
+                } catch {
+                    assertionFailure()
                 }
         })
     }
@@ -195,8 +194,8 @@ class EditPencilTableViewController: ContentTableViewController {
             self.hideHUD()
             self.saveButton.enabled = true
             if !success {
-                println(error?.localizedDescription)
-                println(error?.userInfo)
+                print(error?.localizedDescription)
+                print(error?.userInfo)
                 assertionFailure("bummer: \(error?.localizedDescription)")
             }
             self.context.performBlock({ [unowned self] (_) in
@@ -206,16 +205,22 @@ class EditPencilTableViewController: ContentTableViewController {
                     }
                 }
                 return .SaveToPersistentStore
-            }, completionHandler: { [unowned self] (result: Result<CommitAction>) in
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    if self.newPencil {
-                        self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
-                    } else {
-                        self.toggleEditing(false)
-                        self.navigationItem.leftBarButtonItem = nil
-                        self.navigationItem.rightBarButtonItem = self.editButton
-                    }
-                })
+            }, completionHandler: { [unowned self] (result) in
+                
+                do {
+                    try result()
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        if self.newPencil {
+                            self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+                        } else {
+                            self.toggleEditing(false)
+                            self.navigationItem.leftBarButtonItem = nil
+                            self.navigationItem.rightBarButtonItem = self.editButton
+                        }
+                    })
+                } catch {
+                    assertionFailure()
+                }
             })
         }
     }
@@ -231,23 +236,22 @@ class EditPencilTableViewController: ContentTableViewController {
                 inventory.populateWithPencil(pencil)
                 return .SaveToPersistentStore
             },
-            completionHandler: { [unowned self] (result: Result<CommitAction>) in
+            completionHandler: { [unowned self] (result) in
                 
-                switch result {
-                case let .Failure(error):
-                    assertionFailure("Unable to save inventory: \(error)")
-                default:
-                    var userInfo = [AppNotificationInfoKeys.DidEditPencilPencilKey.rawValue : self.pencil.objectID ]
+                do {
+                    try result()
+                    let userInfo = [AppNotificationInfoKeys.DidEditPencilPencilKey.rawValue : self.pencil.objectID ]
                     dispatch_async(dispatch_get_main_queue(), { () -> Void in
                         NSNotificationCenter.defaultCenter().postNotificationName(AppNotifications.DidEditPencil.rawValue, object: nil, userInfo: userInfo)
                     })
-            }})
+                } catch {
+                    assertionFailure()
+                }
+            })
     }
     
-}
 
-// MARK: - Table view data source
-extension EditPencilTableViewController: UITableViewDataSource {
+    // MARK: - Table view data source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         if self.newPencil {
@@ -262,7 +266,7 @@ extension EditPencilTableViewController: UITableViewDataSource {
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            var cell = tableView.dequeueReusableCellWithIdentifier(EditPecilPropertyTableViewCell.nibName, forIndexPath: indexPath) as! EditPecilPropertyTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(EditPecilPropertyTableViewCell.nibName, forIndexPath: indexPath) as! EditPecilPropertyTableViewCell
             cell.pencil = self.pencil
             if indexPath.row == 0 {
                 cell.placeholder = NSLocalizedString("Color Name", comment:"edit pencil color name placeholder")
@@ -274,19 +278,19 @@ extension EditPencilTableViewController: UITableViewDataSource {
             return cell
         } else if indexPath.section == 1 {
             if !self.tableView.editing {
-                var cell = tableView.dequeueReusableCellWithIdentifier(PencilColorTableViewCell.nibName, forIndexPath: indexPath) as! PencilColorTableViewCell
+                let cell = tableView.dequeueReusableCellWithIdentifier(PencilColorTableViewCell.nibName, forIndexPath: indexPath) as! PencilColorTableViewCell
                 let color = self.pencil.color as? UIColor ?? UIColor.blackColor()
                 cell.swatchColor = color
                 cell.colorName = color.hexRepresentation
                 return cell
             }
-            var cell = tableView.dequeueReusableCellWithIdentifier(PencilColorPickerTableViewCell.nibName, forIndexPath: indexPath) as! PencilColorPickerTableViewCell
+            let cell = tableView.dequeueReusableCellWithIdentifier(PencilColorPickerTableViewCell.nibName, forIndexPath: indexPath) as! PencilColorPickerTableViewCell
             cell.defaultColor = self.pencil.color as! UIColor? ?? UIColor.blackColor()
             cell.delegate = self
             return cell
         } else {
-            var title = (self.pencil.inventory != nil) ? NSLocalizedString("You own this pencil.", comment:"edit pencil button title") : NSLocalizedString("Add Pencil To My Inventory", comment:"edit pencil add pencil to inventory button title")
-            var cell = tableView.dequeueReusableCellWithIdentifier(BigButtonTableViewCell.nibName) as! BigButtonTableViewCell
+            let title = (self.pencil.inventory != nil) ? NSLocalizedString("You own this pencil.", comment:"edit pencil button title") : NSLocalizedString("Add Pencil To My Inventory", comment:"edit pencil add pencil to inventory button title")
+            let cell = tableView.dequeueReusableCellWithIdentifier(BigButtonTableViewCell.nibName) as! BigButtonTableViewCell
             cell.title = title
             cell.disabled = (self.pencil.inventory != nil)
             return cell
@@ -299,11 +303,8 @@ extension EditPencilTableViewController: UITableViewDataSource {
         }
         return false
     }
-    
-}
 
-// MARK: - Table view delegate
-extension EditPencilTableViewController: UITableViewDelegate {
+    // MARK: - Table view delegate
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         if self.tableView.editing {
@@ -382,14 +383,14 @@ extension EditPencilTableViewController: PencilColorPickerTableViewCellDelegate,
     }
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        if count(string) == 0 {
+        if string.characters.count == 0 {
             return true
         }
-        if count(textField.text) + count(string) > 6 {
+        if textField.text!.characters.count + string.characters.count > 6 {
             return false
         }
         let nonHexChars = NSCharacterSet(charactersInString: "0123456789ABCDEFabcdef").invertedSet
-        if let foundRange = string.rangeOfCharacterFromSet(nonHexChars, options: NSStringCompareOptions.CaseInsensitiveSearch) {
+        if let _ = string.rangeOfCharacterFromSet(nonHexChars, options: NSStringCompareOptions.CaseInsensitiveSearch) {
             return false
         }
         return true

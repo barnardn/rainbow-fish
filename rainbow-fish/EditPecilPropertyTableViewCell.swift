@@ -78,9 +78,9 @@ extension EditPecilPropertyTableViewCell: UITextFieldDelegate {
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         if let keypath = self.keyPath {
             if let pencil = self.pencil {
-                var end = advance(textField.text.startIndex, range.location)
-                let replaceRange: Range<String.Index> = Range<String.Index>(start: textField.text.startIndex, end: end)
-                var value = textfield.text.substringWithRange(replaceRange) + string
+                let end = textField.text!.startIndex.advancedBy(range.location)
+                let replaceRange: Range<String.Index> = Range<String.Index>(start: textField.text!.startIndex, end: end)
+                let value = textfield.text!.substringWithRange(replaceRange) + string
                 pencil.setValue(value, forKey: keypath)
             }
         }

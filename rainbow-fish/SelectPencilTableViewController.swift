@@ -95,7 +95,7 @@ class SelectPencilTableViewController: ContentTableViewController {
                 let row = self.pencils.insertionIndexOf(pencil, isOrderedBefore: { (p1: Pencil, p2: Pencil) -> Bool in
                     return p1.identifier == p2.identifier
                 })
-                if let visibleRows = self.tableView.indexPathsForVisibleRows() as! [NSIndexPath]? {
+                if let visibleRows = self.tableView.indexPathsForVisibleRows {
                     let results = visibleRows.filter{(indexPath: NSIndexPath) in
                         return indexPath.row == row
                     }
@@ -110,14 +110,15 @@ class SelectPencilTableViewController: ContentTableViewController {
     // MARK: private methods
     
     private func updatePencils() {
-        if let pencils = Pencil.allPencils(forProduct: self.product, context: self.product.managedObjectContext!) {
-            self.pencils = pencils
+        
+        if let pencils = try? Pencil.allPencils(forProduct: self.product, context: self.product.managedObjectContext!) {
+            self.pencils = pencils ?? [Pencil]()
             tableView.reloadData()
         }
         self.cloudUpdate(forced: false)
     }
     
-    private func cloudUpdate(#forced: Bool) {
+    private func cloudUpdate(forced forced: Bool) {
         if !forced && !self.product.shouldPerformUpdate {
             return
         }
@@ -132,9 +133,11 @@ class SelectPencilTableViewController: ContentTableViewController {
                 self.refreshControl?.endRefreshing()
             }
             if error != nil {
-                println(error?.localizedDescription)
+                print(error?.localizedDescription)
             } else {
-                self.pencils = Pencil.allPencils(forProduct: self.product, context: self.product.managedObjectContext!) ?? [Pencil]()
+                if let pencils = try? Pencil.allPencils(forProduct: self.product, context: self.product.managedObjectContext!) {
+                    self.pencils = pencils ?? [Pencil]()
+                }
                 self.tableView.reloadData()
             }
         }
@@ -155,12 +158,8 @@ class SelectPencilTableViewController: ContentTableViewController {
         return newestPencil.modificationDate ?? NSDate()
     }
 
-}
-
-// MARK: UITableViewDataSource
-
-extension SelectPencilTableViewController: UITableViewDataSource {
-
+    // MARK: UITableViewDataSource
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.pencils.count
     }
@@ -175,11 +174,8 @@ extension SelectPencilTableViewController: UITableViewDataSource {
         cell.presentInInventory = (pencil.inventory != nil)
         return cell
     }
-}
 
-// MARK: UITableViewDelegate
-
-extension SelectPencilTableViewController: UITableViewDelegate {
+    // MARK: UITableViewDelegate
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         var pencil: Pencil
@@ -190,7 +186,10 @@ extension SelectPencilTableViewController: UITableViewDelegate {
         }
         self.navigationController?.pushViewController(EditPencilTableViewController(pencil: pencil), animated: true)
     }
+    
 }
+
+
 
 // MARK: search extensions
 
@@ -204,7 +203,7 @@ extension SelectPencilTableViewController: UISearchBarDelegate, UISearchControll
         let resultsController = searchController.searchResultsController as! PencilSearchResultsTableViewController
         
         let whitespaceCharacterSet = NSCharacterSet.whitespaceCharacterSet()
-        let strippedString = searchController.searchBar.text.stringByTrimmingCharactersInSet(whitespaceCharacterSet)
+        let strippedString = searchController.searchBar.text!.stringByTrimmingCharactersInSet(whitespaceCharacterSet)
         let searchItems = strippedString.componentsSeparatedByString(" ") as [String]
         
         var subpredicates = [NSPredicate]()

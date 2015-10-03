@@ -51,7 +51,7 @@ class InventoryTableViewController: ContentTableViewController {
     
     convenience init() {
         self.init(style: UITableViewStyle.Plain)
-        var image = UIImage(named:"tabbar-icon-inventory")?.imageWithRenderingMode(.AlwaysTemplate)
+        let image = UIImage(named:"tabbar-icon-inventory")?.imageWithRenderingMode(.AlwaysTemplate)
         let title = NSLocalizedString("My Pencils", comment: "my pencils tab bar item title")
         self.tabBarItem = UITabBarItem(title: title, image: image, tag: 0)
     }
@@ -104,7 +104,7 @@ class InventoryTableViewController: ContentTableViewController {
     }
     
     func sortCurrentInventoryByQuantity() {
-        var sorted = self.inventory.sorted { (item1: Inventory, item2: Inventory) -> Bool in
+        let sorted = self.inventory.sort { (item1: Inventory, item2: Inventory) -> Bool in
             if item1.quantity?.doubleValue == item2.quantity?.doubleValue {
                 return item1.name < item2.name
             }
@@ -121,7 +121,7 @@ class InventoryTableViewController: ContentTableViewController {
     
     // MARK: kvo 
 
-    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
         if context != &inventoryKVOContext {
             super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
             return
@@ -129,7 +129,7 @@ class InventoryTableViewController: ContentTableViewController {
         self.updateBadgeCount(reloadingVisibleRows: true)
     }
     
-    private func updateBadgeCount(#reloadingVisibleRows: Bool) {
+    private func updateBadgeCount(reloadingVisibleRows reloadingVisibleRows: Bool) {
         
         let minimumQuantity = AppController.appController.appConfiguration.minInventoryQuantity
         if minimumQuantity == nil {
@@ -152,14 +152,11 @@ class InventoryTableViewController: ContentTableViewController {
         if !reloadingVisibleRows {
             return
         }
-        if let indexPaths = self.tableView.indexPathsForVisibleRows() {
+        if let indexPaths = self.tableView.indexPathsForVisibleRows {
             self.tableView.reloadRowsAtIndexPaths(indexPaths, withRowAnimation: .None)
         }
     }
     
-}
-
-extension InventoryTableViewController : UITableViewDataSource {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.inventory.count
@@ -190,9 +187,6 @@ extension InventoryTableViewController : UITableViewDataSource {
         // exists solely to allow editting
     }
     
-}
-
-extension InventoryTableViewController: UITableViewDelegate {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 
@@ -233,7 +227,7 @@ extension InventoryTableViewController: UITableViewDelegate {
     }
 
     
-    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [AnyObject]? {
+    override func tableView(tableView: UITableView, editActionsForRowAtIndexPath indexPath: NSIndexPath) -> [UITableViewRowAction]? {
         if tableView != self.tableView {
             return nil
         }
@@ -257,13 +251,13 @@ extension InventoryTableViewController: UITableViewDelegate {
         return [deleteAction, addAction, subtractAction]
     }
     
-    private func quantityUpdateAction(#lineItem: Inventory, atIndexPath indexPath: NSIndexPath, addition: Bool) {
+    private func quantityUpdateAction(lineItem lineItem: Inventory, atIndexPath indexPath: NSIndexPath, addition: Bool) {
 
         let context = lineItem.managedObjectContext!
 
         context.performBlock({ [unowned self]() -> Void in
 
-            if var qty = lineItem.quantity {
+            if let qty = lineItem.quantity {
                 if addition {
                     lineItem.quantity = qty.decimalNumberByAdding(NSDecimalNumber.one())
                 } else {
@@ -279,8 +273,14 @@ extension InventoryTableViewController: UITableViewDelegate {
                     lineItem.quantity = NSDecimalNumber.one()
                 }
             }
-            context.save(nil)
-            context.parentContext?.save(nil)
+            do {
+                try context.save()
+            } catch _ {
+            }
+            do {
+                try context.parentContext?.save()
+            } catch _ {
+            }
 
             let cell = self.tableView.cellForRowAtIndexPath(indexPath) as! InventoryTableViewCell
             cell.quantity = lineItem.quantity?.stringValue
@@ -289,7 +289,7 @@ extension InventoryTableViewController: UITableViewDelegate {
 
     }
     
-    private func deleteLineItemAction(#lineItem: Inventory, atIndexPath indexPath: NSIndexPath) {
+    private func deleteLineItemAction(lineItem lineItem: Inventory, atIndexPath indexPath: NSIndexPath) {
         
         self.inventory.removeAtIndex(indexPath.row)
         tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
@@ -299,15 +299,14 @@ extension InventoryTableViewController: UITableViewDelegate {
             ctxt.deleteObject(item)
             return CommitAction.SaveToPersistentStore
             
-            }, completionHandler: { [unowned self] (result: Result<CommitAction>) in
-                
-                if let error = result.error() as NSError? {
-                    assertionFailure(error.localizedDescription)
-                } else {
+            }, completionHandler: { [unowned self] (result) in
+                do {
+                    try result()
                     dispatch_async(dispatch_get_main_queue()) {self.updateBadgeCount(reloadingVisibleRows: false) }
+                } catch {
+                    assertionFailure()
                 }
-                
-        })
+            })
     }
     
     func findIndexOfItemByManagedObjectID( managedObjectID: NSManagedObjectID) -> Int {
@@ -335,7 +334,7 @@ extension InventoryTableViewController : UISearchBarDelegate, UISearchController
         let resultsController = searchController.searchResultsController as! InventorySearchResultsTableViewController
         
         let whitespaceCharacterSet = NSCharacterSet.whitespaceCharacterSet()
-        let strippedString = searchController.searchBar.text.stringByTrimmingCharactersInSet(whitespaceCharacterSet)
+        let strippedString = searchController.searchBar.text!.stringByTrimmingCharactersInSet(whitespaceCharacterSet)
         let searchItems = strippedString.componentsSeparatedByString(" ") as [String]
         
         var subpredicates = [NSPredicate]()

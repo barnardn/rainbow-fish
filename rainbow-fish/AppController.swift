@@ -9,8 +9,8 @@
 import Foundation
 import CoreData
 import CoreDataKit
-import Fabric
-import Crashlytics
+//import Fabric
+//import Crashlytics
 import UIKit
 
 class AppController: NSObject {
@@ -36,7 +36,7 @@ class AppController: NSObject {
     
     func setup() {
         NSValueTransformer.setValueTransformer(ColorValueTransformer(), forName: "ColorValueTransformer")
-        Fabric.with([Crashlytics()])
+//        Fabric.with([Crashlytics.self()])
         AppearanceManager.appearanceManager.setupAppearanceProxies()
         CDK.sharedStack = CoreDataStack(persistentStoreCoordinator: self.persistentStoreCoordinator)
     }
@@ -46,7 +46,7 @@ class AppController: NSObject {
     }
     
     lazy var dataImportKey: String = {
-        if  let infoDict = NSBundle.mainBundle().infoDictionary as! [NSString: AnyObject]?,
+        if  let infoDict = NSBundle.mainBundle().infoDictionary ,
             let importKey = infoDict[self.DataImportKey] as? String {
                 return importKey
         }
@@ -55,7 +55,7 @@ class AppController: NSObject {
     
     func shouldPerformAutomaticProductUpdates() -> Bool {
         if let lastUpdatedDate = NSUserDefaults.standardUserDefaults().objectForKey(LastUpdatedDateUserDefaultKey) as! NSDate? {
-            let dateComponents = NSCalendar.currentCalendar().components(NSCalendarUnit.CalendarUnitDay, fromDate: lastUpdatedDate, toDate: NSDate(), options: NSCalendarOptions.allZeros)
+            let dateComponents = NSCalendar.currentCalendar().components(NSCalendarUnit.Day, fromDate: lastUpdatedDate, toDate: NSDate(), options: NSCalendarOptions())
             return (dateComponents.day >= 1)
         }
         return true
@@ -73,8 +73,8 @@ class AppController: NSObject {
     }
     
     func allowsAppIconBadge() -> Bool {
-        var notificationSettings = UIApplication.sharedApplication().currentUserNotificationSettings()
-        return (notificationSettings.types & UIUserNotificationType.Badge) != nil
+        let notificationSettings = UIApplication.sharedApplication().currentUserNotificationSettings()
+        return (notificationSettings!.types.intersect(UIUserNotificationType.Badge)) != []
     }
     
     func setAppIconBadgeNumber(badgeNumber value: Int) {
@@ -92,7 +92,7 @@ class AppController: NSObject {
     
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
         let storeURL = self.urlForResourceInApplicationSupport(resourceName: self.storeName)        
-        println("Store URL: \(storeURL)")
+        print("Store URL: \(storeURL)")
         return NSPersistentStoreCoordinator(automigrating: true, deleteOnMismatch: true, URL: storeURL, managedObjectModel: self.managedObjectModel)!
     }()
     
@@ -103,7 +103,7 @@ class AppController: NSObject {
         return NSFileManager.defaultManager().applicationSupportDirectory()
     }()
     
-    func urlForResourceInApplicationSupport(#resourceName: String) -> NSURL {
+    func urlForResourceInApplicationSupport(resourceName resourceName: String) -> NSURL {
         return self.applicationSupportFolderURL.URLByAppendingPathComponent(resourceName)
     }
 }

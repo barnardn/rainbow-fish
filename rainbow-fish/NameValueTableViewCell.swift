@@ -36,7 +36,7 @@ class NameValueTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.selectedBackgroundView = UIView(frame: self.bounds)
-        self.selectedBackgroundView.backgroundColor = AppearanceManager.appearanceManager.selectedCellBackgroundColor
+        self.selectedBackgroundView?.backgroundColor = AppearanceManager.appearanceManager.selectedCellBackgroundColor
         self.nameLabel.textColor = AppearanceManager.appearanceManager.brandColor
         self.nameLabel.font = AppearanceManager.appearanceManager.nameLabelFont
         self.valueLabel.textColor = AppearanceManager.appearanceManager.bodyTextColor

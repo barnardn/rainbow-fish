@@ -24,36 +24,16 @@ protocol CloudSyncable {  // used by NSMangedObject
 
 extension NSManagedObjectContext {
     
-    func updateFromCKRecord<T:NSManagedObject where T:NamedManagedObject, T:CloudSyncable>(entity: T.Type, record: CKRecord, createIfNotFound: Bool) -> (T?,NSError?) {
-        
-        var returnResult: (T?, NSError?) = (nil, nil)
+    func updateFromCKRecord<T:NSManagedObject where T:NamedManagedObject, T:CloudSyncable>(entity: T.Type, record: CKRecord, createIfNotFound: Bool) throws -> T? {
         let byRecordID = NSPredicate(format: "recordID == %@", record.recordID.recordName)
         
-        switch self.findFirst(entity, predicate: byRecordID, sortDescriptors: nil, offset: nil) {
-            
-        case let .Failure(error):
-            returnResult = (nil,error)
-            
-        case let .Success(boxedResult):
-            if let managedObject = boxedResult.value as T! {
-                if let moDate = managedObject.valueForKeyPath("modificationDate") as? NSDate {
-                    if moDate.compare(record.modificationDate)  == .OrderedAscending {
-                        managedObject.populateFromCKRecord(record)
-                    }
-                }
-                returnResult = (managedObject, nil)
-            } else {
-                if createIfNotFound {
-                    var managedObject = self.create(T).value()
-                    managedObject?.populateFromCKRecord(record)
-                    returnResult = (managedObject, nil)
-                }
+        if let managedObject = try self.findFirst(entity, predicate: byRecordID, sortDescriptors: nil, offset: nil) {
+            if let moDate = managedObject.valueForKeyPath("modificationDate") as? NSDate where moDate.compare(record.modificationDate!) == .OrderedAscending {
+                managedObject.populateFromCKRecord(record)
+                return managedObject
             }
-
         }
-        return returnResult
+        return nil
     }
-    
-    
     
 }

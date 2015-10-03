@@ -29,10 +29,10 @@ class SettingsPurchaseOptionsTableViewController: UITableViewController {
         self.storeKitController.validateProductIdentifiers { [unowned self] (products) -> Void in
             self.hideSmallHUD()
             var allProducts = [self.storeKitController.restorePurchasesProduct]
-            let storeKitProducts = products.sorted({ (p1: StoreKitProduct, p2: StoreKitProduct) -> Bool in
+            let storeKitProducts = products.sort({ (p1: StoreKitProduct, p2: StoreKitProduct) -> Bool in
                 return p1.displayPriceValue < p2.displayPriceValue
             })
-            allProducts.extend(storeKitProducts)
+            allProducts.appendContentsOf(storeKitProducts)
             self.products = allProducts
             self.tableView.reloadData()
         }
@@ -48,9 +48,7 @@ class SettingsPurchaseOptionsTableViewController: UITableViewController {
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     
-}
-
-extension SettingsPurchaseOptionsTableViewController: UITableViewDataSource, UITableViewDelegate {
+    // MARK: tableview methods
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return self.products?.count ?? 0
@@ -67,7 +65,7 @@ extension SettingsPurchaseOptionsTableViewController: UITableViewDataSource, UIT
         cell.name = product.name
         cell.value = product.displayPrice
         cell.tintColor = AppearanceManager.appearanceManager.brandColor
-        if let details = product.details {
+        if let _ = product.details {
             cell.accessoryType = .DetailDisclosureButton
         } else {
             cell.accessoryType = .DisclosureIndicator

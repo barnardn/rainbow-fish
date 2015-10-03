@@ -45,7 +45,7 @@ struct StoreKitProduct {
     
 }
 
-extension StoreKitProduct: Printable {
+extension StoreKitProduct: CustomStringConvertible {
     var description: String {
         return "\(self.name) @ \(self.displayPrice) available for sale: \(self.isAvailableForSale)"
     }

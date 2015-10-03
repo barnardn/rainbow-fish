@@ -61,7 +61,7 @@ class CloudImport {
         
         var accumulator = [CKRecord]()
 
-        var mfgRec = self.createCKRecord(Manufacturer.entityName, json: json)
+        let mfgRec = self.createCKRecord(Manufacturer.entityName, json: json)
         mfgRec.setValue(json[ManufacturerAttributes.name.rawValue].string, forKey: ManufacturerAttributes.name.rawValue)
         mfgRec.setValue(json[ManufacturerAttributes.ownerRecordIdentifier.rawValue].string, forKey: ManufacturerAttributes.ownerRecordIdentifier.rawValue)
         accumulator.append(mfgRec)
@@ -72,12 +72,12 @@ class CloudImport {
         return accumulator
     }
     
-    private func productTree(#productJSON: [JSON], mfg: CKRecord) -> [CKRecord] {
+    private func productTree(productJSON productJSON: [JSON], mfg: CKRecord) -> [CKRecord] {
         
         var accumulator = [CKRecord]()
         
         for json in productJSON {
-            var prodRec = self.createCKRecord(Product.entityName, json: json)
+            let prodRec = self.createCKRecord(Product.entityName, json: json)
             prodRec.setValue(json[ProductAttributes.name.rawValue].string, forKey: ProductAttributes.name.rawValue)
             prodRec.setValue(json[ProductAttributes.ownerRecordIdentifier.rawValue].string, forKey: ProductAttributes.ownerRecordIdentifier.rawValue)
             let mfgRelation = CKReference(record: mfg, action: .DeleteSelf)
@@ -93,10 +93,10 @@ class CloudImport {
         return accumulator
     }
     
-    private func pencils(#pencilJSON: [JSON], product: CKRecord) -> [CKRecord] {
+    private func pencils(pencilJSON pencilJSON: [JSON], product: CKRecord) -> [CKRecord] {
         
         return pencilJSON.map{ (json: JSON) -> CKRecord in
-            var pencilRec = self.createCKRecord(Pencil.entityName, json: json)
+            let pencilRec = self.createCKRecord(Pencil.entityName, json: json)
             pencilRec.setValue(json[PencilAttributes.name.rawValue].string, forKey: PencilAttributes.name.rawValue)
             pencilRec.setValue(json[PencilAttributes.identifier.rawValue].string, forKey: PencilAttributes.identifier.rawValue)
             pencilRec.setValue(json[PencilAttributes.color.rawValue].string, forKey: PencilAttributes.color.rawValue)

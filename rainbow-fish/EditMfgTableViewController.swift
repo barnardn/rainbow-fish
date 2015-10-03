@@ -31,13 +31,9 @@ class EditMfgTableViewController: UITableViewController {
     }
 
     private func updateDatasource() {
-        switch CDK.mainThreadContext.find(Manufacturer.self, predicate: nil, sortDescriptors: [NSSortDescriptor(key: ManufacturerAttributes.name.rawValue, ascending: true)], limit: nil, offset: nil) {
-            
-        case let .Failure(error):
-            assertionFailure(error.localizedDescription)
-        case let .Success(boxedResults):
-            self.allManufacturers = boxedResults.value
-        }
+        
+        let results = try? CDK.mainThreadContext.find(Manufacturer.self, predicate: nil, sortDescriptors: [NSSortDescriptor(key: ManufacturerAttributes.name.rawValue, ascending: true)], limit: nil, offset: nil)
+        self.allManufacturers = results ?? [Manufacturer]()
         self.tableView!.reloadData()
     }
     
@@ -60,15 +56,16 @@ class EditMfgTableViewController: UITableViewController {
             mfg.managedObjectContext?.performBlock({ (context: NSManagedObjectContext) in
                 mfg.name = edittedText
                 return CommitAction.SaveToPersistentStore
-            }, completionHandler: { (result: Result<CommitAction>) in
-                if let error = result.error() {
-                    sender?.enabled = true
-                    assertionFailure(error.localizedDescription)
-                } else {
-                    self.syncEditsToCloud(mfg) { [unowned self ] in
+            }, completionHandler: { (result) in
+                sender?.enabled = true
+                do {
+                    try result()
+                    self.syncEditsToCloud(mfg, completion: { [unowned self] () -> Void in
                         self.dismissViewControllerAnimated(true, completion: nil)
                         self.tableView.reloadData()
-                    }
+                    })
+                } catch {
+                    assertionFailure()
                 }
             })
         }
@@ -85,17 +82,18 @@ class EditMfgTableViewController: UITableViewController {
             product.managedObjectContext?.performBlock({ (context: NSManagedObjectContext) in
                 product.name = edittedText
                 return CommitAction.SaveToPersistentStore
-                }, completionHandler: { (result: Result<CommitAction>) in
-                    if let error = result.error() {
-                        sender?.enabled = true
-                        assertionFailure(error.localizedDescription)
-                    } else {
+                }, completionHandler: { (result) in
+                    sender?.enabled = true
+                    do {
+                        try result()
                         self.syncEditsToCloud(product) { [unowned self] in
                             self.dismissViewControllerAnimated(true, completion: nil)
                             self.tableView.reloadData()
                         }
+                    } catch {
+                        assertionFailure()
                     }
-            })
+                })
         }
         self.presentViewController(viewController, animated: true, completion: nil)
 
@@ -109,10 +107,9 @@ class EditMfgTableViewController: UITableViewController {
             dispatch_async(dispatch_get_main_queue()) { completion() }
         })
     }
-    
-}
 
-extension EditMfgTableViewController: UITableViewDataSource, UITableViewDelegate {
+    //MARK: tableview datasource
+    
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return self.allManufacturers.count;
@@ -137,6 +134,8 @@ extension EditMfgTableViewController: UITableViewDataSource, UITableViewDelegate
         return cell
     }
 
+    //MARK: tableview delegate
+    
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let cloudObject = self.cloudObjectAt(indexPath)

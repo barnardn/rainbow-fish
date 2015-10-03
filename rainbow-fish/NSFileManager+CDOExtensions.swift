@@ -13,13 +13,15 @@ extension NSFileManager {
     func applicationSupportDirectory() -> NSURL {
         
         let urls = NSFileManager.defaultManager().URLsForDirectory(.ApplicationSupportDirectory, inDomains: .UserDomainMask)
-        var appSupport =  urls.last as! NSURL
+        let appSupport =  urls.last as NSURL!
         
-        var error: NSError? = nil
+        var error: NSError?
         if !appSupport.checkResourceIsReachableAndReturnError(&error) {
-            var fsError: NSError? = nil
-            var ok = NSFileManager.defaultManager().createDirectoryAtURL(appSupport, withIntermediateDirectories: true, attributes: nil, error: &fsError)
-            assert(ok == true, "Unable to create app support directory \(fsError!.localizedDescription)")
+            do {
+                try NSFileManager.defaultManager().createDirectoryAtURL(appSupport, withIntermediateDirectories: true, attributes: nil)
+            } catch let createError as NSError {
+                assertionFailure(createError.localizedDescription)
+            }
         }
         return appSupport
     }
