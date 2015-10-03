@@ -59,10 +59,17 @@ class SelectPencilTableViewController: ContentTableViewController {
         self.refreshControl = UIRefreshControl()
         self.refreshControl?.tintColor = AppearanceManager.appearanceManager.brandColor
         self.refreshControl?.addTarget(self, action: Selector("refreshControlDidChange:"), forControlEvents: .ValueChanged)
-        self.navigationItem.rightBarButtonItem = self.addButton
+        
+        if AppController.appController.appConfiguration.wasPurchasedSuccessfully {
+            self.navigationItem.rightBarButtonItem = self.addButton
+        }
+        
         self.navigationItem.backBarButtonItem = self.backButton
         definesPresentationContext = true
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("inventoryDidUpdate:"), name: AppNotifications.DidEditPencil.rawValue, object: nil)
+
+        // KVO on purchase status
+        
     }
     
     override func viewDidAppear(animated: Bool) {

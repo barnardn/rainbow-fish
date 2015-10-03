@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import StoreKit
 
 class ConfigurationSettings: NSObject {
 
@@ -38,6 +39,13 @@ class ConfigurationSettings: NSObject {
         set {
             NSUserDefaults.standardUserDefaults().setObject(newValue, forKey: ConfigurationSettingsKey.AppPurchaseErrorKey.rawValue)
         }
+    }
+    
+    var wasPurchasedSuccessfully: Bool {
+        if let status = NSUserDefaults.standardUserDefaults().integerForKey(ConfigurationSettingsKey.AppPurchaseStatusKey.rawValue) as Int? {
+            return (status == SKPaymentTransactionState.Purchased.rawValue)
+        }
+        return false
     }
     
     override init() {
