@@ -46,8 +46,10 @@ class RootViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = AppearanceManager.appearanceManager.appBackgroundColor;
-        self.view.insertSubview(self.adBannerView, belowSubview: self.tabBar)
-        self.adBannerView.delegate = self
+        if !AppController.appController.appConfiguration.wasPurchasedSuccessfully {
+            self.view.insertSubview(self.adBannerView, belowSubview: self.tabBar)
+            self.adBannerView.delegate = self
+        }
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -67,7 +69,11 @@ class RootViewController: UITabBarController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        self.adBannerView.frame = CGRect(x: CGFloat(0.0), y: CGRectGetMinY(self.tabBar.frame), width: CGRectGetWidth(self.view.bounds), height: CGFloat(50))
+        
+        if !AppController.appController.appConfiguration.wasPurchasedSuccessfully {
+            self.adBannerView.frame = CGRect(x: CGFloat(0.0), y: CGRectGetMinY(self.tabBar.frame), width: CGRectGetWidth(self.view.bounds), height: CGFloat(50))
+        }
+        
     }
     
     // MARK: --= notification handlers =--
@@ -87,6 +93,7 @@ class RootViewController: UITabBarController {
             switch purchaseResult {
             case StoreKitPurchaseResultType.Completed.rawValue:
                 message = NSLocalizedString("Thank you for your purchase!", comment:"completed store kit purchase message")
+                
             case StoreKitPurchaseResultType.Failed.rawValue:
                 message = NSLocalizedString("Your purchase could not be processed.", comment:"failed store kit purchase default message")
                 if let error = userInfo[StoreKitPurchaseErrorUserInfoKey] as? NSError {
@@ -99,6 +106,13 @@ class RootViewController: UITabBarController {
             }
             assert(message.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) > 0, "empty message for storekit notification")
             self.presentStoreKitTransactionMessage(message)
+        }
+    }
+    
+    private func disableBannerAds() {
+        if let _ = self.adBannerView.superview {
+            self.adBannerView.delegate = nil
+            self.adBannerView.removeFromSuperview()
         }
     }
     

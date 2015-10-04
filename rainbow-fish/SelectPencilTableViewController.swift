@@ -60,15 +60,17 @@ class SelectPencilTableViewController: ContentTableViewController {
         self.refreshControl?.tintColor = AppearanceManager.appearanceManager.brandColor
         self.refreshControl?.addTarget(self, action: Selector("refreshControlDidChange:"), forControlEvents: .ValueChanged)
         
-        if AppController.appController.appConfiguration.wasPurchasedSuccessfully {
-            self.navigationItem.rightBarButtonItem = self.addButton
-        }
-        
         self.navigationItem.backBarButtonItem = self.backButton
         definesPresentationContext = true
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("inventoryDidUpdate:"), name: AppNotifications.DidEditPencil.rawValue, object: nil)
 
         // KVO on purchase status
+        
+        if AppController.appController.appConfiguration.wasPurchasedSuccessfully {
+            self.navigationItem.rightBarButtonItem = self.addButton
+        } else {
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("paymentUpdatedNotifcation:"), name: StoreKitPurchaseNotificationName, object: nil)
+        }
         
     }
     
@@ -104,6 +106,16 @@ class SelectPencilTableViewController: ContentTableViewController {
                     }
                 }
             
+        }
+    }
+    
+    func paymentUpdatedNotifcation(notification: NSNotification) {
+        if  let userInfo = notification.userInfo,
+            let purchaseResult = userInfo[StoreKitPurchaseResultTypeKey] as! String? {
+                if purchaseResult == StoreKitPurchaseResultType.Completed.rawValue && self.addButton != self.navigationItem.rightBarButtonItem {
+                    self.navigationItem.rightBarButtonItem = self.addButton
+                    NSNotificationCenter.defaultCenter().removeObserver(self, name: StoreKitPurchaseNotificationName, object: nil)
+                }
         }
     }
     

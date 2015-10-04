@@ -68,7 +68,6 @@ class CatalogViewController: ContentTableViewController {
         }
     }
     
-    
     // MARK: button action
     
     func editButtonTapped(sender: UIBarButtonItem) {
