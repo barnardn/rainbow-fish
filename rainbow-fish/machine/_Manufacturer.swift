@@ -86,13 +86,13 @@ extension _Manufacturer {
 
     func addProducts(objects: NSSet) {
         let mutable = self.products.mutableCopy() as! NSMutableSet
-        mutable.unionSet(objects as! Set<NSObject>)
+        mutable.unionSet(objects as Set<NSObject>)
         self.products = mutable.copy() as! NSSet
     }
 
     func removeProducts(objects: NSSet) {
         let mutable = self.products.mutableCopy() as! NSMutableSet
-        mutable.minusSet(objects as! Set<NSObject>)
+        mutable.minusSet(objects as Set<NSObject>)
         self.products = mutable.copy() as! NSSet
     }
 

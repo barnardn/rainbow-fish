@@ -98,13 +98,13 @@ extension _Product {
 
     func addPencils(objects: NSSet) {
         let mutable = self.pencils.mutableCopy() as! NSMutableSet
-        mutable.unionSet(objects as! Set<NSObject>)
+        mutable.unionSet(objects as Set<NSObject>)
         self.pencils = mutable.copy() as! NSSet
     }
 
     func removePencils(objects: NSSet) {
         let mutable = self.pencils.mutableCopy() as! NSMutableSet
-        mutable.minusSet(objects as! Set<NSObject>)
+        mutable.minusSet(objects as Set<NSObject>)
         self.pencils = mutable.copy() as! NSSet
     }
 
