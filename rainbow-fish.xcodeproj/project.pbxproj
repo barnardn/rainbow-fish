@@ -62,7 +62,6 @@
 		497E0D661AA7E8D1007FA6A4 /* InventoryDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 497E0D651AA7E8D1007FA6A4 /* InventoryDetailTableViewController.swift */; };
 		4988FEBA1AB61F1B00AE2D89 /* SettingsMinimumStockTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4988FEB91AB61F1B00AE2D89 /* SettingsMinimumStockTableViewController.swift */; };
 		498AC94F1AC0EB8100C33954 /* CoreDataKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E8D8B71A7443C60064E682 /* CoreDataKit.framework */; };
-		49AB806C1ABE40D8009BEDE5 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AB806A1ABE40D8009BEDE5 /* Fabric.framework */; };
 		49AC9E3B1A87DD67007CE68A /* SelectPencilTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AC9E3A1A87DD67007CE68A /* SelectPencilTableViewController.swift */; };
 		49AC9E3E1A87E120007CE68A /* DefaultDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AC9E3C1A87E120007CE68A /* DefaultDetailTableViewCell.swift */; };
 		49AC9E3F1A87E120007CE68A /* DefaultDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49AC9E3D1A87E120007CE68A /* DefaultDetailTableViewCell.xib */; };
@@ -224,7 +223,6 @@
 				494BA7CE1B0AC9FF0026B2AE /* UIKit.framework in Frameworks */,
 				497CD0701AD1D8B200A3E3C9 /* SwiftyJSON.framework in Frameworks */,
 				498AC94F1AC0EB8100C33954 /* CoreDataKit.framework in Frameworks */,
-				49AB806C1ABE40D8009BEDE5 /* Fabric.framework in Frameworks */,
 				49E8D8C11A7445670064E682 /* CloudKit.framework in Frameworks */,
 				49E8D8BE1A7445400064E682 /* CoreData.framework in Frameworks */,
 			);
