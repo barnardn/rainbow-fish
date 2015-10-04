@@ -158,11 +158,12 @@ class RootViewController: UITabBarController {
         let retryAlert = UIAlertController(title: NSLocalizedString("iCloud Login Required", comment:"icloud alert title"), message: NSLocalizedString("This app requires the use of iCloud. Please go to your settings and either log in or create an iCloud account.", comment:"icloud alert message"), preferredStyle: UIAlertControllerStyle.Alert);
         let retryAction = UIAlertAction(title: NSLocalizedString("Retry", comment:"retry alert button"), style: UIAlertActionStyle.Default) {
             [unowned self] (_) -> Void in
-                print("hey!!!")
                 self.obtainCloudRecordId(performUpdate: true)
         }
         retryAlert.addAction(retryAction)
-        self.presentViewController(retryAlert, animated: true, completion: nil)
+        self.presentViewController(retryAlert, animated: true) { () -> Void in
+            retryAlert.view.tintColor = AppearanceManager.appearanceManager.brandColor
+        }
         retryAlert.view.tintColor = AppearanceManager.appearanceManager.brandColor
     }
     
@@ -172,7 +173,9 @@ class RootViewController: UITabBarController {
         alertController.view.tintColor = AppearanceManager.appearanceManager.brandColor
         
         let viewController = self.presentedViewController ?? self
-        viewController.presentViewController(alertController, animated: true, completion: nil)
+        viewController.presentViewController(alertController, animated: true) { () -> Void in
+            alertController.view.tintColor = AppearanceManager.appearanceManager.brandColor
+        }
     }
     
 }
