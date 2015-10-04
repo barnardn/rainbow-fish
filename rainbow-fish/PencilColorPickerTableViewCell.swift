@@ -38,9 +38,8 @@ class PencilColorPickerTableViewCell: UITableViewCell {
             var red: CGFloat = 0
             var green: CGFloat = 0
             var blue: CGFloat = 0
-            var alpha: CGFloat = 0
             if let color = inValue {
-                (red, green, blue, alpha) = color.getCGFloatValues()
+                (red, green, blue, _) = color.getCGFloatValues()
                 hexValueLabel.text = color.hexRepresentation
                 swatchView.backgroundColor = color
             }
