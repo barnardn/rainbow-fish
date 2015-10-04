@@ -93,7 +93,7 @@ class RootViewController: UITabBarController {
             switch purchaseResult {
             case StoreKitPurchaseResultType.Completed.rawValue:
                 message = NSLocalizedString("Thank you for your purchase!", comment:"completed store kit purchase message")
-                
+                disableBannerAds()
             case StoreKitPurchaseResultType.Failed.rawValue:
                 message = NSLocalizedString("Your purchase could not be processed.", comment:"failed store kit purchase default message")
                 if let error = userInfo[StoreKitPurchaseErrorUserInfoKey] as? NSError {
