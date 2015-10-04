@@ -29,7 +29,7 @@ class StoreKitPaymentObserver: NSObject, SKPaymentTransactionObserver {
             case .Purchased:
                 let productId = transaction.payment.productIdentifier
                 AppController.appController.appConfiguration.purchaseStatus = NSNumber(integer: SKPaymentTransactionState.Purchased.rawValue)
-                AppController.appController.appConfiguration.purchasedProduct = productId
+                AppController.appController.appConfiguration.purchasedProduct = productId                
                 notification = .Completed
             case .Restored:
                 let productId = transaction.originalTransaction!.payment.productIdentifier
