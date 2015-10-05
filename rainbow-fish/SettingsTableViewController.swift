@@ -49,6 +49,7 @@ class SettingsTableViewController: ContentTableViewController {
     
     deinit {
         self.removeObserver(self, forKeyPath: "minInventoryQuantity", context: &settingsContext)
+        self.removeObserver(self, forKeyPath: "purchaseStatus", context: &settingsContext)
     }
     
     override func viewDidLoad() {
@@ -59,6 +60,7 @@ class SettingsTableViewController: ContentTableViewController {
         self.tableView.registerClass(ProductHeaderView.self, forHeaderFooterViewReuseIdentifier: "ProductHeaderView")
         
         AppController.appController.appConfiguration.addObserver(self, forKeyPath: "minInventoryQuantity", options: .New, context: &settingsContext)
+        AppController.appController.appConfiguration.addObserver(self, forKeyPath: "purchaseStatus", options: .New, context: &settingsContext)
         
         if let ownerCloudId = AppController.appController.appConfiguration.iCloudRecordID  {
             if ownerCloudId == AppController.appController.dataImportKey {
@@ -79,12 +81,17 @@ class SettingsTableViewController: ContentTableViewController {
     // MARK: kvo 
     
     override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
-        if context != &settingsContext {
+        guard context == &settingsContext else {
             super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
             return
         }
-        if keyPath == "minInventoryQuantity" {
-            self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: Sections.MinimumInventory.rawValue)], withRowAnimation: .None)
+        switch keyPath! {
+            case "minInventoryQuantity":
+                self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: Sections.MinimumInventory.rawValue)], withRowAnimation: .None)
+            case "purchaseStatus":
+                self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: Sections.AppPurchase.rawValue)], withRowAnimation: .None)
+            default:
+                assertionFailure("unknown keypath observed \(keyPath)")
         }
     }
     
@@ -174,7 +181,10 @@ class SettingsTableViewController: ContentTableViewController {
     private func configureInAppPurchaseCell(indexPath: NSIndexPath) -> NameValueTableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(NameValueTableViewCell.nibName, forIndexPath: indexPath) as! NameValueTableViewCell
         cell.name = NSLocalizedString("Support the Developer", comment:"in app purchase title")
-        cell.value = "YES Please!"      // should show "thanks!" if user has purchase
+        cell.value = "Please"
+        if AppController.appController.appConfiguration.wasPurchasedSuccessfully {
+            cell.value = NSLocalizedString("Thank You!", comment:"settings app purchase thank you message")
+        }
         cell.accessoryType = .DisclosureIndicator
         return cell
     }

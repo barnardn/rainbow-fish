@@ -11,6 +11,7 @@ import StoreKit
 
 class SettingsConfirmPurchaseTableViewController: UITableViewController {
 
+    private var kvoContext = 0
     var purchaseProduct: StoreKitProduct!
     var appStoreProduct: SKProduct!
     
@@ -25,6 +26,28 @@ class SettingsConfirmPurchaseTableViewController: UITableViewController {
         super.viewDidLoad()
         self.tableView.registerNib(UINib(nibName: BigButtonTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: BigButtonTableViewCell.nibName)
         self.tableView.contentInset = UIEdgeInsets(top: 40.0, left: 0, bottom: 0, right: 0)
+        AppController.appController.appConfiguration.addObserver(self, forKeyPath: "purchaseStatus", options: .New, context: &kvoContext)
+    }
+    
+    deinit {
+        AppController.appController.appConfiguration.removeObserver(self, forKeyPath: "purchaseStatus", context: &kvoContext)
+    }
+    
+    // MARK: kvo handler
+    
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        guard context == &kvoContext else {
+            super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
+            return
+        }
+        if  let keyPath = keyPath where keyPath == "purchaseStatus",
+            let change = change,
+            let statusValue = change["new"] as! Int?
+        {
+            if self.navigationController?.topViewController == self && statusValue == SKPaymentTransactionState.Purchased.rawValue {
+                self.navigationController?.popToRootViewControllerAnimated(true)
+            }
+        }
     }
     
     // MARK: - Table view data source
