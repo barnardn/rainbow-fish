@@ -46,6 +46,7 @@ class StoreKitPaymentObserver: NSObject, SKPaymentTransactionObserver {
             case .Purchasing:
                 AppController.appController.appConfiguration.purchaseStatus = NSNumber(integer: SKPaymentTransactionState.Purchasing.rawValue)
             }
+            AppController.appController.appConfiguration.save()
             if transaction.transactionState != .Deferred && transaction.transactionState != .Purchasing {
                 queue.finishTransaction(transaction)
                 self.postNotification(notification!, error: transaction.error)
