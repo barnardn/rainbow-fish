@@ -21,6 +21,7 @@ class ConfigurationSettings: NSObject {
     
     dynamic var iCloudRecordID: String?
     dynamic var minInventoryQuantity: NSDecimalNumber?
+    dynamic var purchaseStatus: NSNumber?
     
     var purchasedProduct: String? {
         get {
@@ -40,19 +41,10 @@ class ConfigurationSettings: NSObject {
         }
     }
     
-    var purchaseStatus: NSNumber? {
-        get {
-            return NSUserDefaults.standardUserDefaults().boolForKey(ConfigurationSettingsKey.AppPurchaseStatusKey.rawValue)
-        }
-        set {
-            if let newValue = newValue {
-                NSUserDefaults.standardUserDefaults().setBool(newValue.boolValue, forKey: ConfigurationSettingsKey.AppPurchaseStatusKey.rawValue)
-            }
-        }
-    }
-    
-    
     var wasPurchasedSuccessfully: Bool {
+        if let status = purchaseStatus {
+            return status.boolValue
+        }
         if let status = NSUserDefaults.standardUserDefaults().integerForKey(ConfigurationSettingsKey.AppPurchaseStatusKey.rawValue) as Int? {
             return (status == SKPaymentTransactionState.Purchased.rawValue)
         }
@@ -69,9 +61,7 @@ class ConfigurationSettings: NSObject {
     func save() {
         NSUserDefaults.standardUserDefaults().setObject(self.iCloudRecordID, forKey: ConfigurationSettingsKey.ICloudKey.rawValue)
         NSUserDefaults.standardUserDefaults().setObject(self.minInventoryQuantity, forKey: ConfigurationSettingsKey.MinInventoryQuantityKey.rawValue)
+        NSUserDefaults.standardUserDefaults().setObject(self.purchaseStatus, forKey: ConfigurationSettingsKey.AppPurchaseStatusKey.rawValue)
     }
-    
-    
-    
     
 }
