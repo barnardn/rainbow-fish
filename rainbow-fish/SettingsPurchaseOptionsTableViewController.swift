@@ -74,8 +74,22 @@ class SettingsPurchaseOptionsTableViewController: UITableViewController {
     }
     
     //MARK: table view delegate
+
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section == 0 && indexPath.row == 0 {
+            let nameValueCell = cell as! NameValueTableViewCell
+            nameValueCell.disabledAppearance = AppController.appController.appConfiguration.wasPurchasedSuccessfully
+            nameValueCell.accessoryType = (AppController.appController.appConfiguration.wasPurchasedSuccessfully) ? .None : .DisclosureIndicator
+        }
+    }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.section == 0 && indexPath.row == 0 {
+            let viewController = SettingsPurchaseRestoreTableViewController()
+            self.navigationController?.pushViewController(viewController, animated: true)
+            return
+        }
+        
         if  let product = self.products?[indexPath.section],
             let appStoreProduct = self.storeKitController.skProduct(forProduct: product) {
             let viewController = SettingsConfirmPurchaseTableViewController(selectedProduct: product, appStoreProduct: appStoreProduct)

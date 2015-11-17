@@ -23,6 +23,7 @@ let StoreKitPurchaseErrorUserInfoKey = "StoreKitPurchaseErrorUserInfoKey"
 class StoreKitPaymentObserver: NSObject, SKPaymentTransactionObserver {
 
     func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        print("Payment queue observer have updated transaction info!")
         var notification: StoreKitPurchaseResultType?
         for transaction in transactions {
             switch transaction.transactionState {

@@ -33,14 +33,26 @@ class NameValueTableViewCell: UITableViewCell {
         }
     }
     
+    var disabledAppearance: Bool = false {
+        willSet(newValue) {
+            self.contentView.alpha = (newValue) ? CGFloat(0.5) : CGFloat(1.0)
+        }
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.disabledAppearance = false
         self.selectedBackgroundView = UIView(frame: self.bounds)
         self.selectedBackgroundView?.backgroundColor = AppearanceManager.appearanceManager.selectedCellBackgroundColor
         self.nameLabel.textColor = AppearanceManager.appearanceManager.brandColor
         self.nameLabel.font = AppearanceManager.appearanceManager.nameLabelFont
         self.valueLabel.textColor = AppearanceManager.appearanceManager.bodyTextColor
         self.valueLabel.font = AppearanceManager.appearanceManager.standardFont
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.contentView.alpha = 1.0
     }
     
     // MARK: class methods
