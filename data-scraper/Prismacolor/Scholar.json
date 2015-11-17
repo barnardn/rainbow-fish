@@ -1,0 +1,356 @@
+[
+    {
+        "name": "Indigo Blue",
+        "identifier": "Indigo Blue",
+        "normalizedId": "indigoblue",
+        "color": "14,79,169"
+    },
+    {
+        "name": "Permanent Blue",
+        "identifier": "Permanent Blue",
+        "normalizedId": "permanentblue",
+        "color": "69,199,255"
+    },
+    {
+        "name": "Light Blue",
+        "identifier": "Light Blue",
+        "normalizedId": "lightblue",
+        "color": "115,235,255"
+    },
+    {
+        "name": "Aquamarine",
+        "identifier": "Aquamarine",
+        "normalizedId": "aquamarine",
+        "color": "50,195,142"
+    },
+    {
+        "name": "Copenhagen Blue",
+        "identifier": "Copenhagen Blue",
+        "normalizedId": "copenhagenblue",
+        "color": "59,171,252"
+    },
+    {
+        "name": "Peacock Green",
+        "identifier": "Peacock Green",
+        "normalizedId": "peacockgreen",
+        "color": "61,240,117"
+    },
+    {
+        "name": "Dark Green",
+        "identifier": "Dark Green",
+        "normalizedId": "darkgreen",
+        "color": "33,156,57"
+    },
+    {
+        "name": "Grass Green",
+        "identifier": "Grass Green",
+        "normalizedId": "grassgreen",
+        "color": "54,240,46"
+    },
+    {
+        "name": "Permanent Green",
+        "identifier": "Permanent Green",
+        "normalizedId": "permanentgreen",
+        "color": "66,220,78"
+    },
+    {
+        "name": "Olive Green",
+        "identifier": "Olive Green",
+        "normalizedId": "olivegreen",
+        "color": "52,203,79"
+    },
+    {
+        "name": "Pale Green",
+        "identifier": "Pale Green",
+        "normalizedId": "palegreen",
+        "color": "150,255,20"
+    },
+    {
+        "name": "Cream",
+        "identifier": "Cream",
+        "normalizedId": "cream",
+        "color": "252,255,222"
+    },
+    {
+        "name": "Lemon Yellow",
+        "identifier": "Lemon Yellow",
+        "normalizedId": "lemonyellow",
+        "color": "245,255,25"
+    },
+    {
+        "name": "Canary Yellow",
+        "identifier": "Canary Yellow",
+        "normalizedId": "canaryyellow",
+        "color": "245,255,25"
+    },
+    {
+        "name": "Orange",
+        "identifier": "Orange",
+        "normalizedId": "orange",
+        "color": "255,92,48"
+    },
+    {
+        "name": "Light Green",
+        "identifier": "Light Green",
+        "normalizedId": "lightgreen",
+        "color": "168,255,196"
+    },
+    {
+        "name": "Vermilion Red",
+        "identifier": "Vermilion Red",
+        "normalizedId": "vermilionred",
+        "color": "252,128,54"
+    },
+    {
+        "name": "Scarlet Red",
+        "identifier": "Scarlet Red",
+        "normalizedId": "scarletred",
+        "color": "252,71,54"
+    },
+    {
+        "name": "Crimson Red",
+        "identifier": "Crimson Red",
+        "normalizedId": "crimsonred",
+        "color": "213,20,54"
+    },
+    {
+        "name": "Crimson Lake",
+        "identifier": "Crimson Lake",
+        "normalizedId": "crimsonlake",
+        "color": "137,12,78"
+    },
+    {
+        "name": "Carmine Red",
+        "identifier": "Carmine Red",
+        "normalizedId": "carminered",
+        "color": "255,74,128"
+    },
+    {
+        "name": "Light Peach",
+        "identifier": "Light Peach",
+        "normalizedId": "lightpeach",
+        "color": "252,219,214"
+    },
+    {
+        "name": "Light Pink",
+        "identifier": "Light Pink",
+        "normalizedId": "lightpink",
+        "color": "255,184,212"
+    },
+    {
+        "name": "Pink",
+        "identifier": "Pink",
+        "normalizedId": "pink",
+        "color": "255,112,227"
+    },
+    {
+        "name": "Magenta",
+        "identifier": "Magenta",
+        "normalizedId": "magenta",
+        "color": "230,15,255"
+    },
+    {
+        "name": "Purple",
+        "identifier": "Purple",
+        "normalizedId": "purple",
+        "color": "115,71,133"
+    },
+    {
+        "name": "Violet",
+        "identifier": "Violet",
+        "normalizedId": "violet",
+        "color": "138,143,255"
+    },
+    {
+        "name": "Lavender",
+        "identifier": "Lavender",
+        "normalizedId": "lavender",
+        "color": "153,18,255"
+    },
+    {
+        "name": "Black",
+        "identifier": "Black",
+        "normalizedId": "black",
+        "color": "31,33,37"
+    },
+    {
+        "name": "Dark Grey",
+        "identifier": "Dark Grey",
+        "normalizedId": "darkgrey",
+        "color": "69,149,166"
+    },
+    {
+        "name": "White",
+        "identifier": "White",
+        "normalizedId": "white",
+        "color": "255,255,255"
+    },
+    {
+        "name": "Peach",
+        "identifier": "Peach",
+        "normalizedId": "peach",
+        "color": "252,163,130"
+    },
+    {
+        "name": "Yellow Ochre",
+        "identifier": "Yellow Ochre",
+        "normalizedId": "yellowochre",
+        "color": "255,196,18"
+    },
+    {
+        "name": "Terra Cotta",
+        "identifier": "Terra Cotta",
+        "normalizedId": "terracotta",
+        "color": "164,83,56"
+    },
+    {
+        "name": "Sienna",
+        "identifier": "Sienna",
+        "normalizedId": "sienna",
+        "color": "157,109,66"
+    },
+    {
+        "name": "Dark Brown",
+        "identifier": "Dark Brown",
+        "normalizedId": "darkbrown",
+        "color": "134,120,98"
+    },
+    {
+        "name": "Silver",
+        "identifier": "Silver",
+        "normalizedId": "silver",
+        "color": "191,207,214"
+    },
+    {
+        "name": "Light Violet",
+        "identifier": "Light Violet",
+        "normalizedId": "lightviolet",
+        "color": "163,130,207"
+    },
+    {
+        "name": "Medium Cold Grey",
+        "identifier": "Medium Cold Grey",
+        "normalizedId": "mediumcoldgrey",
+        "color": "107,160,172"
+    },
+    {
+        "name": "Pale Cold Grey",
+        "identifier": "Pale Cold Grey",
+        "normalizedId": "palecoldgrey",
+        "color": "247,250,250"
+    },
+    {
+        "name": "Porcelaine Blue",
+        "identifier": "Porcelaine Blue",
+        "normalizedId": "porcelaineblue",
+        "color": "20,48,168"
+    },
+    {
+        "name": "Mauve",
+        "identifier": "Mauve",
+        "normalizedId": "mauve",
+        "color": "207,135,232"
+    },
+    {
+        "name": "Yellow Chartreuse",
+        "identifier": "Yellow Chartreuse",
+        "normalizedId": "yellowchartreuse",
+        "color": "207,255,33"
+    },
+    {
+        "name": "Cloud Blue",
+        "identifier": "Cloud Blue",
+        "normalizedId": "cloudblue",
+        "color": "199,232,255"
+    },
+    {
+        "name": "Neon Yellow",
+        "identifier": "Neon Yellow",
+        "normalizedId": "neonyellow",
+        "color": "242,255,23"
+    },
+    {
+        "name": "Neon Orange",
+        "identifier": "Neon Orange",
+        "normalizedId": "neonorange",
+        "color": "255,130,15"
+    },
+    {
+        "name": "Neon Pink",
+        "identifier": "Neon Pink",
+        "normalizedId": "neonpink",
+        "color": "252,54,255"
+    },
+    {
+        "name": "Orange Yellow",
+        "identifier": "Orange Yellow",
+        "normalizedId": "orangeyellow",
+        "color": "255,214,59"
+    },
+    {
+        "name": "Orange Ochre",
+        "identifier": "Orange Ochre",
+        "normalizedId": "orangeochre",
+        "color": "255,163,0"
+    },
+    {
+        "name": "Deep Orange",
+        "identifier": "Deep Orange",
+        "normalizedId": "deeporange",
+        "color": "255,140,71"
+    },
+    {
+        "name": "Fuchsia",
+        "identifier": "Fuchsia",
+        "normalizedId": "fuchsia",
+        "color": "235,0,155"
+    },
+    {
+        "name": "Sky Blue",
+        "identifier": "Sky Blue",
+        "normalizedId": "skyblue",
+        "color": "105,255,240"
+    },
+    {
+        "name": "Neon Green",
+        "identifier": "Neon Green",
+        "normalizedId": "neongreen",
+        "color": "145,255,102"
+    },
+    {
+        "name": "Avocado Green",
+        "identifier": "Avocado Green",
+        "normalizedId": "avocadogreen",
+        "color": "99,187,0"
+    },
+    {
+        "name": "Raw Umber",
+        "identifier": "Raw Umber",
+        "normalizedId": "rawumber",
+        "color": "194,156,79"
+    },
+    {
+        "name": "Tuscan Red",
+        "identifier": "Tuscan Red",
+        "normalizedId": "tuscanred",
+        "color": "106,16,44"
+    },
+    {
+        "name": "Orchid",
+        "identifier": "Orchid",
+        "normalizedId": "orchid",
+        "color": "150,13,255"
+    },
+    {
+        "name": "Pale Warm Grey",
+        "identifier": "Pale Warm Grey",
+        "normalizedId": "palewarmgrey",
+        "color": "217,219,212"
+    },
+    {
+        "name": "White",
+        "identifier": "White",
+        "normalizedId": "white",
+        "color": "255,255,255"
+    }
+]

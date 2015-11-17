@@ -1,0 +1,902 @@
+[
+    {
+        "name": "Cream",
+        "identifier": "PC 914",
+        "normalizedId": "pc914",
+        "color": "252,255,217"
+    },
+    {
+        "name": "Eggshell",
+        "identifier": "PC 140",
+        "normalizedId": "pc140",
+        "color": "247,220,169"
+    },
+    {
+        "name": "Ginger Root",
+        "identifier": "PC 1084",
+        "normalizedId": "pc1084",
+        "color": "232,219,153"
+    },
+    {
+        "name": "Artichoke",
+        "identifier": "PC 1098",
+        "normalizedId": "pc1098",
+        "color": "192,179,3"
+    },
+    {
+        "name": "Deco Yellow",
+        "identifier": "PC 1011",
+        "normalizedId": "pc1011",
+        "color": "255,244,95"
+    },
+    {
+        "name": "Lemon Yellow",
+        "identifier": "PC 915",
+        "normalizedId": "pc915",
+        "color": "245,255,18"
+    },
+    {
+        "name": "Canary Yellow",
+        "identifier": "PC 916",
+        "normalizedId": "pc916",
+        "color": "245,255,18"
+    },
+    {
+        "name": "Yellowed Orange",
+        "identifier": "PC 1002",
+        "normalizedId": "pc1002",
+        "color": "250,230,3"
+    },
+    {
+        "name": "Jasmine",
+        "identifier": "PC 1012",
+        "normalizedId": "pc1012",
+        "color": "250,230,3"
+    },
+    {
+        "name": "Yellow Ochre",
+        "identifier": "PC 942",
+        "normalizedId": "pc942",
+        "color": "245,201,54"
+    },
+    {
+        "name": "Spanish Orange",
+        "identifier": "PC 1003",
+        "normalizedId": "pc1003",
+        "color": "252,189,3"
+    },
+    {
+        "name": "Goldenrod",
+        "identifier": "PC 1034",
+        "normalizedId": "pc1034",
+        "color": "245,181,18"
+    },
+    {
+        "name": "Sunburst Yellow",
+        "identifier": "PC 917",
+        "normalizedId": "pc917",
+        "color": "255,128,25"
+    },
+    {
+        "name": "Sand",
+        "identifier": "PC 940",
+        "normalizedId": "pc940",
+        "color": "230,153,66"
+    },
+    {
+        "name": "Mineral Orange",
+        "identifier": "PC 1033",
+        "normalizedId": "pc1033",
+        "color": "245,99,41"
+    },
+    {
+        "name": "Orange",
+        "identifier": "PC 918",
+        "normalizedId": "pc918",
+        "color": "255,77,28"
+    },
+    {
+        "name": "Pale Vermilion",
+        "identifier": "PC 921",
+        "normalizedId": "pc921",
+        "color": "255,107,18"
+    },
+    {
+        "name": "Cadmium Orange Hue",
+        "identifier": "PC 118",
+        "normalizedId": "pc118",
+        "color": "244,122,92"
+    },
+    {
+        "name": "Pumpkin Orange",
+        "identifier": "PC 1032",
+        "normalizedId": "pc1032",
+        "color": "245,71,3"
+    },
+    {
+        "name": "Poppy Red",
+        "identifier": "PC 922",
+        "normalizedId": "pc922",
+        "color": "255,54,20"
+    },
+    {
+        "name": "Carmine Red",
+        "identifier": "PC 926",
+        "normalizedId": "pc926",
+        "color": "255,54,97"
+    },
+    {
+        "name": "Permanent Red",
+        "identifier": "PC 122",
+        "normalizedId": "pc122",
+        "color": "239,64,80"
+    },
+    {
+        "name": "Scarlet Lake",
+        "identifier": "PC 923",
+        "normalizedId": "pc923",
+        "color": "240,3,20"
+    },
+    {
+        "name": "Crimson Red",
+        "identifier": "PC 924",
+        "normalizedId": "pc924",
+        "color": "206,5,15"
+    },
+    {
+        "name": "Crimson Lake",
+        "identifier": "PC 925",
+        "normalizedId": "pc925",
+        "color": "125,0,55"
+    },
+    {
+        "name": "Pomegranate",
+        "identifier": "PC 195",
+        "normalizedId": "pc195",
+        "color": "164,73,111"
+    },
+    {
+        "name": "Magenta",
+        "identifier": "PC 930",
+        "normalizedId": "pc930",
+        "color": "222,0,237"
+    },
+    {
+        "name": "Process Red",
+        "identifier": "PC 994",
+        "normalizedId": "pc994",
+        "color": "199,3,252"
+    },
+    {
+        "name": "Mulberry",
+        "identifier": "PC 995",
+        "normalizedId": "pc995",
+        "color": "143,3,255"
+    },
+    {
+        "name": "Hot Pink",
+        "identifier": "PC 993",
+        "normalizedId": "pc993",
+        "color": "255,122,252"
+    },
+    {
+        "name": "Pink",
+        "identifier": "PC 929",
+        "normalizedId": "pc929",
+        "color": "255,92,217"
+    },
+    {
+        "name": "Nectar",
+        "identifier": "PC 1092",
+        "normalizedId": "pc1092",
+        "color": "215,121,63"
+    },
+    {
+        "name": "Blush Pink",
+        "identifier": "PC 928",
+        "normalizedId": "pc928",
+        "color": "255,173,201"
+    },
+    {
+        "name": "Pink Rose",
+        "identifier": "PC 1018",
+        "normalizedId": "pc1018",
+        "color": "240,176,214"
+    },
+    {
+        "name": "Deco Pink",
+        "identifier": "PC 1014",
+        "normalizedId": "pc1014",
+        "color": "251,212,220"
+    },
+    {
+        "name": "Deco Peach",
+        "identifier": "PC 1013",
+        "normalizedId": "pc1013",
+        "color": "251,201,193"
+    },
+    {
+        "name": "Light Peach",
+        "identifier": "PC 927",
+        "normalizedId": "pc927",
+        "color": "252,214,204"
+    },
+    {
+        "name": "Peach Beige",
+        "identifier": "PC 1085",
+        "normalizedId": "pc1085",
+        "color": "255,196,163"
+    },
+    {
+        "name": "Seashell Pink",
+        "identifier": "PC 1093",
+        "normalizedId": "pc1093",
+        "color": "252,153,115"
+    },
+    {
+        "name": "Salmon Pink",
+        "identifier": "PC 1001",
+        "normalizedId": "pc1001",
+        "color": "255,173,148"
+    },
+    {
+        "name": "Beige",
+        "identifier": "PC 997",
+        "normalizedId": "pc997",
+        "color": "240,191,143"
+    },
+    {
+        "name": "Peach",
+        "identifier": "PC 939",
+        "normalizedId": "pc939",
+        "color": "255,145,117"
+    },
+    {
+        "name": "Rosy Beige",
+        "identifier": "PC 1019",
+        "normalizedId": "pc1019",
+        "color": "201,176,201"
+    },
+    {
+        "name": "Clay Rose",
+        "identifier": "PC 1017",
+        "normalizedId": "pc1017",
+        "color": "184,161,189"
+    },
+    {
+        "name": "Beige Sienna",
+        "identifier": "PC 1080",
+        "normalizedId": "pc1080",
+        "color": "184,161,189"
+    },
+    {
+        "name": "Chestnut",
+        "identifier": "PC 1081",
+        "normalizedId": "pc1081",
+        "color": "123,24,0"
+    },
+    {
+        "name": "Raspberry",
+        "identifier": "PC 1030",
+        "normalizedId": "pc1030",
+        "color": "129,33,132"
+    },
+    {
+        "name": "Mahogany Red",
+        "identifier": "PC 1029",
+        "normalizedId": "pc1029",
+        "color": "125,64,127"
+    },
+    {
+        "name": "Dark Purple",
+        "identifier": "PC 931",
+        "normalizedId": "pc931",
+        "color": "92,42,107"
+    },
+    {
+        "name": "Black Raspberry",
+        "identifier": "PC 1095",
+        "normalizedId": "pc1095",
+        "color": "90,6,25"
+    },
+    {
+        "name": "Black Cherry",
+        "identifier": "PC 1078",
+        "normalizedId": "pc1078",
+        "color": "74,0,61"
+    },
+    {
+        "name": "Greyed Lavender",
+        "identifier": "PC 1026",
+        "normalizedId": "pc1026",
+        "color": "212,201,245"
+    },
+    {
+        "name": "Lavender",
+        "identifier": "PC 934",
+        "normalizedId": "pc934",
+        "color": "204,128,230"
+    },
+    {
+        "name": "Lilac",
+        "identifier": "PC 956",
+        "normalizedId": "pc956",
+        "color": "151,116,204"
+    },
+    {
+        "name": "Dahlia Purple",
+        "identifier": "PC 1009",
+        "normalizedId": "pc1009",
+        "color": "92,3,250"
+    },
+    {
+        "name": "Parma Violet",
+        "identifier": "PC 1008",
+        "normalizedId": "pc1008",
+        "color": "117,122,255"
+    },
+    {
+        "name": "Black Grape",
+        "identifier": "PC 996",
+        "normalizedId": "pc996",
+        "color": "5,0,199"
+    },
+    {
+        "name": "Dioxazine Purple Hue",
+        "identifier": "PC 132",
+        "normalizedId": "pc132",
+        "color": "0,74,143"
+    },
+    {
+        "name": "Violet",
+        "identifier": "PC 932",
+        "normalizedId": "pc932",
+        "color": "37,35,158"
+    },
+    {
+        "name": "Imperial Violet",
+        "identifier": "PC 1007",
+        "normalizedId": "pc1007",
+        "color": "46,94,255"
+    },
+    {
+        "name": "Blue Violet Lake",
+        "identifier": "PC 1079",
+        "normalizedId": "pc1079",
+        "color": "0,17,196"
+    },
+    {
+        "name": "Violet Blue",
+        "identifier": "PC 933",
+        "normalizedId": "pc933",
+        "color": "0,45,227"
+    },
+    {
+        "name": "Indanthrone Blue",
+        "identifier": "PC 208",
+        "normalizedId": "pc208",
+        "color": "0,61,113"
+    },
+    {
+        "name": "Ultramarine",
+        "identifier": "PC 902",
+        "normalizedId": "pc902",
+        "color": "10,74,252"
+    },
+    {
+        "name": "Cobalt Blue Hue",
+        "identifier": "PC 133",
+        "normalizedId": "pc133",
+        "color": "0,97,170"
+    },
+    {
+        "name": "China Blue",
+        "identifier": "PC 1100",
+        "normalizedId": "pc1100",
+        "color": "36,74,255"
+    },
+    {
+        "name": "Copenhagen Blue",
+        "identifier": "PC 906",
+        "normalizedId": "pc906",
+        "color": "38,140,255"
+    },
+    {
+        "name": "Electric Blue",
+        "identifier": "PC 1040",
+        "normalizedId": "pc1040",
+        "color": "89,240,255"
+    },
+    {
+        "name": "Denim Blue",
+        "identifier": "PC 1101",
+        "normalizedId": "pc1101",
+        "color": "15,41,252"
+    },
+    {
+        "name": "True Blue",
+        "identifier": "PC 903",
+        "normalizedId": "pc903",
+        "color": "59,181,255"
+    },
+    {
+        "name": "Sky Blue Light",
+        "identifier": "PC 1086",
+        "normalizedId": "pc1086",
+        "color": "191,250,255"
+    },
+    {
+        "name": "Light Cerulean Blue",
+        "identifier": "PC 904",
+        "normalizedId": "pc904",
+        "color": "97,224,255"
+    },
+    {
+        "name": "Cerulean Blue",
+        "identifier": "PC 103",
+        "normalizedId": "pc103",
+        "color": "0,114,188"
+    },
+    {
+        "name": "Mediterranean Blue",
+        "identifier": "PC 1022",
+        "normalizedId": "pc1022",
+        "color": "48,173,242"
+    },
+    {
+        "name": "Peacock Blue",
+        "identifier": "PC 1027",
+        "normalizedId": "pc1027",
+        "color": "33,144,207"
+    },
+    {
+        "name": "Powder Blue",
+        "identifier": "PC 1087",
+        "normalizedId": "pc1087",
+        "color": "189,230,255"
+    },
+    {
+        "name": "Caribbean Sea",
+        "identifier": "PC 1103",
+        "normalizedId": "pc1103",
+        "color": "112,201,255"
+    },
+    {
+        "name": "Periwinkle",
+        "identifier": "PC 1025",
+        "normalizedId": "pc1025",
+        "color": "92,189,255"
+    },
+    {
+        "name": "Cloud Blue",
+        "identifier": "PC 1023",
+        "normalizedId": "pc1023",
+        "color": "201,247,255"
+    },
+    {
+        "name": "Blue Lake",
+        "identifier": "PC 1102",
+        "normalizedId": "pc1102",
+        "color": "66,128,255"
+    },
+    {
+        "name": "Blue Slate",
+        "identifier": "PC 1024",
+        "normalizedId": "pc1024",
+        "color": "145,224,255"
+    },
+    {
+        "name": "Indigo Blue",
+        "identifier": "PC 901",
+        "normalizedId": "pc901",
+        "color": "0,50,154"
+    },
+    {
+        "name": "Non-Photo Blue",
+        "identifier": "PC 919",
+        "normalizedId": "pc919",
+        "color": "97,255,230"
+    },
+    {
+        "name": "Light Aqua",
+        "identifier": "PC 992",
+        "normalizedId": "pc992",
+        "color": "69,252,186"
+    },
+    {
+        "name": "Aquamarine",
+        "identifier": "PC 905",
+        "normalizedId": "pc905",
+        "color": "39,179,130"
+    },
+    {
+        "name": "Cobalt Turquoise",
+        "identifier": "PC 105",
+        "normalizedId": "pc105",
+        "color": "0,129,152"
+    },
+    {
+        "name": "Light Green",
+        "identifier": "PC 920",
+        "normalizedId": "pc920",
+        "color": "117,255,145"
+    },
+    {
+        "name": "Parrot Green",
+        "identifier": "PC 1006",
+        "normalizedId": "pc1006",
+        "color": "48,225,98"
+    },
+    {
+        "name": "Grey Green Light",
+        "identifier": "PC 289",
+        "normalizedId": "pc289",
+        "color": "230,243,229"
+    },
+    {
+        "name": "Pale Sage",
+        "identifier": "PC 1089",
+        "normalizedId": "pc1089",
+        "color": "224,255,181"
+    },
+    {
+        "name": "Yellow Chartreuse",
+        "identifier": "PC 1004",
+        "normalizedId": "pc1004",
+        "color": "199,255,3"
+    },
+    {
+        "name": "Chartreuse",
+        "identifier": "PC 989",
+        "normalizedId": "pc989",
+        "color": "186,227,3"
+    },
+    {
+        "name": "Lime Peel",
+        "identifier": "PC 1005",
+        "normalizedId": "pc1005",
+        "color": "173,227,0"
+    },
+    {
+        "name": "Moss Green",
+        "identifier": "PC 1097",
+        "normalizedId": "pc1097",
+        "color": "84,121,0"
+    },
+    {
+        "name": "Green Ochre",
+        "identifier": "PC 1091",
+        "normalizedId": "pc1091",
+        "color": "118,106,0"
+    },
+    {
+        "name": "Spring Green",
+        "identifier": "PC 913",
+        "normalizedId": "pc913",
+        "color": "143,255,3"
+    },
+    {
+        "name": "Apple Green",
+        "identifier": "PC 912",
+        "normalizedId": "pc912",
+        "color": "120,240,41"
+    },
+    {
+        "name": "Sap Green Light",
+        "identifier": "PC 120",
+        "normalizedId": "pc120",
+        "color": "109,188,149"
+    },
+    {
+        "name": "True Green",
+        "identifier": "PC 910",
+        "normalizedId": "pc910",
+        "color": "52,205,52"
+    },
+    {
+        "name": "Kelly Green",
+        "identifier": "PC 1096",
+        "normalizedId": "pc1096",
+        "color": "73,227,3"
+    },
+    {
+        "name": "Grass Green",
+        "identifier": "PC 909",
+        "normalizedId": "pc909",
+        "color": "40,225,10"
+    },
+    {
+        "name": "Olive Green",
+        "identifier": "PC 911",
+        "normalizedId": "pc911",
+        "color": "33,181,52"
+    },
+    {
+        "name": "Prussian Green",
+        "identifier": "PC 109",
+        "normalizedId": "pc109",
+        "color": "0,121,50"
+    },
+    {
+        "name": "Dark Green",
+        "identifier": "PC 908",
+        "normalizedId": "pc908",
+        "color": "22,132,35"
+    },
+    {
+        "name": "Kelp Green",
+        "identifier": "PC 1090",
+        "normalizedId": "pc1090",
+        "color": "51,95,0"
+    },
+    {
+        "name": "Sandbar Brown",
+        "identifier": "PC 1094",
+        "normalizedId": "pc1094",
+        "color": "111,85,0"
+    },
+    {
+        "name": "Sepia",
+        "identifier": "PC 948",
+        "normalizedId": "pc948",
+        "color": "62,106,64"
+    },
+    {
+        "name": "Marine Green",
+        "identifier": "PC 988",
+        "normalizedId": "pc988",
+        "color": "15,71,0"
+    },
+    {
+        "name": "Celadon Green",
+        "identifier": "PC 1020",
+        "normalizedId": "pc1020",
+        "color": "176,227,201"
+    },
+    {
+        "name": "Jade Green",
+        "identifier": "PC 1021",
+        "normalizedId": "pc1021",
+        "color": "115,219,186"
+    },
+    {
+        "name": "Muted Turquoise",
+        "identifier": "PC 1088",
+        "normalizedId": "pc1088",
+        "color": "61,187,159"
+    },
+    {
+        "name": "Peacock Green",
+        "identifier": "PC 907",
+        "normalizedId": "pc907",
+        "color": "30,149,119"
+    },
+    {
+        "name": "Putty Beige",
+        "identifier": "PC 1083",
+        "normalizedId": "pc1083",
+        "color": "242,219,191"
+    },
+    {
+        "name": "Light Umber",
+        "identifier": "PC 941",
+        "normalizedId": "pc941",
+        "color": "120,99,72"
+    },
+    {
+        "name": "Chocolate",
+        "identifier": "PC 1082",
+        "normalizedId": "pc1082",
+        "color": "109,66,39"
+    },
+    {
+        "name": "Burnt Ochre",
+        "identifier": "PC 943",
+        "normalizedId": "pc943",
+        "color": "176,99,61"
+    },
+    {
+        "name": "Sienna Brown",
+        "identifier": "PC 945",
+        "normalizedId": "pc945",
+        "color": "149,96,53"
+    },
+    {
+        "name": "Terra Cotta",
+        "identifier": "PC 944",
+        "normalizedId": "pc944",
+        "color": "151,63,29"
+    },
+    {
+        "name": "Henna",
+        "identifier": "PC 1031",
+        "normalizedId": "pc1031",
+        "color": "176,61,103"
+    },
+    {
+        "name": "Tuscan Red",
+        "identifier": "PC 937",
+        "normalizedId": "pc937",
+        "color": "89,30,52"
+    },
+    {
+        "name": "Espresso",
+        "identifier": "PC 1099",
+        "normalizedId": "pc1099",
+        "color": "56,38,15"
+    },
+    {
+        "name": "Dark Umber",
+        "identifier": "PC 947",
+        "normalizedId": "pc947",
+        "color": "42,44,37"
+    },
+    {
+        "name": "Dark Brown",
+        "identifier": "PC 946",
+        "normalizedId": "pc946",
+        "color": "70,80,60"
+    },
+    {
+        "name": "Warm Grey 10%",
+        "identifier": "PC 1050",
+        "normalizedId": "pc1050",
+        "color": "252,250,252"
+    },
+    {
+        "name": "Warm Grey 20%",
+        "identifier": "PC 1051",
+        "normalizedId": "pc1051",
+        "color": "247,245,250"
+    },
+    {
+        "name": "Warm Grey 30%",
+        "identifier": "PC 1052",
+        "normalizedId": "pc1052",
+        "color": "235,232,242"
+    },
+    {
+        "name": "Warm Grey 50%",
+        "identifier": "PC 1054",
+        "normalizedId": "pc1054",
+        "color": "217,212,227"
+    },
+    {
+        "name": "Warm Grey 70%",
+        "identifier": "PC 1056",
+        "normalizedId": "pc1056",
+        "color": "136,139,161"
+    },
+    {
+        "name": "Warm Grey 90%",
+        "identifier": "PC 1058",
+        "normalizedId": "pc1058",
+        "color": "67,63,82"
+    },
+    {
+        "name": "Cool Grey 10%",
+        "identifier": "PC 1059",
+        "normalizedId": "pc1059",
+        "color": "247,252,252"
+    },
+    {
+        "name": "Cool Grey 20%",
+        "identifier": "PC 1060",
+        "normalizedId": "pc1060",
+        "color": "247,242,250"
+    },
+    {
+        "name": "Cool Grey 30%",
+        "identifier": "PC 1061",
+        "normalizedId": "pc1061",
+        "color": "219,242,242"
+    },
+    {
+        "name": "Cool Grey 50%",
+        "identifier": "PC 1063",
+        "normalizedId": "pc1063",
+        "color": "201,227,227"
+    },
+    {
+        "name": "Cool Grey 70%",
+        "identifier": "PC 1065",
+        "normalizedId": "pc1065",
+        "color": "99,153,166"
+    },
+    {
+        "name": "Cool Grey 90%",
+        "identifier": "PC 1067",
+        "normalizedId": "pc1067",
+        "color": "44,74,88"
+    },
+    {
+        "name": "Black",
+        "identifier": "PC 935",
+        "normalizedId": "pc935",
+        "color": "6,8,8"
+    },
+    {
+        "name": "French Grey 10%",
+        "identifier": "PC 1068",
+        "normalizedId": "pc1068",
+        "color": "245,240,240"
+    },
+    {
+        "name": "French Grey 20%",
+        "identifier": "PC 1069",
+        "normalizedId": "pc1069",
+        "color": "237,232,232"
+    },
+    {
+        "name": "French Grey 30%",
+        "identifier": "PC 1070",
+        "normalizedId": "pc1070",
+        "color": "217,212,209"
+    },
+    {
+        "name": "French Grey 50%",
+        "identifier": "PC 1072",
+        "normalizedId": "pc1072",
+        "color": "181,176,184"
+    },
+    {
+        "name": "French Grey 70%",
+        "identifier": "PC 1074",
+        "normalizedId": "pc1074",
+        "color": "137,140,144"
+    },
+    {
+        "name": "French Grey 90%",
+        "identifier": "PC 1076",
+        "normalizedId": "pc1076",
+        "color": "67,68,77"
+    },
+    {
+        "name": "Slate Grey",
+        "identifier": "PC 936",
+        "normalizedId": "pc936",
+        "color": "55,135,154"
+    },
+    {
+        "name": "White",
+        "identifier": "PC 938",
+        "normalizedId": "pc938",
+        "color": "255,255,255"
+    },
+    {
+        "name": "Metallic Silver",
+        "identifier": "PC 949",
+        "normalizedId": "pc949",
+        "color": "178,196,207"
+    },
+    {
+        "name": "Metallic Gold",
+        "identifier": "PC 950",
+        "normalizedId": "pc950",
+        "color": "179,172,101"
+    },
+    {
+        "name": "Bronze",
+        "identifier": "PC 1028",
+        "normalizedId": "pc1028",
+        "color": "187,172,116"
+    },
+    {
+        "name": "Neon Yellow",
+        "identifier": "PC 1035",
+        "normalizedId": "pc1035",
+        "color": "254,238,0"
+    },
+    {
+        "name": "Neon Orange",
+        "identifier": "PC 1036",
+        "normalizedId": "pc1036",
+        "color": "244,122,85"
+    },
+    {
+        "name": "Neon Pink",
+        "identifier": "PC 1038",
+        "normalizedId": "pc1038",
+        "color": "241,115,172"
+    }
+]

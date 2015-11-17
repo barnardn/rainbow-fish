@@ -1,0 +1,14 @@
+[
+	{		 "name" : "Yellow"		 ,"identifier"  : "Yellow"		 ,"normalizedId" : "yellow"		 ,"color": "245,232,110"	},
+	{		 "name" : "Light Peach"		 ,"identifier"  : "Light Peach"		 ,"normalizedId" : "lightpeach"		 ,"color": "255,219,176"	},
+	{		 "name" : "Orange"		 ,"identifier"  : "Orange"		 ,"normalizedId" : "orange"		 ,"color": "255,140,71"	},
+	{		 "name" : "Carmine Red"		 ,"identifier"  : "Carmine Red"		 ,"normalizedId" : "carminered"		 ,"color": "217,0,82"	},
+	{		 "name" : "Pink"		 ,"identifier"  : "Pink"		 ,"normalizedId" : "pink"		 ,"color": "255,150,232"	},
+	{		 "name" : "Lavender"		 ,"identifier"  : "Lavender"		 ,"normalizedId" : "lavender"		 ,"color": "117,130,255"	},
+	{		 "name" : "Blue"		 ,"identifier"  : "Blue"		 ,"normalizedId" : "blue"		 ,"color": "0,43,168"	},
+	{		 "name" : "Indigo Blue"		 ,"identifier"  : "Indigo Blue"		 ,"normalizedId" : "indigoblue"		 ,"color": "28,105,227"	},
+	{		 "name" : "Green"		 ,"identifier"  : "Green"		 ,"normalizedId" : "green"		 ,"color": "110,191,150"	},
+	{		 "name" : "Brown"		 ,"identifier"  : "Brown"		 ,"normalizedId" : "brown"		 ,"color": "97,47,0"	},
+	{		 "name" : "Light Grey"		 ,"identifier"  : "Light Grey"		 ,"normalizedId" : "lightgrey"		 ,"color": "163,191,204"	},
+	{		 "name" : "Black"		 ,"identifier"  : "Black"		 ,"normalizedId" : "black"		 ,"color": "0,0,0"	}
+]
