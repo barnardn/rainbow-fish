@@ -10,7 +10,7 @@
 			<key>name</key>
 			<string>Remove Ads</string>
 			<key>summary</key>
-			<string>This option removes the banner ads from the app and allows you to contribute to the catalog.</string>
+			<string>This option removes the banner ads from the app.</string>
 		</dict>
 		<dict>
 			<key>details</key>

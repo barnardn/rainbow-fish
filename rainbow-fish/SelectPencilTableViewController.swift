@@ -65,11 +65,16 @@ class SelectPencilTableViewController: ContentTableViewController {
 
         // KVO on purchase status
         
-        if AppController.appController.appConfiguration.wasPurchasedSuccessfully {
-            self.navigationItem.rightBarButtonItem = self.addButton
-        } else {
+        if !AppController.appController.appConfiguration.wasPurchasedSuccessfully {
             NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("paymentUpdatedNotifcation:"), name: StoreKitPurchaseNotificationName, object: nil)
         }
+        
+        if let ownerCloudId = AppController.appController.appConfiguration.iCloudRecordID where ownerCloudId == AppController.appController.dataImportKey {
+            if self.navigationItem.rightBarButtonItem == nil {
+                self.navigationItem.rightBarButtonItem = self.addButton
+            }
+        }
+        
         
     }
     
@@ -111,8 +116,7 @@ class SelectPencilTableViewController: ContentTableViewController {
     func paymentUpdatedNotifcation(notification: NSNotification) {
         if  let userInfo = notification.userInfo,
             let purchaseResult = userInfo[StoreKitPurchaseResultTypeKey] as! String? {
-                if purchaseResult == StoreKitPurchaseResultType.Completed.rawValue && self.addButton != self.navigationItem.rightBarButtonItem {
-                    self.navigationItem.rightBarButtonItem = self.addButton
+                if purchaseResult == StoreKitPurchaseResultType.Completed.rawValue {
                     NSNotificationCenter.defaultCenter().removeObserver(self, name: StoreKitPurchaseNotificationName, object: nil)
                 }
         }
