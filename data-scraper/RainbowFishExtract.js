@@ -5,6 +5,22 @@ var RainbowFishExtractor = {
 
     pencilData : [],
 
+    hexToRgb : function (hex) {
+        // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
+        var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+        hex = hex.replace(shorthandRegex, function(m, r, g, b) {
+            return r + r + g + g + b + b;
+        });
+
+        var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16)
+        } : null;
+    },
+
+
     extractPrismacolor :  function () {
         var idx = 0;
 
@@ -27,6 +43,52 @@ var RainbowFishExtractor = {
 
             idx++;
         }
+        this.showPencils()
+    },
+
+    extractDerwent : function () {
+
+        var colorInfoDivs = document.getElementsByClassName('colourChartWrapper')
+
+        for (var i in colorInfoDivs) {
+
+            var pencil = {}
+
+            var colorDiv = colorInfoDivs[i]
+
+            if (typeof colorDiv.getElementsByClassName === 'undefined') {
+                continue;
+            }
+
+            var nameObj = colorDiv.getElementsByClassName('theColourTitleLabel')[0]
+            var numberObj = colorDiv.getElementsByClassName('theColourNumber')[0]
+            var colorPanel = colorDiv.getElementsByClassName('colourPanel')[0]
+
+            var name = nameObj.textContent.trim();
+
+            pencil.name = name.split(' ').slice(1).join(' ')
+            pencil.identifier = numberObj.textContent.trim()
+            pencil.normalizedId = numberObj.textContent.trim().toLowerCase()
+
+            var colorText = colorPanel.getAttributeNode('style').textContent
+
+            var colorRegex = /.+:#(.+);/
+            var matches = colorRegex.exec(colorText)
+
+            console.log(matches[1]);
+
+            var rgbValue = this.hexToRgb(matches[1])
+            pencil.color = rgbValue.r + "," + rgbValue.g + "," + rgbValue.b;
+
+            this.pencilData[i] = pencil
+
+        }
+        this.showPencils()
+    },
+
+
+    showPencils : function () {
+
         str = "[\n";
 
         for (var i in this.pencilData) {
@@ -45,15 +107,7 @@ var RainbowFishExtractor = {
         }
         str += "]\n";
         console.log(str);
-    }
-
-    extractDerwent : function () {
-
-
-
 
     }
-
-
 
 };

@@ -1,0 +1,722 @@
+[
+    {
+        "name": "Artists Lime",
+        "identifier": "0000",
+        "normalizedId": "0000",
+        "color": "234,231,97"
+    },
+    {
+        "name": "Artists Zinc Yellow",
+        "identifier": "0100",
+        "normalizedId": "0100",
+        "color": "239,233,88"
+    },
+    {
+        "name": "Artists Lemon Cadmium",
+        "identifier": "0200",
+        "normalizedId": "0200",
+        "color": "239,232,79"
+    },
+    {
+        "name": "Artists Gold",
+        "identifier": "0300",
+        "normalizedId": "0300",
+        "color": "244,201,26"
+    },
+    {
+        "name": "Artists Primrose Yellow",
+        "identifier": "0400",
+        "normalizedId": "0400",
+        "color": "241,235,108"
+    },
+    {
+        "name": "Artists Champagne",
+        "identifier": "0410",
+        "normalizedId": "0410",
+        "color": "244,201,26"
+    },
+    {
+        "name": "Artists Straw Yellow",
+        "identifier": "0500",
+        "normalizedId": "0500",
+        "color": "241,235,108"
+    },
+    {
+        "name": "Artists Buttercup Yellow",
+        "identifier": "0510",
+        "normalizedId": "0510",
+        "color": "246,242,167"
+    },
+    {
+        "name": "Artists Deep Cadmium",
+        "identifier": "0600",
+        "normalizedId": "0600",
+        "color": "244,234,80"
+    },
+    {
+        "name": "Artists Naples Yellow",
+        "identifier": "0700",
+        "normalizedId": "0700",
+        "color": "240,231,73"
+    },
+    {
+        "name": "Artists Middle Chrome",
+        "identifier": "0800",
+        "normalizedId": "0800",
+        "color": "245,232,51"
+    },
+    {
+        "name": "Artists Deep Chrome",
+        "identifier": "0900",
+        "normalizedId": "0900",
+        "color": "249,193,26"
+    },
+    {
+        "name": "Artists Orange Chrome",
+        "identifier": "1000",
+        "normalizedId": "1000",
+        "color": "243,177,43"
+    },
+    {
+        "name": "Artists Spectrum Orange",
+        "identifier": "1100",
+        "normalizedId": "1100",
+        "color": "241,163,51"
+    },
+    {
+        "name": "Artists Scarlet Lake",
+        "identifier": "1200",
+        "normalizedId": "1200",
+        "color": "255,79,79"
+    },
+    {
+        "name": "Artists Pale Vermilion",
+        "identifier": "1300",
+        "normalizedId": "1300",
+        "color": "222,82,46"
+    },
+    {
+        "name": "Artists Deep Vermilion",
+        "identifier": "1400",
+        "normalizedId": "1400",
+        "color": "255,79,79"
+    },
+    {
+        "name": "Artists Bright Red",
+        "identifier": "1410",
+        "normalizedId": "1410",
+        "color": "225,92,51"
+    },
+    {
+        "name": "Artists Geranium Lake",
+        "identifier": "1500",
+        "normalizedId": "1500",
+        "color": "222,76,69"
+    },
+    {
+        "name": "Artists Flesh Pink",
+        "identifier": "1600",
+        "normalizedId": "1600",
+        "color": "251,233,188"
+    },
+    {
+        "name": "Artists Light Sienna",
+        "identifier": "1610",
+        "normalizedId": "1610",
+        "color": "245,189,111"
+    },
+    {
+        "name": "Artists Salmon",
+        "identifier": "1620",
+        "normalizedId": "1620",
+        "color": "241,172,158"
+    },
+    {
+        "name": "Artists Ash Rose 1630 Pencil",
+        "identifier": "1630",
+        "normalizedId": "1630",
+        "color": "235,161,155"
+    },
+    {
+        "name": "Artists Pink Madder Lake",
+        "identifier": "1700",
+        "normalizedId": "1700",
+        "color": "231,125,118"
+    },
+    {
+        "name": "Artists Rose Pink",
+        "identifier": "1800",
+        "normalizedId": "1800",
+        "color": "234,143,165"
+    },
+    {
+        "name": "Artists Rioja",
+        "identifier": "1810",
+        "normalizedId": "1810",
+        "color": "158,42,41"
+    },
+    {
+        "name": "Artists Madder Carmine",
+        "identifier": "1900",
+        "normalizedId": "1900",
+        "color": "190,24,35"
+    },
+    {
+        "name": "Artists Claret",
+        "identifier": "1910",
+        "normalizedId": "1910",
+        "color": "132,26,34"
+    },
+    {
+        "name": "Artists Crimson Lake",
+        "identifier": "2000",
+        "normalizedId": "2000",
+        "color": "215,32,57"
+    },
+    {
+        "name": "Artists Rose Madder Lake",
+        "identifier": "2100",
+        "normalizedId": "2100",
+        "color": "208,13,64"
+    },
+    {
+        "name": "Artists Plum",
+        "identifier": "2110",
+        "normalizedId": "2110",
+        "color": "123,29,43"
+    },
+    {
+        "name": "Artists Grape",
+        "identifier": "2120",
+        "normalizedId": "2120",
+        "color": "31,25,32"
+    },
+    {
+        "name": "Artists Magenta",
+        "identifier": "2200",
+        "normalizedId": "2200",
+        "color": "146,29,114"
+    },
+    {
+        "name": "Artists Heather",
+        "identifier": "2210",
+        "normalizedId": "2210",
+        "color": "202,129,175"
+    },
+    {
+        "name": "Artists Soft Violet",
+        "identifier": "2220",
+        "normalizedId": "2220",
+        "color": "245,211,220"
+    },
+    {
+        "name": "Artists Imperial Purple",
+        "identifier": "2300",
+        "normalizedId": "2300",
+        "color": "90,56,108"
+    },
+    {
+        "name": "Artists Red Violet Lake",
+        "identifier": "2400",
+        "normalizedId": "2400",
+        "color": "87,51,94"
+    },
+    {
+        "name": "Artists Slate Violet",
+        "identifier": "2410",
+        "normalizedId": "2410",
+        "color": "178,166,188"
+    },
+    {
+        "name": "Artists Dark Violet",
+        "identifier": "2500",
+        "normalizedId": "2500",
+        "color": "57,52,113"
+    },
+    {
+        "name": "Artists Light Violet",
+        "identifier": "2600",
+        "normalizedId": "2600",
+        "color": "164,144,189"
+    },
+    {
+        "name": "Artists Blue Violet Lake",
+        "identifier": "2700",
+        "normalizedId": "2700",
+        "color": "81,95,159"
+    },
+    {
+        "name": "Artists Delft Blue",
+        "identifier": "2800",
+        "normalizedId": "2800",
+        "color": "29,42,105"
+    },
+    {
+        "name": "Artists Royal Blue",
+        "identifier": "2810",
+        "normalizedId": "2810",
+        "color": "50,58,133"
+    },
+    {
+        "name": "Artists Mid Ultramarine",
+        "identifier": "2820",
+        "normalizedId": "2820",
+        "color": "75,90,158"
+    },
+    {
+        "name": "Artists Teal Blue",
+        "identifier": "2830",
+        "normalizedId": "2830",
+        "color": "182,197,223"
+    },
+    {
+        "name": "Artists Pale Ultramarine",
+        "identifier": "2840",
+        "normalizedId": "2840",
+        "color": "172,202,228"
+    },
+    {
+        "name": "Artists Ultramarine",
+        "identifier": "2900",
+        "normalizedId": "2900",
+        "color": "28,52,123"
+    },
+    {
+        "name": "Artists Smalt Blue",
+        "identifier": "3000",
+        "normalizedId": "3000",
+        "color": "23,74,149"
+    },
+    {
+        "name": "Artists Cobalt Blue",
+        "identifier": "3100",
+        "normalizedId": "3100",
+        "color": "18,55,130"
+    },
+    {
+        "name": "Artists Spectrum Blue",
+        "identifier": "3200",
+        "normalizedId": "3200",
+        "color": "36,63,139"
+    },
+    {
+        "name": "Artists Light Blue",
+        "identifier": "3300",
+        "normalizedId": "3300",
+        "color": "47,99,167"
+    },
+    {
+        "name": "Artists Sky Blue",
+        "identifier": "3400",
+        "normalizedId": "3400",
+        "color": "120,196,222"
+    },
+    {
+        "name": "Artists Prussian Blue",
+        "identifier": "3500",
+        "normalizedId": "3500",
+        "color": "25,44,115"
+    },
+    {
+        "name": "Artists Indigo",
+        "identifier": "3600",
+        "normalizedId": "3600",
+        "color": "22,35,57"
+    },
+    {
+        "name": "Artists Ash Blue",
+        "identifier": "3610",
+        "normalizedId": "3610",
+        "color": "150,184,192"
+    },
+    {
+        "name": "Artists Phthalo Blue",
+        "identifier": "3620",
+        "normalizedId": "3620",
+        "color": "24,48,121"
+    },
+    {
+        "name": "Artists Oriental Blue",
+        "identifier": "3700",
+        "normalizedId": "3700",
+        "color": "29,68,143"
+    },
+    {
+        "name": "Artists Midnight Blue",
+        "identifier": "3710",
+        "normalizedId": "3710",
+        "color": "27,57,92"
+    },
+    {
+        "name": "Artists Kingfisher Blue",
+        "identifier": "3800",
+        "normalizedId": "3800",
+        "color": "20,74,149"
+    },
+    {
+        "name": "Artists Turquoise Blue",
+        "identifier": "3900",
+        "normalizedId": "3900",
+        "color": "122,193,199"
+    },
+    {
+        "name": "Artists Turquoise Green",
+        "identifier": "4000",
+        "normalizedId": "4000",
+        "color": "131,196,187"
+    },
+    {
+        "name": "Artists Jade Green",
+        "identifier": "4100",
+        "normalizedId": "4100",
+        "color": "28,152,149"
+    },
+    {
+        "name": "Artists Cobalt Green",
+        "identifier": "4110",
+        "normalizedId": "4110",
+        "color": "18,87,113"
+    },
+    {
+        "name": "Artists Fir Green",
+        "identifier": "4120",
+        "normalizedId": "4120",
+        "color": "38,95,90"
+    },
+    {
+        "name": "Artists Spruce Green",
+        "identifier": "4130",
+        "normalizedId": "4130",
+        "color": "38,95,90"
+    },
+    {
+        "name": "Artists Distant Green",
+        "identifier": "4140",
+        "normalizedId": "4140",
+        "color": "143,198,170"
+    },
+    {
+        "name": "Artists Phthalo Green",
+        "identifier": "4150",
+        "normalizedId": "4150",
+        "color": "15,91,64"
+    },
+    {
+        "name": "Artists Juniper Green",
+        "identifier": "4200",
+        "normalizedId": "4200",
+        "color": "18,93,65"
+    },
+    {
+        "name": "Artists Bottle Green",
+        "identifier": "4300",
+        "normalizedId": "4300",
+        "color": "21,84,52"
+    },
+    {
+        "name": "Artists Water Green",
+        "identifier": "4400",
+        "normalizedId": "4400",
+        "color": "162,203,147"
+    },
+    {
+        "name": "Artists Mineral Green",
+        "identifier": "4500",
+        "normalizedId": "4500",
+        "color": "16,93,41"
+    },
+    {
+        "name": "Artists Emerald Green",
+        "identifier": "4600",
+        "normalizedId": "4600",
+        "color": "36,149,52"
+    },
+    {
+        "name": "Artists Grass Green",
+        "identifier": "4700",
+        "normalizedId": "4700",
+        "color": "107,174,65"
+    },
+    {
+        "name": "Artists May Green",
+        "identifier": "4800",
+        "normalizedId": "4800",
+        "color": "146,187,40"
+    },
+    {
+        "name": "Artists Sap Green",
+        "identifier": "4900",
+        "normalizedId": "4900",
+        "color": "18,101,40"
+    },
+    {
+        "name": "Artists Cedar Green",
+        "identifier": "5000",
+        "normalizedId": "5000",
+        "color": "33,68,33"
+    },
+    {
+        "name": "Artists Grey Green",
+        "identifier": "5010",
+        "normalizedId": "5010",
+        "color": "120,148,97"
+    },
+    {
+        "name": "Artists Olive Green",
+        "identifier": "5100",
+        "normalizedId": "5100",
+        "color": "96,108,32"
+    },
+    {
+        "name": "Artists Moss Green",
+        "identifier": "5110",
+        "normalizedId": "5110",
+        "color": "40,115,39"
+    },
+    {
+        "name": "Artists Light Moss",
+        "identifier": "5120",
+        "normalizedId": "5120",
+        "color": "183,208,109"
+    },
+    {
+        "name": "Artists Chartreuse",
+        "identifier": "5130",
+        "normalizedId": "5130",
+        "color": "205,207,24"
+    },
+    {
+        "name": "Artists Green Earth",
+        "identifier": "5140",
+        "normalizedId": "5140",
+        "color": "178,182,78"
+    },
+    {
+        "name": "Artists Parchment",
+        "identifier": "5150",
+        "normalizedId": "5150",
+        "color": "228,212,141"
+    },
+    {
+        "name": "Artists Olive Earth",
+        "identifier": "5160",
+        "normalizedId": "5160",
+        "color": "52,65,32"
+    },
+    {
+        "name": "Artists Bronze",
+        "identifier": "5200",
+        "normalizedId": "5200",
+        "color": "114,90,36"
+    },
+    {
+        "name": "Artists Sepia",
+        "identifier": "5300",
+        "normalizedId": "5300",
+        "color": "93,75,39"
+    },
+    {
+        "name": "Artists Felt Grey",
+        "identifier": "5310",
+        "normalizedId": "5310",
+        "color": "219,205,171"
+    },
+    {
+        "name": "Artists Burnt Umber",
+        "identifier": "5400",
+        "normalizedId": "5400",
+        "color": "63,49,35"
+    },
+    {
+        "name": "Artists Terracotta",
+        "identifier": "5400",
+        "normalizedId": "5400",
+        "color": "201,51,27"
+    },
+    {
+        "name": "Artists Sunset Gold",
+        "identifier": "5410",
+        "normalizedId": "5410",
+        "color": "240,164,62"
+    },
+    {
+        "name": "Artists Vandyke Brown",
+        "identifier": "5500",
+        "normalizedId": "5500",
+        "color": "78,53,29"
+    },
+    {
+        "name": "Artists Raw Umber",
+        "identifier": "5600",
+        "normalizedId": "5600",
+        "color": "172,103,29"
+    },
+    {
+        "name": "Artists Brown Ochre",
+        "identifier": "5700",
+        "normalizedId": "5700",
+        "color": "214,145,26"
+    },
+    {
+        "name": "Artists Light Ochre",
+        "identifier": "5710",
+        "normalizedId": "5710",
+        "color": "244,200,101"
+    },
+    {
+        "name": "Artists Yellow Ochre",
+        "identifier": "5720",
+        "normalizedId": "5720",
+        "color": "245,191,37"
+    },
+    {
+        "name": "Artists Raw Sienna",
+        "identifier": "5800",
+        "normalizedId": "5800",
+        "color": "243,173,28"
+    },
+    {
+        "name": "Artists Golden Brown",
+        "identifier": "5900",
+        "normalizedId": "5900",
+        "color": "205,121,24"
+    },
+    {
+        "name": "Artists Burnt Yellow Ochre",
+        "identifier": "6000",
+        "normalizedId": "6000",
+        "color": "222,128,36"
+    },
+    {
+        "name": "Artists Copper Beech",
+        "identifier": "6100",
+        "normalizedId": "6100",
+        "color": "108,50,31"
+    },
+    {
+        "name": "Artists Burnt Sienna",
+        "identifier": "6200",
+        "normalizedId": "6200",
+        "color": "192,68,26"
+    },
+    {
+        "name": "Artists Venetian Red",
+        "identifier": "6300",
+        "normalizedId": "6300",
+        "color": "127,52,31"
+    },
+    {
+        "name": "Artists Autumn Leaf",
+        "identifier": "6420",
+        "normalizedId": "6420",
+        "color": "217,64,27"
+    },
+    {
+        "name": "Artists Rust",
+        "identifier": "6430",
+        "normalizedId": "6430",
+        "color": "215,17,26"
+    },
+    {
+        "name": "Artists Light Rust",
+        "identifier": "6440",
+        "normalizedId": "6440",
+        "color": "234,140,90"
+    },
+    {
+        "name": "Artists Mahogany",
+        "identifier": "6450",
+        "normalizedId": "6450",
+        "color": "188,40,39"
+    },
+    {
+        "name": "Artists Burnt Rose",
+        "identifier": "6460",
+        "normalizedId": "6460",
+        "color": "161,40,56"
+    },
+    {
+        "name": "Artists Mars Violet",
+        "identifier": "6470",
+        "normalizedId": "6470",
+        "color": "156,98,96"
+    },
+    {
+        "name": "Artists Taupe",
+        "identifier": "6480",
+        "normalizedId": "6480",
+        "color": "173,146,133"
+    },
+    {
+        "name": "Artists Bistre",
+        "identifier": "6490",
+        "normalizedId": "6490",
+        "color": "221,168,134"
+    },
+    {
+        "name": "Artists Burnt Carmine",
+        "identifier": "6500",
+        "normalizedId": "6500",
+        "color": "57,33,36"
+    },
+    {
+        "name": "Artists Chocolate",
+        "identifier": "6600",
+        "normalizedId": "6600",
+        "color": "36,26,22"
+    },
+    {
+        "name": "Artists Mars Black",
+        "identifier": "6610",
+        "normalizedId": "6610",
+        "color": "7,7,6"
+    },
+    {
+        "name": "Artists Ivory Black",
+        "identifier": "6700",
+        "normalizedId": "6700",
+        "color": "2,2,0"
+    },
+    {
+        "name": "Artists Blue Grey",
+        "identifier": "6800",
+        "normalizedId": "6800",
+        "color": "23,45,62"
+    },
+    {
+        "name": "Artists Gunmetal",
+        "identifier": "6900",
+        "normalizedId": "6900",
+        "color": "46,67,69"
+    },
+    {
+        "name": "Artists Storm Grey",
+        "identifier": "6910",
+        "normalizedId": "6910",
+        "color": "119,117,87"
+    },
+    {
+        "name": "Artists French Grey",
+        "identifier": "7000",
+        "normalizedId": "7000",
+        "color": "185,203,186"
+    },
+    {
+        "name": "Artists Silver Grey",
+        "identifier": "7100",
+        "normalizedId": "7100",
+        "color": "159,160,151"
+    },
+    {
+        "name": "Artists Fell Mist",
+        "identifier": "7110",
+        "normalizedId": "7110",
+        "color": "178,180,162"
+    },
+    {
+        "name": "Artists Chinese White",
+        "identifier": "7200",
+        "normalizedId": "7200",
+        "color": "250,250,241"
+    }
+]

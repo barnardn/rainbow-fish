@@ -1,0 +1,146 @@
+[
+    {
+        "name": "Light Sienna",
+        "identifier": "1610",
+        "normalizedId": "1610",
+        "color": "248,224,185"
+    },
+    {
+        "name": "Solway Blue",
+        "identifier": "3615",
+        "normalizedId": "3615",
+        "color": "209,219,220"
+    },
+    {
+        "name": "Ink Blue",
+        "identifier": "3720",
+        "normalizedId": "3720",
+        "color": "58,88,96"
+    },
+    {
+        "name": "Smoke Blue",
+        "identifier": "3810",
+        "normalizedId": "3810",
+        "color": "155,178,178"
+    },
+    {
+        "name": "Pale Cedar",
+        "identifier": "4125",
+        "normalizedId": "4125",
+        "color": "190,201,164"
+    },
+    {
+        "name": "Green Shadow",
+        "identifier": "4135",
+        "normalizedId": "4135",
+        "color": "138,155,137"
+    },
+    {
+        "name": "Crag Green",
+        "identifier": "5090",
+        "normalizedId": "5090",
+        "color": "168,180,143"
+    },
+    {
+        "name": "Olive Earth",
+        "identifier": "5160",
+        "normalizedId": "5160",
+        "color": "115,123,86"
+    },
+    {
+        "name": "Warm Earth",
+        "identifier": "5550",
+        "normalizedId": "5550",
+        "color": "138,122,90"
+    },
+    {
+        "name": "Brown Ochre",
+        "identifier": "5700",
+        "normalizedId": "5700",
+        "color": "181,150,82"
+    },
+    {
+        "name": "Wheat",
+        "identifier": "5715",
+        "normalizedId": "5715",
+        "color": "244,238,198"
+    },
+    {
+        "name": "Yellow Ochre",
+        "identifier": "5720",
+        "normalizedId": "5720",
+        "color": "227,201,109"
+    },
+    {
+        "name": "Sepia (Red)",
+        "identifier": "6110",
+        "normalizedId": "6110",
+        "color": "114,92,81"
+    },
+    {
+        "name": "Mars Orange",
+        "identifier": "6210",
+        "normalizedId": "6210",
+        "color": "192,123,88"
+    },
+    {
+        "name": "Sanguine",
+        "identifier": "6220",
+        "normalizedId": "6220",
+        "color": "173,97,74"
+    },
+    {
+        "name": "Venetian Red",
+        "identifier": "6300",
+        "normalizedId": "6300",
+        "color": "128,78,63"
+    },
+    {
+        "name": "Terracotta",
+        "identifier": "6400",
+        "normalizedId": "6400",
+        "color": "143,79,68"
+    },
+    {
+        "name": "Mars Violet",
+        "identifier": "6470",
+        "normalizedId": "6470",
+        "color": "156,130,134"
+    },
+    {
+        "name": "Ruby Earth",
+        "identifier": "6510",
+        "normalizedId": "6510",
+        "color": "148,100,101"
+    },
+    {
+        "name": "Chocolate",
+        "identifier": "6600",
+        "normalizedId": "6600",
+        "color": "71,68,65"
+    },
+    {
+        "name": "Ivory Black",
+        "identifier": "6700",
+        "normalizedId": "6700",
+        "color": "25,34,35"
+    },
+    {
+        "name": "Warm Grey",
+        "identifier": "7010",
+        "normalizedId": "7010",
+        "color": "171,171,154"
+    },
+    {
+        "name": "Cool Gray",
+        "identifier": "7120",
+        "normalizedId": "7120",
+        "color": "197,200,186"
+    },
+    {
+        "name": "Chinese White",
+        "identifier": "7200",
+        "normalizedId": "7200",
+        "color": "255,255,255"
+    }
+]

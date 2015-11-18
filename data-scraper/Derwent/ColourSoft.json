@@ -1,0 +1,290 @@
+[
+    {
+        "name": "Cream",
+        "identifier": "C010",
+        "normalizedId": "c010",
+        "color": "255,225,186"
+    },
+    {
+        "name": "Acid Yellow",
+        "identifier": "C020",
+        "normalizedId": "c020",
+        "color": "255,239,111"
+    },
+    {
+        "name": "Deep Cadmium",
+        "identifier": "C040",
+        "normalizedId": "c040",
+        "color": "255,196,37"
+    },
+    {
+        "name": "Yellow Ochre",
+        "identifier": "C050",
+        "normalizedId": "c050",
+        "color": "231,166,20"
+    },
+    {
+        "name": "Orange",
+        "identifier": "C070",
+        "normalizedId": "c070",
+        "color": "251,176,52"
+    },
+    {
+        "name": "Bright Orange",
+        "identifier": "C080",
+        "normalizedId": "c080",
+        "color": "251,181,104"
+    },
+    {
+        "name": "Rose",
+        "identifier": "C100",
+        "normalizedId": "c100",
+        "color": "245,134,108"
+    },
+    {
+        "name": "Scarlet",
+        "identifier": "C110",
+        "normalizedId": "c110",
+        "color": "240,81,51"
+    },
+    {
+        "name": "Red",
+        "identifier": "C120",
+        "normalizedId": "c120",
+        "color": "238,49,36"
+    },
+    {
+        "name": "Deep Fuchsia",
+        "identifier": "C140",
+        "normalizedId": "c140",
+        "color": "165,67,153"
+    },
+    {
+        "name": "Loganberry",
+        "identifier": "C160",
+        "normalizedId": "c160",
+        "color": "134,0,56"
+    },
+    {
+        "name": "Blush Pink",
+        "identifier": "C180",
+        "normalizedId": "c180",
+        "color": "251,201,191"
+    },
+    {
+        "name": "Pink",
+        "identifier": "C190",
+        "normalizedId": "c190",
+        "color": "252,217,213"
+    },
+    {
+        "name": "Pink Lavender",
+        "identifier": "C210",
+        "normalizedId": "c210",
+        "color": "236,132,181"
+    },
+    {
+        "name": "Grey Lavender",
+        "identifier": "C220",
+        "normalizedId": "c220",
+        "color": "195,183,177"
+    },
+    {
+        "name": "Bright Purple",
+        "identifier": "C240",
+        "normalizedId": "c240",
+        "color": "155,91,165"
+    },
+    {
+        "name": "Bright Lilac",
+        "identifier": "C260",
+        "normalizedId": "c260",
+        "color": "179,162,206"
+    },
+    {
+        "name": "Royal Purple",
+        "identifier": "C270",
+        "normalizedId": "c270",
+        "color": "73,47,146"
+    },
+    {
+        "name": "Blackberry",
+        "identifier": "C280",
+        "normalizedId": "c280",
+        "color": "70,22,107"
+    },
+    {
+        "name": "Ultramarine",
+        "identifier": "C290",
+        "normalizedId": "c290",
+        "color": "78,132,196"
+    },
+    {
+        "name": "Indigo",
+        "identifier": "C300",
+        "normalizedId": "c300",
+        "color": "0,83,155"
+    },
+    {
+        "name": "Electric Blue",
+        "identifier": "C320",
+        "normalizedId": "c320",
+        "color": "0,129,198"
+    },
+    {
+        "name": "Blue",
+        "identifier": "C330",
+        "normalizedId": "c330",
+        "color": "0,150,214"
+    },
+    {
+        "name": "Iced Blue",
+        "identifier": "C350",
+        "normalizedId": "c350",
+        "color": "108,173,223"
+    },
+    {
+        "name": "Cloud Blue",
+        "identifier": "C360",
+        "normalizedId": "c360",
+        "color": "201,217,239"
+    },
+    {
+        "name": "Pale Blue",
+        "identifier": "C370",
+        "normalizedId": "c370",
+        "color": "114,205,244"
+    },
+    {
+        "name": "Grey Green",
+        "identifier": "C390",
+        "normalizedId": "c390",
+        "color": "173,198,188"
+    },
+    {
+        "name": "Dark Green",
+        "identifier": "C410",
+        "normalizedId": "c410",
+        "color": "0,112,60"
+    },
+    {
+        "name": "Green",
+        "identifier": "C420",
+        "normalizedId": "c420",
+        "color": "108,179,63"
+    },
+    {
+        "name": "Light Green",
+        "identifier": "C440",
+        "normalizedId": "c440",
+        "color": "180,216,139"
+    },
+    {
+        "name": "Lime Green",
+        "identifier": "C460",
+        "normalizedId": "c460",
+        "color": "200,223,142"
+    },
+    {
+        "name": "Mint",
+        "identifier": "C470",
+        "normalizedId": "c470",
+        "color": "160,213,181"
+    },
+    {
+        "name": "Pale Mint",
+        "identifier": "C490",
+        "normalizedId": "c490",
+        "color": "192,228,218"
+    },
+    {
+        "name": "Lichen Green",
+        "identifier": "C500",
+        "normalizedId": "c500",
+        "color": "122,111,0"
+    },
+    {
+        "name": "Dark Brown",
+        "identifier": "C520",
+        "normalizedId": "c520",
+        "color": "90,72,28"
+    },
+    {
+        "name": "Pale Brown",
+        "identifier": "C530",
+        "normalizedId": "c530",
+        "color": "207,171,122"
+    },
+    {
+        "name": "Pimento",
+        "identifier": "C540",
+        "normalizedId": "c540",
+        "color": "208,111,26"
+    },
+    {
+        "name": "Peach",
+        "identifier": "C560",
+        "normalizedId": "c560",
+        "color": "255,216,167"
+    },
+    {
+        "name": "Light Sand",
+        "identifier": "C580",
+        "normalizedId": "c580",
+        "color": "255,225,155"
+    },
+    {
+        "name": "Ochre",
+        "identifier": "C590",
+        "normalizedId": "c590",
+        "color": "231,166,20"
+    },
+    {
+        "name": "Dark Terracotta",
+        "identifier": "C610",
+        "normalizedId": "c610",
+        "color": "124,53,32"
+    },
+    {
+        "name": "Brown Earth",
+        "identifier": "C630",
+        "normalizedId": "c630",
+        "color": "126,84,58"
+    },
+    {
+        "name": "Black",
+        "identifier": "C650",
+        "normalizedId": "c650",
+        "color": "38,28,2"
+    },
+    {
+        "name": "Persian Grey",
+        "identifier": "C660",
+        "normalizedId": "c660",
+        "color": "106,115,123"
+    },
+    {
+        "name": "Dove Grey",
+        "identifier": "C670",
+        "normalizedId": "c670",
+        "color": "176,183,188"
+    },
+    {
+        "name": "Steel Grey",
+        "identifier": "C690",
+        "normalizedId": "c690",
+        "color": "148,156,161"
+    },
+    {
+        "name": "Mid Grey",
+        "identifier": "C700",
+        "normalizedId": "c700",
+        "color": "95,96,98"
+    },
+    {
+        "name": "White",
+        "identifier": "C720",
+        "normalizedId": "c720",
+        "color": "255,255,255"
+    }
+]

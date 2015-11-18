@@ -1,0 +1,434 @@
+[
+    {
+        "name": "Zinc Yellow",
+        "identifier": "01",
+        "normalizedId": "01",
+        "color": "239,233,88"
+    },
+    {
+        "name": "Lemon Cadmium",
+        "identifier": "02",
+        "normalizedId": "02",
+        "color": "239,232,79"
+    },
+    {
+        "name": "Gold",
+        "identifier": "03",
+        "normalizedId": "03",
+        "color": "244,201,26"
+    },
+    {
+        "name": "Primrose Yellow",
+        "identifier": "04",
+        "normalizedId": "04",
+        "color": "241,235,108"
+    },
+    {
+        "name": "Straw Yellow",
+        "identifier": "05",
+        "normalizedId": "05",
+        "color": "241,235,108"
+    },
+    {
+        "name": "Deep Cadmium",
+        "identifier": "06",
+        "normalizedId": "06",
+        "color": "244,234,80"
+    },
+    {
+        "name": "Naples Yellow",
+        "identifier": "07",
+        "normalizedId": "07",
+        "color": "240,231,73"
+    },
+    {
+        "name": "Middle Chrome",
+        "identifier": "08",
+        "normalizedId": "08",
+        "color": "245,232,51"
+    },
+    {
+        "name": "Deep Chrome",
+        "identifier": "09",
+        "normalizedId": "09",
+        "color": "249,193,26"
+    },
+    {
+        "name": "Orange Chrome",
+        "identifier": "10",
+        "normalizedId": "10",
+        "color": "243,177,43"
+    },
+    {
+        "name": "Spectrum Orange",
+        "identifier": "11",
+        "normalizedId": "11",
+        "color": "241,163,51"
+    },
+    {
+        "name": "Scarlet Lake",
+        "identifier": "12",
+        "normalizedId": "12",
+        "color": "255,79,79"
+    },
+    {
+        "name": "Pale Vermilion",
+        "identifier": "13",
+        "normalizedId": "13",
+        "color": "222,82,46"
+    },
+    {
+        "name": "Deep Vermilion",
+        "identifier": "14",
+        "normalizedId": "14",
+        "color": "255,79,79"
+    },
+    {
+        "name": "Geranium Lake",
+        "identifier": "15",
+        "normalizedId": "15",
+        "color": "222,76,69"
+    },
+    {
+        "name": "Flesh Pink",
+        "identifier": "16",
+        "normalizedId": "16",
+        "color": "251,233,188"
+    },
+    {
+        "name": "Pink Madder Lake",
+        "identifier": "17",
+        "normalizedId": "17",
+        "color": "231,125,118"
+    },
+    {
+        "name": "Rose Pink",
+        "identifier": "18",
+        "normalizedId": "18",
+        "color": "234,143,165"
+    },
+    {
+        "name": "Madder Carmine",
+        "identifier": "19",
+        "normalizedId": "19",
+        "color": "190,24,35"
+    },
+    {
+        "name": "Crimson Lake",
+        "identifier": "20",
+        "normalizedId": "20",
+        "color": "215,32,57"
+    },
+    {
+        "name": "Rose Madder Lake",
+        "identifier": "21",
+        "normalizedId": "21",
+        "color": "208,13,64"
+    },
+    {
+        "name": "Magenta",
+        "identifier": "22",
+        "normalizedId": "22",
+        "color": "146,29,114"
+    },
+    {
+        "name": "Imperial Purple",
+        "identifier": "23",
+        "normalizedId": "23",
+        "color": "90,56,108"
+    },
+    {
+        "name": "Red Violet Lake",
+        "identifier": "24",
+        "normalizedId": "24",
+        "color": "87,51,94"
+    },
+    {
+        "name": "Dark Violet",
+        "identifier": "25",
+        "normalizedId": "25",
+        "color": "57,52,113"
+    },
+    {
+        "name": "Light Violet",
+        "identifier": "26",
+        "normalizedId": "26",
+        "color": "164,144,189"
+    },
+    {
+        "name": "Blue Violet Lake",
+        "identifier": "27",
+        "normalizedId": "27",
+        "color": "81,95,159"
+    },
+    {
+        "name": "Delft Blue",
+        "identifier": "28",
+        "normalizedId": "28",
+        "color": "29,42,105"
+    },
+    {
+        "name": "Ultramarine",
+        "identifier": "29",
+        "normalizedId": "29",
+        "color": "28,52,123"
+    },
+    {
+        "name": "Smalt Blue",
+        "identifier": "30",
+        "normalizedId": "30",
+        "color": "23,74,149"
+    },
+    {
+        "name": "Cobalt Blue",
+        "identifier": "31",
+        "normalizedId": "31",
+        "color": "18,55,130"
+    },
+    {
+        "name": "Spectrum Blue",
+        "identifier": "32",
+        "normalizedId": "32",
+        "color": "36,63,139"
+    },
+    {
+        "name": "Light Blue",
+        "identifier": "33",
+        "normalizedId": "33",
+        "color": "47,99,167"
+    },
+    {
+        "name": "Sky Blue",
+        "identifier": "34",
+        "normalizedId": "34",
+        "color": "120,196,222"
+    },
+    {
+        "name": "Prussian Blue",
+        "identifier": "35",
+        "normalizedId": "35",
+        "color": "25,44,115"
+    },
+    {
+        "name": "Indigo",
+        "identifier": "36",
+        "normalizedId": "36",
+        "color": "22,35,57"
+    },
+    {
+        "name": "Oriental Blue",
+        "identifier": "37",
+        "normalizedId": "37",
+        "color": "29,68,143"
+    },
+    {
+        "name": "Kingfisher Blue",
+        "identifier": "38",
+        "normalizedId": "38",
+        "color": "20,74,149"
+    },
+    {
+        "name": "Turquoise Blue",
+        "identifier": "39",
+        "normalizedId": "39",
+        "color": "122,193,199"
+    },
+    {
+        "name": "Turquoise Green",
+        "identifier": "40",
+        "normalizedId": "40",
+        "color": "131,196,187"
+    },
+    {
+        "name": "Jade Green",
+        "identifier": "41",
+        "normalizedId": "41",
+        "color": "28,152,149"
+    },
+    {
+        "name": "Juniper Green",
+        "identifier": "42",
+        "normalizedId": "42",
+        "color": "18,93,65"
+    },
+    {
+        "name": "Bottle Green",
+        "identifier": "43",
+        "normalizedId": "43",
+        "color": "21,84,52"
+    },
+    {
+        "name": "Water Green",
+        "identifier": "44",
+        "normalizedId": "44",
+        "color": "162,203,147"
+    },
+    {
+        "name": "Mineral Green",
+        "identifier": "45",
+        "normalizedId": "45",
+        "color": "16,93,41"
+    },
+    {
+        "name": "Emerald Green",
+        "identifier": "46",
+        "normalizedId": "46",
+        "color": "36,149,52"
+    },
+    {
+        "name": "Grass Green",
+        "identifier": "47",
+        "normalizedId": "47",
+        "color": "107,174,65"
+    },
+    {
+        "name": "May Green",
+        "identifier": "48",
+        "normalizedId": "48",
+        "color": "146,187,40"
+    },
+    {
+        "name": "Sap Green",
+        "identifier": "49",
+        "normalizedId": "49",
+        "color": "18,101,40"
+    },
+    {
+        "name": "Cedar Green",
+        "identifier": "50",
+        "normalizedId": "50",
+        "color": "33,68,33"
+    },
+    {
+        "name": "Olive Green",
+        "identifier": "51",
+        "normalizedId": "51",
+        "color": "96,108,32"
+    },
+    {
+        "name": "Bronze",
+        "identifier": "52",
+        "normalizedId": "52",
+        "color": "114,90,36"
+    },
+    {
+        "name": "Sepia",
+        "identifier": "53",
+        "normalizedId": "53",
+        "color": "93,75,39"
+    },
+    {
+        "name": "Burnt Umber",
+        "identifier": "54",
+        "normalizedId": "54",
+        "color": "63,49,35"
+    },
+    {
+        "name": "Vandyke Brown",
+        "identifier": "55",
+        "normalizedId": "55",
+        "color": "78,53,29"
+    },
+    {
+        "name": "Raw Umber",
+        "identifier": "56",
+        "normalizedId": "56",
+        "color": "172,103,29"
+    },
+    {
+        "name": "Brown Ochre",
+        "identifier": "57",
+        "normalizedId": "57",
+        "color": "214,145,26"
+    },
+    {
+        "name": "Raw Sienna",
+        "identifier": "58",
+        "normalizedId": "58",
+        "color": "243,173,28"
+    },
+    {
+        "name": "Golden Brown",
+        "identifier": "59",
+        "normalizedId": "59",
+        "color": "205,121,24"
+    },
+    {
+        "name": "Burnt Yellow Ochre",
+        "identifier": "60",
+        "normalizedId": "60",
+        "color": "222,128,36"
+    },
+    {
+        "name": "Copper Beech",
+        "identifier": "61",
+        "normalizedId": "61",
+        "color": "108,50,31"
+    },
+    {
+        "name": "Burnt Sienna",
+        "identifier": "62",
+        "normalizedId": "62",
+        "color": "192,68,26"
+    },
+    {
+        "name": "Venetian Red",
+        "identifier": "63",
+        "normalizedId": "63",
+        "color": "127,52,31"
+    },
+    {
+        "name": "Terracotta",
+        "identifier": "64",
+        "normalizedId": "64",
+        "color": "201,51,27"
+    },
+    {
+        "name": "Burnt Carmine",
+        "identifier": "65",
+        "normalizedId": "65",
+        "color": "57,33,36"
+    },
+    {
+        "name": "Chocolate",
+        "identifier": "66",
+        "normalizedId": "66",
+        "color": "36,26,22"
+    },
+    {
+        "name": "Ivory Black",
+        "identifier": "67",
+        "normalizedId": "67",
+        "color": "2,2,0"
+    },
+    {
+        "name": "Blue Grey",
+        "identifier": "68",
+        "normalizedId": "68",
+        "color": "23,45,62"
+    },
+    {
+        "name": "Gunmetal",
+        "identifier": "69",
+        "normalizedId": "69",
+        "color": "46,67,69"
+    },
+    {
+        "name": "French Grey",
+        "identifier": "70",
+        "normalizedId": "70",
+        "color": "185,203,186"
+    },
+    {
+        "name": "Silver Grey",
+        "identifier": "71",
+        "normalizedId": "71",
+        "color": "159,160,151"
+    },
+    {
+        "name": "Chinese White",
+        "identifier": "72",
+        "normalizedId": "72",
+        "color": "250,250,241"
+    }
+]

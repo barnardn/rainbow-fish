@@ -1,0 +1,74 @@
+[
+    {
+        "name": "Silver",
+        "identifier": "80",
+        "normalizedId": "80",
+        "color": "176,183,188"
+    },
+    {
+        "name": "Pewter",
+        "identifier": "81",
+        "normalizedId": "81",
+        "color": "148,156,161"
+    },
+    {
+        "name": "Gold",
+        "identifier": "82",
+        "normalizedId": "82",
+        "color": "200,177,139"
+    },
+    {
+        "name": "Antique Gold",
+        "identifier": "83",
+        "normalizedId": "83",
+        "color": "166,132,98"
+    },
+    {
+        "name": "Bronze",
+        "identifier": "84",
+        "normalizedId": "84",
+        "color": "155,95,14"
+    },
+    {
+        "name": "Copper",
+        "identifier": "85",
+        "normalizedId": "85",
+        "color": "190,133,76"
+    },
+    {
+        "name": "Yellow",
+        "identifier": "86",
+        "normalizedId": "86",
+        "color": "219,197,0"
+    },
+    {
+        "name": "Red",
+        "identifier": "87",
+        "normalizedId": "87",
+        "color": "171,6,52"
+    },
+    {
+        "name": "Pink",
+        "identifier": "88",
+        "normalizedId": "88",
+        "color": "175,0,110"
+    },
+    {
+        "name": "Purple",
+        "identifier": "89",
+        "normalizedId": "89",
+        "color": "156,141,195"
+    },
+    {
+        "name": "Blue",
+        "identifier": "90",
+        "normalizedId": "90",
+        "color": "0,104,146"
+    },
+    {
+        "name": "Green",
+        "identifier": "91",
+        "normalizedId": "91",
+        "color": "96,197,186"
+    }
+]
