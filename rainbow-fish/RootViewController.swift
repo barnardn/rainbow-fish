@@ -45,6 +45,7 @@ class RootViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.definesPresentationContext = true
         self.view.backgroundColor = AppearanceManager.appearanceManager.appBackgroundColor;
         if !AppController.appController.appConfiguration.wasPurchasedSuccessfully {
             self.view.insertSubview(self.adBannerView, belowSubview: self.tabBar)

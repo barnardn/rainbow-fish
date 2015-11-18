@@ -61,7 +61,6 @@ class SelectPencilTableViewController: ContentTableViewController {
         self.refreshControl?.addTarget(self, action: Selector("refreshControlDidChange:"), forControlEvents: .ValueChanged)
         
         self.navigationItem.backBarButtonItem = self.backButton
-        definesPresentationContext = true
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("inventoryDidUpdate:"), name: AppNotifications.DidEditPencil.rawValue, object: nil)
 
         // KVO on purchase status
