@@ -69,7 +69,6 @@ class InventoryTableViewController: ContentTableViewController {
         self.tableView.tableHeaderView = self.searchController.searchBar
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("didEditPencil:"), name: AppNotifications.DidEditPencil.rawValue, object: nil)
         
-        definesPresentationContext = true
         self.updateInventory()
     }
     
