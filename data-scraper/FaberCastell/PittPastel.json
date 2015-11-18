@@ -1,0 +1,368 @@
+[
+    {
+        "name": "White",
+        "identifier": "101",
+        "normalizedId": "101",
+        "color": "255,255,255"
+    },
+    {
+        "name": "White",
+        "identifier": "101",
+        "normalizedId": "101",
+        "color": "255,255,255"
+    },
+    {
+        "name": "Cream",
+        "identifier": "102",
+        "normalizedId": "102",
+        "color": "255,255,125"
+    },
+    {
+        "name": "Ivory",
+        "identifier": "103",
+        "normalizedId": "103",
+        "color": "255,242,176"
+    },
+    {
+        "name": "Light yellow glaze",
+        "identifier": "104",
+        "normalizedId": "104",
+        "color": "240,255,0"
+    },
+    {
+        "name": "Light chrome yellow",
+        "identifier": "106",
+        "normalizedId": "106",
+        "color": "255,245,54"
+    },
+    {
+        "name": "Dark chrome yellow",
+        "identifier": "109",
+        "normalizedId": "109",
+        "color": "255,214,0"
+    },
+    {
+        "name": "Orange glaze",
+        "identifier": "113",
+        "normalizedId": "113",
+        "color": "255,153,26"
+    },
+    {
+        "name": "Scarlet red",
+        "identifier": "118",
+        "normalizedId": "118",
+        "color": "255,13,0"
+    },
+    {
+        "name": "Dark red",
+        "identifier": "225",
+        "normalizedId": "225",
+        "color": "204,0,43"
+    },
+    {
+        "name": "Alizarin crimson",
+        "identifier": "226",
+        "normalizedId": "226",
+        "color": "242,0,104"
+    },
+    {
+        "name": "Pink carmine",
+        "identifier": "127",
+        "normalizedId": "127",
+        "color": "247,0,153"
+    },
+    {
+        "name": "Rose carmine",
+        "identifier": "124",
+        "normalizedId": "124",
+        "color": "255,61,158"
+    },
+    {
+        "name": "Red-violet",
+        "identifier": "194",
+        "normalizedId": "194",
+        "color": "179,0,152"
+    },
+    {
+        "name": "Manganese violet",
+        "identifier": "160",
+        "normalizedId": "160",
+        "color": "99,28,255"
+    },
+    {
+        "name": "Violet",
+        "identifier": "138",
+        "normalizedId": "138",
+        "color": "105,87,255"
+    },
+    {
+        "name": "Dark indigo",
+        "identifier": "157",
+        "normalizedId": "157",
+        "color": "0,59,66"
+    },
+    {
+        "name": "Helioblue-reddish",
+        "identifier": "151",
+        "normalizedId": "151",
+        "color": "0,143,255"
+    },
+    {
+        "name": "Cobalt blue",
+        "identifier": "143",
+        "normalizedId": "143",
+        "color": "74,148,255"
+    },
+    {
+        "name": "Light ultramarine",
+        "identifier": "140",
+        "normalizedId": "140",
+        "color": "115,207,255"
+    },
+    {
+        "name": "Bluish turquoise",
+        "identifier": "149",
+        "normalizedId": "149",
+        "color": "0,156,186"
+    },
+    {
+        "name": "Helio turquoise",
+        "identifier": "155",
+        "normalizedId": "155",
+        "color": "0,158,120"
+    },
+    {
+        "name": "Cobalt turquoise",
+        "identifier": "153",
+        "normalizedId": "153",
+        "color": "0,196,159"
+    },
+    {
+        "name": "Cobalt green",
+        "identifier": "156",
+        "normalizedId": "156",
+        "color": "0,237,164"
+    },
+    {
+        "name": "Hooker´s green",
+        "identifier": "159",
+        "normalizedId": "159",
+        "color": "0,181,60"
+    },
+    {
+        "name": "Permanent green olive",
+        "identifier": "167",
+        "normalizedId": "167",
+        "color": "82,186,0"
+    },
+    {
+        "name": "Pine green",
+        "identifier": "267",
+        "normalizedId": "267",
+        "color": "22,112,0"
+    },
+    {
+        "name": "Juniper green",
+        "identifier": "165",
+        "normalizedId": "165",
+        "color": "52,148,0"
+    },
+    {
+        "name": "Olive green yellowish",
+        "identifier": "173",
+        "normalizedId": "173",
+        "color": "70,71,0"
+    },
+    {
+        "name": "May green",
+        "identifier": "170",
+        "normalizedId": "170",
+        "color": "183,235,0"
+    },
+    {
+        "name": "Earth green yellowish",
+        "identifier": "168",
+        "normalizedId": "168",
+        "color": "165,207,0"
+    },
+    {
+        "name": "Chromium green opaque",
+        "identifier": "174",
+        "normalizedId": "174",
+        "color": "84,115,6"
+    },
+    {
+        "name": "Earth green",
+        "identifier": "172",
+        "normalizedId": "172",
+        "color": "132,189,143"
+    },
+    {
+        "name": "Caput mortuum",
+        "identifier": "169",
+        "normalizedId": "169",
+        "color": "122,26,0"
+    },
+    {
+        "name": "Indian red",
+        "identifier": "192",
+        "normalizedId": "192",
+        "color": "184,0,7"
+    },
+    {
+        "name": "Burnt carmine",
+        "identifier": "193",
+        "normalizedId": "193",
+        "color": "207,0,91"
+    },
+    {
+        "name": "Medium flesh",
+        "identifier": "131",
+        "normalizedId": "131",
+        "color": "255,135,150"
+    },
+    {
+        "name": "Light flesh",
+        "identifier": "132",
+        "normalizedId": "132",
+        "color": "255,189,207"
+    },
+    {
+        "name": "Cinnamon",
+        "identifier": "189",
+        "normalizedId": "189",
+        "color": "255,168,122"
+    },
+    {
+        "name": "Pompeian red",
+        "identifier": "191",
+        "normalizedId": "191",
+        "color": "255,54,0"
+    },
+    {
+        "name": "Venetian red",
+        "identifier": "190",
+        "normalizedId": "190",
+        "color": "255,92,0"
+    },
+    {
+        "name": "Sanguine",
+        "identifier": "188",
+        "normalizedId": "188",
+        "color": "255,82,0"
+    },
+    {
+        "name": "Burnt ochre",
+        "identifier": "187",
+        "normalizedId": "187",
+        "color": "237,133,0"
+    },
+    {
+        "name": "Terracotta",
+        "identifier": "186",
+        "normalizedId": "186",
+        "color": "252,124,0"
+    },
+    {
+        "name": "Light yellow ochre",
+        "identifier": "183",
+        "normalizedId": "183",
+        "color": "255,214,59"
+    },
+    {
+        "name": "Naples yellow",
+        "identifier": "185",
+        "normalizedId": "185",
+        "color": "255,235,69"
+    },
+    {
+        "name": "Dark Naples ochre",
+        "identifier": "184",
+        "normalizedId": "184",
+        "color": "255,232,51"
+    },
+    {
+        "name": "Brown ochre",
+        "identifier": "182",
+        "normalizedId": "182",
+        "color": "232,158,0"
+    },
+    {
+        "name": "Raw umber",
+        "identifier": "180",
+        "normalizedId": "180",
+        "color": "196,124,0"
+    },
+    {
+        "name": "Bistre",
+        "identifier": "179",
+        "normalizedId": "179",
+        "color": "117,55,0"
+    },
+    {
+        "name": "Van Dyck brown",
+        "identifier": "176",
+        "normalizedId": "176",
+        "color": "105,45,0"
+    },
+    {
+        "name": "Burnt umber",
+        "identifier": "280",
+        "normalizedId": "280",
+        "color": "54,21,0"
+    },
+    {
+        "name": "Burnt siena",
+        "identifier": "283",
+        "normalizedId": "283",
+        "color": "171,72,0"
+    },
+    {
+        "name": "Walnut brown",
+        "identifier": "177",
+        "normalizedId": "177",
+        "color": "66,13,0"
+    },
+    {
+        "name": "Dark sepia",
+        "identifier": "175",
+        "normalizedId": "175",
+        "color": "28,22,0"
+    },
+    {
+        "name": "Warm grey I",
+        "identifier": "270",
+        "normalizedId": "270",
+        "color": "240,235,233"
+    },
+    {
+        "name": "Warm grey IV",
+        "identifier": "273",
+        "normalizedId": "273",
+        "color": "112,103,88"
+    },
+    {
+        "name": "Cold grey I",
+        "identifier": "230",
+        "normalizedId": "230",
+        "color": "227,227,227"
+    },
+    {
+        "name": "Cold grey IV",
+        "identifier": "233",
+        "normalizedId": "233",
+        "color": "125,124,125"
+    },
+    {
+        "name": "Payne´s grey",
+        "identifier": "181",
+        "normalizedId": "181",
+        "color": "0,0,0"
+    },
+    {
+        "name": "Black",
+        "identifier": "199",
+        "normalizedId": "199",
+        "color": "0,0,0"
+    }
+]
