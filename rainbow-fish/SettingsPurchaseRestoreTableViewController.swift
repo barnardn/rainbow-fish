@@ -6,6 +6,7 @@
 //  Copyright © 2015 Clamdango. All rights reserved.
 //
 
+import Foundation
 import StoreKit
 import UIKit
 
@@ -37,7 +38,12 @@ class SettingsPurchaseRestoreTableViewController: UITableViewController {
         if let restoreRequest = self.restoreRequest where self.navigationController?.topViewController == self {
             restoreRequest.cancel()
         }
+        self.hideSmallHUD()
         super.viewWillDisappear(animated)
+    }
+    
+    func purchaseNotificationHandler(notification: NSNotification) {
+        self.hideSmallHUD()
     }
     
     // MARK: private api
@@ -53,10 +59,8 @@ class SettingsPurchaseRestoreTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
         return 1
     }
-
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(BigButtonTableViewCell.nibName, forIndexPath: indexPath) as! BigButtonTableViewCell
@@ -67,11 +71,12 @@ class SettingsPurchaseRestoreTableViewController: UITableViewController {
     // MARK: - tableview delegate
     
     override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        return NSLocalizedString("If you have already purchased Rainbow Fish, tap \"Restore Purchase\" to restore your purchase from The App Store.", comment:"settings resstore purchase instructions message")
+        return NSLocalizedString("If you have already purchased Rainbow Fish, tap \"Restore Purchase\" to restore your purchase from The App Store. You will not be billed for restoring your purchase.", comment:"settings resstore purchase instructions message")
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("Selected restore purchase")
+        self.requestReceiptRefresh()
+        
     }
     
 }
@@ -80,12 +85,17 @@ extension SettingsPurchaseRestoreTableViewController: SKRequestDelegate {
     
     func requestDidFinish(request: SKRequest) {
         self.restoreRequest = nil
-        print("Purchase restore finihsed")
+        SKPaymentQueue.defaultQueue().restoreCompletedTransactionsWithApplicationUsername(AppController.appController.appConfiguration.iCloudRecordID!)
     }
     
     func request(request: SKRequest, didFailWithError error: NSError) {
         self.restoreRequest = nil
         print("Purchase restore returned \(error.localizedDescription)")
+        self.hideSmallHUD()
+        let title = NSLocalizedString("Unable to Refresh Receipt", comment:"settings restore purchase receipt refresh alert title")
+        let alertController = UIAlertController(title: title, message: error.localizedDescription, preferredStyle: .Alert)
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("Dismiss", comment:"alert dismiss button title"), style: .Cancel, handler: nil))
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
     
 }
