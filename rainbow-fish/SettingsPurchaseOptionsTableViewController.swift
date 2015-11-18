@@ -85,6 +85,9 @@ class SettingsPurchaseOptionsTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.section == 0 && indexPath.row == 0 {
+            if AppController.appController.appConfiguration.wasPurchasedSuccessfully {
+                return
+            }            
             let viewController = SettingsPurchaseRestoreTableViewController()
             self.navigationController?.pushViewController(viewController, animated: true)
             return
