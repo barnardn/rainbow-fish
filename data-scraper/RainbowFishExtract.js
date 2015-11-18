@@ -86,6 +86,42 @@ var RainbowFishExtractor = {
         this.showPencils()
     },
 
+    extractFaberCastell: function () {
+
+        var paletteInfo = document.getElementsByClassName('color-palette')
+
+        for (var i in paletteInfo[0].children) {
+            var pencil = {}
+
+            if (typeof paletteInfo[0].children[i].getElementsByClassName === 'undefined') {
+                continue;
+            }
+
+            var colorNodes = paletteInfo[0].children[i].getElementsByClassName('color')
+            var colorStyle = colorNodes[0].children[0].getAttributeNode('style').textContent
+
+            var colorRegex = /.+:#(.+)$/
+            var matches = colorRegex.exec(colorStyle)
+
+            var rgbValue = this.hexToRgb(matches[1])
+            pencil.color = rgbValue.r + "," + rgbValue.g + "," + rgbValue.b;
+
+            var textNode = paletteInfo[0].children[i].getElementsByClassName('text')[0]
+
+            var textInfo = textNode.getElementsByTagName('p')
+
+            pencil.identifier = textInfo[0].textContent.trim()
+            pencil.normalizedId = pencil.identifier
+
+            var name = textInfo[1].textContent.trim()
+            pencil.name = name.charAt(0).toUpperCase() + name.slice(1)
+
+            this.pencilData[i] = pencil
+
+        }
+        this.showPencils()
+    },
+
 
     showPencils : function () {
 
