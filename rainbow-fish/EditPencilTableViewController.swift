@@ -376,10 +376,8 @@ extension EditPencilTableViewController: PencilColorPickerTableViewCellDelegate,
         }
         
         alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment:"cancel button title"), style: .Cancel, handler: nil))
-        
-        alertController.view.tintColor = AppearanceManager.appearanceManager.brandColor
         self.presentViewController(alertController, animated: true, completion: nil)
-        
+        alertController.view.tintColor = AppearanceManager.appearanceManager.brandColor
     }
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
