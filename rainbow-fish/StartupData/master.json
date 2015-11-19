@@ -1,0 +1,28 @@
+{
+    "Derwent" : {
+
+        "Artists" : "Artists.json",
+        "Colour Soft" : "ColourSoft.json",
+        "Drawing" : "Drawing.json",
+        "Metallic" : "Metallic.json",
+        "Studio" : "Studio.json"
+    },
+
+    "Faber-Castell" : {
+        "Albrecht Durer" : "AlbrechtDurer.json",
+        "Art Grip Aquarelle" : "ArtGripAquarelle.json",
+        "Pitt Pastel" : "PitPastel.json",
+        "Polychromos" : "Polychromos.json"
+    },
+
+    "Prismacolor" : {
+        "Col-Erase" : "Col-Erase.json",
+        "Premier Softcore" : "PremSoftcore.json",
+        "Premier Watercolor" : "PremWatercolor.json",
+        "Scholar" : "Scholar.json",
+        "Scholar Eraseable" : "ScholarEraseable.json",
+        "Verithin®" : "Verithin.json"
+    }
+
+
+}
