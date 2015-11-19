@@ -15,6 +15,8 @@ class PencilTableViewCell: UITableViewCell {
     @IBOutlet private weak var pencilCodeLabel: UILabel!
     @IBOutlet private weak var centerYAlignmentConstraint: NSLayoutConstraint!
     @IBOutlet private weak var inventoryStatusLabel: UILabel!
+    private var _colorSwatch: UIColor?
+    
     
     var name: String? {
         get {
@@ -40,6 +42,7 @@ class PencilTableViewCell: UITableViewCell {
         }
         set {
             self.colorSwatchImageView.backgroundColor = newValue
+            self._colorSwatch = newValue
         }
     }
     
@@ -77,6 +80,14 @@ class PencilTableViewCell: UITableViewCell {
         self.colorSwatchImageView.layer.borderWidth = 1.0;
     }
 
+    override func setSelected(selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        if let color = self._colorSwatch {
+            self.colorSwatchImageView.backgroundColor = color
+        }
+    }
+    
+    
     class var nibName: String { return "PencilTableViewCell" }
     
     class var rowHeight: CGFloat { return 50.0 }

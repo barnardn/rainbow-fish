@@ -16,6 +16,8 @@ class InventoryTableViewCell: UITableViewCell {
     @IBOutlet private weak var subTitleLabel: UILabel!
     @IBOutlet private weak var colorSwatchView: UIView!
     
+    private var _swatchColor: UIColor?
+    
     var title: String? {
         get {
             return self.titleLabel.text
@@ -48,6 +50,7 @@ class InventoryTableViewCell: UITableViewCell {
         }
         set {
             self.colorSwatchView.backgroundColor = newValue
+            self._swatchColor = newValue
         }
     }
     
@@ -71,6 +74,13 @@ class InventoryTableViewCell: UITableViewCell {
         self.colorSwatchView.layer.borderColor = AppearanceManager.appearanceManager.blackColor.CGColor;
         self.colorSwatchView.layer.borderWidth = 1.0;
         
+    }
+    
+    override func setSelected(selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+        if let color = self._swatchColor {
+            self.colorSwatchView.backgroundColor = color
+        }
     }
     
     // MARK: class methods
