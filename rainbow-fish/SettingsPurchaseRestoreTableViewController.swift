@@ -96,6 +96,7 @@ extension SettingsPurchaseRestoreTableViewController: SKRequestDelegate {
         let alertController = UIAlertController(title: title, message: error.localizedDescription, preferredStyle: .Alert)
         alertController.addAction(UIAlertAction(title: NSLocalizedString("Dismiss", comment:"alert dismiss button title"), style: .Cancel, handler: nil))
         self.presentViewController(alertController, animated: true, completion: nil)
+        alertController.view.tintColor = AppearanceManager.appearanceManager.brandColor
     }
     
 }

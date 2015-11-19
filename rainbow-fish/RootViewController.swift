@@ -177,6 +177,7 @@ class RootViewController: UITabBarController {
         viewController.presentViewController(alertController, animated: true) { () -> Void in
             alertController.view.tintColor = AppearanceManager.appearanceManager.brandColor
         }
+        alertController.view.tintColor = AppearanceManager.appearanceManager.brandColor
     }
     
 }

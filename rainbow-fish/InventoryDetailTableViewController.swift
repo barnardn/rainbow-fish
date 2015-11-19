@@ -20,11 +20,6 @@ class InventoryDetailTableViewController: ContentTableViewController {
         case Manufacturer, Product, ColorName, Color, Quantity, Delete
     }
     
-    lazy var doneButton : UIBarButtonItem = {
-        let button = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: Selector("doneButtonTapped:"))
-        return button
-    }()
-    
     let sectionInfo: [[InventoryRow]] = [[.Manufacturer, .Product, .ColorName],
                                          [.Color], [.Quantity], [.Delete]]
     
@@ -41,8 +36,6 @@ class InventoryDetailTableViewController: ContentTableViewController {
         self.lineItem = self.context.objectWithID(lineItem.objectID) as? Inventory
         self.title = self.lineItem.name
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("contextDidChange:"), name: NSManagedObjectContextObjectsDidChangeNotification, object: self.context)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("contextWillSave:"), name: NSManagedObjectContextWillSaveNotification, object: self.context)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("contextDidSave:"), name: NSManagedObjectContextDidSaveNotification, object: self.context)
     }
     
@@ -64,10 +57,31 @@ class InventoryDetailTableViewController: ContentTableViewController {
         self.tableView.registerNib(UINib(nibName: PencilColorPickerTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: PencilColorPickerTableViewCell.nibName)
     }
 
-    // MARK: done button handler
+    override func willMoveToParentViewController(parent: UIViewController?) {
+        super.willMoveToParentViewController(parent)
+        if self.context.hasChanges && parent == nil {
+            self.saveChanges()
+        }
+        
+    }
     
-    func doneButtonTapped(sender: UIBarButtonItem) {
-        self.view.endEditing(true)
+    // MARK: context notification handler
+    
+    
+    func contextDidSave(notification: NSNotification) {
+        
+        if  let userInfo = notification.userInfo,
+            let itemSet = userInfo[NSDeletedObjectsKey] as? NSSet,
+            let block = self.itemUpdatedBlock
+            where itemSet.count > 0 {
+                block(lineItemWithIdentity: self.lineItem.objectID, wasDeleted: true)
+        }        
+        self.navigationController?.popViewControllerAnimated(true)
+    }
+    
+    // MARK: private api
+    
+    private func saveChanges() {
         self.context.performBlock( {(ctx: NSManagedObjectContext) in
             return .SaveToPersistentStore
             }, completionHandler: {[unowned self] (result) in
@@ -85,26 +99,6 @@ class InventoryDetailTableViewController: ContentTableViewController {
     }
     
     
-    // MARK: context notification handlers
-    
-    func contextDidChange(notification: NSNotification) {
-        self.navigationItem.setRightBarButtonItem(self.doneButton, animated: true)
-    }
-    
-    func contextWillSave(notification: NSNotification) {
-        self.navigationItem.setRightBarButtonItem(nil, animated: true)
-    }
-    
-    func contextDidSave(notification: NSNotification) {
-        
-        if  let userInfo = notification.userInfo,
-            let itemSet = userInfo[NSDeletedObjectsKey] as? NSSet,
-            let block = self.itemUpdatedBlock
-            where itemSet.count > 0 {
-                block(lineItemWithIdentity: self.lineItem.objectID, wasDeleted: true)
-        }        
-        self.navigationController?.popViewControllerAnimated(true)
-    }
     
     // MARK: - Table view data source
 
@@ -220,8 +214,8 @@ class InventoryDetailTableViewController: ContentTableViewController {
                     }
             })
         }))
-        confirmController.view.tintColor = AppearanceManager.appearanceManager.brandColor
         self.presentViewController(confirmController, animated: true, completion: nil);
+        confirmController.view.tintColor = AppearanceManager.appearanceManager.brandColor
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }
     
@@ -277,10 +271,8 @@ extension InventoryDetailTableViewController: PencilColorPickerTableViewCellDele
         }
         
         alertController.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment:"cancel button title"), style: .Cancel, handler: nil))
-        
-        alertController.view.tintColor = AppearanceManager.appearanceManager.brandColor
         self.presentViewController(alertController, animated: true, completion: nil)
-        
+        alertController.view.tintColor = AppearanceManager.appearanceManager.brandColor
     }
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {

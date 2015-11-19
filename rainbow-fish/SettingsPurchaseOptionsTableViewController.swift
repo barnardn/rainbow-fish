@@ -46,6 +46,7 @@ class SettingsPurchaseOptionsTableViewController: UITableViewController {
         }
         alertController.addAction(action)
         self.presentViewController(alertController, animated: true, completion: nil)
+        alertController.view.tintColor = AppearanceManager.appearanceManager.brandColor
     }
     
     // MARK: tableview methods
