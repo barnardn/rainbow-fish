@@ -69,12 +69,9 @@ class SelectPencilTableViewController: ContentTableViewController {
             NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("paymentUpdatedNotifcation:"), name: StoreKitPurchaseNotificationName, object: nil)
         }
         
-        if let ownerCloudId = AppController.appController.appConfiguration.iCloudRecordID where ownerCloudId == AppController.appController.dataImportKey {
-            if self.navigationItem.rightBarButtonItem == nil {
-                self.navigationItem.rightBarButtonItem = self.addButton
-            }
+        if AppController.appController.isNormsiPhone() && self.navigationItem.rightBarButtonItem == nil {
+            self.navigationItem.rightBarButtonItem = self.addButton
         }
-        
         
     }
     

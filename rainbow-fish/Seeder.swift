@@ -10,50 +10,85 @@ import Foundation
 import CoreData
 import CoreDataKit
 import CloudKit
+import SwiftyJSON
+
+enum SeedError: ErrorType {
+    case Error(message : String)
+}
 
 class Seeder {
     
-    private let seedFile: NSString
+    private let seedFile = "master.json"
+    private let seedDataSubdir = "StartupData"
     private let container: CKContainer
     private let publicDb: CKDatabase
     
-    init(seedFile: NSString) {
-        self.seedFile = seedFile;
+    init() {
         container = CKContainer.defaultContainer()
         publicDb = container.publicCloudDatabase
     }
 
-    func seedPencilDatabase(completion: (countInserted: Int, error: NSError?) -> ()) {
+    func seedPencilDatabase(completion: (success: Bool, message: String?) -> ()) throws  {
         
-        let seedURL = NSBundle.mainBundle().URLForResource(seedFile as String, withExtension: "json")
+        let seedURL = NSBundle.mainBundle().URLForResource("master.json", withExtension: nil, subdirectory: self.seedDataSubdir)
         assert(seedURL != nil, "can't find seed json file")
-        if let seedJsonData = NSData(contentsOfURL: seedURL!) {
+        
+        var recordOperations: [CKModifyRecordsOperation] = []
+        guard let seedJsonData = NSData(contentsOfURL: seedURL!)  else {
+            assertionFailure("Unable to read master json database")
+            throw SeedError.Error(message: "Unable to read master json database")
+        }
+        
+        let jsonData = JSON(data: seedJsonData)
+        
+        for (mfgKey, prodLineJson):(String, JSON) in jsonData {
             
-            let jsonData = try? NSJSONSerialization.JSONObjectWithData(seedJsonData, options: .AllowFragments) as! [[String:String]]
-            if jsonData == nil {
-                let jsonError = NSError(domain: "com.clamdango.rainbowfish", code: 1, userInfo: [NSLocalizedDescriptionKey : "json parsing error"])
-                completion(countInserted: 0, error: jsonError)
-                return
+            let mfg = self.manufacturerWithName(mfgKey)
+            var changeSet = [mfg]
+            
+            for (prodLineKey, pencilFilename):(String, JSON) in prodLineJson {
+                
+                let product = self.productWithName(prodLineKey, manufacturer: mfg)
+                changeSet.append(product)
+
+                guard let pencilDataURL = NSBundle.mainBundle().URLForResource(pencilFilename.stringValue, withExtension: nil, subdirectory: self.seedDataSubdir) else {
+                    assertionFailure("Missing file \(pencilFilename.stringValue) for \(prodLineKey)")
+                    throw SeedError.Error(message: "Missing file \(pencilFilename.stringValue) for \(prodLineKey)")
+                }
+                guard let pencilData = NSData(contentsOfURL: pencilDataURL) else {
+                    assertionFailure("Unable to get pencil json data")
+                    throw SeedError.Error(message: "Unable to get pencil json data")
+                }
+                let pencilJson = JSON(data: pencilData)
+                let pencilRecords = self.pencilRecordsFromJson(pencilJson, forProduct: product)
+                
+                changeSet.appendContentsOf(pencilRecords)
             }
-            let manufacturer = manufacturerWithName("Prismacolor")
-            let product = productWithName("Premier Softcore", manufacturer: manufacturer)
-            let pencils = pencilsWithInfo(jsonData!, forProduct: product)
-            var changeSet = [manufacturer, product]
-            for p in pencils {
-                changeSet.append(p)
-            }
+            
             let saveOp = CKModifyRecordsOperation(recordsToSave: changeSet, recordIDsToDelete: nil)
             saveOp.database = self.publicDb
-            saveOp.savePolicy = .AllKeys
-            saveOp.modifyRecordsCompletionBlock = {(saved, deleted, error) -> Void in
-                if error != nil {
-                    completion(countInserted: 0, error: error)
-                } else {
-                    completion(countInserted: saved!.count, error: nil)
-                }
+            saveOp.modifyRecordsCompletionBlock = { (records:[CKRecord]?, deletedIds:[CKRecordID]?, error: NSError?) in
+                print("Finished with manufacturer: \(mfgKey)")
             }
-            saveOp.start()
+            saveOp.savePolicy = .AllKeys
+            recordOperations.append(saveOp)
+            
         }
+        guard let lastOp = recordOperations.last else {
+            completion(success: false, message: "No records to seed")
+            return
+        }
+        lastOp.modifyRecordsCompletionBlock = { (records:[CKRecord]?, deletedIds:[CKRecordID]?, error: NSError?) in
+            completion(success: true, message: nil)
+        }
+        
+        for saveOp in recordOperations {
+            if saveOp != lastOp {
+                lastOp.addDependency(saveOp)
+                saveOp.start()
+            }
+        }
+        lastOp.start()
     }
     
     func manufacturerWithName(name: String) -> CKRecord {
@@ -69,6 +104,19 @@ class Seeder {
         let manufactRef = CKReference(record: manufacturer, action: CKReferenceAction.DeleteSelf)
         product.setObject(manufactRef, forKey: ProductRelationships.manufacturer.rawValue);
         return product
+    }
+    
+    func pencilRecordsFromJson(pencilJson: JSON, forProduct product: CKRecord) -> [CKRecord] {
+        let pencilRecords = pencilJson.map { (_:String, json:JSON) -> CKRecord in
+            let pencil = CKRecord(recordType: Pencil.entityName)
+            pencil.setObject(json[PencilAttributes.name.rawValue].stringValue, forKey: PencilAttributes.name.rawValue)
+            pencil.setObject(json[PencilAttributes.identifier.rawValue].stringValue, forKey: PencilAttributes.identifier.rawValue)
+            pencil.setObject(json[PencilAttributes.color.rawValue].stringValue, forKey: PencilAttributes.color.rawValue)
+            let productRef = CKReference(record: product, action: .DeleteSelf)
+            pencil.setObject(productRef, forKey: PencilRelationships.product.rawValue)
+            return pencil
+        }
+        return pencilRecords
     }
     
     func pencilsWithInfo(pencilInfo: [[String:String]], forProduct product: CKRecord) -> [CKRecord] {

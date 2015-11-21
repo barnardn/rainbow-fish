@@ -100,6 +100,7 @@
 		49EE53561BFA72F70027E843 /* CoreDataKit.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 49EE53541BFA72F70027E843 /* CoreDataKit.framework.dSYM */; };
 		49EE53571BFA72F70027E843 /* SwiftyJSON.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 49EE53551BFA72F70027E843 /* SwiftyJSON.framework.dSYM */; };
 		49EE535D1BFA74AD0027E843 /* SettingsPurchaseRestoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EE535C1BFA74AD0027E843 /* SettingsPurchaseRestoreTableViewController.swift */; };
+		49EE53801BFE46A90027E843 /* StartupData in Resources */ = {isa = PBXBuildFile; fileRef = 49EE537F1BFE46A90027E843 /* StartupData */; };
 		49F419D11A9AA61900635EF3 /* PencilColorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F419CF1A9AA61900635EF3 /* PencilColorTableViewCell.swift */; };
 		49F419D21A9AA61900635EF3 /* PencilColorTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F419D01A9AA61900635EF3 /* PencilColorTableViewCell.xib */; };
 		49F419D41A9AAA5100635EF3 /* Int+CDOExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F419D31A9AAA5100635EF3 /* Int+CDOExtensions.swift */; };
@@ -224,6 +225,7 @@
 		49EE53541BFA72F70027E843 /* CoreDataKit.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = CoreDataKit.framework.dSYM; path = ../Carthage/Build/iOS/CoreDataKit.framework.dSYM; sourceTree = "<group>"; };
 		49EE53551BFA72F70027E843 /* SwiftyJSON.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SwiftyJSON.framework.dSYM; path = ../Carthage/Build/iOS/SwiftyJSON.framework.dSYM; sourceTree = "<group>"; };
 		49EE535C1BFA74AD0027E843 /* SettingsPurchaseRestoreTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsPurchaseRestoreTableViewController.swift; sourceTree = "<group>"; };
+		49EE537F1BFE46A90027E843 /* StartupData */ = {isa = PBXFileReference; lastKnownFileType = folder; path = StartupData; sourceTree = "<group>"; };
 		49F419CF1A9AA61900635EF3 /* PencilColorTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PencilColorTableViewCell.swift; sourceTree = "<group>"; };
 		49F419D01A9AA61900635EF3 /* PencilColorTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PencilColorTableViewCell.xib; sourceTree = "<group>"; };
 		49F419D31A9AAA5100635EF3 /* Int+CDOExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+CDOExtensions.swift"; sourceTree = "<group>"; };
@@ -476,6 +478,7 @@
 		49DF07F41A743A2800BF94D3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				49EE537F1BFE46A90027E843 /* StartupData */,
 				49EE53581BFA742A0027E843 /* Frameworks */,
 				49EE53541BFA72F70027E843 /* CoreDataKit.framework.dSYM */,
 				49EE53551BFA72F70027E843 /* SwiftyJSON.framework.dSYM */,
@@ -711,6 +714,7 @@
 				49CA533A1B40A09500D3E138 /* purchase-options.plist in Resources */,
 				49BB8F601A79D89C007CFE3B /* prismacolor-pencils.json in Resources */,
 				493F6ADA1A990E1E003636AE /* TextFieldTableViewCell.xib in Resources */,
+				49EE53801BFE46A90027E843 /* StartupData in Resources */,
 				49DF07FE1A743A2800BF94D3 /* Images.xcassets in Resources */,
 				493F6AC81A8AEB48003636AE /* EditPecilPropertyTableViewCell.xib in Resources */,
 				4938037A1A86AE8900E62FC2 /* EmbeddedPickerTableViewCell.xib in Resources */,
