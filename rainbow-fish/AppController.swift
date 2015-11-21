@@ -45,6 +45,13 @@ class AppController: NSObject {
         return self.config
     }
     
+    func isNormsiPhone() -> Bool {
+        if let ownerCloudId = AppController.appController.appConfiguration.iCloudRecordID where ownerCloudId == AppController.appController.dataImportKey  {
+            return true
+        }
+        return false
+    }
+    
     lazy var dataImportKey: String = {
         if  let infoDict = NSBundle.mainBundle().infoDictionary ,
             let importKey = infoDict[self.DataImportKey] as? String {

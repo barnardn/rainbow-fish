@@ -29,6 +29,7 @@ class SettingsTableViewController: ContentTableViewController {
     enum DataManagementRows: Int {
         case DataExport
         case DataImport
+        case DataSeed
     }
     
     private var settingsContext = 0
@@ -38,13 +39,19 @@ class SettingsTableViewController: ContentTableViewController {
         return CloudImport()
     }()
     
-    let sectionInfo = [ [InventoryRows.MinimumInventory.rawValue], [AppPurchaseRows.InAppPurchaseRow.rawValue], [DataManagementRows.DataExport.rawValue, DataManagementRows.DataImport.rawValue] ]
+    var sectionInfo = [ [InventoryRows.MinimumInventory.rawValue], [AppPurchaseRows.InAppPurchaseRow.rawValue], [DataManagementRows.DataExport.rawValue, DataManagementRows.DataImport.rawValue] ]
     
     convenience init() {
         self.init(style: .Grouped)
         let image = UIImage(named: "tabbar-icon-settings")?.imageWithRenderingMode(.AlwaysTemplate)
         self.title = NSLocalizedString("Settings", comment:"setting navigation item title")
         self.tabBarItem = UITabBarItem(title: NSLocalizedString("Settings", comment:"setting tabbar item title"), image: image, tag: 0)
+        
+        if AppController.appController.isNormsiPhone() {
+            var _ = self.sectionInfo.removeLast()
+            self.sectionInfo.append([DataManagementRows.DataExport.rawValue, DataManagementRows.DataImport.rawValue, DataManagementRows.DataSeed.rawValue])
+        }
+    
     }
     
     deinit {
@@ -62,11 +69,11 @@ class SettingsTableViewController: ContentTableViewController {
         AppController.appController.appConfiguration.addObserver(self, forKeyPath: "minInventoryQuantity", options: .New, context: &settingsContext)
         AppController.appController.appConfiguration.addObserver(self, forKeyPath: "purchaseStatus", options: .New, context: &settingsContext)
         
-        if let ownerCloudId = AppController.appController.appConfiguration.iCloudRecordID  {
-            if ownerCloudId == AppController.appController.dataImportKey {
-                allowDataImportSection = true
-            }
+        if AppController.appController.isNormsiPhone() {
+            allowDataImportSection = true
         }
+        
+
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -141,6 +148,12 @@ class SettingsTableViewController: ContentTableViewController {
         })
     }
     
+    func createDatabaseFromSeedJson() {
+        print("Full database import")
+    }
+    
+    
+    
     //MARK: tableview data source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -159,6 +172,8 @@ class SettingsTableViewController: ContentTableViewController {
             return self.configureDataExportCell(indexPath)
         case  (Sections.DataManagement.rawValue, 1):
             return self.configureDataImportCell(indexPath)
+        case (Sections.DataManagement.rawValue, DataManagementRows.DataSeed.rawValue):
+            return self.configureSeedSell(indexPath)
         case (Sections.AppPurchase.rawValue, AppPurchaseRows.InAppPurchaseRow.rawValue):
             return self.configureInAppPurchaseCell(indexPath)
         default:
@@ -201,6 +216,12 @@ class SettingsTableViewController: ContentTableViewController {
         return cell
     }
     
+    private func configureSeedSell(indexPath: NSIndexPath) -> BigButtonTableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(BigButtonTableViewCell.nibName, forIndexPath: indexPath) as! BigButtonTableViewCell
+        cell.title = NSLocalizedString("Create Cloud Data", comment:"create full database in iCloud admin function")
+        return cell
+    }
+    
     private func formatDecimalQuantity(quantity: NSDecimalNumber) -> String {
         let wholeNumber = Int(floorf(quantity.floatValue))
         if fmodf(quantity.floatValue, 1.0) > 0 {
@@ -236,6 +257,8 @@ class SettingsTableViewController: ContentTableViewController {
             }
         case (Sections.DataManagement.rawValue, DataManagementRows.DataImport.rawValue):
             self.seedCloudDatabase()
+        case (Sections.DataManagement.rawValue, DataManagementRows.DataSeed.rawValue):
+            self.createDatabaseFromSeedJson()
         case (Sections.AppPurchase.rawValue, _):
             viewController = SettingsPurchaseOptionsTableViewController()
         default:
