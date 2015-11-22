@@ -83,6 +83,11 @@ class InventoryTableViewController: ContentTableViewController {
         dispatch_once(&Static.token, { () -> Void in
             AppController.appController.appConfiguration.addObserver(self, forKeyPath: "minInventoryQuantity", options: .New, context: &self.inventoryKVOContext)
         })
+        
+        if self.inventory.count == 0 {
+            AppController.appController.setAppIconBadgeNumber(badgeNumber: 0)
+        }
+        
     }
 
 
