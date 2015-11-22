@@ -70,9 +70,13 @@ class Seeder {
             saveOp.modifyRecordsCompletionBlock = { (records:[CKRecord]?, deletedIds:[CKRecordID]?, error: NSError?) in
                 if let error = error {
                     print(error.localizedDescription)
-                    progress(success: false, message: "\(mfgKey) ✕")
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        progress(success: false, message: "\(mfgKey) ✕")
+                    })
                 } else {
-                    progress(success: true, message: "\(mfgKey) ✓")
+                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                        progress(success: true, message: "\(mfgKey) ✓")
+                    })
                 }
 
             }
@@ -86,7 +90,9 @@ class Seeder {
         }
 
         lastOp.completionBlock = {
-            completion(success: true, message: "Cloud catalog creation complete!")
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                completion(success: true, message: "Cloud catalog creation complete!")
+            })
         }
         
         for saveOp in recordOperations {
