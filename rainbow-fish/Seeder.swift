@@ -28,7 +28,7 @@ class Seeder {
         publicDb = container.publicCloudDatabase
     }
 
-    func seedPencilDatabase(completion: (success: Bool, message: String?) -> ()) throws  {
+    func createCloudkitCatalog(progress: (success: Bool, message: String?) -> Void, completion: (success: Bool, message: String?) -> Void) throws {
         
         let seedURL = NSBundle.mainBundle().URLForResource("master.json", withExtension: nil, subdirectory: self.seedDataSubdir)
         assert(seedURL != nil, "can't find seed json file")
@@ -68,7 +68,13 @@ class Seeder {
             let saveOp = CKModifyRecordsOperation(recordsToSave: changeSet, recordIDsToDelete: nil)
             saveOp.database = self.publicDb
             saveOp.modifyRecordsCompletionBlock = { (records:[CKRecord]?, deletedIds:[CKRecordID]?, error: NSError?) in
-                print("Finished with manufacturer: \(mfgKey)")
+                if let error = error {
+                    print(error.localizedDescription)
+                    progress(success: false, message: "\(mfgKey) ✕")
+                } else {
+                    progress(success: true, message: "\(mfgKey) ✓")
+                }
+
             }
             saveOp.savePolicy = .AllKeys
             recordOperations.append(saveOp)
@@ -78,17 +84,18 @@ class Seeder {
             completion(success: false, message: "No records to seed")
             return
         }
-        lastOp.modifyRecordsCompletionBlock = { (records:[CKRecord]?, deletedIds:[CKRecordID]?, error: NSError?) in
-            completion(success: true, message: nil)
+
+        lastOp.completionBlock = {
+            completion(success: true, message: "Cloud catalog creation complete!")
         }
         
         for saveOp in recordOperations {
             if saveOp != lastOp {
                 lastOp.addDependency(saveOp)
-                saveOp.start()
+                self.publicDb.addOperation(saveOp)
             }
         }
-        lastOp.start()
+        self.publicDb.addOperation(lastOp)
     }
     
     func manufacturerWithName(name: String) -> CKRecord {
