@@ -39,6 +39,10 @@ class SettingsTableViewController: ContentTableViewController {
         return CloudImport()
     }()
     
+    private lazy var catalogSeeder: Seeder = {
+        return Seeder()
+    }()
+    
     var sectionInfo = [ [InventoryRows.MinimumInventory.rawValue], [AppPurchaseRows.InAppPurchaseRow.rawValue], [DataManagementRows.DataExport.rawValue, DataManagementRows.DataImport.rawValue] ]
     
     convenience init() {
@@ -47,10 +51,6 @@ class SettingsTableViewController: ContentTableViewController {
         self.title = NSLocalizedString("Settings", comment:"setting navigation item title")
         self.tabBarItem = UITabBarItem(title: NSLocalizedString("Settings", comment:"setting tabbar item title"), image: image, tag: 0)
         
-        if AppController.appController.isNormsiPhone() {
-            var _ = self.sectionInfo.removeLast()
-            self.sectionInfo.append([DataManagementRows.DataExport.rawValue, DataManagementRows.DataImport.rawValue, DataManagementRows.DataSeed.rawValue])
-        }
     
     }
     
@@ -73,6 +73,10 @@ class SettingsTableViewController: ContentTableViewController {
             allowDataImportSection = true
         }
         
+        if AppController.appController.isNormsiPhone() {
+            var _ = self.sectionInfo.removeLast()
+            self.sectionInfo.append([DataManagementRows.DataExport.rawValue, DataManagementRows.DataImport.rawValue, DataManagementRows.DataSeed.rawValue])
+        }
 
     }
     
@@ -104,7 +108,7 @@ class SettingsTableViewController: ContentTableViewController {
     
     // MARK: methods
     
-    func exportDatabase (completionHandler: (success: Bool, error: NSError?) -> Void ) throws {
+    private func exportDatabase (completionHandler: (success: Bool, error: NSError?) -> Void ) throws {
         CDK.performBlockOnBackgroundContext({ (context: NSManagedObjectContext) in
 
             do {
@@ -133,7 +137,7 @@ class SettingsTableViewController: ContentTableViewController {
         
     }
     
-    func seedCloudDatabase() {
+    private func seedCloudDatabase() {
         
         // check existence of "database.json"
         
@@ -148,8 +152,58 @@ class SettingsTableViewController: ContentTableViewController {
         })
     }
     
-    func createDatabaseFromSeedJson() {
-        print("Full database import")
+    private func confirmCreateDatabase() {
+        let alert = UIAlertController(title: "Confirm Action", message: "This operation will *INSERT* rows into the current public cloud database. Are you REALLY sure you want to do this?", preferredStyle: .Alert)
+
+        alert.addAction(UIAlertAction(title: "Go!", style: .Default, handler: { [unowned self] (_) -> Void in
+            self.createDatabaseFromSeedJson()
+            }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+        alert.view.tintColor = AppearanceManager.appearanceManager.brandColor
+    }
+    
+    
+    private func createDatabaseFromSeedJson() {
+
+        guard let results = try? CDK.mainThreadContext.find(Manufacturer.self) where results.count == 0 else {
+            
+            let alert = UIAlertController(title: "Records Found", message: "There are existing records in your local store. This operation can only be safely completed on an empty local and remote store.", preferredStyle: .Alert)
+            
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .Cancel, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+            
+            alert.view.tintColor = AppearanceManager.appearanceManager.brandColor
+            
+            return
+            
+        }
+        
+        do {
+            
+            self.showHUD(message: "Creating Catalog...")
+            try self.catalogSeeder.createCloudkitCatalog({ [unowned self] (success, message) -> Void in
+                    self.showHUD(message: message)
+                    print(message)
+                },
+                completion: { [unowned self] (success, message) -> Void in
+                    self.hideHUD()
+            })
+            
+        } catch SeedError.Error(let message) {
+            
+            let alert = UIAlertController(title: "Error", message: message, preferredStyle: .Alert)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .Cancel, handler: nil))
+            
+            self.presentViewController(alert, animated: true) { [unowned self] in
+                self.hideHUD()
+            }
+        } catch {
+            assertionFailure("Unknown exception!(?)")
+        }
+        
     }
     
     
@@ -244,6 +298,7 @@ class SettingsTableViewController: ContentTableViewController {
         
         switch ixPath {
         case (Sections.DataManagement.rawValue, DataManagementRows.DataExport.rawValue):
+            tableView.deselectRowAtIndexPath(indexPath, animated: false)
             self.showHUD(message: "Creating Export")
             do {
                 try self.exportDatabase({ (success, error) -> Void in
@@ -257,8 +312,10 @@ class SettingsTableViewController: ContentTableViewController {
             }
         case (Sections.DataManagement.rawValue, DataManagementRows.DataImport.rawValue):
             self.seedCloudDatabase()
+            tableView.deselectRowAtIndexPath(indexPath, animated: false)
         case (Sections.DataManagement.rawValue, DataManagementRows.DataSeed.rawValue):
-            self.createDatabaseFromSeedJson()
+            self.confirmCreateDatabase()
+            tableView.deselectRowAtIndexPath(indexPath, animated: false)
         case (Sections.AppPurchase.rawValue, _):
             viewController = SettingsPurchaseOptionsTableViewController()
         default:
