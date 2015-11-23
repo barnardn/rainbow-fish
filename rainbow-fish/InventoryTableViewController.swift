@@ -68,7 +68,6 @@ class InventoryTableViewController: ContentTableViewController {
         self.tableView.registerNib(UINib(nibName: InventoryTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: InventoryTableViewCell.nibName)
         self.tableView.tableHeaderView = self.searchController.searchBar
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("didEditPencil:"), name: AppNotifications.DidEditPencil.rawValue, object: nil)
-        
         self.updateInventory()
     }
     
@@ -161,6 +160,8 @@ class InventoryTableViewController: ContentTableViewController {
         }
     }
     
+    // MARK: tableview datasource
+    
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.inventory.count
@@ -191,6 +192,7 @@ class InventoryTableViewController: ContentTableViewController {
         // exists solely to allow editting
     }
     
+    // MARK: tableview delegate
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 
@@ -200,7 +202,15 @@ class InventoryTableViewController: ContentTableViewController {
         }
         let lineItem = datasource[indexPath.row]
         let viewController = InventoryDetailTableViewController(lineItem: lineItem)
-        self.navigationController?.pushViewController(viewController, animated: true)
+        
+        if self.presentedViewController == self.searchController {
+            self.dismissViewControllerAnimated(true) {
+                self.searchController.searchBar.text = nil
+                self.navigationController?.pushViewController(viewController, animated: true)
+            }
+        } else {
+            self.navigationController?.pushViewController(viewController, animated: true)
+        }
         
         viewController.itemUpdatedBlock = { [unowned self] (itemID : NSManagedObjectID, wasDeleted: Bool) in
             if wasDeleted {
@@ -254,6 +264,12 @@ class InventoryTableViewController: ContentTableViewController {
         
         return [deleteAction, addAction, subtractAction]
     }
+    
+    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.0;
+    }
+    
+    //MARK: private api
     
     private func quantityUpdateAction(lineItem lineItem: Inventory, atIndexPath indexPath: NSIndexPath, addition: Bool) {
 
