@@ -15,6 +15,9 @@ class InventorySearchResultsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.registerNib(UINib(nibName: InventoryTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: InventoryTableViewCell.nibName)
+        self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.tableView.estimatedRowHeight = InventoryTableViewCell.estimatedRowHeight
+        self.tableView.tableFooterView = UIView()
     }
 
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -36,6 +39,5 @@ class InventorySearchResultsTableViewController: UITableViewController {
         cell.swatchColor = lineItem.color as? UIColor
         return cell
     }
-
-
+    
 }
