@@ -196,7 +196,17 @@ class SelectPencilTableViewController: ContentTableViewController {
         } else {
             pencil = self.pencils[indexPath.row]
         }
-        self.navigationController?.pushViewController(EditPencilTableViewController(pencil: pencil), animated: true)
+        
+        let viewController = EditPencilTableViewController(pencil: pencil)
+        
+        if self.presentedViewController == self.searchController {
+            self.dismissViewControllerAnimated(true) {
+                self.navigationController?.pushViewController(viewController, animated: true)
+                self.searchController.searchBar.text = nil
+            }
+        } else {
+            self.navigationController?.pushViewController(viewController, animated: true)
+        }
     }
     
 }
