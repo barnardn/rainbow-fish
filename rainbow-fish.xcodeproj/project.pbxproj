@@ -101,6 +101,8 @@
 		49EE53571BFA72F70027E843 /* SwiftyJSON.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 49EE53551BFA72F70027E843 /* SwiftyJSON.framework.dSYM */; };
 		49EE535D1BFA74AD0027E843 /* SettingsPurchaseRestoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EE535C1BFA74AD0027E843 /* SettingsPurchaseRestoreTableViewController.swift */; };
 		49EE53801BFE46A90027E843 /* StartupData in Resources */ = {isa = PBXBuildFile; fileRef = 49EE537F1BFE46A90027E843 /* StartupData */; };
+		49EE53821C02A4B50027E843 /* SlidingReminderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EE53811C02A4B50027E843 /* SlidingReminderView.swift */; };
+		49EE53841C02A4C80027E843 /* SlidingReminderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49EE53831C02A4C80027E843 /* SlidingReminderView.xib */; };
 		49F419D11A9AA61900635EF3 /* PencilColorTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F419CF1A9AA61900635EF3 /* PencilColorTableViewCell.swift */; };
 		49F419D21A9AA61900635EF3 /* PencilColorTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49F419D01A9AA61900635EF3 /* PencilColorTableViewCell.xib */; };
 		49F419D41A9AAA5100635EF3 /* Int+CDOExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49F419D31A9AAA5100635EF3 /* Int+CDOExtensions.swift */; };
@@ -226,6 +228,8 @@
 		49EE53551BFA72F70027E843 /* SwiftyJSON.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SwiftyJSON.framework.dSYM; path = ../Carthage/Build/iOS/SwiftyJSON.framework.dSYM; sourceTree = "<group>"; };
 		49EE535C1BFA74AD0027E843 /* SettingsPurchaseRestoreTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsPurchaseRestoreTableViewController.swift; sourceTree = "<group>"; };
 		49EE537F1BFE46A90027E843 /* StartupData */ = {isa = PBXFileReference; lastKnownFileType = folder; path = StartupData; sourceTree = "<group>"; };
+		49EE53811C02A4B50027E843 /* SlidingReminderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlidingReminderView.swift; sourceTree = "<group>"; };
+		49EE53831C02A4C80027E843 /* SlidingReminderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SlidingReminderView.xib; sourceTree = "<group>"; };
 		49F419CF1A9AA61900635EF3 /* PencilColorTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PencilColorTableViewCell.swift; sourceTree = "<group>"; };
 		49F419D01A9AA61900635EF3 /* PencilColorTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PencilColorTableViewCell.xib; sourceTree = "<group>"; };
 		49F419D31A9AAA5100635EF3 /* Int+CDOExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Int+CDOExtensions.swift"; sourceTree = "<group>"; };
@@ -257,6 +261,8 @@
 			isa = PBXGroup;
 			children = (
 				4908EA741AABAF2200E176E9 /* DoneEditingInputAccessoryView.swift */,
+				49EE53811C02A4B50027E843 /* SlidingReminderView.swift */,
+				49EE53831C02A4C80027E843 /* SlidingReminderView.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -717,6 +723,7 @@
 				49EE53801BFE46A90027E843 /* StartupData in Resources */,
 				49DF07FE1A743A2800BF94D3 /* Images.xcassets in Resources */,
 				493F6AC81A8AEB48003636AE /* EditPecilPropertyTableViewCell.xib in Resources */,
+				49EE53841C02A4C80027E843 /* SlidingReminderView.xib in Resources */,
 				4938037A1A86AE8900E62FC2 /* EmbeddedPickerTableViewCell.xib in Resources */,
 				491AD0FC1AA3C23F0046FE00 /* PencilTableViewCell.xib in Resources */,
 				493F6ACC1A8AEFBE003636AE /* PencilColorPickerTableViewCell.xib in Resources */,
@@ -835,6 +842,7 @@
 				49BEC0E31A7F094E00A601CF /* ProductHeaderView.swift in Sources */,
 				4908EA751AABAF2200E176E9 /* DoneEditingInputAccessoryView.swift in Sources */,
 				49F419D41A9AAA5100635EF3 /* Int+CDOExtensions.swift in Sources */,
+				49EE53821C02A4B50027E843 /* SlidingReminderView.swift in Sources */,
 				49CA53361B407ED500D3E138 /* SettingsPurchaseOptionsTableViewController.swift in Sources */,
 				493803801A86BA7100E62FC2 /* NameValueTableViewCell.swift in Sources */,
 			);
