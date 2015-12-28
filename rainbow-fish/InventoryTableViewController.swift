@@ -46,15 +46,6 @@ class InventoryTableViewController: ContentTableViewController {
         controller.searchBar.delegate = self
         return controller
     }()
-    
-    lazy var reminderView: SlidingReminderView = {
-        let view = NSBundle.mainBundle().loadNibNamed("SlidingReminderView", owner: nil, options: nil).first as! SlidingReminderView
-        view.layer.shadowOffset = CGSize(width: 5, height: 5)
-        view.layer.shadowOpacity = 0.5
-        view.layer.shadowRadius = 5.0
-        view.layer.shadowColor = UIColor.blackColor().CGColor
-        return view
-    }()
 
     convenience init() {
         self.init(style: UITableViewStyle.Plain)
@@ -75,6 +66,7 @@ class InventoryTableViewController: ContentTableViewController {
         self.tableView.registerNib(UINib(nibName: InventoryTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: InventoryTableViewCell.nibName)
         self.tableView.tableHeaderView = self.searchController.searchBar
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("didEditPencil:"), name: AppNotifications.DidEditPencil.rawValue, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("didFinishUpdatingCatalog:"), name: AppNotifications.DidFinishCloudUpdate.rawValue, object: nil)
         self.updateInventory()
         
     }
@@ -93,30 +85,6 @@ class InventoryTableViewController: ContentTableViewController {
         
         if self.inventory.count == 0 {
             AppController.appController.setAppIconBadgeNumber(badgeNumber: 0)
-        }
-
-        dispatch_after(2, dispatch_get_main_queue()) { () -> Void in
-            
-            let currentWindow: UIWindow = UIApplication.sharedApplication().windows.last as UIWindow!
-            let blurView = UIView(frame: UIScreen.mainScreen().bounds);
-            blurView.backgroundColor = UIColor(white: 0.0, alpha: 0.05)
-            currentWindow.addSubview(blurView)
-            
-            let frame = CGRectMake(0.0, CGRectGetMinY(blurView.bounds) - 200.0, CGRectGetWidth(self.view.bounds), 200.0)
-            self.reminderView.frame = CGRectInset(frame, 5.0, 5.0)
-            blurView.addSubview(self.reminderView)
-            UIView.animateWithDuration(0.5) { () -> Void in
-                self.reminderView.transform = CGAffineTransformMakeTranslation(0.0, 260.0)
-            }
-            
-            
-            
-//            let frame = CGRectMake(0.0, CGRectGetMinY(self.view.bounds) - 200.0, CGRectGetWidth(self.view.bounds), 200.0)
-//            self.reminderView.frame = CGRectInset(frame, 5.0, 5.0)
-//            self.view.addSubview(self.reminderView)
-//            UIView.animateWithDuration(0.5) { () -> Void in
-//                self.reminderView.transform = CGAffineTransformMakeTranslation(0.0, 200.0)
-//            }
         }
         
     }
@@ -153,6 +121,17 @@ class InventoryTableViewController: ContentTableViewController {
     func didEditPencil(notification: NSNotification) {
         self.updateInventory()
     }
+    
+    func didFinishUpdatingCatalog(notification: NSNotification) {
+        
+        if (!AppController.appController.didDisplayInventoryHint) {
+            HintView.show(title: NSLocalizedString("New User Tip", comment:"hint title"), hint: NSLocalizedString("Add pencils to your \"My Pencils\" inventory by selecting a pencil from the \"Catalog\", then tap the \"Add Pencil to My Inventory\" button.", comment:"invenory hint"))
+            AppController.appController.didDisplayInventoryHint = true
+            NSNotificationCenter.defaultCenter().removeObserver(self, name: AppNotifications.DidFinishCloudUpdate.rawValue, object: nil)
+        }
+        
+    }
+    
     
     // MARK: kvo 
 
