@@ -21,7 +21,17 @@ class AppController: NSObject {
     private let storeName: String = "rainbow-fish.sqlite"
     private let LastUpdatedDateUserDefaultKey = "LastUpdatedDateUserDefaultKey"
     private let DataImportKey = "CDOImportIdentifier"
+    private let InventoryHintUserDefaultsKey = "com.clamdango.rainbow-fish.inventoryhintdisplayed"
     private let config = ConfigurationSettings()
+    
+    var didDisplayInventoryHint: Bool {
+        get {
+            return NSUserDefaults.standardUserDefaults().boolForKey(InventoryHintUserDefaultsKey)
+        }
+        set {
+            NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: InventoryHintUserDefaultsKey)
+        }
+    }
     
     var shouldFetchCatalogOnDisplay: Bool = false
     

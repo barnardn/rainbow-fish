@@ -46,9 +46,7 @@ class InventoryTableViewController: ContentTableViewController {
         controller.searchBar.delegate = self
         return controller
     }()
-    
 
-    
     convenience init() {
         self.init(style: UITableViewStyle.Plain)
         let image = UIImage(named:"tabbar-icon-inventory")?.imageWithRenderingMode(.AlwaysTemplate)
@@ -68,7 +66,9 @@ class InventoryTableViewController: ContentTableViewController {
         self.tableView.registerNib(UINib(nibName: InventoryTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: InventoryTableViewCell.nibName)
         self.tableView.tableHeaderView = self.searchController.searchBar
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("didEditPencil:"), name: AppNotifications.DidEditPencil.rawValue, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("didFinishUpdatingCatalog:"), name: AppNotifications.DidFinishCloudUpdate.rawValue, object: nil)
         self.updateInventory()
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -121,6 +121,17 @@ class InventoryTableViewController: ContentTableViewController {
     func didEditPencil(notification: NSNotification) {
         self.updateInventory()
     }
+    
+    func didFinishUpdatingCatalog(notification: NSNotification) {
+        
+        if (!AppController.appController.didDisplayInventoryHint) {
+            HintView.show(title: NSLocalizedString("New User Tip", comment:"hint title"), hint: NSLocalizedString("Add pencils to your \"My Pencils\" inventory by selecting a pencil from the \"Catalog\", then tap the \"Add Pencil to My Inventory\" button.", comment:"invenory hint"))
+            AppController.appController.didDisplayInventoryHint = true
+            NSNotificationCenter.defaultCenter().removeObserver(self, name: AppNotifications.DidFinishCloudUpdate.rawValue, object: nil)
+        }
+        
+    }
+    
     
     // MARK: kvo 
 

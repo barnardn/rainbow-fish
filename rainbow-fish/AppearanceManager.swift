@@ -89,6 +89,14 @@ class AppearanceManager {
         hudConfig.spinnerLineWidth = 4.0
         SwiftLoader.sharedInstance.config = hudConfig
         SwiftFullScreenLoader.sharedInstance.config = hudConfig
+        
+        var hintConfig = HintViewConfiguration()
+        hintConfig.size = CGSize(width: UIScreen.mainScreen().bounds.width, height: 200.0)
+        hintConfig.backgroundColor = self.brandColorAlternate
+        hintConfig.titleColor = UIColor.yellowColor()
+        hintConfig.textColor = UIColor.whiteColor()
+        HintView.defaultView.configuration = hintConfig
+        
         UINavigationBar.appearance().barTintColor = self.brandColor
         UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
         UIBarButtonItem.appearance().tintColor = UIColor.whiteColor()
