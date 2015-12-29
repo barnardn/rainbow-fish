@@ -234,7 +234,7 @@ class InventoryDetailTableViewController: ContentTableViewController {
         case InventorySection.Details.rawValue:
             return NSLocalizedString("Pencil Details", comment:"inventory details  header title")
         case InventorySection.Color.rawValue:
-            return NSLocalizedString("Color", comment:"inventory details color header title")
+            return NSLocalizedString("Adjust Color", comment:"inventory details color header title")
         case InventorySection.Quantity.rawValue:
             return NSLocalizedString("Quantity On Hand", comment:"inventory details quantity header title")
         default:
