@@ -149,7 +149,7 @@ class RootViewController: UITabBarController {
                 return
             }
             CloudManager.sharedManger.refreshManufacturersAndProducts{ [unowned self] (success, error) in
-                if let e = error {
+                if let _ = error {
                     self.hideHUD()
                     self.presentErrorAlert(title: NSLocalizedString("Unable to Update", comment:"update network error title"), message: NSLocalizedString("Please verify that you are connected to the Internet and that you are signed into iCloud.", comment:"icloud update failed message"))
                 } else {
