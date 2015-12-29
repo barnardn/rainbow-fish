@@ -9,8 +9,8 @@
 import Foundation
 import CoreData
 import CoreDataKit
-//import Fabric
-//import Crashlytics
+import Fabric
+import Crashlytics
 import UIKit
 
 class AppController: NSObject {
@@ -53,7 +53,7 @@ class AppController: NSObject {
         } else {
             self.icloudCurrentlyAvailable = false
         }
-//        Fabric.with([Crashlytics.self()])
+        Fabric.with([Crashlytics.self])
         AppearanceManager.appearanceManager.setupAppearanceProxies()
         CDK.sharedStack = CoreDataStack(persistentStoreCoordinator: self.persistentStoreCoordinator)
     }

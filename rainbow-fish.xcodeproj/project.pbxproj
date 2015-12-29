@@ -65,6 +65,8 @@
 		49AC9E3B1A87DD67007CE68A /* SelectPencilTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AC9E3A1A87DD67007CE68A /* SelectPencilTableViewController.swift */; };
 		49AC9E3E1A87E120007CE68A /* DefaultDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AC9E3C1A87E120007CE68A /* DefaultDetailTableViewCell.swift */; };
 		49AC9E3F1A87E120007CE68A /* DefaultDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49AC9E3D1A87E120007CE68A /* DefaultDetailTableViewCell.xib */; };
+		49AD281C1C3331E10040B76B /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AD281A1C3331E10040B76B /* Fabric.framework */; };
+		49AD281D1C3331E10040B76B /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49AD281B1C3331E10040B76B /* Crashlytics.framework */; };
 		49BB8F5E1A79D431007CFE3B /* Seeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BB8F5D1A79D431007CFE3B /* Seeder.swift */; };
 		49BEC0E31A7F094E00A601CF /* ProductHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BEC0E21A7F094E00A601CF /* ProductHeaderView.swift */; };
 		49CA53361B407ED500D3E138 /* SettingsPurchaseOptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CA53351B407ED500D3E138 /* SettingsPurchaseOptionsTableViewController.swift */; };
@@ -184,11 +186,11 @@
 		4988FEB91AB61F1B00AE2D89 /* SettingsMinimumStockTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsMinimumStockTableViewController.swift; sourceTree = "<group>"; };
 		498E33EA1C17C7F4000D5B5A /* HintView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HintView.swift; sourceTree = "<group>"; };
 		498E33EC1C17C959000D5B5A /* HintView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HintView.xib; sourceTree = "<group>"; };
-		49AB80691ABE40D8009BEDE5 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
-		49AB806A1ABE40D8009BEDE5 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		49AC9E3A1A87DD67007CE68A /* SelectPencilTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPencilTableViewController.swift; sourceTree = "<group>"; };
 		49AC9E3C1A87E120007CE68A /* DefaultDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultDetailTableViewCell.swift; sourceTree = "<group>"; };
 		49AC9E3D1A87E120007CE68A /* DefaultDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultDetailTableViewCell.xib; sourceTree = "<group>"; };
+		49AD281A1C3331E10040B76B /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = SOURCE_ROOT; };
+		49AD281B1C3331E10040B76B /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = SOURCE_ROOT; };
 		49BB8F5D1A79D431007CFE3B /* Seeder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Seeder.swift; sourceTree = "<group>"; };
 		49BEC0E21A7F094E00A601CF /* ProductHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductHeaderView.swift; sourceTree = "<group>"; };
 		49CA53351B407ED500D3E138 /* SettingsPurchaseOptionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsPurchaseOptionsTableViewController.swift; sourceTree = "<group>"; };
@@ -243,8 +245,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				49CA53381B409EBB00D3E138 /* StoreKit.framework in Frameworks */,
+				49AD281D1C3331E10040B76B /* Crashlytics.framework in Frameworks */,
 				492EBCF51B2E04670054C59F /* iAd.framework in Frameworks */,
 				49EE53511BFA726B0027E843 /* CoreDataKit.framework in Frameworks */,
+				49AD281C1C3331E10040B76B /* Fabric.framework in Frameworks */,
 				49EE53521BFA726B0027E843 /* SwiftyJSON.framework in Frameworks */,
 				494BA7CE1B0AC9FF0026B2AE /* UIKit.framework in Frameworks */,
 				49E8D8C11A7445670064E682 /* CloudKit.framework in Frameworks */,
@@ -619,14 +623,14 @@
 		49EE53581BFA742A0027E843 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				49AD281A1C3331E10040B76B /* Fabric.framework */,
+				49AD281B1C3331E10040B76B /* Crashlytics.framework */,
 				497CD06F1AD1D8B200A3E3C9 /* SwiftyJSON.framework */,
 				494BA7CD1B0AC9FE0026B2AE /* UIKit.framework */,
 				49CA53371B409EBB00D3E138 /* StoreKit.framework */,
 				49E8D8C01A7445670064E682 /* CloudKit.framework */,
 				49E8D8BD1A7445400064E682 /* CoreData.framework */,
 				49E8D8B71A7443C60064E682 /* CoreDataKit.framework */,
-				49AB80691ABE40D8009BEDE5 /* Crashlytics.framework */,
-				49AB806A1ABE40D8009BEDE5 /* Fabric.framework */,
 				492EBCF41B2E04670054C59F /* iAd.framework */,
 			);
 			name = Frameworks;
@@ -654,6 +658,7 @@
 				49DF07ED1A743A2800BF94D3 /* Sources */,
 				49DF07EE1A743A2800BF94D3 /* Frameworks */,
 				49E8D8BC1A7444190064E682 /* Carthage copy frameworks */,
+				49AD280D1C3331150040B76B /* Crashlytics */,
 				49DF07EF1A743A2800BF94D3 /* Resources */,
 				49EE53531BFA72BC0027E843 /* CopyFiles */,
 			);
@@ -766,6 +771,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
 			shellScript = "#!/bin/bash\n\n# The location of the plist file is provided by Xcode in the environment variable PRODUCT_SETTINGS_PATH\n# It is wrapped in quotes in case the path has a space in its name.\n\n# The output of any echo statements can be found in the Xcode build logs.\n\nif [ $CONFIGURATION == \"Debug\" ]; then\n    exit 0\nfi\n\n# You need to include the whole path to the PlistBuddy executable because it's not in $PATH by default.\nOLD_NUMBER=`/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$PRODUCT_SETTINGS_PATH\"`\n\n# If the build number key doesn't exist in the plist, we'll add it by setting its initial value to 1.\nif [ $? -ne 0 ]\nthen\nSTARTING_NUMBER=1\necho \"No build number present. Starting from ${STARTING_NUMBER}.\"\n`/usr/libexec/PlistBuddy -c \"Add CFBundleVersion string $STARTING_NUMBER\" \"$PRODUCT_SETTINGS_PATH\"`\nexit 0\nfi\n\n# Only reach this point if the build key exists in the plist file.\n# Do the increment. This can be as complicated as you want.\n# Might need a scripting language with better maths capabilities though if you want something truly tricky.\nNEW_NUMBER=$((OLD_NUMBER+=1))\necho \"NEW_NUMBER $NEW_NUMBER\"\n\n# Write it back to the plist\n`/usr/libexec/PlistBuddy -c \"Set CFBundleVersion $NEW_NUMBER\" \"$PRODUCT_SETTINGS_PATH\"`";
+		};
+		49AD280D1C3331150040B76B /* Crashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = Crashlytics;
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Fabric.framework/run d1a134a3064cf181e5ca3939ce43f13f95c094ca b20d3e488424d20c08c47aedc30f6ce8534749d8207597ef125838e764073e7e";
 		};
 		49E8D8BC1A7444190064E682 /* Carthage copy frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -973,6 +992,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)/rainbow-fish",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = "rainbow-fish/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1006,6 +1026,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 					"$(PROJECT_DIR)/rainbow-fish",
+					"$(PROJECT_DIR)",
 				);
 				GCC_OPTIMIZATION_LEVEL = 1;
 				INFOPLIST_FILE = "rainbow-fish/Info.plist";
