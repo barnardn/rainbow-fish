@@ -66,7 +66,6 @@
 		49AC9E3E1A87E120007CE68A /* DefaultDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AC9E3C1A87E120007CE68A /* DefaultDetailTableViewCell.swift */; };
 		49AC9E3F1A87E120007CE68A /* DefaultDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49AC9E3D1A87E120007CE68A /* DefaultDetailTableViewCell.xib */; };
 		49BB8F5E1A79D431007CFE3B /* Seeder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BB8F5D1A79D431007CFE3B /* Seeder.swift */; };
-		49BB8F601A79D89C007CFE3B /* prismacolor-pencils.json in Resources */ = {isa = PBXBuildFile; fileRef = 49BB8F5F1A79D89C007CFE3B /* prismacolor-pencils.json */; };
 		49BEC0E31A7F094E00A601CF /* ProductHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49BEC0E21A7F094E00A601CF /* ProductHeaderView.swift */; };
 		49CA53361B407ED500D3E138 /* SettingsPurchaseOptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49CA53351B407ED500D3E138 /* SettingsPurchaseOptionsTableViewController.swift */; };
 		49CA53381B409EBB00D3E138 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49CA53371B409EBB00D3E138 /* StoreKit.framework */; };
@@ -191,7 +190,6 @@
 		49AC9E3C1A87E120007CE68A /* DefaultDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultDetailTableViewCell.swift; sourceTree = "<group>"; };
 		49AC9E3D1A87E120007CE68A /* DefaultDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultDetailTableViewCell.xib; sourceTree = "<group>"; };
 		49BB8F5D1A79D431007CFE3B /* Seeder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Seeder.swift; sourceTree = "<group>"; };
-		49BB8F5F1A79D89C007CFE3B /* prismacolor-pencils.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "prismacolor-pencils.json"; sourceTree = "<group>"; };
 		49BEC0E21A7F094E00A601CF /* ProductHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductHeaderView.swift; sourceTree = "<group>"; };
 		49CA53351B407ED500D3E138 /* SettingsPurchaseOptionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsPurchaseOptionsTableViewController.swift; sourceTree = "<group>"; };
 		49CA53371B409EBB00D3E138 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
@@ -498,7 +496,6 @@
 				49EE53551BFA72F70027E843 /* SwiftyJSON.framework.dSYM */,
 				49DF07F51A743A2800BF94D3 /* Info.plist */,
 				49746BC51ACE18430088C4E4 /* libcommonCrypto.dylib */,
-				49BB8F5F1A79D89C007CFE3B /* prismacolor-pencils.json */,
 				49E8D8BF1A7445620064E682 /* rainbow-fish.entitlements */,
 				49746BC41ACE18270088C4E4 /* RainbowFishBridge.h */,
 				49CA53391B40A09500D3E138 /* purchase-options.plist */,
@@ -727,7 +724,6 @@
 				4930BBA11B519458009A2A22 /* ThankYouView.xib in Resources */,
 				493803811A86BA7100E62FC2 /* NameValueTableViewCell.xib in Resources */,
 				49CA533A1B40A09500D3E138 /* purchase-options.plist in Resources */,
-				49BB8F601A79D89C007CFE3B /* prismacolor-pencils.json in Resources */,
 				493F6ADA1A990E1E003636AE /* TextFieldTableViewCell.xib in Resources */,
 				498E33ED1C17C959000D5B5A /* HintView.xib in Resources */,
 				49EE53801BFE46A90027E843 /* StartupData in Resources */,
@@ -972,6 +968,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = "";
 				DEFINES_MODULE = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -1001,8 +998,10 @@
 				CODE_SIGN_ENTITLEMENTS = "rainbow-fish/rainbow-fish.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = "";
 				DEFINES_MODULE = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
