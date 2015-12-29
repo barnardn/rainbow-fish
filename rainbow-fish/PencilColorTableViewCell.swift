@@ -28,6 +28,7 @@ class PencilColorTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.contentView.backgroundColor = UIColor.whiteColor()
+        self.selectionStyle = .None
         self.colorLabel.textColor = AppearanceManager.appearanceManager.brandColor
         self.colorLabel.font = AppearanceManager.appearanceManager.nameLabelFont
         self.swatchView.layer.borderWidth = 1.0
