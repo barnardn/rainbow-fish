@@ -48,6 +48,11 @@ class AppController: NSObject {
     func setup() {
         NSValueTransformer.setValueTransformer(ColorValueTransformer(), forName: "ColorValueTransformer")
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("icloudIdentifierDidChange:"), name: NSUbiquityIdentityDidChangeNotification, object: nil)
+        if let _ = NSFileManager.defaultManager().ubiquityIdentityToken {
+            self.icloudCurrentlyAvailable = true
+        } else {
+            self.icloudCurrentlyAvailable = false
+        }
 //        Fabric.with([Crashlytics.self()])
         AppearanceManager.appearanceManager.setupAppearanceProxies()
         CDK.sharedStack = CoreDataStack(persistentStoreCoordinator: self.persistentStoreCoordinator)
@@ -56,6 +61,7 @@ class AppController: NSObject {
     // MARK: ubiquity notification handler
     
     func icloudIdentifierDidChange(notification: NSNotification) {
+        print("icloudIdentifierDidChange")
         if let _ = NSFileManager.defaultManager().ubiquityIdentityToken {
             self.icloudCurrentlyAvailable = true
         } else {
