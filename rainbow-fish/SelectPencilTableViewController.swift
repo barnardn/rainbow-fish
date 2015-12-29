@@ -144,8 +144,9 @@ class SelectPencilTableViewController: ContentTableViewController {
             } else {
                 self.refreshControl?.endRefreshing()
             }
-            if error != nil {
-                print(error?.localizedDescription)
+            if let error = error {
+                self.presentErrorAlert(title: NSLocalizedString("Unable to Update", comment:"update failed alert title"), message: NSLocalizedString("Please verify that you are connected to the Internet and that you are signed into iCloud.", comment:"icloud update failed message"))
+                print(error.localizedDescription)
             } else {
                 if let pencils = try? Pencil.allPencils(forProduct: self.product, context: self.product.managedObjectContext!) {
                     self.pencils = pencils ?? [Pencil]()

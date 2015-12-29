@@ -23,6 +23,7 @@ class AppController: NSObject {
     private let DataImportKey = "CDOImportIdentifier"
     private let InventoryHintUserDefaultsKey = "com.clamdango.rainbow-fish.inventoryhintdisplayed"
     private let config = ConfigurationSettings()
+    var icloudCurrentlyAvailable: Bool = false
     
     var didDisplayInventoryHint: Bool {
         get {
@@ -46,11 +47,24 @@ class AppController: NSObject {
     
     func setup() {
         NSValueTransformer.setValueTransformer(ColorValueTransformer(), forName: "ColorValueTransformer")
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("icloudIdentifierDidChange:"), name: NSUbiquityIdentityDidChangeNotification, object: nil)
 //        Fabric.with([Crashlytics.self()])
         AppearanceManager.appearanceManager.setupAppearanceProxies()
         CDK.sharedStack = CoreDataStack(persistentStoreCoordinator: self.persistentStoreCoordinator)
     }
 
+    // MARK: ubiquity notification handler
+    
+    func icloudIdentifierDidChange(notification: NSNotification) {
+        if let _ = NSFileManager.defaultManager().ubiquityIdentityToken {
+            self.icloudCurrentlyAvailable = true
+        } else {
+            self.icloudCurrentlyAvailable = false
+        }
+    }
+    
+    // MARK: app configuration settings
+    
     var appConfiguration: ConfigurationSettings  {
         return self.config
     }
@@ -73,7 +87,7 @@ class AppController: NSObject {
     func shouldPerformAutomaticProductUpdates() -> Bool {
         if let lastUpdatedDate = NSUserDefaults.standardUserDefaults().objectForKey(LastUpdatedDateUserDefaultKey) as! NSDate? {
             let dateComponents = NSCalendar.currentCalendar().components(NSCalendarUnit.Day, fromDate: lastUpdatedDate, toDate: NSDate(), options: NSCalendarOptions())
-            return (dateComponents.day >= 1)
+            return (dateComponents.day >= 1) && self.icloudCurrentlyAvailable
         }
         return true
     }

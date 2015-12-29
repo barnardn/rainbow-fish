@@ -39,4 +39,12 @@ extension UIViewController {
         })
     }
     
+    func presentErrorAlert(title title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("Dismiss", comment:"error alert dismiss button"), style: .Cancel, handler: nil))
+        let viewController = self.presentedViewController ?? self
+        viewController.presentViewController(alertController, animated: true, completion: nil)
+        alertController.view.tintColor = AppearanceManager.appearanceManager.brandColor
+    }
+    
 }

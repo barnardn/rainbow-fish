@@ -35,6 +35,9 @@ class SettingsPurchaseOptionsTableViewController: UITableViewController {
             allProducts.appendContentsOf(storeKitProducts)
             self.products = allProducts
             self.tableView.reloadData()
+            if !AppController.appController.icloudCurrentlyAvailable {
+                self.icloudNotAvailableAlert()
+            }
         }
     }
 
@@ -48,6 +51,19 @@ class SettingsPurchaseOptionsTableViewController: UITableViewController {
         self.presentViewController(alertController, animated: true, completion: nil)
         alertController.view.tintColor = AppearanceManager.appearanceManager.brandColor
     }
+    
+    private func icloudNotAvailableAlert() {
+        let alertController = UIAlertController(title: NSLocalizedString("Unable to Purchase", comment:"can't purchase alert title"), message: NSLocalizedString("Access to iCloud is currently not available. Please verify that you have signed in to your iCloud account from the Settings app", comment:"icloud not available alert message"), preferredStyle: .Alert)
+        let action = UIAlertAction(title: NSLocalizedString("Dismiss", comment:"dismiss alert button title"), style: UIAlertActionStyle.Cancel) {
+            [unowned self](_) -> Void in
+            self.navigationController?.popToRootViewControllerAnimated(true)
+        }
+        alertController.addAction(action)
+        let viewController = self.presentedViewController ?? self
+        viewController.presentViewController(alertController, animated: true, completion: nil)
+        alertController.view.tintColor = AppearanceManager.appearanceManager.brandColor        
+    }
+    
     
     // MARK: tableview methods
     
