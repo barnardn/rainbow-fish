@@ -136,8 +136,8 @@ class RootViewController: UITabBarController {
     private func obtainCloudRecordId(performUpdate performUpdate: Bool) {
         self.showHUD(message: "Setup...")
         CloudManager.sharedManger.fetchUserRecordID({ [unowned self] (recordID, error) -> Void in
+            self.hideHUD()
             if let _ = error {
-                self.hideHUD()
                 self.askUserToLoginToiCloud()
                 return
             }
@@ -145,12 +145,10 @@ class RootViewController: UITabBarController {
             AppController.appController.appConfiguration.save()
             AppController.appController.icloudCurrentlyAvailable = true
             if !performUpdate {
-                self.hideHUD()
                 return
             }
             CloudManager.sharedManger.refreshManufacturersAndProducts{ [unowned self] (success, error) in
                 if let _ = error {
-                    self.hideHUD()
                     self.presentErrorAlert(title: NSLocalizedString("Unable to Update", comment:"update network error title"), message: NSLocalizedString("Please verify that you are connected to the Internet and that you are signed into iCloud.", comment:"icloud update failed message"))
                 } else {
                     let _  = AppController.appController.updateLastUpdatedDateToNow()
