@@ -241,7 +241,7 @@ class SettingsTableViewController: ContentTableViewController {
         if let quantity = AppController.appController.appConfiguration.minInventoryQuantity {
             cell.value = formatDecimalQuantity(quantity)
         } else {
-            cell.value = "0"
+            cell.value = ""
         }
         cell.accessoryType = .DisclosureIndicator
         return cell
