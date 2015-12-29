@@ -658,9 +658,9 @@
 				49DF07ED1A743A2800BF94D3 /* Sources */,
 				49DF07EE1A743A2800BF94D3 /* Frameworks */,
 				49E8D8BC1A7444190064E682 /* Carthage copy frameworks */,
-				49AD280D1C3331150040B76B /* Crashlytics */,
 				49DF07EF1A743A2800BF94D3 /* Resources */,
 				49EE53531BFA72BC0027E843 /* CopyFiles */,
+				49AD280D1C3331150040B76B /* Crashlytics */,
 			);
 			buildRules = (
 			);
