@@ -653,6 +653,7 @@
 			buildConfigurationList = 49DF08101A743A2800BF94D3 /* Build configuration list for PBXNativeTarget "rainbow-fish" */;
 			buildPhases = (
 				494BA7CF1B1377300026B2AE /* Generate managed objects (mogenerator) */,
+				49AD280C1C320EE60040B76B /* Update Build Number */,
 				49DF07ED1A743A2800BF94D3 /* Sources */,
 				49DF07EE1A743A2800BF94D3 /* Frameworks */,
 				49E8D8BC1A7444190064E682 /* Carthage copy frameworks */,
@@ -755,6 +756,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "mogenerator --v2 --swift --template-path '/Users/barnardn/Library/Application Support/mogenerator' --model $SRCROOT/$TARGET_NAME/$TARGET_NAME.xcdatamodeld/ --machine-dir $SRCROOT/$TARGET_NAME/machine --human-dir $SRCROOT/$TARGET_NAME";
+		};
+		49AD280C1C320EE60040B76B /* Update Build Number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Update Build Number";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "#!/bin/bash\n\n# The location of the plist file is provided by Xcode in the environment variable PRODUCT_SETTINGS_PATH\n# It is wrapped in quotes in case the path has a space in its name.\n\n# The output of any echo statements can be found in the Xcode build logs.\n\nif [ $CONFIGURATION == \"Debug\" ]; then\n    exit 0\nfi\n\n# You need to include the whole path to the PlistBuddy executable because it's not in $PATH by default.\nOLD_NUMBER=`/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"$PRODUCT_SETTINGS_PATH\"`\n\n# If the build number key doesn't exist in the plist, we'll add it by setting its initial value to 1.\nif [ $? -ne 0 ]\nthen\nSTARTING_NUMBER=1\necho \"No build number present. Starting from ${STARTING_NUMBER}.\"\n`/usr/libexec/PlistBuddy -c \"Add CFBundleVersion string $STARTING_NUMBER\" \"$PRODUCT_SETTINGS_PATH\"`\nexit 0\nfi\n\n# Only reach this point if the build key exists in the plist file.\n# Do the increment. This can be as complicated as you want.\n# Might need a scripting language with better maths capabilities though if you want something truly tricky.\nNEW_NUMBER=$((OLD_NUMBER+=1))\necho \"NEW_NUMBER $NEW_NUMBER\"\n\n# Write it back to the plist\n`/usr/libexec/PlistBuddy -c \"Set CFBundleVersion $NEW_NUMBER\" \"$PRODUCT_SETTINGS_PATH\"`";
 		};
 		49E8D8BC1A7444190064E682 /* Carthage copy frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -955,6 +970,7 @@
 				CODE_SIGN_ENTITLEMENTS = "rainbow-fish/rainbow-fish.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = "";
 				DEFINES_MODULE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -974,6 +990,7 @@
 				PRODUCT_NAME = "Rainbow Fish";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "rainbow-fish/RainbowFishBridge.h";
+				VERSIONING_SYSTEM = "";
 			};
 			name = Debug;
 		};
@@ -984,6 +1001,7 @@
 				CODE_SIGN_ENTITLEMENTS = "rainbow-fish/rainbow-fish.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = "";
 				DEFINES_MODULE = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1005,6 +1023,7 @@
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "rainbow-fish/RainbowFishBridge.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "";
 			};
 			name = Release;
 		};
