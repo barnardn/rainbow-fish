@@ -129,7 +129,6 @@ class InventoryTableViewController: ContentTableViewController {
             AppController.appController.didDisplayInventoryHint = true
             NSNotificationCenter.defaultCenter().removeObserver(self, name: AppNotifications.DidFinishCloudUpdate.rawValue, object: nil)
         }
-        
     }
     
     

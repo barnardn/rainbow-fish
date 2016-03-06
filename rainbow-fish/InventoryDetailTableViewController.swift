@@ -26,7 +26,12 @@ class InventoryDetailTableViewController: ContentTableViewController {
     private var context: NSManagedObjectContext!
     private var lineItem: Inventory!
     private var editPencilColor: Bool = false
-
+    
+    private lazy var doneBarButtonItem: UIBarButtonItem = {
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: Selector("doneButtonTapped:"))
+        return doneButton
+    }()
+    
     var itemUpdatedBlock: ((lineItemWithIdentity: NSManagedObjectID, wasDeleted: Bool) -> Void)?
     
     convenience init(lineItem: Inventory) {
@@ -55,6 +60,7 @@ class InventoryDetailTableViewController: ContentTableViewController {
         self.tableView.registerNib(UINib(nibName: PencilColorTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: PencilColorTableViewCell.nibName)
         self.tableView.registerNib(UINib(nibName: BigButtonTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: BigButtonTableViewCell.nibName)
         self.tableView.registerNib(UINib(nibName: PencilColorPickerTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: PencilColorPickerTableViewCell.nibName)
+        self.navigationItem.rightBarButtonItem = self.doneBarButtonItem
     }
 
     override func willMoveToParentViewController(parent: UIViewController?) {
@@ -98,7 +104,9 @@ class InventoryDetailTableViewController: ContentTableViewController {
             })
     }
     
-    
+    @objc private func doneButtonTapped(sender: UIBarButtonItem) {
+        self.navigationController?.popViewControllerAnimated(true);
+    }
     
     // MARK: - Table view data source
 
