@@ -343,6 +343,9 @@ class EditPencilTableViewController: ContentTableViewController {
             self.addPencilToInventory()
             cell.title = NSLocalizedString("You own this pencil.", comment:"edit pencil button title")
             cell.disabled = true
+            delay(0.33){ () -> Void in
+                self.navigationController?.popViewControllerAnimated(true)
+            }
         }
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
     }

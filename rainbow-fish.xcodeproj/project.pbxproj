@@ -52,6 +52,7 @@
 		494366DE1B2CD80C00868F1F /* SwiftLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494366DD1B2CD80C00868F1F /* SwiftLoader.swift */; };
 		494BA7CE1B0AC9FF0026B2AE /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 494BA7CD1B0AC9FE0026B2AE /* UIKit.framework */; };
 		494BA7D21B154E280026B2AE /* EditMfgTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 494BA7D11B154E280026B2AE /* EditMfgTableViewController.swift */; };
+		496A72FB1C8CA5D300C5B7E4 /* GCDHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496A72FA1C8CA5D300C5B7E4 /* GCDHelpers.swift */; };
 		4973DA701A7F05CB00619D06 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4973DA6F1A7F05CB00619D06 /* ProductTableViewCell.swift */; };
 		4973DA721A7F05E600619D06 /* ProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4973DA711A7F05E600619D06 /* ProductTableViewCell.xib */; };
 		49746BC81ACE191E0088C4E4 /* String+Hash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49746BC71ACE191E0088C4E4 /* String+Hash.swift */; };
@@ -173,6 +174,7 @@
 		494366DD1B2CD80C00868F1F /* SwiftLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftLoader.swift; sourceTree = "<group>"; };
 		494BA7CD1B0AC9FE0026B2AE /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		494BA7D11B154E280026B2AE /* EditMfgTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditMfgTableViewController.swift; sourceTree = "<group>"; };
+		496A72FA1C8CA5D300C5B7E4 /* GCDHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDHelpers.swift; sourceTree = "<group>"; };
 		4973DA6F1A7F05CB00619D06 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
 		4973DA711A7F05E600619D06 /* ProductTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProductTableViewCell.xib; sourceTree = "<group>"; };
 		49746BC41ACE18270088C4E4 /* RainbowFishBridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RainbowFishBridge.h; sourceTree = "<group>"; };
@@ -580,6 +582,7 @@
 				49E8D8E61A75C9420064E682 /* ContentTableViewController.swift */,
 				4930BB9E1B519458009A2A22 /* ThankYouViewController.swift */,
 				4930BB9F1B519458009A2A22 /* ThankYouView.xib */,
+				496A72FA1C8CA5D300C5B7E4 /* GCDHelpers.swift */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -831,6 +834,7 @@
 				49405C771AA7F69F002F2E83 /* InventoryQuantityTableViewCell.swift in Sources */,
 				4938036D1A8447EB00E62FC2 /* UIViewController+ProgressHUD.swift in Sources */,
 				49E8D8DE1A7567FF0064E682 /* AppearanceManager.swift in Sources */,
+				496A72FB1C8CA5D300C5B7E4 /* GCDHelpers.swift in Sources */,
 				49E8D8D41A7564400064E682 /* _Manufacturer.swift in Sources */,
 				49E8D8D51A7564400064E682 /* _Pencil.swift in Sources */,
 				494366DE1B2CD80C00868F1F /* SwiftLoader.swift in Sources */,
