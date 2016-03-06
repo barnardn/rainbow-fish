@@ -212,8 +212,6 @@ class SelectPencilTableViewController: ContentTableViewController {
     
 }
 
-
-
 // MARK: search extensions
 
 extension SelectPencilTableViewController: UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating {
@@ -228,15 +226,21 @@ extension SelectPencilTableViewController: UISearchBarDelegate, UISearchControll
         let whitespaceCharacterSet = NSCharacterSet.whitespaceCharacterSet()
         let strippedString = searchController.searchBar.text!.stringByTrimmingCharactersInSet(whitespaceCharacterSet)
         let searchItems = strippedString.componentsSeparatedByString(" ") as [String]
+
+        let identifierPredicate = NSPredicate(format: "identifier contains[cd] %@", strippedString)
         
-        var subpredicates = [NSPredicate]()
-        for searchText in searchItems {
-            let namePredicate = NSPredicate(format: "name contains[cd] %@ ", searchText)
-            let identifierPredicate = NSPredicate(format: "identifier contains[cd] %@", searchText)
-            let subpredicate = NSCompoundPredicate(type: .OrPredicateType, subpredicates: [namePredicate, identifierPredicate])
-            subpredicates.append(subpredicate)
+        var criteria = NSPredicate()
+        
+        let nameSubpredicates = searchItems.map{
+            return NSPredicate(format: "name contains[cd] %@", $0)
         }
-        let searchPredicate = NSCompoundPredicate(type: .OrPredicateType, subpredicates: subpredicates)
+        if nameSubpredicates.count > 1 {
+            criteria = NSCompoundPredicate(andPredicateWithSubpredicates: nameSubpredicates)
+        } else {
+            criteria = nameSubpredicates.first!
+        }
+
+        let searchPredicate = NSCompoundPredicate(type: .OrPredicateType, subpredicates: [criteria, identifierPredicate])
         
         let results = self.pencils.filter{ searchPredicate.evaluateWithObject($0) }
         
