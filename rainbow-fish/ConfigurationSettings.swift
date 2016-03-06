@@ -54,7 +54,9 @@ class ConfigurationSettings: NSObject {
     override init() {
         super.init()
         iCloudRecordID = NSUserDefaults.standardUserDefaults().stringForKey(ConfigurationSettingsKey.ICloudKey.rawValue)
-        minInventoryQuantity = NSUserDefaults.standardUserDefaults().objectForKey(ConfigurationSettingsKey.MinInventoryQuantityKey.rawValue) as? NSDecimalNumber
+        if let minqty = NSUserDefaults.standardUserDefaults().objectForKey(ConfigurationSettingsKey.MinInventoryQuantityKey.rawValue) as? NSNumber {
+            self.minInventoryQuantity = NSDecimalNumber(float: minqty.floatValue)
+        }
         purchaseStatus = NSUserDefaults.standardUserDefaults().objectForKey(ConfigurationSettingsKey.AppPurchaseStatusKey.rawValue) as? NSNumber
     }
     
