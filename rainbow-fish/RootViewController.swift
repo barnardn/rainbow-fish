@@ -51,21 +51,12 @@ class RootViewController: UITabBarController {
             self.view.insertSubview(self.adBannerView, belowSubview: self.tabBar)
             self.adBannerView.delegate = self
         }
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+        if let _ = AppController.appController.appConfiguration.iCloudRecordID {
+            self.updateProducts()
+        } else {
+            self.obtainCloudRecordId(performUpdate: true)
+        }
         
-        struct DispatchOnce {
-            static var dispatchToken: dispatch_once_t = 0
-        }
-        dispatch_once(&DispatchOnce.dispatchToken) {
-            if let _ = AppController.appController.appConfiguration.iCloudRecordID {
-                self.updateProducts()
-            } else {
-                self.obtainCloudRecordId(performUpdate: true)
-            }
-        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -126,10 +117,12 @@ class RootViewController: UITabBarController {
             if let _ = error {
                 self.hideHUD()
                 self.presentErrorAlert(title: NSLocalizedString("Unable to Update", comment:"update network error title"), message: NSLocalizedString("Please verify that you are connected to the Internet and that you are signed into iCloud.", comment:"icloud update failed message"))
+                AppController.appController.shouldFetchCatalogOnDisplay = true
             } else {
                 let _  = AppController.appController.updateLastUpdatedDateToNow()
             }
             NSNotificationCenter.defaultCenter().postNotificationName(AppNotifications.DidFinishCloudUpdate.rawValue, object: nil)
+            
         }
     }
     
@@ -150,10 +143,12 @@ class RootViewController: UITabBarController {
             CloudManager.sharedManger.refreshManufacturersAndProducts{ [unowned self] (success, error) in
                 if let _ = error {
                     self.presentErrorAlert(title: NSLocalizedString("Unable to Update", comment:"update network error title"), message: NSLocalizedString("Please verify that you are connected to the Internet and that you are signed into iCloud.", comment:"icloud update failed message"))
+                    AppController.appController.shouldFetchCatalogOnDisplay = true                    
                 } else {
                     let _  = AppController.appController.updateLastUpdatedDateToNow()
                 }
                 NSNotificationCenter.defaultCenter().postNotificationName(AppNotifications.DidFinishCloudUpdate.rawValue, object: nil)
+
             }
         })
     }

@@ -54,16 +54,14 @@ class CatalogViewController: ContentTableViewController {
 //        navigationItem.leftBarButtonItem = self.editButton
         
         navigationItem.backBarButtonItem = self.backButton
-        
         self.recordCreatorID = AppController.appController.appConfiguration.iCloudRecordID;
-        AppController.appController.shouldFetchCatalogOnDisplay = false
         self.updateDatasource()
-        self.cloudUpdate()
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         if AppController.appController.shouldFetchCatalogOnDisplay {
+            AppController.appController.shouldFetchCatalogOnDisplay = false
             self.updateDatasource()
         }
     }
