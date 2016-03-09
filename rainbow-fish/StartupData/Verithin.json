@@ -1,38 +1,197 @@
-[
-	{		 "name" : "Lemon Yellow"		 ,"identifier"  : "VT 735-1/2"		 ,"normalizedId" : "vt735-1/2"		 ,"color": "245,255,18"	},
-	{		 "name" : "Canary Yellow"		 ,"identifier"  : "VT 735"		 ,"normalizedId" : "vt735"		 ,"color": "245,255,18"	},
-	{		 "name" : "Spanish Orange"		 ,"identifier"  : "VT 736"		 ,"normalizedId" : "vt736"		 ,"color": "252,189,3"	},
-	{		 "name" : "Goldenrod"		 ,"identifier"  : "VT 755"		 ,"normalizedId" : "vt755"		 ,"color": "245,181,18"	},
-	{		 "name" : "Orange"		 ,"identifier"  : "VT 737"		 ,"normalizedId" : "vt737"		 ,"color": "255,77,28"	},
-	{		 "name" : "Pale Vermilion"		 ,"identifier"  : "VT 750"		 ,"normalizedId" : "vt750"		 ,"color": "255,107,18"	},
-	{		 "name" : "Pumpkin Orange"		 ,"identifier"  : "VT 736-1/2"		 ,"normalizedId" : "vt736-1/2"		 ,"color": "245,71,3"	},
-	{		 "name" : "Poppy Red"		 ,"identifier"  : "VT 744"		 ,"normalizedId" : "vt744"		 ,"color": "255,54,20"	},
-	{		 "name" : "Crimson Red"		 ,"identifier"  : "VT 745"		 ,"normalizedId" : "vt745"		 ,"color": "206,5,15"	},
-	{		 "name" : "Magenta"		 ,"identifier"  : "VT 759"		 ,"normalizedId" : "vt759"		 ,"color": "222,0,237"	},
-	{		 "name" : "Process Red"		 ,"identifier"  : "VT 743-1/2"		 ,"normalizedId" : "vt743-1/2"		 ,"color": "199,3,252"	},
-	{		 "name" : "Deco Pink"		 ,"identifier"  : "VT 743"		 ,"normalizedId" : "vt743"		 ,"color": "252,3,252"	},
-	{		 "name" : "Light Peach"		 ,"identifier"  : "VT 757"		 ,"normalizedId" : "vt757"		 ,"color": "252,214,204"	},
-	{		 "name" : "Dahlia Purple"		 ,"identifier"  : "VT 752"		 ,"normalizedId" : "vt752"		 ,"color": "92,3,250"	},
-	{		 "name" : "Parma Violet"		 ,"identifier"  : "VT 742-1/2"		 ,"normalizedId" : "vt742-1/2"		 ,"color": "117,122,255"	},
-	{		 "name" : "Violet"		 ,"identifier"  : "VT 742"		 ,"normalizedId" : "vt742"		 ,"color": "37,35,158"	},
-	{		 "name" : "Violet Blue"		 ,"identifier"  : "VT 760"		 ,"normalizedId" : "vt760"		 ,"color": "2,24,152"	},
-	{		 "name" : "Ultramarine"		 ,"identifier"  : "VT 740"		 ,"normalizedId" : "vt740"		 ,"color": "10,74,252"	},
-	{		 "name" : "True Blue"		 ,"identifier"  : "VT 758"		 ,"normalizedId" : "vt758"		 ,"color": "59,181,255"	},
-	{		 "name" : "Cerulean Blue"		 ,"identifier"  : "VT 741-1/2"		 ,"normalizedId" : "vt741-1/2"		 ,"color": "97,224,255"	},
-	{		 "name" : "Peacock Blue"		 ,"identifier"  : "VT 740-1/2"		 ,"normalizedId" : "vt740-1/2"		 ,"color": "33,144,207"	},
-	{		 "name" : "Indigo Blue"		 ,"identifier"  : "VT 741"		 ,"normalizedId" : "vt741"		 ,"color": "0,50,154"	},
-	{		 "name" : "Non-Photo Blue"		 ,"identifier"  : "VT 761-1/2"		 ,"normalizedId" : "vt761-1/2"		 ,"color": "97,255,230"	},
-	{		 "name" : "Aquamarine"		 ,"identifier"  : "VT 737-1/2"		 ,"normalizedId" : "vt737-1/2"		 ,"color": "39,179,130"	},
-	{		 "name" : "Apple Green"		 ,"identifier"  : "VT 738-1/2"		 ,"normalizedId" : "vt738-1/2"		 ,"color": "120,240,46"	},
-	{		 "name" : "True Green"		 ,"identifier"  : "VT 751"		 ,"normalizedId" : "vt751"		 ,"color": "52,205,52"	},
-	{		 "name" : "Grass Green"		 ,"identifier"  : "VT 738"		 ,"normalizedId" : "vt738"		 ,"color": "40,225,10"	},
-	{		 "name" : "Olive Green"		 ,"identifier"  : "VT 739-1/2"		 ,"normalizedId" : "vt739-1/2"		 ,"color": "33,181,52"	},
-	{		 "name" : "Peacock Green"		 ,"identifier"  : "VT 739"		 ,"normalizedId" : "vt739"		 ,"color": "30,149,119"	},
-	{		 "name" : "Terra Cotta"		 ,"identifier"  : "VT 745-1/2"		 ,"normalizedId" : "vt745-1/2"		 ,"color": "151,63,29"	},
-	{		 "name" : "Tuscan Red"		 ,"identifier"  : "VT 746-1/2"		 ,"normalizedId" : "vt746-1/2"		 ,"color": "89,30,52"	},
-	{		 "name" : "Dark Umber"		 ,"identifier"  : "VT 756"		 ,"normalizedId" : "vt756"		 ,"color": "42,44,37"	},
-	{		 "name" : "Dark Brown"		 ,"identifier"  : "VT 746"		 ,"normalizedId" : "vt746"		 ,"color": "70,80,60"	},
-	{		 "name" : "Warm Grey 20%"		 ,"identifier"  : "VT 734-1/2"		 ,"normalizedId" : "vt734-1/2"		 ,"color": "247,245,250"	},
-	{		 "name" : "Cool Grey 70%"		 ,"identifier"  : "VT 747-1/2"		 ,"normalizedId" : "vt747-1/2"		 ,"color": "91,111,115"	},
-	{		 "name" : "White"		 ,"identifier"  : "VT 734"		 ,"normalizedId" : "vt734"		 ,"color": "255,255,255"	}
+[{
+        "name": "Lemon Yellow",
+        "identifier": "VT 735-1/2",
+        "normalizedId": "vt735-1/2",
+        "color": "245,255,18"
+    }, {
+        "name": "Canary Yellow",
+        "identifier": "VT 735",
+        "normalizedId": "vt735",
+        "color": "245,255,18"
+    }, {
+        "name": "Spanish Orange",
+        "identifier": "VT 736",
+        "normalizedId": "vt736",
+        "color": "252,189,3"
+    }, {
+        "name": "Goldenrod",
+        "identifier": "VT 755",
+        "normalizedId": "vt755",
+        "color": "245,181,18"
+    }, {
+        "name": "Orange",
+        "identifier": "VT 737",
+        "normalizedId": "vt737",
+        "color": "255,77,28"
+    }, {
+        "name": "Pale Vermilion",
+        "identifier": "VT 750",
+        "normalizedId": "vt750",
+        "color": "255,107,18"
+    }, {
+        "name": "Pumpkin Orange",
+        "identifier": "VT 736-1/2",
+        "normalizedId": "vt736-1/2",
+        "color": "245,71,3"
+    }, {
+        "name": "Poppy Red",
+        "identifier": "VT 744",
+        "normalizedId": "vt744",
+        "color": "255,54,20"
+    }, {
+        "name": "Crimson Red",
+        "identifier": "VT 745",
+        "normalizedId": "vt745",
+        "color": "206,5,15"
+    }, {
+        "name": "Magenta",
+        "identifier": "VT 759",
+        "normalizedId": "vt759",
+        "color": "222,0,237"
+    }, {
+        "name": "Process Red",
+        "identifier": "VT 743-1/2",
+        "normalizedId": "vt743-1/2",
+        "color": "199,3,252"
+    }, {
+        "name": "Deco Pink",
+        "identifier": "VT 743",
+        "normalizedId": "vt743",
+        "color": "252,3,252"
+    }, {
+        "name": "Light Peach",
+        "identifier": "VT 757",
+        "normalizedId": "vt757",
+        "color": "252,214,204"
+    }, {
+        "name": "Dahlia Purple",
+        "identifier": "VT 752",
+        "normalizedId": "vt752",
+        "color": "92,3,250"
+    }, {
+        "name": "Parma Violet",
+        "identifier": "VT 742-1/2",
+        "normalizedId": "vt742-1/2",
+        "color": "117,122,255"
+    }, {
+        "name": "Violet",
+        "identifier": "VT 742",
+        "normalizedId": "vt742",
+        "color": "37,35,158"
+    }, {
+        "name": "Violet Blue",
+        "identifier": "VT 760",
+        "normalizedId": "vt760",
+        "color": "2,24,152"
+    }, {
+        "name": "Ultramarine",
+        "identifier": "VT 740",
+        "normalizedId": "vt740",
+        "color": "10,74,252"
+    }, {
+        "name": "True Blue",
+        "identifier": "VT 758",
+        "normalizedId": "vt758",
+        "color": "59,181,255"
+    }, {
+        "name": "Cerulean Blue",
+        "identifier": "VT 741-1/2",
+        "normalizedId": "vt741-1/2",
+        "color": "97,224,255"
+    }, {
+        "name": "Peacock Blue",
+        "identifier": "VT 740-1/2",
+        "normalizedId": "vt740-1/2",
+        "color": "33,144,207"
+    }, {
+        "name": "Indigo Blue",
+        "identifier": "VT 741",
+        "normalizedId": "vt741",
+        "color": "0,50,154"
+    }, {
+        "name": "Non-Photo Blue",
+        "identifier": "VT 761-1/2",
+        "normalizedId": "vt761-1/2",
+        "color": "97,255,230"
+    }, {
+        "name": "Aquamarine",
+        "identifier": "VT 737-1/2",
+        "normalizedId": "vt737-1/2",
+        "color": "39,179,130"
+    }, {
+        "name": "Apple Green",
+        "identifier": "VT 738-1/2",
+        "normalizedId": "vt738-1/2",
+        "color": "120,240,46"
+    }, {
+        "name": "True Green",
+        "identifier": "VT 751",
+        "normalizedId": "vt751",
+        "color": "52,205,52"
+    }, {
+        "name": "Grass Green",
+        "identifier": "VT 738",
+        "normalizedId": "vt738",
+        "color": "40,225,10"
+    }, {
+        "name": "Olive Green",
+        "identifier": "VT 739-1/2",
+        "normalizedId": "vt739-1/2",
+        "color": "33,181,52"
+    }, {
+        "name": "Peacock Green",
+        "identifier": "VT 739",
+        "normalizedId": "vt739",
+        "color": "30,149,119"
+    }, {
+        "name": "Terra Cotta",
+        "identifier": "VT 745-1/2",
+        "normalizedId": "vt745-1/2",
+        "color": "151,63,29"
+    }, {
+        "name": "Tuscan Red",
+        "identifier": "VT 746-1/2",
+        "normalizedId": "vt746-1/2",
+        "color": "89,30,52"
+    }, {
+        "name": "Dark Umber",
+        "identifier": "VT 756",
+        "normalizedId": "vt756",
+        "color": "42,44,37"
+    }, {
+        "name": "Dark Brown",
+        "identifier": "VT 746",
+        "normalizedId": "vt746",
+        "color": "70,80,60"
+    }, {
+        "name": "Warm Grey 20%",
+        "identifier": "VT 734-1/2",
+        "normalizedId": "vt734-1/2",
+        "color": "247,245,250"
+    }, {
+        "name": "Cool Grey 70%",
+        "identifier": "VT 747-1/2",
+        "normalizedId": "vt747-1/2",
+        "color": "91,111,115"
+    }, {
+        "name": "White",
+        "identifier": "VT 734",
+        "normalizedId": "vt734",
+        "color": "255,255,255"
+    }, {
+		"name": "Metallic Gold",
+		"identifier": "VT 754",
+		"normalizedId": "vt754",
+		"color": "174,151,96"
+	}, {
+		"name": "Metallic Silver",
+		"identifier": "VT 753",
+		"normalizedId": "vt753",
+		"color": "197,202,210"
+	}, {
+		"name": "Black",
+		"identifier": "VT 747",
+		"normalizedId": "vt747",
+		"color": "0,0,0"
+	}
 ]
