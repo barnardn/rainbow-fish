@@ -79,7 +79,8 @@ extension EditPecilPropertyTableViewCell: UITextFieldDelegate {
         if let keypath = self.keyPath {
             if let pencil = self.pencil {
                 let end = textField.text!.startIndex.advancedBy(range.location)
-                let replaceRange: Range<String.Index> = Range<String.Index>(start: textField.text!.startIndex, end: end)
+                let replaceRange: Range<String.Index> = Range<String.Index>(textField.text!.startIndex ..< end)
+//                let replaceRange: Range<String.Index> = Range<String.Index>(start: textField.text!.startIndex, end: end)
                 let value = textfield.text!.substringWithRange(replaceRange) + string
                 pencil.setValue(value, forKey: keypath)
             }

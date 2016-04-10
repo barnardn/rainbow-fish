@@ -26,7 +26,7 @@ class SettingsMinimumStockTableViewController: ContentTableViewController {
         self.tableView.registerNib(UINib(nibName: DefaultTableViewCell.nibName as String, bundle: nil), forCellReuseIdentifier: DefaultTableViewCell.nibName as String)
         
         let wholeNumbers = [0,0,1,1,2,2,3]
-        for var i = 0; i < wholeNumbers.count; i++ {
+        for i in 0 ..< wholeNumbers.count {
             var value = NSDecimalNumber(integer: wholeNumbers[i])
             if i % 2 > 0 {
                 value = value.decimalNumberByAdding(NSDecimalNumber(floatLiteral: 0.5))
