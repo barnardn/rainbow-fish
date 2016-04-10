@@ -96,8 +96,12 @@ class RootViewController: UITabBarController {
             default:
                 print("status returned \(purchaseResult)")
             }
-            assert(message.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) > 0, "empty message for storekit notification")
-            self.presentStoreKitTransactionMessage(message)
+            print("Store kit message: \(message)")
+            
+            // store kit seems to present it's own alerts!
+            
+//            assert(message.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) > 0, "empty message for storekit notification")
+//            self.presentStoreKitTransactionMessage(message)
         }
     }
     
