@@ -22,17 +22,17 @@ class EditPencilTableViewController: ContentTableViewController {
     private var recordCreatorID : String? = ""       // thread safety!
     
     lazy var saveButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: Selector("saveButonTapped:"))
+        let button = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: #selector(EditPencilTableViewController.saveButonTapped(_:)))
         return button
     }()
     
     lazy var editButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: Selector("editButtonTapped:"))
+        let button = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: #selector(EditPencilTableViewController.editButtonTapped(_:)))
         return button
     }()
 
     lazy var cancelButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: Selector("cancelButtonTapped:"))
+        let button = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(EditPencilTableViewController.cancelButtonTapped(_:)))
         return button
     }()
     
@@ -43,7 +43,7 @@ class EditPencilTableViewController: ContentTableViewController {
         if let editPencil = pencil {
             self.title = editPencil.name ?? NSLocalizedString("Edit Pencil", comment:"edit an existing pencil view title")
             self.pencil = self.context.objectWithID(editPencil.objectID) as! Pencil
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("inventoryDeletedNotificationHandler:"), name: NSManagedObjectContextDidSaveNotification, object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(EditPencilTableViewController.inventoryDeletedNotificationHandler(_:)), name: NSManagedObjectContextDidSaveNotification, object: nil)
         } else {
             self.title = NSLocalizedString("New Pencil", comment:"new pencil view title")
             self.pencil = Pencil(managedObjectContext: self.context)

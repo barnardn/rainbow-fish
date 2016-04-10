@@ -29,8 +29,8 @@ class RootViewController: UITabBarController {
     
     init() {
         super.init(nibName: nil, bundle: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("updateProductsNotificationHandler:"), name: UIApplicationDidBecomeActiveNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("updateStoreKitPurchaseStatus:"), name: StoreKitPurchaseNotificationName, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(RootViewController.updateProductsNotificationHandler(_:)), name: UIApplicationDidBecomeActiveNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(RootViewController.updateStoreKitPurchaseStatus(_:)), name: StoreKitPurchaseNotificationName, object: nil)
         viewControllers = [
                 InventoryNavigationController(),
                 CatalogNavigationController(),

@@ -25,7 +25,7 @@ class ProductFooterView: UITableViewHeaderFooterView {
         button.setTitleColor(AppearanceManager.appearanceManager.brandColor, forState: .Normal)
         button.setTitleColor(AppearanceManager.appearanceManager.tableHeaderColor, forState: .Highlighted)
         button.titleLabel?.font = AppearanceManager.appearanceManager.subtitleFont
-        button.addTarget(self, action: Selector("addButtonTapped:"), forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: #selector(SelectPencilTableViewController.addButtonTapped(_:)), forControlEvents: .TouchUpInside)
         return button
     }()
     

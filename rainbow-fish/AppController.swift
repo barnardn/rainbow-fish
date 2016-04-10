@@ -47,7 +47,7 @@ class AppController: NSObject {
     
     func setup() {
         NSValueTransformer.setValueTransformer(ColorValueTransformer(), forName: "ColorValueTransformer")
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("icloudIdentifierDidChange:"), name: NSUbiquityIdentityDidChangeNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppController.icloudIdentifierDidChange(_:)), name: NSUbiquityIdentityDidChangeNotification, object: nil)
         if let _ = NSFileManager.defaultManager().ubiquityIdentityToken {
             self.icloudCurrentlyAvailable = true
         } else {

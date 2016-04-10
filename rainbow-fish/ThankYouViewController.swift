@@ -34,7 +34,7 @@ class ThankYouViewController: UIViewController {
         self.messageTextView.textColor = AppearanceManager.appearanceManager.bodyTextColor
         self.okButton.setTitle(NSLocalizedString("OK", comment:"developer view ok button title"), forState: .Normal)
         okButton.setTitleColor(AppearanceManager.appearanceManager.brandColor, forState: .Normal)
-        self.okButton.addTarget(self, action: Selector("okButtonTapped:"), forControlEvents: .TouchUpInside)
+        self.okButton.addTarget(self, action: #selector(ThankYouViewController.okButtonTapped(_:)), forControlEvents: .TouchUpInside)
     }
 
     func okButtonTapped(sender: UIButton) {

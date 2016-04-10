@@ -31,7 +31,7 @@ class SelectPencilTableViewController: ContentTableViewController {
     }()
     
     lazy var addButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: Selector("addButtonTapped:"))
+        let button = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(SelectPencilTableViewController.addButtonTapped(_:)))
         return button
     }()
     
@@ -58,15 +58,15 @@ class SelectPencilTableViewController: ContentTableViewController {
         self.tableView.registerNib(UINib(nibName: PencilTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: PencilTableViewCell.nibName)
         self.refreshControl = UIRefreshControl()
         self.refreshControl?.tintColor = AppearanceManager.appearanceManager.brandColor
-        self.refreshControl?.addTarget(self, action: Selector("refreshControlDidChange:"), forControlEvents: .ValueChanged)
+        self.refreshControl?.addTarget(self, action: #selector(SelectPencilTableViewController.refreshControlDidChange(_:)), forControlEvents: .ValueChanged)
         
         self.navigationItem.backBarButtonItem = self.backButton
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("inventoryDidUpdate:"), name: AppNotifications.DidEditPencil.rawValue, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SelectPencilTableViewController.inventoryDidUpdate(_:)), name: AppNotifications.DidEditPencil.rawValue, object: nil)
 
         // KVO on purchase status
         
         if !AppController.appController.appConfiguration.wasPurchasedSuccessfully {
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("paymentUpdatedNotifcation:"), name: StoreKitPurchaseNotificationName, object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SelectPencilTableViewController.paymentUpdatedNotifcation(_:)), name: StoreKitPurchaseNotificationName, object: nil)
         }
         
         if AppController.appController.isNormsiPhone() && self.navigationItem.rightBarButtonItem == nil {

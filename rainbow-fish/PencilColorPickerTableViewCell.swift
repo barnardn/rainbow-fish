@@ -63,10 +63,10 @@ class PencilColorPickerTableViewCell: UITableViewCell {
             label.text = "0"
         }
         hexValueLabel.text = "#000000"
-        redSlider.addTarget(self, action: Selector("sliderValueChanged:"), forControlEvents: .ValueChanged)
-        greenSlider.addTarget(self, action: Selector("sliderValueChanged:"), forControlEvents: .ValueChanged)
-        blueSlider.addTarget(self, action: Selector("sliderValueChanged:"), forControlEvents: .ValueChanged)
-        hexEntryButton.addTarget(self, action: Selector("hexEntryButtonTapped:"), forControlEvents: .TouchUpInside)
+        redSlider.addTarget(self, action: #selector(PencilColorPickerTableViewCell.sliderValueChanged(_:)), forControlEvents: .ValueChanged)
+        greenSlider.addTarget(self, action: #selector(PencilColorPickerTableViewCell.sliderValueChanged(_:)), forControlEvents: .ValueChanged)
+        blueSlider.addTarget(self, action: #selector(PencilColorPickerTableViewCell.sliderValueChanged(_:)), forControlEvents: .ValueChanged)
+        hexEntryButton.addTarget(self, action: #selector(PencilColorPickerTableViewCell.hexEntryButtonTapped(_:)), forControlEvents: .TouchUpInside)
         hexEntryButton.setTitleColor(AppearanceManager.appearanceManager.brandColor, forState: .Normal)
         sliders = [redSlider, greenSlider, blueSlider]
         
