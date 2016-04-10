@@ -19,6 +19,8 @@
 		491AD0F81AA2B6E30046FE00 /* SyncInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491AD0F71AA2B6E30046FE00 /* SyncInfo.swift */; };
 		491AD0FB1AA3C23F0046FE00 /* PencilTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 491AD0F91AA3C23F0046FE00 /* PencilTableViewCell.swift */; };
 		491AD0FC1AA3C23F0046FE00 /* PencilTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 491AD0FA1AA3C23F0046FE00 /* PencilTableViewCell.xib */; };
+		491E22EE1CBAD581005F2C20 /* CoreDataKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E8D8B71A7443C60064E682 /* CoreDataKit.framework */; };
+		491E22F21CBADC0B005F2C20 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 497CD06F1AD1D8B200A3E3C9 /* SwiftyJSON.framework */; };
 		492EBCF31B2CFF120054C59F /* ConfigurationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492EBCF21B2CFF120054C59F /* ConfigurationSettings.swift */; };
 		492EBCF51B2E04670054C59F /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 492EBCF41B2E04670054C59F /* iAd.framework */; };
 		4930BBA01B519458009A2A22 /* ThankYouViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4930BB9E1B519458009A2A22 /* ThankYouViewController.swift */; };
@@ -99,8 +101,6 @@
 		49E8D8EC1A75CADE0064E682 /* InventoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8EB1A75CADE0064E682 /* InventoryTableViewController.swift */; };
 		49E8D8EE1A75D2A50064E682 /* CatalogViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8ED1A75D2A50064E682 /* CatalogViewController.swift */; };
 		49E8D8F01A75D4760064E682 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49E8D8EF1A75D4760064E682 /* SettingsTableViewController.swift */; };
-		49EE53511BFA726B0027E843 /* CoreDataKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E8D8B71A7443C60064E682 /* CoreDataKit.framework */; };
-		49EE53521BFA726B0027E843 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 497CD06F1AD1D8B200A3E3C9 /* SwiftyJSON.framework */; };
 		49EE53561BFA72F70027E843 /* CoreDataKit.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 49EE53541BFA72F70027E843 /* CoreDataKit.framework.dSYM */; };
 		49EE53571BFA72F70027E843 /* SwiftyJSON.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 49EE53551BFA72F70027E843 /* SwiftyJSON.framework.dSYM */; };
 		49EE535D1BFA74AD0027E843 /* SettingsPurchaseRestoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49EE535C1BFA74AD0027E843 /* SettingsPurchaseRestoreTableViewController.swift */; };
@@ -249,9 +249,9 @@
 				49CA53381B409EBB00D3E138 /* StoreKit.framework in Frameworks */,
 				49AD281D1C3331E10040B76B /* Crashlytics.framework in Frameworks */,
 				492EBCF51B2E04670054C59F /* iAd.framework in Frameworks */,
-				49EE53511BFA726B0027E843 /* CoreDataKit.framework in Frameworks */,
+				491E22EE1CBAD581005F2C20 /* CoreDataKit.framework in Frameworks */,
 				49AD281C1C3331E10040B76B /* Fabric.framework in Frameworks */,
-				49EE53521BFA726B0027E843 /* SwiftyJSON.framework in Frameworks */,
+				491E22F21CBADC0B005F2C20 /* SwiftyJSON.framework in Frameworks */,
 				494BA7CE1B0AC9FF0026B2AE /* UIKit.framework in Frameworks */,
 				49E8D8C11A7445670064E682 /* CloudKit.framework in Frameworks */,
 				49E8D8BE1A7445400064E682 /* CoreData.framework in Frameworks */,

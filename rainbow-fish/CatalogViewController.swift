@@ -22,14 +22,14 @@ class CatalogViewController: ContentTableViewController {
     }()
     
     lazy var editButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: Selector("editButtonTapped:"))
+        let button = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: #selector(CatalogViewController.editButtonTapped(_:)))
         return button
     }()
     
     convenience init() {
         self.init(style: UITableViewStyle.Grouped)
         self.title = NSLocalizedString("Catalog", comment:"catalog navigation title")
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("updateDatasource"), name: AppNotifications.DidFinishCloudUpdate.rawValue, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CatalogViewController.updateDatasource), name: AppNotifications.DidFinishCloudUpdate.rawValue, object: nil)
     }
     
     deinit {
@@ -44,7 +44,7 @@ class CatalogViewController: ContentTableViewController {
         self.tableView!.rowHeight = ProductTableViewCell.estimatedRowHeight
         self.refreshControl = UIRefreshControl()
         self.refreshControl?.tintColor = AppearanceManager.appearanceManager.brandColor
-        self.refreshControl?.addTarget(self, action: Selector("refreshControlDidChange:"), forControlEvents: .ValueChanged)
+        self.refreshControl?.addTarget(self, action: #selector(CatalogViewController.refreshControlDidChange(_:)), forControlEvents: .ValueChanged)
 
 // NOTE: not allowing product and manufacturer inserts/edits at this point
         

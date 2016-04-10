@@ -17,12 +17,12 @@ class EditTextFieldTableViewController: UITableViewController {
     private var completion: EditTextFieldTableViewCompletionBlock?
     
     lazy var doneButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: Selector("barButtonTapped:"))
+        let button = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(EditTextFieldTableViewController.barButtonTapped(_:)))
         return button
     }()
     
     lazy var cancelButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: Selector("barButtonTapped:"))
+        let button = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(EditTextFieldTableViewController.barButtonTapped(_:)))
         return button
     }()
     

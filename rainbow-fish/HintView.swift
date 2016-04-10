@@ -94,7 +94,7 @@ class HintView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = UIColor(white: 0.0, alpha: 0.1)
-        self.dismissTapGestureRecognizer.addTarget(self, action: Selector("dismissTapGestureRecognizerDidTap:"))
+        self.dismissTapGestureRecognizer.addTarget(self, action: #selector(HintView.dismissTapGestureRecognizerDidTap(_:)))
         self.addGestureRecognizer(self.dismissTapGestureRecognizer)
         self.contentView = UINib(nibName: "HintView", bundle: nil).instantiateWithOwner(nil, options: nil).first as! HintContentView
         self.addSubview(self.contentView);

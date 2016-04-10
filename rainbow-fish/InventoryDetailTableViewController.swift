@@ -28,7 +28,7 @@ class InventoryDetailTableViewController: ContentTableViewController {
     private var editPencilColor: Bool = false
     
     private lazy var doneBarButtonItem: UIBarButtonItem = {
-        let doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: Selector("doneButtonTapped:"))
+        let doneButton = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(InventoryDetailTableViewController.doneButtonTapped(_:)))
         return doneButton
     }()
     
@@ -41,7 +41,7 @@ class InventoryDetailTableViewController: ContentTableViewController {
         self.lineItem = self.context.objectWithID(lineItem.objectID) as? Inventory
         self.title = self.lineItem.name
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("contextDidSave:"), name: NSManagedObjectContextDidSaveNotification, object: self.context)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(InventoryDetailTableViewController.contextDidSave(_:)), name: NSManagedObjectContextDidSaveNotification, object: self.context)
     }
     
     deinit {

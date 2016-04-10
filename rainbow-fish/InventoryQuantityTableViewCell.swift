@@ -46,7 +46,7 @@ class InventoryQuantityTableViewCell: UITableViewCell {
         inputAccessory.delegate = self
         
         self.stepper.tintColor = AppearanceManager.appearanceManager.brandColor
-        self.stepper.addTarget(self, action: Selector("stepperValueDidChange:"), forControlEvents: .TouchUpInside)
+        self.stepper.addTarget(self, action: #selector(InventoryQuantityTableViewCell.stepperValueDidChange(_:)), forControlEvents: .TouchUpInside)
         numberFormatter.generatesDecimalNumbers = true
         
     }

@@ -31,7 +31,7 @@ class SettingsPurchaseRestoreTableViewController: UITableViewController {
         super.viewDidLoad()
         self.tableView.registerNib(UINib(nibName: BigButtonTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: BigButtonTableViewCell.nibName)
         self.tableView.contentInset = UIEdgeInsets(top: 40.0, left: 0, bottom: 0, right: 0)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "purchaseNotificationHandler:", name: StoreKitPurchaseNotificationName, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SettingsPurchaseRestoreTableViewController.purchaseNotificationHandler(_:)), name: StoreKitPurchaseNotificationName, object: nil)
     }
     
     override func viewWillDisappear(animated: Bool) {

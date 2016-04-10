@@ -28,7 +28,7 @@ class InventoryTableViewController: ContentTableViewController {
         
         segControl.selectedSegmentIndex = InventorySortModes.Alpha.rawValue
         segControl.tintColor = UIColor.whiteColor()
-        segControl.addTarget(self, action: Selector("segmentControlChanged:"), forControlEvents: .ValueChanged)
+        segControl.addTarget(self, action: #selector(InventoryTableViewController.segmentControlChanged(_:)), forControlEvents: .ValueChanged)
         return segControl
     }()
     
@@ -65,8 +65,8 @@ class InventoryTableViewController: ContentTableViewController {
         self.tableView.estimatedRowHeight = 60.0
         self.tableView.registerNib(UINib(nibName: InventoryTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: InventoryTableViewCell.nibName)
         self.tableView.tableHeaderView = self.searchController.searchBar
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("didEditPencil:"), name: AppNotifications.DidEditPencil.rawValue, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("didFinishUpdatingCatalog:"), name: AppNotifications.DidFinishCloudUpdate.rawValue, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(InventoryTableViewController.didEditPencil(_:)), name: AppNotifications.DidEditPencil.rawValue, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(InventoryTableViewController.didFinishUpdatingCatalog(_:)), name: AppNotifications.DidFinishCloudUpdate.rawValue, object: nil)
         self.updateInventory()
         
     }
@@ -343,7 +343,7 @@ class InventoryTableViewController: ContentTableViewController {
         if self.inventory.count == 0 {
             return NSNotFound
         }
-        for var i = 0; i < self.inventory.count; i++ {
+        for i in 0 ..< self.inventory.count {
             let item = self.inventory[i]
             if managedObjectID == item.objectID {
                 return i

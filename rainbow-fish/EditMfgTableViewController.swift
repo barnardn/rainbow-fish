@@ -15,7 +15,7 @@ class EditMfgTableViewController: UITableViewController {
     private var allManufacturers = [Manufacturer]()
     
     private lazy var doneButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: Selector("doneButtonTapped:"))
+        let button = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(EditMfgTableViewController.doneButtonTapped(_:)))
         return button
     }()
     

@@ -29,8 +29,8 @@ class RootViewController: UITabBarController {
     
     init() {
         super.init(nibName: nil, bundle: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("updateProductsNotificationHandler:"), name: UIApplicationDidBecomeActiveNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("updateStoreKitPurchaseStatus:"), name: StoreKitPurchaseNotificationName, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(RootViewController.updateProductsNotificationHandler(_:)), name: UIApplicationDidBecomeActiveNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(RootViewController.updateStoreKitPurchaseStatus(_:)), name: StoreKitPurchaseNotificationName, object: nil)
         viewControllers = [
                 InventoryNavigationController(),
                 CatalogNavigationController(),
@@ -96,8 +96,12 @@ class RootViewController: UITabBarController {
             default:
                 print("status returned \(purchaseResult)")
             }
-            assert(message.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) > 0, "empty message for storekit notification")
-            self.presentStoreKitTransactionMessage(message)
+            print("Store kit message: \(message)")
+            
+            // store kit seems to present it's own alerts!
+            
+//            assert(message.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) > 0, "empty message for storekit notification")
+//            self.presentStoreKitTransactionMessage(message)
         }
     }
     

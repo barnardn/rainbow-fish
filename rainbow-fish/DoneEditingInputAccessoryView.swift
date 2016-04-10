@@ -20,7 +20,7 @@ class DoneEditingInputAccessoryView: UIView {
         button.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
         button.setTitle(NSLocalizedString("Done", comment:"quantity input accessory done button title"), forState: .Normal)
         button.setTitleColor(AppearanceManager.appearanceManager.brandColor, forState: .Normal)
-        button.addTarget(self, action: Selector("doneButtonTapped:"), forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: #selector(DoneEditingInputAccessoryView.doneButtonTapped(_:)), forControlEvents: .TouchUpInside)
         return button
     }()
     
