@@ -127,18 +127,19 @@ class SelectPencilTableViewController: ContentTableViewController {
             self.pencils = pencils ?? [Pencil]()
             tableView.reloadData()
         }
-        self.cloudUpdate(forced: false)
+        if self.pencils.count == 0 {
+            self.cloudUpdate(forced: false)
+        }
     }
     
     private func cloudUpdate(forced forced: Bool) {
-        if !forced && !self.product.shouldPerformUpdate {
-            return
-        }
         if !forced {
             self.showSmallHUD(message: nil)
+            self.tableView.userInteractionEnabled = false
         }
         let modificationDate = recentModificationDate(inPencils: pencils)
         CloudManager.sharedManger.importAllPencilsForProduct(self.product, modifiedAfterDate: modificationDate ){ (success, error) in
+            self.tableView.userInteractionEnabled = true
             if !forced {
                 self.hideSmallHUD()
             } else {
