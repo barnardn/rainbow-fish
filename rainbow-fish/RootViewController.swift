@@ -100,8 +100,6 @@ class RootViewController: UITabBarController {
             
             // store kit seems to present it's own alerts!
             
-//            assert(message.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) > 0, "empty message for storekit notification")
-//            self.presentStoreKitTransactionMessage(message)
         }
     }
     
