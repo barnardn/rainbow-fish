@@ -27,6 +27,7 @@
 		4930BBA11B519458009A2A22 /* ThankYouView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4930BB9F1B519458009A2A22 /* ThankYouView.xib */; };
 		4930BBA31B51BCEA009A2A22 /* SettingsConfirmPurchaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4930BBA21B51BCEA009A2A22 /* SettingsConfirmPurchaseTableViewController.swift */; };
 		4930BBA51B51F0D3009A2A22 /* StoreKitPaymentObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4930BBA41B51F0D3009A2A22 /* StoreKitPaymentObserver.swift */; };
+		4937FC191CE7C16600DE6835 /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4937FC181CE7C16600DE6835 /* Reachability.framework */; };
 		4938036D1A8447EB00E62FC2 /* UIViewController+ProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4938036C1A8447EB00E62FC2 /* UIViewController+ProgressHUD.swift */; };
 		493803701A8449AA00E62FC2 /* Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4938036F1A8449AA00E62FC2 /* Types.swift */; };
 		493803721A84503F00E62FC2 /* CatalogNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 493803711A84503F00E62FC2 /* CatalogNavigationController.swift */; };
@@ -131,6 +132,7 @@
 		4930BB9F1B519458009A2A22 /* ThankYouView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThankYouView.xib; sourceTree = "<group>"; };
 		4930BBA21B51BCEA009A2A22 /* SettingsConfirmPurchaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsConfirmPurchaseTableViewController.swift; sourceTree = "<group>"; };
 		4930BBA41B51F0D3009A2A22 /* StoreKitPaymentObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreKitPaymentObserver.swift; sourceTree = "<group>"; };
+		4937FC181CE7C16600DE6835 /* Reachability.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reachability.framework; path = ../Carthage/Build/iOS/Reachability.framework; sourceTree = "<group>"; };
 		4938036C1A8447EB00E62FC2 /* UIViewController+ProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+ProgressHUD.swift"; sourceTree = "<group>"; };
 		4938036F1A8449AA00E62FC2 /* Types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Types.swift; sourceTree = "<group>"; };
 		493803711A84503F00E62FC2 /* CatalogNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CatalogNavigationController.swift; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 				49AD281C1C3331E10040B76B /* Fabric.framework in Frameworks */,
 				494BA7CE1B0AC9FF0026B2AE /* UIKit.framework in Frameworks */,
 				49E8D8C11A7445670064E682 /* CloudKit.framework in Frameworks */,
+				4937FC191CE7C16600DE6835 /* Reachability.framework in Frameworks */,
 				491E22F71CBB15B0005F2C20 /* CoreDataKit.framework in Frameworks */,
 				491E22F81CBB15B0005F2C20 /* SwiftyJSON.framework in Frameworks */,
 				49E8D8BE1A7445400064E682 /* CoreData.framework in Frameworks */,
@@ -606,6 +609,7 @@
 		49EE53581BFA742A0027E843 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4937FC181CE7C16600DE6835 /* Reachability.framework */,
 				49AD281A1C3331E10040B76B /* Fabric.framework */,
 				49AD281B1C3331E10040B76B /* Crashlytics.framework */,
 				497CD06F1AD1D8B200A3E3C9 /* SwiftyJSON.framework */,
@@ -734,6 +738,7 @@
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/CoreDataKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/SwiftyJSON.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Reachability.framework",
 			);
 			name = "Carthage Copy Frameworks";
 			outputPaths = (
