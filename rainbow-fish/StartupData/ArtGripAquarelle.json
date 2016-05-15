@@ -1,0 +1,362 @@
+[
+ {
+  "color": "255,255,255",
+  "normalizedId": "101",
+  "name": "White",
+  "id": "101"
+ },
+ {
+  "color": "255,245,168",
+  "normalizedId": "102",
+  "name": "Cream",
+  "id": "102"
+ },
+ {
+  "color": "240,251,77",
+  "normalizedId": "104",
+  "name": "Light Yellow Glaze",
+  "id": "104"
+ },
+ {
+  "color": "255,226,88",
+  "normalizedId": "105",
+  "name": "Light Cadmium Yellow",
+  "id": "105"
+ },
+ {
+  "color": "255,217,24",
+  "normalizedId": "107",
+  "name": "Cadmium Yellow",
+  "id": "107"
+ },
+ {
+  "color": "255,192,12",
+  "normalizedId": "108",
+  "name": "Dark Cadmium Yellow",
+  "id": "108"
+ },
+ {
+  "color": "255,153,24",
+  "normalizedId": "109",
+  "name": "Dark Chrome Yellow",
+  "id": "109"
+ },
+ {
+  "color": "232,134,62",
+  "normalizedId": "111",
+  "name": "Cadmium Orange",
+  "id": "111"
+ },
+ {
+  "color": "255,89,24",
+  "normalizedId": "115",
+  "name": "Dark Cadmium Orange",
+  "id": "115"
+ },
+ {
+  "color": "255,26,58",
+  "normalizedId": "117",
+  "name": "Light Cadmium Red",
+  "id": "117"
+ },
+ {
+  "color": "245,38,64",
+  "normalizedId": "118",
+  "name": "Scarlet Red",
+  "id": "118"
+ },
+ {
+  "color": "255,41,87",
+  "normalizedId": "121",
+  "name": "Pale Geranium Lake",
+  "id": "121"
+ },
+ {
+  "color": "196,52,74",
+  "normalizedId": "126",
+  "name": "Permanent Carmine",
+  "id": "126"
+ },
+ {
+  "color": "131,73,92",
+  "normalizedId": "133",
+  "name": "Magenta",
+  "id": "133"
+ },
+ {
+  "color": "245,53,148",
+  "normalizedId": "124",
+  "name": "Rose Carmine",
+  "id": "124"
+ },
+ {
+  "color": "255,56,209",
+  "normalizedId": "123",
+  "name": "Fuchsia",
+  "id": "123"
+ },
+ {
+  "color": "202,53,226",
+  "normalizedId": "125",
+  "name": "Middle Purple Pink",
+  "id": "125"
+ },
+ {
+  "color": "225,110,255",
+  "normalizedId": "119",
+  "name": "Light Magenta",
+  "id": "119"
+ },
+ {
+  "color": "146,75,139",
+  "normalizedId": "134",
+  "name": "Crimson",
+  "id": "134"
+ },
+ {
+  "color": "179,179,255",
+  "normalizedId": "139",
+  "name": "Light Violet",
+  "id": "139"
+ },
+ {
+  "color": "94,65,243",
+  "normalizedId": "136",
+  "name": "Purple Violet",
+  "id": "136"
+ },
+ {
+  "color": "83,77,136",
+  "normalizedId": "137",
+  "name": "Blue Violet",
+  "id": "137"
+ },
+ {
+  "color": "40,51,250",
+  "normalizedId": "141",
+  "name": "Delft Blue",
+  "id": "141"
+ },
+ {
+  "color": "45,103,160",
+  "normalizedId": "151",
+  "name": "Helioblue-Reddish",
+  "id": "151"
+ },
+ {
+  "color": "16,107,255",
+  "normalizedId": "143",
+  "name": "Cobalt Blue",
+  "id": "143"
+ },
+ {
+  "color": "102,179,255",
+  "normalizedId": "140",
+  "name": "Light Ultramarine",
+  "id": "140"
+ },
+ {
+  "color": "31,110,255",
+  "normalizedId": "144",
+  "name": "Cobalt Blue-Greenish",
+  "id": "144"
+ },
+ {
+  "color": "74,192,255",
+  "normalizedId": "152",
+  "name": "Middle Phthalo Blue",
+  "id": "152"
+ },
+ {
+  "color": "80,162,204",
+  "normalizedId": "145",
+  "name": "Light Phthalo Blue",
+  "id": "145"
+ },
+ {
+  "color": "128,253,255",
+  "normalizedId": "147",
+  "name": "Light Blue",
+  "id": "147"
+ },
+ {
+  "color": "36,155,137",
+  "normalizedId": "155",
+  "name": "Helio Turquoise",
+  "id": "155"
+ },
+ {
+  "color": "27,164,164",
+  "normalizedId": "153",
+  "name": "Cobalt Turquoise",
+  "id": "153"
+ },
+ {
+  "color": "117,252,220",
+  "normalizedId": "154",
+  "name": "Light Cobalt Turquoise",
+  "id": "154"
+ },
+ {
+  "color": "65,251,179",
+  "normalizedId": "156",
+  "name": "Cobalt Green",
+  "id": "156"
+ },
+ {
+  "color": "20,123,75",
+  "normalizedId": "158",
+  "name": "Deep Cobalt Green",
+  "id": "158"
+ },
+ {
+  "color": "0,163,110",
+  "normalizedId": "163",
+  "name": "Emerald Green",
+  "id": "163"
+ },
+ {
+  "color": "77,250,104",
+  "normalizedId": "162",
+  "name": "Light Phthalo Green",
+  "id": "162"
+ },
+ {
+  "color": "110,250,40",
+  "normalizedId": "166",
+  "name": "Grass Green",
+  "id": "166"
+ },
+ {
+  "color": "63,142,44",
+  "normalizedId": "167",
+  "name": "Permanent Green Olive",
+  "id": "167"
+ },
+ {
+  "color": "72,89,46",
+  "normalizedId": "173",
+  "name": "Olive Green Yellowish",
+  "id": "173"
+ },
+ {
+  "color": "118,193,44",
+  "normalizedId": "168",
+  "name": "Earth Green Yellowish",
+  "id": "168"
+ },
+ {
+  "color": "101,159,91",
+  "normalizedId": "172",
+  "name": "Earth Green",
+  "id": "172"
+ },
+ {
+  "color": "135,45,78",
+  "normalizedId": "192",
+  "name": "Indian Red",
+  "id": "192"
+ },
+ {
+  "color": "255,128,171",
+  "normalizedId": "130",
+  "name": "Dark Flesh",
+  "id": "130"
+ },
+ {
+  "color": "255,133,181",
+  "normalizedId": "131",
+  "name": "Medium Flesh",
+  "id": "131"
+ },
+ {
+  "color": "255,184,163",
+  "normalizedId": "132",
+  "name": "Light Flesh",
+  "id": "132"
+ },
+ {
+  "color": "221,85,77",
+  "normalizedId": "188",
+  "name": "Sanguine",
+  "id": "188"
+ },
+ {
+  "color": "217,140,81",
+  "normalizedId": "187",
+  "name": "Burnt Ochre",
+  "id": "187"
+ },
+ {
+  "color": "243,186,69",
+  "normalizedId": "183",
+  "name": "Light Yellow Ochre",
+  "id": "183"
+ },
+ {
+  "color": "242,204,102",
+  "normalizedId": "185",
+  "name": "Naples Yellow",
+  "id": "185"
+ },
+ {
+  "color": "89,77,77",
+  "normalizedId": "176",
+  "name": "Van Dyck Brown",
+  "id": "176"
+ },
+ {
+  "color": "51,63,62",
+  "normalizedId": "175",
+  "name": "Dark Sepia",
+  "id": "175"
+ },
+ {
+  "color": "110,129,131",
+  "normalizedId": "273",
+  "name": "Warm Grey IV",
+  "id": "273"
+ },
+ {
+  "color": "220,217,217",
+  "normalizedId": "270",
+  "name": "Warm Grey I",
+  "id": "270"
+ },
+ {
+  "color": "197,204,205",
+  "normalizedId": "230",
+  "name": "Cold Grey I",
+  "id": "230"
+ },
+ {
+  "color": "94,113,121",
+  "normalizedId": "234",
+  "name": "Cold Grey V",
+  "id": "234"
+ },
+ {
+  "color": "79,80,78",
+  "normalizedId": "235",
+  "name": "Cold Grey VI", 
+  "id": "235"
+ },
+ {
+  "color": "0,0,0",
+  "normalizedId": "199",
+  "name": "Black",
+  "id": "199"
+ },
+ {
+  "color": "135,136,135",
+  "normalizedId": "251",
+  "name": "Silver",
+  "id": "251"
+ },
+ {
+  "color": "198,185,137",
+  "normalizedId": "250",
+  "name": "Gold",
+  "id": "250"
+ }
+]
