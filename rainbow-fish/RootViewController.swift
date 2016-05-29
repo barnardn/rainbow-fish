@@ -51,12 +51,9 @@ class RootViewController: UITabBarController {
             self.view.insertSubview(self.adBannerView, belowSubview: self.tabBar)
             self.adBannerView.delegate = self
         }
-        if let _ = AppController.appController.appConfiguration.iCloudRecordID {
-            self.updateProducts()
-        } else {
+        if AppController.appController.appConfiguration.iCloudRecordID == nil {
             self.obtainCloudRecordId(performUpdate: true)
         }
-        
     }
     
     override func viewDidLayoutSubviews() {
