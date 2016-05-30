@@ -10,16 +10,16 @@ import UIKit
 
 import CoreData
 import CoreDataKit
-import iAd
 import StoreKit
+import GoogleMobileAds
 
 class RootViewController: UITabBarController {
 
     private var showingAd: Bool = false
     private var skPaymentObserver: StoreKitPaymentObserver = StoreKitPaymentObserver()
     
-    private lazy var adBannerView : ADBannerView = {
-        let bannerView = ADBannerView(adType: ADAdType.Banner)
+    private lazy var adBannerView : GADBannerView = {
+        let bannerView = GADBannerView(adSize: kGADAdSizeSmartBannerLandscape)
         return bannerView
     }()
     
@@ -49,7 +49,12 @@ class RootViewController: UITabBarController {
         self.view.backgroundColor = AppearanceManager.appearanceManager.appBackgroundColor;
         if !AppController.appController.appConfiguration.wasPurchasedSuccessfully {
             self.view.insertSubview(self.adBannerView, belowSubview: self.tabBar)
+            self.adBannerView.adUnitID = AppController.appController.googleAdUnitId
             self.adBannerView.delegate = self
+            self.adBannerView.rootViewController = self
+            let request = GADRequest()
+            request.testDevices = [kGADSimulatorID]
+            self.adBannerView.loadRequest(request)
         }
         if AppController.appController.appConfiguration.iCloudRecordID == nil {
             self.obtainCloudRecordId(performUpdate: true)
@@ -181,24 +186,24 @@ class RootViewController: UITabBarController {
 
 // MARK: --= iAd banner delegate =--
 
-extension RootViewController: ADBannerViewDelegate {
+extension RootViewController: GADBannerViewDelegate {
     
-    func bannerViewDidLoadAd(banner: ADBannerView!) {
+    func adViewDidReceiveAd(bannerView: GADBannerView!) {
         if (!AppController.appController.bannerAdIsVisible) {
             UIView.animateWithDuration(0.5, animations: {() -> Void in
-                banner.frame = CGRectOffset(banner.frame, 0, -CGRectGetHeight(banner.frame))
+                bannerView.frame = CGRectOffset(bannerView.frame, 0, -CGRectGetHeight(bannerView.frame))
             }, completion: { (_) -> Void in
                 AppController.appController.bannerAdIsVisible = true
             })
         }
     }
-    
-    func bannerView(banner: ADBannerView!, didFailToReceiveAdWithError error: NSError!) {
+
+    func adView(bannerView: GADBannerView!, didFailToReceiveAdWithError error: GADRequestError!) {
         if (!AppController.appController.bannerAdIsVisible) {
             return
         }
         UIView.animateWithDuration(0.5, animations: { () -> Void in
-            banner.frame = CGRectOffset(banner.frame, 0, CGRectGetHeight(banner.frame))
+            bannerView.frame = CGRectOffset(bannerView.frame, 0, CGRectGetHeight(bannerView.frame))
         }, completion: { (_) -> Void in
             AppController.appController.bannerAdIsVisible = false
         })

@@ -22,7 +22,6 @@
 		491E22F71CBB15B0005F2C20 /* CoreDataKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E8D8B71A7443C60064E682 /* CoreDataKit.framework */; };
 		491E22F81CBB15B0005F2C20 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 497CD06F1AD1D8B200A3E3C9 /* SwiftyJSON.framework */; };
 		492EBCF31B2CFF120054C59F /* ConfigurationSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492EBCF21B2CFF120054C59F /* ConfigurationSettings.swift */; };
-		492EBCF51B2E04670054C59F /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 492EBCF41B2E04670054C59F /* iAd.framework */; };
 		4930BBA01B519458009A2A22 /* ThankYouViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4930BB9E1B519458009A2A22 /* ThankYouViewController.swift */; };
 		4930BBA11B519458009A2A22 /* ThankYouView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4930BB9F1B519458009A2A22 /* ThankYouView.xib */; };
 		4930BBA31B51BCEA009A2A22 /* SettingsConfirmPurchaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4930BBA21B51BCEA009A2A22 /* SettingsConfirmPurchaseTableViewController.swift */; };
@@ -66,6 +65,8 @@
 		4988FEBA1AB61F1B00AE2D89 /* SettingsMinimumStockTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4988FEB91AB61F1B00AE2D89 /* SettingsMinimumStockTableViewController.swift */; };
 		498E33EB1C17C7F4000D5B5A /* HintView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498E33EA1C17C7F4000D5B5A /* HintView.swift */; };
 		498E33ED1C17C959000D5B5A /* HintView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 498E33EC1C17C959000D5B5A /* HintView.xib */; };
+		499A08FA1CFB9324001C6F82 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 499A08F91CFB9324001C6F82 /* GoogleService-Info.plist */; };
+		499A09071CFB9762001C6F82 /* GoogleMobileAds.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 499A09021CFB95A6001C6F82 /* GoogleMobileAds.framework */; };
 		49AC9E3B1A87DD67007CE68A /* SelectPencilTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AC9E3A1A87DD67007CE68A /* SelectPencilTableViewController.swift */; };
 		49AC9E3E1A87E120007CE68A /* DefaultDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49AC9E3C1A87E120007CE68A /* DefaultDetailTableViewCell.swift */; };
 		49AC9E3F1A87E120007CE68A /* DefaultDetailTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49AC9E3D1A87E120007CE68A /* DefaultDetailTableViewCell.xib */; };
@@ -79,7 +80,6 @@
 		49DA95CB1B49A03900502991 /* StoreKitProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DA95CA1B49A03900502991 /* StoreKitProduct.swift */; };
 		49DA95CE1B49A8FF00502991 /* StoreKitController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DA95CD1B49A8FF00502991 /* StoreKitController.swift */; };
 		49DF07F71A743A2800BF94D3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DF07F61A743A2800BF94D3 /* AppDelegate.swift */; };
-		49DF07F91A743A2800BF94D3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49DF07F81A743A2800BF94D3 /* ViewController.swift */; };
 		49DF07FE1A743A2800BF94D3 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49DF07FD1A743A2800BF94D3 /* Images.xcassets */; };
 		49DF08011A743A2800BF94D3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 49DF07FF1A743A2800BF94D3 /* LaunchScreen.xib */; };
 		49E8D8BE1A7445400064E682 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 49E8D8BD1A7445400064E682 /* CoreData.framework */; };
@@ -127,7 +127,6 @@
 		491AD0F91AA3C23F0046FE00 /* PencilTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PencilTableViewCell.swift; sourceTree = "<group>"; };
 		491AD0FA1AA3C23F0046FE00 /* PencilTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PencilTableViewCell.xib; sourceTree = "<group>"; };
 		492EBCF21B2CFF120054C59F /* ConfigurationSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConfigurationSettings.swift; sourceTree = "<group>"; };
-		492EBCF41B2E04670054C59F /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		4930BB9E1B519458009A2A22 /* ThankYouViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThankYouViewController.swift; sourceTree = "<group>"; };
 		4930BB9F1B519458009A2A22 /* ThankYouView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ThankYouView.xib; sourceTree = "<group>"; };
 		4930BBA21B51BCEA009A2A22 /* SettingsConfirmPurchaseTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsConfirmPurchaseTableViewController.swift; sourceTree = "<group>"; };
@@ -174,6 +173,8 @@
 		4988FEB91AB61F1B00AE2D89 /* SettingsMinimumStockTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsMinimumStockTableViewController.swift; sourceTree = "<group>"; };
 		498E33EA1C17C7F4000D5B5A /* HintView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HintView.swift; sourceTree = "<group>"; };
 		498E33EC1C17C959000D5B5A /* HintView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HintView.xib; sourceTree = "<group>"; };
+		499A08F91CFB9324001C6F82 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		499A09021CFB95A6001C6F82 /* GoogleMobileAds.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GoogleMobileAds.framework; path = ../GoogleMobileAds.framework; sourceTree = "<group>"; };
 		49AC9E3A1A87DD67007CE68A /* SelectPencilTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectPencilTableViewController.swift; sourceTree = "<group>"; };
 		49AC9E3C1A87E120007CE68A /* DefaultDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultDetailTableViewCell.swift; sourceTree = "<group>"; };
 		49AC9E3D1A87E120007CE68A /* DefaultDetailTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DefaultDetailTableViewCell.xib; sourceTree = "<group>"; };
@@ -189,7 +190,6 @@
 		49DF07F11A743A2800BF94D3 /* Rainbow Fish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Rainbow Fish.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		49DF07F51A743A2800BF94D3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		49DF07F61A743A2800BF94D3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		49DF07F81A743A2800BF94D3 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		49DF07FD1A743A2800BF94D3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		49DF08001A743A2800BF94D3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		49E8D8B71A7443C60064E682 /* CoreDataKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreDataKit.framework; path = ../Carthage/Build/iOS/CoreDataKit.framework; sourceTree = "<group>"; };
@@ -230,9 +230,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				499A09071CFB9762001C6F82 /* GoogleMobileAds.framework in Frameworks */,
 				49CA53381B409EBB00D3E138 /* StoreKit.framework in Frameworks */,
 				49AD281D1C3331E10040B76B /* Crashlytics.framework in Frameworks */,
-				492EBCF51B2E04670054C59F /* iAd.framework in Frameworks */,
 				49AD281C1C3331E10040B76B /* Fabric.framework in Frameworks */,
 				494BA7CE1B0AC9FF0026B2AE /* UIKit.framework in Frameworks */,
 				49E8D8C11A7445670064E682 /* CloudKit.framework in Frameworks */,
@@ -470,7 +470,6 @@
 				49E8D8DF1A7570DF0064E682 /* Categories & Extensions */,
 				49E8D8DA1A7566570064E682 /* Classes */,
 				49E8D8C21A7447180064E682 /* Core Data */,
-				49DF07F81A743A2800BF94D3 /* ViewController.swift */,
 				49DF07FD1A743A2800BF94D3 /* Images.xcassets */,
 				49DF07FF1A743A2800BF94D3 /* LaunchScreen.xib */,
 				49DF07F41A743A2800BF94D3 /* Supporting Files */,
@@ -481,6 +480,7 @@
 		49DF07F41A743A2800BF94D3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				499A08F91CFB9324001C6F82 /* GoogleService-Info.plist */,
 				49EE537F1BFE46A90027E843 /* StartupData */,
 				49EE53581BFA742A0027E843 /* Frameworks */,
 				49DF07F51A743A2800BF94D3 /* Info.plist */,
@@ -609,6 +609,7 @@
 		49EE53581BFA742A0027E843 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				499A09021CFB95A6001C6F82 /* GoogleMobileAds.framework */,
 				4937FC181CE7C16600DE6835 /* Reachability.framework */,
 				49AD281A1C3331E10040B76B /* Fabric.framework */,
 				49AD281B1C3331E10040B76B /* Crashlytics.framework */,
@@ -618,7 +619,6 @@
 				49E8D8C01A7445670064E682 /* CloudKit.framework */,
 				49E8D8BD1A7445400064E682 /* CoreData.framework */,
 				49E8D8B71A7443C60064E682 /* CoreDataKit.framework */,
-				492EBCF41B2E04670054C59F /* iAd.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -722,6 +722,7 @@
 				493F6AC81A8AEB48003636AE /* EditPecilPropertyTableViewCell.xib in Resources */,
 				4938037A1A86AE8900E62FC2 /* EmbeddedPickerTableViewCell.xib in Resources */,
 				491AD0FC1AA3C23F0046FE00 /* PencilTableViewCell.xib in Resources */,
+				499A08FA1CFB9324001C6F82 /* GoogleService-Info.plist in Resources */,
 				493F6ACC1A8AEFBE003636AE /* PencilColorPickerTableViewCell.xib in Resources */,
 				49405C781AA7F69F002F2E83 /* InventoryQuantityTableViewCell.xib in Resources */,
 			);
@@ -822,7 +823,6 @@
 				49E8D8D41A7564400064E682 /* _Manufacturer.swift in Sources */,
 				49E8D8D51A7564400064E682 /* _Pencil.swift in Sources */,
 				494366DE1B2CD80C00868F1F /* SwiftLoader.swift in Sources */,
-				49DF07F91A743A2800BF94D3 /* ViewController.swift in Sources */,
 				493FC6101A86ED5700D8D17F /* DefaultTableViewCell.swift in Sources */,
 				4930BBA31B51BCEA009A2A22 /* SettingsConfirmPurchaseTableViewController.swift in Sources */,
 				49E8D8C51A74474B0064E682 /* rainbow-fish.xcdatamodeld in Sources */,
