@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>16133624081-eu9tc7qp0hqlrnguno25mqqk5h67ddjj.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.16133624081-eu9tc7qp0hqlrnguno25mqqk5h67ddjj</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAK0TY5lKCmkUJRm5Sq0J2B4M1p0qUq-sU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>16133624081</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.clamdango.rainbow-fish</string>
+	<key>PROJECT_ID</key>
+	<string>project-6834661757257976381</string>
+	<key>STORAGE_BUCKET</key>
+	<string>project-6834661757257976381.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:16133624081:ios:25eb49f6a857cc5e</string>
+	<key>DATABASE_URL</key>
+	<string>https://project-6834661757257976381.firebaseio.com</string>
+</dict>
+</plist>
