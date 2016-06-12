@@ -123,15 +123,14 @@ class AppController: NSObject {
     // MARK: google admob settings
     
     lazy var googleAdUnitId: String = {
-        let googleSettingsURL = NSBundle.mainBundle().URLForResource("GoogleService-Info", withExtension: "plist")
-        guard let url = googleSettingsURL else {
-            return "ca-app-pub-3940256099942544/2934735716"
+        guard let
+            infoDictionary = NSBundle.mainBundle().infoDictionary as? [String:AnyObject!],
+            googleAdUnitID = infoDictionary["GoogleAdUnitID"] as? String else {
+                
+                return "ca-app-pub-3940256099942544/2934735716"
+                
         }
-        //NOTE: will need to return official adUnitId.  store in Info.plist
-        if let settings = NSDictionary(contentsOfURL: url), adUnitId = settings["AD_UNIT_ID_FOR_BANNER_TEST"] as? String {
-            return adUnitId
-        }
-        return "ca-app-pub-3940256099942544/2934735716"
+        return googleAdUnitID
     }()
     
     // MARK: core data properties

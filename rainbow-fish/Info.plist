@@ -21,7 +21,7 @@
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>46</string>
+	<string>47</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -36,6 +36,10 @@
 			</dict>
 		</array>
 	</dict>
+	<key>GoogleAdUnitID</key>
+	<string>ca-app-pub-7393959330697156/4714767420</string>
+	<key>GoogleAppID</key>
+	<string>ca-app-pub-7393959330697156~3517235828</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
