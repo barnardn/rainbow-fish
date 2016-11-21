@@ -14,13 +14,13 @@ class SettingsPurchaseOptionsTableViewController: UITableViewController {
     var products: [StoreKitProduct]?
     
     convenience init() {
-        self.init(style: .Grouped)
+        self.init(style: .grouped)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = NSLocalizedString("Purchase", comment:"settings in app purchase view title")
-        tableView.registerNib(UINib(nibName: NameValueTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: NameValueTableViewCell.nibName)
+        tableView.register(UINib(nibName: NameValueTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: NameValueTableViewCell.nibName)
         if !self.storeKitController.canMakePayments() {
             self.displayCantPayAlert()
             return
@@ -29,10 +29,10 @@ class SettingsPurchaseOptionsTableViewController: UITableViewController {
         self.storeKitController.validateProductIdentifiers { [unowned self] (products) -> Void in
             self.hideSmallHUD()
             var allProducts = [self.storeKitController.restorePurchasesProduct]
-            let storeKitProducts = products.sort({ (p1: StoreKitProduct, p2: StoreKitProduct) -> Bool in
+            let storeKitProducts = products.sorted(by: { (p1: StoreKitProduct, p2: StoreKitProduct) -> Bool in
                 return p1.displayPriceValue < p2.displayPriceValue
             })
-            allProducts.appendContentsOf(storeKitProducts)
+            allProducts.append(contentsOf: storeKitProducts)
             self.products = allProducts
             self.tableView.reloadData()
             if !AppController.appController.icloudCurrentlyAvailable {
@@ -41,66 +41,66 @@ class SettingsPurchaseOptionsTableViewController: UITableViewController {
         }
     }
 
-    private func displayCantPayAlert() {
-        let alertController = UIAlertController(title: NSLocalizedString("Unable to Make Payments", comment:"unable to make payments alert title"), message: NSLocalizedString("This account is currently not able to make payments. You may need to disable parental controls to allow in-app purchases", comment:"unable to make payments message"), preferredStyle: .Alert)
-        let action = UIAlertAction(title: NSLocalizedString("Dismiss", comment:"dismiss alert button title"), style: UIAlertActionStyle.Cancel) {
+    fileprivate func displayCantPayAlert() {
+        let alertController = UIAlertController(title: NSLocalizedString("Unable to Make Payments", comment:"unable to make payments alert title"), message: NSLocalizedString("This account is currently not able to make payments. You may need to disable parental controls to allow in-app purchases", comment:"unable to make payments message"), preferredStyle: .alert)
+        let action = UIAlertAction(title: NSLocalizedString("Dismiss", comment:"dismiss alert button title"), style: UIAlertActionStyle.cancel) {
             [unowned self](_) -> Void in
-            self.navigationController?.popToRootViewControllerAnimated(true)
+            let _ = self.navigationController?.popToRootViewController(animated: true)
         }
         alertController.addAction(action)
-        self.presentViewController(alertController, animated: true, completion: nil)
+        self.present(alertController, animated: true, completion: nil)
         alertController.view.tintColor = AppearanceManager.appearanceManager.brandColor
     }
     
-    private func icloudNotAvailableAlert() {
-        let alertController = UIAlertController(title: NSLocalizedString("Unable to Purchase", comment:"can't purchase alert title"), message: NSLocalizedString("Access to iCloud is currently not available. Please verify that you have signed in to your iCloud account from the Settings app", comment:"icloud not available alert message"), preferredStyle: .Alert)
-        let action = UIAlertAction(title: NSLocalizedString("Dismiss", comment:"dismiss alert button title"), style: UIAlertActionStyle.Cancel) {
+    fileprivate func icloudNotAvailableAlert() {
+        let alertController = UIAlertController(title: NSLocalizedString("Unable to Purchase", comment:"can't purchase alert title"), message: NSLocalizedString("Access to iCloud is currently not available. Please verify that you have signed in to your iCloud account from the Settings app", comment:"icloud not available alert message"), preferredStyle: .alert)
+        let action = UIAlertAction(title: NSLocalizedString("Dismiss", comment:"dismiss alert button title"), style: UIAlertActionStyle.cancel) {
             [unowned self](_) -> Void in
-            self.navigationController?.popToRootViewControllerAnimated(true)
+            let _ = self.navigationController?.popToRootViewController(animated: true)
         }
         alertController.addAction(action)
         let viewController = self.presentedViewController ?? self
-        viewController.presentViewController(alertController, animated: true, completion: nil)
+        viewController.present(alertController, animated: true, completion: nil)
         alertController.view.tintColor = AppearanceManager.appearanceManager.brandColor        
     }
     
     
     // MARK: tableview methods
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return self.products?.count ?? 0
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(NameValueTableViewCell.nibName, forIndexPath: indexPath) as! NameValueTableViewCell
-        cell.selectionStyle = .None
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: NameValueTableViewCell.nibName, for: indexPath) as! NameValueTableViewCell
+        cell.selectionStyle = .none
         let product = self.products?[indexPath.section] as StoreKitProduct!
-        cell.name = product.name
-        cell.value = product.displayPrice
+        cell.name = product?.name
+        cell.value = product?.displayPrice
         cell.tintColor = AppearanceManager.appearanceManager.brandColor
-        if let _ = product.details {
-            cell.accessoryType = .DetailDisclosureButton
+        if let _ = product?.details {
+            cell.accessoryType = .detailDisclosureButton
         } else {
-            cell.accessoryType = .DisclosureIndicator
+            cell.accessoryType = .disclosureIndicator
         }
         return cell
     }
     
     //MARK: table view delegate
 
-    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.section == 0 && indexPath.row == 0 {
             let nameValueCell = cell as! NameValueTableViewCell
             nameValueCell.disabledAppearance = AppController.appController.appConfiguration.wasPurchasedSuccessfully
-            nameValueCell.accessoryType = (AppController.appController.appConfiguration.wasPurchasedSuccessfully) ? .None : .DisclosureIndicator
+            nameValueCell.accessoryType = (AppController.appController.appConfiguration.wasPurchasedSuccessfully) ? .none : .disclosureIndicator
         }
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 && indexPath.row == 0 {
             if AppController.appController.appConfiguration.wasPurchasedSuccessfully {
                 return
@@ -117,15 +117,15 @@ class SettingsPurchaseOptionsTableViewController: UITableViewController {
         }
     }
     
-    override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         let product = self.products?[section]
         return product?.summary
     }
     
-    override func tableView(tableView: UITableView, accessoryButtonTappedForRowWithIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
         let product = self.products?[indexPath.section]
         let viewController = ThankYouViewController(message: product?.details)
-        self.presentViewController(viewController, animated: true, completion: nil)
+        self.present(viewController, animated: true, completion: nil)
     }
     
 }

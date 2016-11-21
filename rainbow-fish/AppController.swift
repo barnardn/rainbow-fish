@@ -17,20 +17,20 @@ class AppController: NSObject {
     
     dynamic var bannerAdIsVisible: Bool = false
     
-    private let modelName: String = "rainbow-fish"
-    private let storeName: String = "rainbow-fish.sqlite"
-    private let LastUpdatedDateUserDefaultKey = "LastUpdatedDateUserDefaultKey"
-    private let DataImportKey = "CDOImportIdentifier"
-    private let InventoryHintUserDefaultsKey = "com.clamdango.rainbow-fish.inventoryhintdisplayed"
-    private let config = ConfigurationSettings()
+    fileprivate let modelName: String = "rainbow-fish"
+    fileprivate let storeName: String = "rainbow-fish.sqlite"
+    fileprivate let LastUpdatedDateUserDefaultKey = "LastUpdatedDateUserDefaultKey"
+    fileprivate let DataImportKey = "CDOImportIdentifier"
+    fileprivate let InventoryHintUserDefaultsKey = "com.clamdango.rainbow-fish.inventoryhintdisplayed"
+    fileprivate let config = ConfigurationSettings()
     var icloudCurrentlyAvailable: Bool = false
     
     var didDisplayInventoryHint: Bool {
         get {
-            return NSUserDefaults.standardUserDefaults().boolForKey(InventoryHintUserDefaultsKey)
+            return UserDefaults.standard.bool(forKey: InventoryHintUserDefaultsKey)
         }
         set {
-            NSUserDefaults.standardUserDefaults().setBool(newValue, forKey: InventoryHintUserDefaultsKey)
+            UserDefaults.standard.set(newValue, forKey: InventoryHintUserDefaultsKey)
         }
     }
     
@@ -46,9 +46,9 @@ class AppController: NSObject {
     // MARK: setup and confiugration
     
     func setup() {
-        NSValueTransformer.setValueTransformer(ColorValueTransformer(), forName: "ColorValueTransformer")
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AppController.icloudIdentifierDidChange(_:)), name: NSUbiquityIdentityDidChangeNotification, object: nil)
-        if let _ = NSFileManager.defaultManager().ubiquityIdentityToken {
+        ValueTransformer.setValueTransformer(ColorValueTransformer(), forName: NSValueTransformerName(rawValue: "ColorValueTransformer"))
+        NotificationCenter.default.addObserver(self, selector: #selector(AppController.icloudIdentifierDidChange(_:)), name: NSNotification.Name.NSUbiquityIdentityDidChange, object: nil)
+        if let _ = FileManager.default.ubiquityIdentityToken {
             self.icloudCurrentlyAvailable = true
         } else {
             self.icloudCurrentlyAvailable = false
@@ -60,9 +60,9 @@ class AppController: NSObject {
 
     // MARK: ubiquity notification handler
     
-    func icloudIdentifierDidChange(notification: NSNotification) {
+    func icloudIdentifierDidChange(_ notification: Notification) {
         print("icloudIdentifierDidChange")
-        if let _ = NSFileManager.defaultManager().ubiquityIdentityToken {
+        if let _ = FileManager.default.ubiquityIdentityToken {
             self.icloudCurrentlyAvailable = true
         } else {
             self.icloudCurrentlyAvailable = false
@@ -76,14 +76,14 @@ class AppController: NSObject {
     }
     
     func isNormsiPhone() -> Bool {
-        if let ownerCloudId = AppController.appController.appConfiguration.iCloudRecordID where ownerCloudId == AppController.appController.dataImportKey  {
+        if let ownerCloudId = AppController.appController.appConfiguration.iCloudRecordID, ownerCloudId == AppController.appController.dataImportKey  {
             return true
         }
         return false
     }
     
     lazy var dataImportKey: String = {
-        if  let infoDict = NSBundle.mainBundle().infoDictionary ,
+        if  let infoDict = Bundle.main.infoDictionary ,
             let importKey = infoDict[self.DataImportKey] as? String {
                 return importKey
         }
@@ -91,32 +91,32 @@ class AppController: NSObject {
     }()
     
     func shouldPerformAutomaticProductUpdates() -> Bool {
-        if let lastUpdatedDate = NSUserDefaults.standardUserDefaults().objectForKey(LastUpdatedDateUserDefaultKey) as! NSDate? {
-            let dateComponents = NSCalendar.currentCalendar().components(NSCalendarUnit.Day, fromDate: lastUpdatedDate, toDate: NSDate(), options: NSCalendarOptions())
-            return (dateComponents.day >= 1) && self.icloudCurrentlyAvailable
+        if let lastUpdatedDate = UserDefaults.standard.object(forKey: LastUpdatedDateUserDefaultKey) as! Date? {
+            let dateComponents = (Calendar.current as NSCalendar).components(NSCalendar.Unit.day, from: lastUpdatedDate, to: Date(), options: NSCalendar.Options())
+            return (dateComponents.day! >= 1) && self.icloudCurrentlyAvailable
         }
         return true
     }
 
-    func updateLastUpdatedDateToNow() -> NSDate {
-        let now = NSDate()
-        NSUserDefaults.standardUserDefaults().setObject(now, forKey: LastUpdatedDateUserDefaultKey)
+    @discardableResult func updateLastUpdatedDateToNow() -> Date {
+        let now = Date()
+        UserDefaults.standard.set(now, forKey: LastUpdatedDateUserDefaultKey)
         return now
     }
 
-    func lastUpdatedDate() -> NSDate? {
-        let date = NSUserDefaults.standardUserDefaults().objectForKey(LastUpdatedDateUserDefaultKey) as! NSDate?
+    func lastUpdatedDate() -> Date? {
+        let date = UserDefaults.standard.object(forKey: LastUpdatedDateUserDefaultKey) as! Date?
         return date
     }
     
     func allowsAppIconBadge() -> Bool {
-        let notificationSettings = UIApplication.sharedApplication().currentUserNotificationSettings()
-        return (notificationSettings!.types.intersect(UIUserNotificationType.Badge)) != []
+        let notificationSettings = UIApplication.shared.currentUserNotificationSettings
+        return (notificationSettings!.types.intersection(UIUserNotificationType.badge)) != []
     }
     
     func setAppIconBadgeNumber(badgeNumber value: Int) {
         if allowsAppIconBadge() {
-            UIApplication.sharedApplication().applicationIconBadgeNumber = value
+            UIApplication.shared.applicationIconBadgeNumber = value
         }
     }
     
@@ -124,8 +124,8 @@ class AppController: NSObject {
     
     lazy var googleAdUnitId: String = {
         guard let
-            infoDictionary = NSBundle.mainBundle().infoDictionary as? [String:AnyObject!],
-            googleAdUnitID = infoDictionary["GoogleAdUnitID"] as? String else {
+            infoDictionary = Bundle.main.infoDictionary as? [String:AnyObject?],
+            let googleAdUnitID = infoDictionary["GoogleAdUnitID"] as? String else {
                 
                 return "ca-app-pub-3940256099942544/2934735716"
                 
@@ -136,8 +136,8 @@ class AppController: NSObject {
     // MARK: core data properties
     
     lazy var managedObjectModel: NSManagedObjectModel = {
-        let modelURL = NSBundle.mainBundle().URLForResource(self.modelName, withExtension: "momd")!
-        return NSManagedObjectModel(contentsOfURL: modelURL)!
+        let modelURL = Bundle.main.url(forResource: self.modelName, withExtension: "momd")!
+        return NSManagedObjectModel(contentsOf: modelURL)!
     }()
     
     lazy var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
@@ -149,11 +149,11 @@ class AppController: NSObject {
     
     // MARK: application folder methods
 
-    lazy var applicationSupportFolderURL: NSURL = {
-        return NSFileManager.defaultManager().applicationSupportDirectory()
+    lazy var applicationSupportFolderURL: URL = {
+        return FileManager.default.applicationSupportDirectory()
     }()
     
-    func urlForResourceInApplicationSupport(resourceName resourceName: String) -> NSURL {
-        return self.applicationSupportFolderURL.URLByAppendingPathComponent(resourceName)
+    func urlForResourceInApplicationSupport(resourceName: String) -> URL {
+        return self.applicationSupportFolderURL.appendingPathComponent(resourceName)
     }
 }

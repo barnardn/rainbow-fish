@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ProductFooterViewDelegate : class {
-    func productFooterView(view: ProductFooterView, newProductForManufacturer manufacturer: Manufacturer)
+    func productFooterView(_ view: ProductFooterView, newProductForManufacturer manufacturer: Manufacturer)
 }
 
 
@@ -20,12 +20,12 @@ class ProductFooterView: UITableViewHeaderFooterView {
     var manufacturer: Manufacturer?
     
     lazy var addButton: UIButton = {
-        let button = UIButton(frame: CGRectZero)
-        button.setTitle(NSLocalizedString("+ Add Product", comment:"all pencils footer view button title"), forState: .Normal)
-        button.setTitleColor(AppearanceManager.appearanceManager.brandColor, forState: .Normal)
-        button.setTitleColor(AppearanceManager.appearanceManager.tableHeaderColor, forState: .Highlighted)
+        let button = UIButton(frame: CGRect.zero)
+        button.setTitle(NSLocalizedString("+ Add Product", comment:"all pencils footer view button title"), for: UIControlState())
+        button.setTitleColor(AppearanceManager.appearanceManager.brandColor, for: UIControlState())
+        button.setTitleColor(AppearanceManager.appearanceManager.tableHeaderColor, for: .highlighted)
         button.titleLabel?.font = AppearanceManager.appearanceManager.subtitleFont
-        button.addTarget(self, action: #selector(SelectPencilTableViewController.addButtonTapped(_:)), forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: #selector(SelectPencilTableViewController.addButtonTapped(_:)), for: .touchUpInside)
         return button
     }()
     
@@ -37,18 +37,18 @@ class ProductFooterView: UITableViewHeaderFooterView {
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         self.contentView.addSubview(self.addButton)
-        self.contentView.backgroundColor = UIColor.whiteColor()
-        self.userInteractionEnabled = true
+        self.contentView.backgroundColor = UIColor.white
+        self.isUserInteractionEnabled = true
     }
 
     override func layoutSubviews() {
         self.contentView.frame = self.bounds
-        self.addButton.frame = CGRectMake(10.0, 0.0, 100.0, ProductFooterView.footerHeight)
+        self.addButton.frame = CGRect(x: 10.0, y: 0.0, width: 100.0, height: ProductFooterView.footerHeight)
     }
     
     //MARK: button actions
     
-    func addButtonTapped(sender: UIButton) {
+    func addButtonTapped(_ sender: UIButton) {
         if let delegate = self.delegate {
             if let manufacturer = self.manufacturer {
                 delegate.productFooterView(self, newProductForManufacturer: manufacturer)

@@ -12,7 +12,7 @@ import StoreKit
 
 class StoreKitController: NSObject {
     
-    private let ProductConfigurationPlist = "purchase-options.plist"
+    fileprivate let ProductConfigurationPlist = "purchase-options.plist"
     var productRequestCompletion: (([StoreKitProduct])->Void)?
     var forSaleProducts: [String:SKProduct]?
     
@@ -33,7 +33,7 @@ class StoreKitController: NSObject {
         return SKPaymentQueue.canMakePayments()
     }
 
-    func validateProductIdentifiers(completion:([StoreKitProduct])->Void) {
+    func validateProductIdentifiers(_ completion:@escaping ([StoreKitProduct])->Void) {
         let identifiers = self.configuredProducts.map { (product)  in
             return product.productID as String
         }
@@ -44,7 +44,7 @@ class StoreKitController: NSObject {
         request.start()
     }
     
-    func productListingForIdentifier(identifier: String) -> StoreKitProduct? {
+    func productListingForIdentifier(_ identifier: String) -> StoreKitProduct? {
         let results = self.configuredProducts.filter {
             return $0.productID == identifier
         }
@@ -55,19 +55,19 @@ class StoreKitController: NSObject {
         return self.forSaleProducts?[product.productID]
     }
     
-    func formattedPrice(price: NSDecimalNumber, forLocale locale: NSLocale) -> String {
-        let numberFormatter = NSNumberFormatter()
-        numberFormatter.formatterBehavior = NSNumberFormatterBehavior.Behavior10_4
+    func formattedPrice(_ price: NSDecimalNumber, forLocale locale: Locale) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.formatterBehavior = NumberFormatter.Behavior.behavior10_4
         numberFormatter.locale = locale
-        numberFormatter.numberStyle = .CurrencyStyle
-        return numberFormatter.stringFromNumber(price)!
+        numberFormatter.numberStyle = .currency
+        return numberFormatter.string(from: price)!
     }
     
 }
 
 extension StoreKitController: SKProductsRequestDelegate {
     
-    func productsRequest(request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
+    func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
         var forSale = [String:SKProduct]()
         var productListings = [StoreKitProduct]()
         for prod in response.products {

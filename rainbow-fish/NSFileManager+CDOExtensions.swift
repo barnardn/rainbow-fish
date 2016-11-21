@@ -8,21 +8,24 @@
 
 import Foundation
 
-extension NSFileManager {
+extension FileManager {
     
-    func applicationSupportDirectory() -> NSURL {
+    func applicationSupportDirectory() -> URL {
         
-        let urls = NSFileManager.defaultManager().URLsForDirectory(.ApplicationSupportDirectory, inDomains: .UserDomainMask)
-        let appSupport =  urls.last as NSURL!
-        
-        var error: NSError?
-        if !appSupport.checkResourceIsReachableAndReturnError(&error) {
-            do {
-                try NSFileManager.defaultManager().createDirectoryAtURL(appSupport, withIntermediateDirectories: true, attributes: nil)
-            } catch let createError as NSError {
-                assertionFailure(createError.localizedDescription)
+        let urls = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)
+        let appSupport =  urls.first!
+
+        do {
+            
+            let exists = try appSupport.checkResourceIsReachable()
+            if !exists {
+                try FileManager.default.createDirectory(at: appSupport, withIntermediateDirectories: true, attributes: nil)
             }
+            
+        } catch let error as NSError {
+            assertionFailure(error.localizedDescription)
         }
+        
         return appSupport
     }
     

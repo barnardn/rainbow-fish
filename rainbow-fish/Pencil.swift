@@ -4,37 +4,37 @@ import CoreDataKit
 import UIKit
 
 @objc(Pencil)
-public class Pencil: _Pencil, NamedManagedObject {
+open class Pencil: _Pencil, NamedManagedObject {
 
     // MARK: NSManagedObject overrides
     
-    override public func awakeFromInsert() {
+    override open func awakeFromInsert() {
         super.awakeFromInsert()
         self.isNew = true
     }
 
-    override public func awakeFromFetch() {
+    override open func awakeFromFetch() {
         super.awakeFromFetch()
         self.isNew = false
     }
     
-    public class var entityName : String {
-        return self.mogen_entityName()
+    open class var entityName : String {
+        return self.entityName()
     }
     
 }
 
 extension Pencil: CloudSyncable {
     
-    func populateFromCKRecord(record: CKRecord) {
+    func populateFromCKRecord(_ record: CKRecord) {
         self.recordID = record.recordID.recordName
-        if let colorValue = record.objectForKey(PencilAttributes.color.rawValue) as? String {
+        if let colorValue = record.object(forKey: PencilAttributes.color.rawValue) as? String {
             self.color = UIColor.colorFromRGBString(colorValue)
         }
         self.modificationDate = record.modificationDate
-        self.name = record.objectForKey(PencilAttributes.name.rawValue) as? String
-        self.identifier = record.objectForKey(PencilAttributes.identifier.rawValue) as? String
-        self.ownerRecordIdentifier = record.objectForKey(PencilAttributes.ownerRecordIdentifier.rawValue) as? String
+        self.name = record.object(forKey: PencilAttributes.name.rawValue) as? String
+        self.identifier = record.object(forKey: PencilAttributes.identifier.rawValue) as? String
+        self.ownerRecordIdentifier = record.object(forKey: PencilAttributes.ownerRecordIdentifier.rawValue) as? String
     }
     
     func toCKRecord() -> CKRecord {
@@ -54,7 +54,7 @@ extension Pencil: CloudSyncable {
         return record
     }
     
-    func toJson(includeRelationships: Bool = false ) -> NSDictionary {
+    func toJson(_ includeRelationships: Bool = false ) -> NSDictionary {
         
         let jsonObject = NSMutableDictionary()
         jsonObject[PencilAttributes.recordID.rawValue] = self.recordID
@@ -81,8 +81,8 @@ extension Pencil {
     }
     
     func canSave() -> Bool {
-        if  let identifierLength = self.identifier?.lengthOfBytesUsingEncoding(NSUTF8StringEncoding),
-            let nameLength = self.name?.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) {
+        if  let identifierLength = self.identifier?.lengthOfBytes(using: String.Encoding.utf8),
+            let nameLength = self.name?.lengthOfBytes(using: String.Encoding.utf8) {
                 return (identifierLength > 0 && nameLength > 0)
         }
         return false
@@ -98,8 +98,8 @@ extension Pencil {
     
     // MARK: cloud kit methods
     
-    func ckReferenceWithProductRecord(productRecord: CKRecord) -> CKReference {
-        let reference = CKReference(record: productRecord, action: .DeleteSelf)
+    func ckReferenceWithProductRecord(_ productRecord: CKRecord) -> CKReference {
+        let reference = CKReference(record: productRecord, action: .deleteSelf)
         let pencilRecord = self.toCKRecord()
         pencilRecord.setValue(reference, forKey: PencilRelationships.product.rawValue)
         return reference

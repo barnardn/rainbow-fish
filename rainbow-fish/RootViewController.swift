@@ -15,10 +15,10 @@ import GoogleMobileAds
 
 class RootViewController: UITabBarController {
 
-    private var showingAd: Bool = false
-    private var skPaymentObserver: StoreKitPaymentObserver = StoreKitPaymentObserver()
+    fileprivate var showingAd: Bool = false
+    fileprivate var skPaymentObserver: StoreKitPaymentObserver = StoreKitPaymentObserver()
     
-    private lazy var adBannerView : GADBannerView = {
+    fileprivate lazy var adBannerView : GADBannerView = {
         let bannerView = GADBannerView(adSize: kGADAdSizeSmartBannerLandscape)
         return bannerView
     }()
@@ -29,18 +29,18 @@ class RootViewController: UITabBarController {
     
     init() {
         super.init(nibName: nil, bundle: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(RootViewController.updateProductsNotificationHandler(_:)), name: UIApplicationDidBecomeActiveNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(RootViewController.updateStoreKitPurchaseStatus(_:)), name: StoreKitPurchaseNotificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(RootViewController.updateProductsNotificationHandler(_:)), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(RootViewController.updateStoreKitPurchaseStatus(_:)), name: NSNotification.Name(rawValue: StoreKitPurchaseNotificationName), object: nil)
         viewControllers = [
                 InventoryNavigationController(),
                 CatalogNavigationController(),
                 SettingsNavigationController()
         ]
-        SKPaymentQueue.defaultQueue().addTransactionObserver(self.skPaymentObserver)
+        SKPaymentQueue.default().add(self.skPaymentObserver)
     }
 
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     override func viewDidLoad() {
@@ -54,7 +54,7 @@ class RootViewController: UITabBarController {
             self.adBannerView.rootViewController = self
             let request = GADRequest()
             request.testDevices = [kGADSimulatorID]
-            self.adBannerView.loadRequest(request)
+            self.adBannerView.load(request)
         }
         if AppController.appController.appConfiguration.iCloudRecordID == nil {
             self.obtainCloudRecordId(performUpdate: true)
@@ -65,22 +65,22 @@ class RootViewController: UITabBarController {
         super.viewDidLayoutSubviews()
         
         if !AppController.appController.appConfiguration.wasPurchasedSuccessfully {
-            self.adBannerView.frame = CGRect(x: CGFloat(0.0), y: CGRectGetMinY(self.tabBar.frame), width: CGRectGetWidth(self.view.bounds), height: CGFloat(50))
+            self.adBannerView.frame = CGRect(x: CGFloat(0.0), y: self.tabBar.frame.minY, width: self.view.bounds.width, height: CGFloat(50))
         }
         
     }
     
     // MARK: --= notification handlers =--
     
-    func updateProductsNotificationHandler(notification: NSNotification) {
-        if let _ = AppController.appController.lastUpdatedDate() as NSDate? {
+    func updateProductsNotificationHandler(_ notification: Notification) {
+        if let _ = AppController.appController.lastUpdatedDate() as Date? {
             if AppController.appController.shouldPerformAutomaticProductUpdates() {
                 self.updateProducts()
             }
         }
     }
     
-    func updateStoreKitPurchaseStatus(notification: NSNotification) {
+    func updateStoreKitPurchaseStatus(_ notification: Notification) {
         if let userInfo = notification.userInfo as? [String:AnyObject] {
             var message: String = ""
             let purchaseResult = userInfo[StoreKitPurchaseResultTypeKey] as! String
@@ -105,7 +105,7 @@ class RootViewController: UITabBarController {
         }
     }
     
-    private func disableBannerAds() {
+    fileprivate func disableBannerAds() {
         if let _ = self.adBannerView.superview {
             self.adBannerView.delegate = nil
             self.adBannerView.removeFromSuperview()
@@ -114,7 +114,7 @@ class RootViewController: UITabBarController {
     
     // MARK: --= private methods =--
     
-    private func updateProducts() {
+    fileprivate func updateProducts() {
         self.showHUD(message: "Updating...")
         CloudManager.sharedManger.refreshManufacturersAndProducts{ [unowned self] (success, error) in
             self.hideHUD()
@@ -125,12 +125,12 @@ class RootViewController: UITabBarController {
             } else {
                 let _  = AppController.appController.updateLastUpdatedDateToNow()
             }
-            NSNotificationCenter.defaultCenter().postNotificationName(AppNotifications.DidFinishCloudUpdate.rawValue, object: nil)
+            NotificationCenter.default.post(name: Notification.Name(rawValue: AppNotifications.DidFinishCloudUpdate.rawValue), object: nil)
             
         }
     }
     
-    private func obtainCloudRecordId(performUpdate performUpdate: Bool) {
+    fileprivate func obtainCloudRecordId(performUpdate: Bool) {
         self.showHUD(message: "Setup...")
         CloudManager.sharedManger.fetchUserRecordID({ [unowned self] (recordID, error) -> Void in
             self.hideHUD()
@@ -151,32 +151,32 @@ class RootViewController: UITabBarController {
                 } else {
                     let _  = AppController.appController.updateLastUpdatedDateToNow()
                 }
-                NSNotificationCenter.defaultCenter().postNotificationName(AppNotifications.DidFinishCloudUpdate.rawValue, object: nil)
+                NotificationCenter.default.post(name: Notification.Name(rawValue: AppNotifications.DidFinishCloudUpdate.rawValue), object: nil)
 
             }
         })
     }
     
-    private func askUserToLoginToiCloud() {
-        let retryAlert = UIAlertController(title: NSLocalizedString("iCloud Login Required", comment:"icloud alert title"), message: NSLocalizedString("This app requires the use of iCloud. Please go to your settings and either log in or create an iCloud account.", comment:"icloud alert message"), preferredStyle: UIAlertControllerStyle.Alert);
-        let retryAction = UIAlertAction(title: NSLocalizedString("Retry", comment:"retry alert button"), style: UIAlertActionStyle.Default) {
+    fileprivate func askUserToLoginToiCloud() {
+        let retryAlert = UIAlertController(title: NSLocalizedString("iCloud Login Required", comment:"icloud alert title"), message: NSLocalizedString("This app requires the use of iCloud. Please go to your settings and either log in or create an iCloud account.", comment:"icloud alert message"), preferredStyle: UIAlertControllerStyle.alert);
+        let retryAction = UIAlertAction(title: NSLocalizedString("Retry", comment:"retry alert button"), style: UIAlertActionStyle.default) {
             [unowned self] (_) -> Void in
                 self.obtainCloudRecordId(performUpdate: true)
         }
         retryAlert.addAction(retryAction)
-        self.presentViewController(retryAlert, animated: true) { () -> Void in
+        self.present(retryAlert, animated: true) { () -> Void in
             retryAlert.view.tintColor = AppearanceManager.appearanceManager.brandColor
         }
         retryAlert.view.tintColor = AppearanceManager.appearanceManager.brandColor
     }
     
-    private func presentStoreKitTransactionMessage(message: String) {
-        let alertController = UIAlertController(title: NSLocalizedString("In-App Purchase", comment:"app store alert title"), message: message, preferredStyle: .Alert)
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("Dismiss", comment:"dismiss alert button title"), style: UIAlertActionStyle.Default, handler: nil))
+    fileprivate func presentStoreKitTransactionMessage(_ message: String) {
+        let alertController = UIAlertController(title: NSLocalizedString("In-App Purchase", comment:"app store alert title"), message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("Dismiss", comment:"dismiss alert button title"), style: UIAlertActionStyle.default, handler: nil))
         alertController.view.tintColor = AppearanceManager.appearanceManager.brandColor
         
         let viewController = self.presentedViewController ?? self
-        viewController.presentViewController(alertController, animated: true) { () -> Void in
+        viewController.present(alertController, animated: true) { () -> Void in
             alertController.view.tintColor = AppearanceManager.appearanceManager.brandColor
         }
         alertController.view.tintColor = AppearanceManager.appearanceManager.brandColor
@@ -188,22 +188,22 @@ class RootViewController: UITabBarController {
 
 extension RootViewController: GADBannerViewDelegate {
     
-    func adViewDidReceiveAd(bannerView: GADBannerView!) {
+    func adViewDidReceiveAd(_ bannerView: GADBannerView!) {
         if (!AppController.appController.bannerAdIsVisible) {
-            UIView.animateWithDuration(0.5, animations: {() -> Void in
-                bannerView.frame = CGRectOffset(bannerView.frame, 0, -CGRectGetHeight(bannerView.frame))
+            UIView.animate(withDuration: 0.5, animations: {() -> Void in
+                bannerView.frame = bannerView.frame.offsetBy(dx: 0, dy: -bannerView.frame.height)
             }, completion: { (_) -> Void in
                 AppController.appController.bannerAdIsVisible = true
             })
         }
     }
 
-    func adView(bannerView: GADBannerView!, didFailToReceiveAdWithError error: GADRequestError!) {
+    func adView(_ bannerView: GADBannerView!, didFailToReceiveAdWithError error: GADRequestError!) {
         if (!AppController.appController.bannerAdIsVisible) {
             return
         }
-        UIView.animateWithDuration(0.5, animations: { () -> Void in
-            bannerView.frame = CGRectOffset(bannerView.frame, 0, CGRectGetHeight(bannerView.frame))
+        UIView.animate(withDuration: 0.5, animations: { () -> Void in
+            bannerView.frame = bannerView.frame.offsetBy(dx: 0, dy: bannerView.frame.height)
         }, completion: { (_) -> Void in
             AppController.appController.bannerAdIsVisible = false
         })

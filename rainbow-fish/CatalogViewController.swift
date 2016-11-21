@@ -12,39 +12,39 @@ import CoreDataKit
 
 class CatalogViewController: ContentTableViewController {
 
-    private var allManufacturers =  [Manufacturer]()
-    private var recordCreatorID : String? = ""
-    private var catalogContext = 0
+    fileprivate var allManufacturers =  [Manufacturer]()
+    fileprivate var recordCreatorID : String? = ""
+    fileprivate var catalogContext = 0
     
     lazy var backButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(title: NSLocalizedString("Catalog", comment:"all pencils back button title"), style: .Plain, target: nil, action: nil)
+        let button = UIBarButtonItem(title: NSLocalizedString("Catalog", comment:"all pencils back button title"), style: .plain, target: nil, action: nil)
         return button
     }()
     
     lazy var editButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(barButtonSystemItem: .Edit, target: self, action: #selector(CatalogViewController.editButtonTapped(_:)))
+        let button = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(CatalogViewController.editButtonTapped(_:)))
         return button
     }()
     
     convenience init() {
-        self.init(style: UITableViewStyle.Grouped)
+        self.init(style: UITableViewStyle.grouped)
         self.title = NSLocalizedString("Catalog", comment:"catalog navigation title")
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(CatalogViewController.updateDatasource), name: AppNotifications.DidFinishCloudUpdate.rawValue, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(CatalogViewController.updateDatasource), name: NSNotification.Name(rawValue: AppNotifications.DidFinishCloudUpdate.rawValue), object: nil)
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self);
+        NotificationCenter.default.removeObserver(self);
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.registerNib(UINib(nibName: ProductTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: ProductTableViewCell.nibName)
-        self.tableView.registerClass(ProductHeaderView.self, forHeaderFooterViewReuseIdentifier: "ProductHeaderView")
-        self.tableView.registerClass(ProductFooterView.self, forHeaderFooterViewReuseIdentifier: "ProductFooterView")
+        self.tableView.register(UINib(nibName: ProductTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: ProductTableViewCell.nibName)
+        self.tableView.register(ProductHeaderView.self, forHeaderFooterViewReuseIdentifier: "ProductHeaderView")
+        self.tableView.register(ProductFooterView.self, forHeaderFooterViewReuseIdentifier: "ProductFooterView")
         self.tableView!.rowHeight = ProductTableViewCell.estimatedRowHeight
         self.refreshControl = UIRefreshControl()
         self.refreshControl?.tintColor = AppearanceManager.appearanceManager.brandColor
-        self.refreshControl?.addTarget(self, action: #selector(CatalogViewController.refreshControlDidChange(_:)), forControlEvents: .ValueChanged)
+        self.refreshControl?.addTarget(self, action: #selector(CatalogViewController.refreshControlDidChange(_:)), for: .valueChanged)
 
 // NOTE: not allowing product and manufacturer inserts/edits at this point
         
@@ -58,7 +58,7 @@ class CatalogViewController: ContentTableViewController {
         self.updateDatasource()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if AppController.appController.shouldFetchCatalogOnDisplay {
             AppController.appController.shouldFetchCatalogOnDisplay = false
@@ -68,19 +68,21 @@ class CatalogViewController: ContentTableViewController {
     
     // MARK: button action
     
-    func editButtonTapped(sender: UIBarButtonItem) {
+    func editButtonTapped(_ sender: UIBarButtonItem) {
         let editViewController = EditMfgTableViewController()
         self.navigationController?.setViewControllers([editViewController], animated: true)
     }
     
-    func addButtonTapped(sender: UIBarButtonItem) {
+    func addButtonTapped(_ sender: UIBarButtonItem) {
         let viewController = EditManufacturerNavigationController(manufacturer: nil) { [unowned self] (didSave, edittedText, sender) -> Void in
             if !didSave {
-                self.dismissViewControllerAnimated(true, completion: nil)
+                self.dismiss(animated: true, completion: nil)
                 return
             }
-            sender?.enabled = false
-            let manufacturer = Manufacturer(managedObjectContext: CDK.mainThreadContext)
+            sender?.isEnabled = false
+            guard let manufacturer = Manufacturer(managedObjectContext: CDK.mainThreadContext) else {
+                return
+            }
             manufacturer.ownerRecordIdentifier = self.recordCreatorID
             let name = edittedText
             manufacturer.name = name
@@ -89,28 +91,28 @@ class CatalogViewController: ContentTableViewController {
                 try CDK.mainThreadContext.save()
                 self.syncManufacturer(manufacturer, completionHandler: { [unowned self] (success: Bool, error: NSError?) -> Void in
                     if let error = error {
-                        sender?.enabled = true
+                        sender?.isEnabled = true
                         assertionFailure(error.localizedDescription)
                     }
-                    self.dismissViewControllerAnimated(true, completion: nil)
+                    self.dismiss(animated: true, completion: nil)
                     self.updateDatasource()
                 })
             } catch let error1 as NSError {
                 error = error1
-                sender?.enabled = true
+                sender?.isEnabled = true
                 assertionFailure(error!.localizedDescription)
             } catch {
                 fatalError()
             }
         }
-        self.presentViewController(viewController, animated: true, completion: nil)
+        self.present(viewController, animated: true, completion: nil)
     }
     
-    func refreshControlDidChange(sender: UIRefreshControl) {
+    func refreshControlDidChange(_ sender: UIRefreshControl) {
         self.cloudUpdate()
     }
     
-    private func cloudUpdate() {
+    fileprivate func cloudUpdate() {
         if (!AppController.appController.icloudCurrentlyAvailable) {
             self.refreshControl?.endRefreshing()            
             return
@@ -134,7 +136,7 @@ class CatalogViewController: ContentTableViewController {
         self.tableView!.reloadData()
     }
     
-    private func syncManufacturer(manufacturer: Manufacturer, completionHandler: ((Bool, NSError?) -> Void)) {
+    fileprivate func syncManufacturer(_ manufacturer: Manufacturer, completionHandler: @escaping ((Bool, NSError?) -> Void)) {
         let record = manufacturer.toCKRecord()
         self.showHUD()
         
@@ -154,7 +156,7 @@ class CatalogViewController: ContentTableViewController {
             } catch {
                 fatalError()
             }
-            if let parentContext = CDK.mainThreadContext.parentContext {
+            if let parentContext = CDK.mainThreadContext.parent {
                 do {
                     try parentContext.save()
                 } catch let error as NSError {
@@ -164,31 +166,31 @@ class CatalogViewController: ContentTableViewController {
                 }
             }
             if let error = saveError {
-                dispatch_async(dispatch_get_main_queue()) { completionHandler(false, error) }
+                DispatchQueue.main.async { completionHandler(false, error) }
                 return
             }
-            dispatch_async(dispatch_get_main_queue()) { completionHandler(true, nil) }
+            DispatchQueue.main.async { completionHandler(true, nil) }
         })
     }
     
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return allManufacturers.count ?? 0
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return allManufacturers.count 
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let manufacturer = allManufacturers[section] as Manufacturer
         return manufacturer.products.count
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(ProductTableViewCell.nibName, forIndexPath: indexPath) as! ProductTableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: ProductTableViewCell.nibName, for: indexPath) as! ProductTableViewCell
         let product = productAtIndexPath(indexPath)
         cell.title = product?.name
         return cell
     }
     
-    func productAtIndexPath(indexPath: NSIndexPath) -> Product? {
+    func productAtIndexPath(_ indexPath: IndexPath) -> Product? {
         let manufacturer = allManufacturers[indexPath.section] as Manufacturer
         if let products = manufacturer.sortedProducts() {
             return products[indexPath.row]
@@ -197,14 +199,14 @@ class CatalogViewController: ContentTableViewController {
     }
     
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let product = productAtIndexPath(indexPath) {
             self.navigationController?.pushViewController(SelectPencilTableViewController(product: product), animated: true)
         }
     }
     
-    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier("ProductHeaderView") as! ProductHeaderView
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "ProductHeaderView") as! ProductHeaderView
         let manufacturer = allManufacturers[section] as Manufacturer
         headerView.title = manufacturer.name
         return headerView
@@ -221,11 +223,11 @@ class CatalogViewController: ContentTableViewController {
 //        return footerview
 //    }
     
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return ProductHeaderView.headerHeight;
     }
     
-    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return ProductFooterView.footerHeight
     }
     
@@ -233,13 +235,13 @@ class CatalogViewController: ContentTableViewController {
 
 extension CatalogViewController: ProductFooterViewDelegate {
     
-    func productFooterView(view: ProductFooterView, newProductForManufacturer manufacturer: Manufacturer) {
+    func productFooterView(_ view: ProductFooterView, newProductForManufacturer manufacturer: Manufacturer) {
         let viewController = EditProductNavigationController(product: nil) { [unowned self] (didSave, edittedText, sender) -> Void in
             if didSave {
-                sender?.enabled = false
+                sender?.isEnabled = false
                 let name = edittedText
                 if let context = manufacturer.managedObjectContext {
-                    let product = Product(managedObjectContext: context)
+                    let product = Product(managedObjectContext: context)!
                     product.name = name
                     product.ownerRecordIdentifier = self.recordCreatorID
                     manufacturer.addProductsObject(product)
@@ -256,38 +258,38 @@ extension CatalogViewController: ProductFooterViewDelegate {
                     }
                     assert(ok, "unable to save: \(error?.localizedDescription)")
                     if !ok {
-                        sender?.enabled = true
+                        sender?.isEnabled = true
                     }
                     self.syncProduct(product, forManufacturer: manufacturer, completion: { [unowned self] (success, error) -> Void in
                         assert(success, error!.localizedDescription)
                         self.updateDatasource()
-                        self.dismissViewControllerAnimated(true, completion: nil)
+                        self.dismiss(animated: true, completion: nil)
                     })
                 }
             } else {
-                self.dismissViewControllerAnimated(true, completion: nil)
+                self.dismiss(animated: true, completion: nil)
             }
         }
-        self.presentViewController(viewController, animated: true, completion: nil)
+        self.present(viewController, animated: true, completion: nil)
     }
     
-    private func syncProduct(product: Product, forManufacturer manufacturer: Manufacturer, completion: ((Bool, NSError?) -> Void)) {
+    fileprivate func syncProduct(_ product: Product, forManufacturer manufacturer: Manufacturer, completion: @escaping ((Bool, NSError?) -> Void)) {
         let productRecord = product.toCKRecord()
         productRecord.assignParentReference(parentRecord: manufacturer.toCKRecord(), relationshipName: ProductRelationships.manufacturer.rawValue)
         self.showHUD()
         CloudManager.sharedManger.syncChangeSet([productRecord], completion: { (success, returnedRecords, error) -> Void in
             self.hideHUD()
             assert(success, error!.localizedDescription)
-            product.managedObjectContext?.performBlock({(_) in
+            product.managedObjectContext?.perform(block: {(_) in
                 if let results = returnedRecords {
                     if let rec = results.first {
                         product.populateFromCKRecord(rec)
                     }
                 }
-                return .SaveToPersistentStore
+                return .saveToPersistentStore
                 }, completionHandler: { (result) -> Void in
                     do {
-                        try result()
+                        let _ = try result()
                         completion(false, nil)
                     } catch let error as NSError {
                         completion(true, error)

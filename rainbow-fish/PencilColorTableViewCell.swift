@@ -10,8 +10,8 @@ import UIKit
 
 class PencilColorTableViewCell: UITableViewCell {
     
-    @IBOutlet private weak var colorLabel: UILabel!
-    @IBOutlet private weak var swatchView: UIView!
+    @IBOutlet fileprivate weak var colorLabel: UILabel!
+    @IBOutlet fileprivate weak var swatchView: UIView!
 
     var colorName: String? {
         didSet {
@@ -21,18 +21,18 @@ class PencilColorTableViewCell: UITableViewCell {
     
     var swatchColor: UIColor? {
         didSet {
-            self.swatchView.backgroundColor = self.swatchColor ?? UIColor.blackColor()
+            self.swatchView.backgroundColor = self.swatchColor ?? UIColor.black
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.contentView.backgroundColor = UIColor.whiteColor()
-        self.selectionStyle = .None
+        self.contentView.backgroundColor = UIColor.white
+        self.selectionStyle = .none
         self.colorLabel.textColor = AppearanceManager.appearanceManager.brandColor
         self.colorLabel.font = AppearanceManager.appearanceManager.nameLabelFont
         self.swatchView.layer.borderWidth = 1.0
-        self.swatchView.layer.borderColor = UIColor.blackColor().CGColor
+        self.swatchView.layer.borderColor = UIColor.black.cgColor
     }
     
     class var nibName: String { return "PencilColorTableViewCell" }

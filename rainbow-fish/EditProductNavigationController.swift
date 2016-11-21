@@ -10,7 +10,7 @@ import UIKit
 
 class EditProductNavigationController: UINavigationController {
    
-    convenience init(product: Product?, completion: EditTextFieldTableViewCompletionBlock) {
+    convenience init(product: Product?, completion: @escaping EditTextFieldTableViewCompletionBlock) {
         self.init(nibName: nil, bundle: nil)
         var viewController: EditTextFieldTableViewController!
         if let p = product {

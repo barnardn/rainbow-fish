@@ -7,27 +7,51 @@
 //
 
 import UIKit
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
 
-typealias EditTextFieldTableViewCompletionBlock = (didSave: Bool, edittedText: String?, sender: UIBarButtonItem?) -> Void
+// FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
+// Consider refactoring the code to use the non-optional operators.
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
+
+typealias EditTextFieldTableViewCompletionBlock = (_ didSave: Bool, _ edittedText: String?, _ sender: UIBarButtonItem?) -> Void
 
 class EditTextFieldTableViewController: UITableViewController {
 
-    private var defaultText: String?
-    private var placeholder: String?
-    private var completion: EditTextFieldTableViewCompletionBlock?
+    fileprivate var defaultText: String?
+    fileprivate var placeholder: String?
+    fileprivate var completion: EditTextFieldTableViewCompletionBlock?
     
     lazy var doneButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(EditTextFieldTableViewController.barButtonTapped(_:)))
+        let button = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(EditTextFieldTableViewController.barButtonTapped(_:)))
         return button
     }()
     
     lazy var cancelButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(EditTextFieldTableViewController.barButtonTapped(_:)))
+        let button = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(EditTextFieldTableViewController.barButtonTapped(_:)))
         return button
     }()
     
     convenience init(title: String, defaultText: String?, placeholder: String?, completion: EditTextFieldTableViewCompletionBlock?) {
-        self.init(style: .Grouped)
+        self.init(style: .grouped)
         self.title = title
         self.defaultText = defaultText
         self.placeholder = placeholder
@@ -36,21 +60,21 @@ class EditTextFieldTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.registerNib(UINib(nibName: TextFieldTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: TextFieldTableViewCell.nibName)
+        self.tableView.register(UINib(nibName: TextFieldTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: TextFieldTableViewCell.nibName)
         self.tableView.backgroundColor = AppearanceManager.appearanceManager.appBackgroundColor;
         self.navigationItem.leftBarButtonItem = self.cancelButton
-        if self.defaultText?.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) > 0 {
+        if self.defaultText?.lengthOfBytes(using: String.Encoding.utf8) > 0 {
             self.navigationItem.rightBarButtonItem = self.doneButton
         }
     }
     
-    func barButtonTapped(sender: UIBarButtonItem) {
+    func barButtonTapped(_ sender: UIBarButtonItem) {
         self.tableView.endEditing(true)
         if let block = self.completion as EditTextFieldTableViewCompletionBlock? {
             if sender == self.cancelButton {
-                block(didSave: false, edittedText: self.defaultText, sender: nil)
+                block(false, self.defaultText, nil)
             } else {
-                block(didSave: true, edittedText: self.defaultText, sender: sender)
+                block(true, self.defaultText, sender)
             }
         }
     }
@@ -59,12 +83,12 @@ class EditTextFieldTableViewController: UITableViewController {
     // MARK: - Table view data source
 
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1;
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(TextFieldTableViewCell.nibName, forIndexPath: indexPath) as! TextFieldTableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: TextFieldTableViewCell.nibName, for: indexPath) as! TextFieldTableViewCell
         cell.defaultText = self.defaultText
         cell.placeholder = self.placeholder
         cell.delegate = self
@@ -73,7 +97,7 @@ class EditTextFieldTableViewController: UITableViewController {
 
     // MARK: - Table view data source
     
-    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.becomeFirstResponder()
     }
 }
@@ -81,13 +105,13 @@ class EditTextFieldTableViewController: UITableViewController {
 
 extension EditTextFieldTableViewController: TextFieldTableViewCellDelegate {
     
-    func textFieldTableViewCell(cell: TextFieldTableViewCell, changedText: String?) {
+    func textFieldTableViewCell(_ cell: TextFieldTableViewCell, changedText: String?) {
         self.defaultText = changedText
         if let text = self.defaultText {
-            let barButtonItem: UIBarButtonItem? = (text.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) > 0) ? self.doneButton : nil
-            self.navigationItem.setRightBarButtonItem(barButtonItem, animated: true)
+            let barButtonItem: UIBarButtonItem? = (text.lengthOfBytes(using: String.Encoding.utf8) > 0) ? self.doneButton : nil
+            self.navigationItem.setRightBarButton(barButtonItem, animated: true)
         } else {
-            self.navigationItem.setRightBarButtonItem(nil, animated: true)
+            self.navigationItem.setRightBarButton(nil, animated: true)
         }
     }
     

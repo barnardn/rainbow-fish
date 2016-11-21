@@ -11,12 +11,12 @@ import StoreKit
 
 class SettingsConfirmPurchaseTableViewController: UITableViewController {
 
-    private var kvoContext = 0
+    fileprivate var kvoContext = 0
     var purchaseProduct: StoreKitProduct!
     var appStoreProduct: SKProduct!
     
     convenience init(selectedProduct: StoreKitProduct, appStoreProduct: SKProduct) {
-        self.init(style: .Grouped)
+        self.init(style: .grouped)
         self.purchaseProduct = selectedProduct
         self.appStoreProduct = appStoreProduct
         self.title = NSLocalizedString("Confirm", comment:"settings confirm view purchase title")
@@ -24,9 +24,9 @@ class SettingsConfirmPurchaseTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.registerNib(UINib(nibName: BigButtonTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: BigButtonTableViewCell.nibName)
+        self.tableView.register(UINib(nibName: BigButtonTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: BigButtonTableViewCell.nibName)
         self.tableView.contentInset = UIEdgeInsets(top: 40.0, left: 0, bottom: 0, right: 0)
-        AppController.appController.appConfiguration.addObserver(self, forKeyPath: "purchaseStatus", options: .New, context: &kvoContext)
+        AppController.appController.appConfiguration.addObserver(self, forKeyPath: "purchaseStatus", options: .new, context: &kvoContext)
     }
     
     deinit {
@@ -35,58 +35,59 @@ class SettingsConfirmPurchaseTableViewController: UITableViewController {
     
     // MARK: kvo handler
     
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         guard context == &kvoContext else {
-            super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
             return
         }
-        if  let keyPath = keyPath where keyPath == "purchaseStatus",
+        //change[NSKeyValueChangeKey.newKey]
+        if  let keyPath = keyPath, keyPath == "purchaseStatus",
             let change = change,
-            let statusValue = change["new"] as! Int?
+            let statusValue = change[.newKey] as! Int?
         {
-            if self.navigationController?.topViewController == self && statusValue == SKPaymentTransactionState.Purchased.rawValue {
-                self.navigationController?.popToRootViewControllerAnimated(true)
+            if self.navigationController?.topViewController == self && statusValue == SKPaymentTransactionState.purchased.rawValue {
+                let _ = self.navigationController?.popToRootViewController(animated: true)
             }
         }
     }
     
     // MARK: - Table view data source
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(BigButtonTableViewCell.nibName, forIndexPath: indexPath) as! BigButtonTableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: BigButtonTableViewCell.nibName, for: indexPath) as! BigButtonTableViewCell
         cell.title = NSLocalizedString("Buy Now!", comment:"settings purchase option button title format")
         return cell
     }
     
     // MARK: - Table view delegate
     
-    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerLabel = UILabel(frame: CGRect(x: 0.0, y: 0.0, width: Double(self.view.bounds.width), height: 24.0))
-        headerLabel.textAlignment = .Center
+        headerLabel.textAlignment = .center
         headerLabel.font = AppearanceManager.appearanceManager.nameLabelFont
-        headerLabel.textColor = UIColor.darkGrayColor()
+        headerLabel.textColor = UIColor.darkGray
         let messageFormat = String(format: NSLocalizedString("Purchase \"%@\" for %@", comment:"settings purchase item title"), self.purchaseProduct.name, self.purchaseProduct.displayPrice)
         headerLabel.text = String(format: messageFormat, self.purchaseProduct.name, self.purchaseProduct.displayPrice)
         return headerLabel
     }
     
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return CGFloat(48.0)
     }
     
-    override func tableView(tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         let messageFormat = NSLocalizedString("Tap \"Buy Now!\" above to purchase the \"%@\" option for %@ ", comment:"settings confirm purchase instructions")
         return String(format: messageFormat, self.purchaseProduct.name, self.purchaseProduct.displayPrice)
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let payment = SKMutablePayment(product: self.appStoreProduct)
         payment.quantity = 1
         payment.applicationUsername = AppController.appController.appConfiguration.iCloudRecordID!
-        SKPaymentQueue.defaultQueue().addPayment(payment)
+        SKPaymentQueue.default().add(payment)
     }
     
     

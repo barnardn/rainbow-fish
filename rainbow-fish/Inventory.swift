@@ -4,20 +4,20 @@ import CoreDataKit
 import Foundation
 
 @objc(Inventory)
-public  class Inventory: _Inventory, NamedManagedObject {
+open  class Inventory: _Inventory, NamedManagedObject {
 
-    public class var entityName : String {
-        return self.mogen_entityName()
+    open class var entityName : String {
+        return self.entityName()
     }
     
 }
 
 extension Inventory {
     
-    func populateWithPencil(pencil: Pencil) {
+    func populateWithPencil(_ pencil: Pencil) {
         self.name = pencil.name
         self.pencilIdentifier = pencil.identifier
-        self.quantity = NSDecimalNumber(integer: 0)
+        self.quantity = NSDecimalNumber(value: 0 as Int)
         self.productName = pencil.product?.name
         self.manufacturerName = pencil.product?.manufacturer?.name
         self.color = pencil.color
@@ -34,7 +34,7 @@ extension Inventory {
         do {
             let results = try context.find(Inventory.self, predicate: nil, sortDescriptors: descriptors, limit: nil, offset: nil)
             return results
-        } catch CoreDataKitError.CoreDataError(let error) {
+        } catch CoreDataKitError.coreDataError(let error) {
             print("Error \(error)")
             return nil
         } catch {

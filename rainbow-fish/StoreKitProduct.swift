@@ -10,7 +10,7 @@ import Foundation
 
 struct StoreKitProduct {
     
-    private enum StoreKitPlistKey: String {
+    fileprivate enum StoreKitPlistKey: String {
         case ProductId = "productID"
         case Name = "name"
         case Summary = "summary"
@@ -25,10 +25,10 @@ struct StoreKitProduct {
     var displayPriceValue: Float = 0.0      // used for sorting!
     var isAvailableForSale = false
     
-    static func productsFromFile(fileName: String) -> [StoreKitProduct] {
+    static func productsFromFile(_ fileName: String) -> [StoreKitProduct] {
         var results =  [StoreKitProduct]()
-        if  let url = NSBundle.mainBundle().URLForResource("purchase-options", withExtension: ".plist"),
-            let plist = NSDictionary(contentsOfURL: url) as? Dictionary<String, AnyObject>,
+        if  let url = Bundle.main.url(forResource: "purchase-options", withExtension: ".plist"),
+            let plist = NSDictionary(contentsOf: url) as? Dictionary<String, AnyObject>,
             let options = plist["Options"] as? Array<Dictionary<String,AnyObject>> {
 
                 for option in options {

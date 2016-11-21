@@ -11,7 +11,7 @@ import UIKit
 
 class EditPecilPropertyTableViewCell: UITableViewCell {
 
-    @IBOutlet private weak var textfield: UITextField!
+    @IBOutlet fileprivate weak var textfield: UITextField!
     
     var placeholder: String? {
         get {
@@ -25,7 +25,7 @@ class EditPecilPropertyTableViewCell: UITableViewCell {
     var pencil: Pencil! {
         didSet {
             if let keypath = self.keyPath {
-                self.textfield.text = self.pencil.valueForKeyPath(keypath) as! String?
+                self.textfield.text = self.pencil.value(forKeyPath: keypath) as! String?
             }
         }
     }
@@ -33,7 +33,7 @@ class EditPecilPropertyTableViewCell: UITableViewCell {
     var keyPath: String! {
         didSet {
             if self.pencil != nil {
-                self.textfield.text = self.pencil.valueForKeyPath(self.keyPath) as! String?
+                self.textfield.text = self.pencil.value(forKeyPath: self.keyPath) as! String?
             }
         }
     }
@@ -43,13 +43,13 @@ class EditPecilPropertyTableViewCell: UITableViewCell {
         self.textfield.delegate = self
         self.textfield.font = AppearanceManager.appearanceManager.standardFont
         self.textfield.textColor = AppearanceManager.appearanceManager.bodyTextColor
-        self.textfield.backgroundColor = UIColor.whiteColor()
+        self.textfield.backgroundColor = UIColor.white
         self.textfield.tintColor = AppearanceManager.appearanceManager.brandColor
         self.shouldIndentWhileEditing = false
-        self.selectionStyle = .None
+        self.selectionStyle = .none
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         if selected {
             self.textfield.becomeFirstResponder()
@@ -62,9 +62,9 @@ class EditPecilPropertyTableViewCell: UITableViewCell {
         return self.textfield.becomeFirstResponder()
     }
     
-    override func setEditing(editing: Bool, animated: Bool) {
+    override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
-        self.textfield.enabled = editing
+        self.textfield.isEnabled = editing
     }
     
     class var nibName: String {
@@ -75,20 +75,20 @@ class EditPecilPropertyTableViewCell: UITableViewCell {
 
 extension EditPecilPropertyTableViewCell: UITextFieldDelegate {
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if let keypath = self.keyPath {
             if let pencil = self.pencil {
-                let end = textField.text!.startIndex.advancedBy(range.location)
+                let end = textField.text!.characters.index(textField.text!.startIndex, offsetBy: range.location)
                 let replaceRange: Range<String.Index> = Range<String.Index>(textField.text!.startIndex ..< end)
 //                let replaceRange: Range<String.Index> = Range<String.Index>(start: textField.text!.startIndex, end: end)
-                let value = textfield.text!.substringWithRange(replaceRange) + string
+                let value = textfield.text!.substring(with: replaceRange) + string
                 pencil.setValue(value, forKey: keypath)
             }
         }
         return true
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textfield.resignFirstResponder()
         return false
     }

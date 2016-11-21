@@ -13,8 +13,8 @@ class DefaultTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.textLabel?.textColor = AppearanceManager.appearanceManager.bodyTextColor
-        self.contentView.backgroundColor = UIColor.whiteColor()
-        self.selectedBackgroundView = UIView(frame: CGRectZero)
+        self.contentView.backgroundColor = UIColor.white
+        self.selectedBackgroundView = UIView(frame: CGRect.zero)
         self.selectedBackgroundView?.backgroundColor = AppearanceManager.appearanceManager.selectedCellBackgroundColor
     }
     

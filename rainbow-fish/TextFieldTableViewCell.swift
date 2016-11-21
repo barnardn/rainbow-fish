@@ -10,7 +10,7 @@ import UIKit
 
 protocol TextFieldTableViewCellDelegate: class {
     
-    func textFieldTableViewCell(cell: TextFieldTableViewCell, changedText: String?)
+    func textFieldTableViewCell(_ cell: TextFieldTableViewCell, changedText: String?)
     
 }
 
@@ -35,12 +35,12 @@ class TextFieldTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.selectionStyle = .None
+        self.selectionStyle = .none
         self.textField.font = AppearanceManager.appearanceManager.standardFont
         self.textField.textColor = AppearanceManager.appearanceManager.bodyTextColor
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         if selected {
             self.textField.becomeFirstResponder()
@@ -59,10 +59,10 @@ class TextFieldTableViewCell: UITableViewCell {
 
 extension TextFieldTableViewCell: UITextFieldDelegate {
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if let delegate = self.delegate {
-            let text: NSString = self.textField.text!
-            delegate.textFieldTableViewCell(self, changedText: text.stringByReplacingCharactersInRange(range, withString: string))
+            let text: NSString = self.textField.text! as NSString
+            delegate.textFieldTableViewCell(self, changedText: text.replacingCharacters(in: range, with: string))
         }
         return true
     }

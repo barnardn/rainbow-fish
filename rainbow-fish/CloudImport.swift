@@ -13,20 +13,20 @@ import SwiftyJSON
 class CloudImport {
     
     let ImportFilename: String = "database.json"
-    private let container: CKContainer
-    private let publicDb: CKDatabase
+    fileprivate let container: CKContainer
+    fileprivate let publicDb: CKDatabase
     
     init() {
-        container = CKContainer.defaultContainer()
+        container = CKContainer.default()
         publicDb = container.publicCloudDatabase
     }
 
-    func seedToCloud (completionHandler: (success: Bool, error: NSError?) -> Void) -> Void {
+    func seedToCloud (_ completionHandler: @escaping (_ success: Bool, _ error: NSError?) -> Void) -> Void {
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) { [unowned self] () -> Void in
+        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async { [unowned self] () -> Void in
          
             let databaseUrl = AppController.appController.urlForResourceInApplicationSupport(resourceName: self.ImportFilename)
-            let jsonData = NSData(contentsOfURL: databaseUrl)
+            let jsonData = try? Data(contentsOf: databaseUrl as URL)
             if jsonData == nil {
                 assertionFailure("Cant load seed file")
             }
@@ -40,12 +40,12 @@ class CloudImport {
             let modifyOperations = databaseJSON.arrayValue.map{ [unowned self] (mfgJSON: JSON) -> CKModifyRecordsOperation in
                 let records = self.mfgTree(mfgJSON)
                 let mop =  CKModifyRecordsOperation(recordsToSave: records, recordIDsToDelete: nil)
-                mop.savePolicy = .AllKeys
+                mop.savePolicy = .allKeys
                 return mop
             }
             let lastOp = modifyOperations.last!
             lastOp.modifyRecordsCompletionBlock = { [unowned self] (saved, deleted, error) in
-                if let err = error {
+                if let err = error as NSError? {
                     self.dispatchCompletionHandler(completionHandler, success: false, error: err)
                 } else {
                     self.dispatchCompletionHandler(completionHandler, success: true, error: nil)
@@ -55,12 +55,12 @@ class CloudImport {
                 if mop != lastOp {
                     lastOp.addDependency(mop)
                 }
-                self.publicDb.addOperation(mop)
+                self.publicDb.add(mop)
             }
         }
     }
     
-    private func mfgTree(json: JSON) -> [CKRecord] {
+    fileprivate func mfgTree(_ json: JSON) -> [CKRecord] {
         
         var accumulator = [CKRecord]()
 
@@ -75,7 +75,7 @@ class CloudImport {
         return accumulator
     }
     
-    private func productTree(productJSON productJSON: [JSON], mfg: CKRecord) -> [CKRecord] {
+    fileprivate func productTree(productJSON: [JSON], mfg: CKRecord) -> [CKRecord] {
         
         var accumulator = [CKRecord]()
         
@@ -83,7 +83,7 @@ class CloudImport {
             let prodRec = self.createCKRecord(Product.entityName, json: json)
             prodRec.setValue(json[ProductAttributes.name.rawValue].string, forKey: ProductAttributes.name.rawValue)
             prodRec.setValue(json[ProductAttributes.ownerRecordIdentifier.rawValue].string, forKey: ProductAttributes.ownerRecordIdentifier.rawValue)
-            let mfgRelation = CKReference(record: mfg, action: .DeleteSelf)
+            let mfgRelation = CKReference(record: mfg, action: .deleteSelf)
             prodRec.setObject(mfgRelation, forKey: ProductRelationships.manufacturer.rawValue)
             accumulator.append(prodRec)
             if let pencils = json[ProductRelationships.pencils.rawValue].array {
@@ -96,7 +96,7 @@ class CloudImport {
         return accumulator
     }
     
-    private func pencils(pencilJSON pencilJSON: [JSON], product: CKRecord) -> [CKRecord] {
+    fileprivate func pencils(pencilJSON: [JSON], product: CKRecord) -> [CKRecord] {
         
         return pencilJSON.map{ (json: JSON) -> CKRecord in
             let pencilRec = self.createCKRecord(Pencil.entityName, json: json)
@@ -104,13 +104,13 @@ class CloudImport {
             pencilRec.setValue(json[PencilAttributes.identifier.rawValue].string, forKey: PencilAttributes.identifier.rawValue)
             pencilRec.setValue(json[PencilAttributes.color.rawValue].string, forKey: PencilAttributes.color.rawValue)
             pencilRec.setValue(json[PencilAttributes.ownerRecordIdentifier.rawValue].string, forKey: PencilAttributes.ownerRecordIdentifier.rawValue)
-            let prodRelation = CKReference(record: product, action: .DeleteSelf)
+            let prodRelation = CKReference(record: product, action: .deleteSelf)
             pencilRec.setObject(prodRelation, forKey: PencilRelationships.product.rawValue)
             return pencilRec
         }
     }
     
-    private func createCKRecord(entityName: String, json: JSON) -> CKRecord {
+    fileprivate func createCKRecord(_ entityName: String, json: JSON) -> CKRecord {
         var record: CKRecord
         if let recordName = json["recordID"].string {
             let recordId = CKRecordID(recordName: recordName)
@@ -121,8 +121,8 @@ class CloudImport {
         return record
     }
     
-    private func dispatchCompletionHandler(handler: (Bool, NSError?) -> Void, success: Bool, error: NSError?) -> Void {
-        dispatch_async(dispatch_get_main_queue()) { handler(success, error) }
+    fileprivate func dispatchCompletionHandler(_ handler: @escaping (Bool, NSError?) -> Void, success: Bool, error: NSError?) -> Void {
+        DispatchQueue.main.async { handler(success, error) }
     }
     
 }

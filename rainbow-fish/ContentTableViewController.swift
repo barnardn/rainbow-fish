@@ -10,9 +10,9 @@ import UIKit
 
 class ContentTableViewController: UITableViewController {
     
-    private var kvoContext = 0;
+    fileprivate var kvoContext = 0;
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -30,20 +30,20 @@ class ContentTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.edgesForExtendedLayout = UIRectEdge.All.exclusiveOr(UIRectEdge.Top).exclusiveOr(UIRectEdge.Bottom)
+        self.edgesForExtendedLayout = UIRectEdge.all.symmetricDifference(UIRectEdge.top).symmetricDifference(UIRectEdge.bottom)
         self.view.backgroundColor = AppearanceManager.appearanceManager.appBackgroundColor
         self.tableView.separatorColor = AppearanceManager.appearanceManager.strokeColor
-        AppController.appController.addObserver(self, forKeyPath: "bannerAdIsVisible", options: [.New, .Initial], context: &kvoContext)
+        AppController.appController.addObserver(self, forKeyPath: "bannerAdIsVisible", options: [.new, .initial], context: &kvoContext)
     }
     
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if context != &kvoContext {
-            super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
             return
         }
         if keyPath == "bannerAdIsVisible" {
             var bannerOffset = 50.0
-            if  let isVisible = change?[NSKeyValueChangeNewKey] as? NSNumber where isVisible.boolValue == false {
+            if  let isVisible = change?[NSKeyValueChangeKey.newKey] as? NSNumber, isVisible.boolValue == false {
                 bannerOffset = 0.0
             }
             self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: CGFloat(bannerOffset), right: 0)

@@ -21,7 +21,7 @@ extension UIColor {
     }
     
     func getCGFloatValues() -> (r: CGFloat, g: CGFloat, b: CGFloat, alpha: CGFloat) {
-        var values = [CGFloat](count: 4, repeatedValue: 0.0)
+        var values = [CGFloat](repeating: 0.0, count: 4)
         self.getRed(&values[0], green: &values[1], blue: &values[2], alpha: &values[3])
         return (values[0], values[1], values[2], values[3])
     }
@@ -40,34 +40,35 @@ extension UIColor {
         }
     }
     
-    class func colorFromRGBString(rgbString: String?) -> UIColor {
+    class func colorFromRGBString(_ rgbString: String?) -> UIColor {
         if let rgbString = rgbString {
-            if rgbString.lengthOfBytesUsingEncoding(NSUTF8StringEncoding) <= 5 {
-                return UIColor.blackColor()
+            if rgbString.lengthOfBytes(using: String.Encoding.utf8) <= 5 {
+                return UIColor.black
             }
-            let rgbParts = rgbString.componentsSeparatedByString(",")
+            let rgbParts = rgbString.components(separatedBy: ",")
             if rgbParts.count != 3 {
-                return UIColor.blackColor()
+                return UIColor.black
             }
             let rgbValues = rgbParts.map{(str: String) in Float(Int(str)!)/256.0 }
             return UIColor(red: CGFloat(rgbValues[0]), green: CGFloat(rgbValues[1]), blue: CGFloat(rgbValues[2]), alpha: 1.0)
         }
-        return UIColor.blackColor()
+        return UIColor.black
     }
     
-    class func colorFromHexString(hexString: String) -> UIColor? {
-        var str = hexString.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).uppercaseString as String
+    class func colorFromHexString(_ hexString: String) -> UIColor? {
+        
+        var str = hexString.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
         while str.hasPrefix("#") {
-            str = str.substringFromIndex(str.startIndex.advancedBy(1))
+            str = str.substring(from: str.characters.index(str.startIndex, offsetBy: 1))
         }
         while str.hasPrefix("0X") {
-            str = str.substringFromIndex(str.startIndex.advancedBy(2))
+            str = str.substring(from: str.characters.index(str.startIndex, offsetBy: 2))
         }
         if str.characters.count != 6 {
             return nil
         }
         var rgbValue : UInt32 = 0
-        NSScanner(string: str).scanHexInt(&rgbValue)
+        Scanner(string: str).scanHexInt32(&rgbValue)
         
         return UIColor(red: CGFloat((rgbValue & 0xFF0000)>>16) / 255.0, green: CGFloat((rgbValue & 0x00FF00)>>8) / 255.0, blue: CGFloat(rgbValue & 0x0000FF) / 255.0, alpha: CGFloat(1.0))
     }

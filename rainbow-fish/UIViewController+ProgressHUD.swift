@@ -10,9 +10,9 @@ import UIKit
 
 extension UIViewController {
     
-    func showHUD(message message: String?) {
+    func showHUD(message: String?) {
         
-        dispatch_async(dispatch_get_main_queue(), {() -> Void in
+        DispatchQueue.main.async(execute: {() -> Void in
             SwiftFullScreenLoader.show(title: message)
         })
     }
@@ -22,31 +22,31 @@ extension UIViewController {
     }
     
     func hideHUD() {
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+        DispatchQueue.main.async(execute: { () -> Void in
             SwiftFullScreenLoader.hide()
         })
     }
     
-    func showSmallHUD(message message: String?) {
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+    func showSmallHUD(message: String?) {
+        DispatchQueue.main.async(execute: { () -> Void in
             SwiftLoader.show(title: message, animated: true)
         })
     }
     
     func hideSmallHUD() {
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
+        DispatchQueue.main.async(execute: { () -> Void in
             SwiftLoader.hide()
         })
     }
     
-    func presentErrorAlert(title title: String, message: String) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
-        alertController.addAction(UIAlertAction(title: NSLocalizedString("Dismiss", comment:"error alert dismiss button"), style: .Cancel, handler: nil))
+    func presentErrorAlert(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: NSLocalizedString("Dismiss", comment:"error alert dismiss button"), style: .cancel, handler: nil))
         let viewController = self.presentedViewController ?? self
-        if viewController.isKindOfClass(UIAlertController) {
+        if viewController.isKind(of: UIAlertController.self) {
             return
         }
-        viewController.presentViewController(alertController, animated: true, completion: nil)
+        viewController.present(alertController, animated: true, completion: nil)
         alertController.view.tintColor = AppearanceManager.appearanceManager.brandColor
     }
     

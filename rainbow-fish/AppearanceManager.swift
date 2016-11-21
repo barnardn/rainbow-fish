@@ -63,19 +63,19 @@ class AppearanceManager {
     // MARK: fonts
     
     var standardFont: UIFont {
-        return UIFont.systemFontOfSize(16.0)
+        return UIFont.systemFont(ofSize: 16.0)
     }
     
     var subtitleFont: UIFont {
-        return UIFont.systemFontOfSize(12.0)
+        return UIFont.systemFont(ofSize: 12.0)
     }
     
     var nameLabelFont: UIFont {
-        return UIFont.systemFontOfSize(14.0)
+        return UIFont.systemFont(ofSize: 14.0)
     }
     
     var headlineFont: UIFont {
-        return UIFont.systemFontOfSize(24.0)
+        return UIFont.systemFont(ofSize: 24.0)
     }
     
     // MARK: methods
@@ -91,15 +91,15 @@ class AppearanceManager {
         SwiftFullScreenLoader.sharedInstance.config = hudConfig
         
         var hintConfig = HintViewConfiguration()
-        hintConfig.size = CGSize(width: UIScreen.mainScreen().bounds.width, height: 200.0)
+        hintConfig.size = CGSize(width: UIScreen.main.bounds.width, height: 200.0)
         hintConfig.backgroundColor = self.brandColorAlternate
-        hintConfig.titleColor = UIColor.yellowColor()
-        hintConfig.textColor = UIColor.whiteColor()
+        hintConfig.titleColor = UIColor.yellow
+        hintConfig.textColor = UIColor.white
         HintView.defaultView.configuration = hintConfig
         
         UINavigationBar.appearance().barTintColor = self.brandColor
-        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
-        UIBarButtonItem.appearance().tintColor = UIColor.whiteColor()
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+        UIBarButtonItem.appearance().tintColor = UIColor.white
         UITabBar.appearance().tintColor = self.brandColor
         UITextField.appearance().tintColor = self.brandColor
     }

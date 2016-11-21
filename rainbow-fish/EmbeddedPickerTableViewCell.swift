@@ -10,12 +10,12 @@ import UIKit
 
 protocol EmbeddedPickerTableViewCellDataSource: class {
 
-    func numberOfRowsForEmbeddedPickerTableViewCell(cell: EmbeddedPickerTableViewCell) -> Int
+    func numberOfRowsForEmbeddedPickerTableViewCell(_ cell: EmbeddedPickerTableViewCell) -> Int
 }
 
 protocol EmbeddedPickerTableViewCellDelegate: class {
-    func embeddedPickerTableViewCell(cell: EmbeddedPickerTableViewCell, selectedItemAtIndex index: Int)
-    func embeddedPickerTableViewCell(cell: EmbeddedPickerTableViewCell, titleForRow row: Int) -> String
+    func embeddedPickerTableViewCell(_ cell: EmbeddedPickerTableViewCell, selectedItemAtIndex index: Int)
+    func embeddedPickerTableViewCell(_ cell: EmbeddedPickerTableViewCell, titleForRow row: Int) -> String
 }
 
 class EmbeddedPickerTableViewCell: UITableViewCell {
@@ -35,7 +35,7 @@ class EmbeddedPickerTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.selectionStyle = .None
+        self.selectionStyle = .none
         self.pickerView.delegate = self
     }
 }
@@ -44,11 +44,11 @@ extension EmbeddedPickerTableViewCell: UIPickerViewDataSource, UIPickerViewDeleg
     
     // MARK: pickerview data source
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if let dataSource = self.dataSource {
             return dataSource.numberOfRowsForEmbeddedPickerTableViewCell(self)
         }
@@ -57,14 +57,14 @@ extension EmbeddedPickerTableViewCell: UIPickerViewDataSource, UIPickerViewDeleg
     
     // MARK: pickerview delegate
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if let delegate = self.delegate {
             return delegate.embeddedPickerTableViewCell(self, titleForRow: row)
         }
         return ""
     }
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if let delegate = self.delegate {
             return delegate.embeddedPickerTableViewCell(self, selectedItemAtIndex: row)
         }

@@ -10,21 +10,21 @@ import UIKit
 
 class ProductHeaderView: UITableViewHeaderFooterView {
 
-    private weak var titleLabel: UILabel!
+    fileprivate weak var titleLabel: UILabel!
     
     var title: String? {
         get {
             return self.titleLabel.text
         }
         set {
-            self.titleLabel.text = newValue?.uppercaseString
+            self.titleLabel.text = newValue?.uppercased()
         }
     }
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         
-        let label = UILabel(frame: CGRectZero)
+        let label = UILabel(frame: CGRect.zero)
         
         self.contentView.addSubview(label)
         label.font = AppearanceManager.appearanceManager.nameLabelFont
@@ -38,7 +38,7 @@ class ProductHeaderView: UITableViewHeaderFooterView {
     }
     
     override func layoutSubviews() {
-        self.titleLabel.frame = CGRectMake(10, 0, CGRectGetWidth(self.bounds), ProductHeaderView.headerHeight)
+        self.titleLabel.frame = CGRect(x: 10, y: 0, width: self.bounds.width, height: ProductHeaderView.headerHeight)
     }
     
     class var headerHeight: CGFloat {

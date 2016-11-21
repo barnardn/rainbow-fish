@@ -31,23 +31,23 @@ class SelectPencilTableViewController: ContentTableViewController {
     }()
     
     lazy var addButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(SelectPencilTableViewController.addButtonTapped(_:)))
+        let button = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(SelectPencilTableViewController.addButtonTapped(_:)))
         return button
     }()
     
     lazy var backButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(title: NSLocalizedString("Back", comment:"back button title"), style: .Plain, target: nil, action: nil)
+        let button = UIBarButtonItem(title: NSLocalizedString("Back", comment:"back button title"), style: .plain, target: nil, action: nil)
         return button
     }()
     
     convenience init(product: Product) {
-        self.init(style: UITableViewStyle.Plain)
+        self.init(style: UITableViewStyle.plain)
         self.product = product
         self.title = NSLocalizedString(product.name!, comment:"select pencil view title")
     }
     
     deinit {
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
     override func viewDidLoad() {
@@ -55,18 +55,18 @@ class SelectPencilTableViewController: ContentTableViewController {
         self.tableView.backgroundColor = AppearanceManager.appearanceManager.appBackgroundColor
         self.tableView.tableHeaderView = self.searchController.searchBar
         self.tableView.rowHeight = PencilTableViewCell.rowHeight
-        self.tableView.registerNib(UINib(nibName: PencilTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: PencilTableViewCell.nibName)
+        self.tableView.register(UINib(nibName: PencilTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: PencilTableViewCell.nibName)
         self.refreshControl = UIRefreshControl()
         self.refreshControl?.tintColor = AppearanceManager.appearanceManager.brandColor
-        self.refreshControl?.addTarget(self, action: #selector(SelectPencilTableViewController.refreshControlDidChange(_:)), forControlEvents: .ValueChanged)
+        self.refreshControl?.addTarget(self, action: #selector(SelectPencilTableViewController.refreshControlDidChange(_:)), for: .valueChanged)
         
         self.navigationItem.backBarButtonItem = self.backButton
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SelectPencilTableViewController.inventoryDidUpdate(_:)), name: AppNotifications.DidEditPencil.rawValue, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(SelectPencilTableViewController.inventoryDidUpdate(_:)), name: NSNotification.Name(rawValue: AppNotifications.DidEditPencil.rawValue), object: nil)
 
         // KVO on purchase status
         
         if !AppController.appController.appConfiguration.wasPurchasedSuccessfully {
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(SelectPencilTableViewController.paymentUpdatedNotifcation(_:)), name: StoreKitPurchaseNotificationName, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(SelectPencilTableViewController.paymentUpdatedNotifcation(_:)), name: NSNotification.Name(rawValue: StoreKitPurchaseNotificationName), object: nil)
         }
         
         if AppController.appController.isNormsiPhone() && self.navigationItem.rightBarButtonItem == nil {
@@ -75,53 +75,53 @@ class SelectPencilTableViewController: ContentTableViewController {
         
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         updatePencils()
     }
     
     
     // MARK: action & event handlers
     
-    func addButtonTapped(sender: UIBarButtonItem) {
-        self.presentViewController(CreatePencilNavigationController(product: self.product), animated: true, completion: nil)
+    func addButtonTapped(_ sender: UIBarButtonItem) {
+        self.present(CreatePencilNavigationController(product: self.product), animated: true, completion: nil)
     }
     
-    func refreshControlDidChange(sender: UIRefreshControl) {
+    func refreshControlDidChange(_ sender: UIRefreshControl) {
         self.cloudUpdate(forced: true)
     }
     
-    func inventoryDidUpdate(notification: NSNotification) {
+    func inventoryDidUpdate(_ notification: Notification) {
         if let userInfo = notification.userInfo,
            let pencilObjectID = userInfo[AppNotificationInfoKeys.DidEditPencilPencilKey.rawValue] as? NSManagedObjectID {
             
-                let pencil = self.product.managedObjectContext?.objectWithID(pencilObjectID) as! Pencil
+                let pencil = self.product.managedObjectContext?.object(with: pencilObjectID) as! Pencil
                 let row = self.pencils.insertionIndexOf(pencil, isOrderedBefore: { (p1: Pencil, p2: Pencil) -> Bool in
                     return p1.identifier == p2.identifier
                 })
                 if let visibleRows = self.tableView.indexPathsForVisibleRows {
-                    let results = visibleRows.filter{(indexPath: NSIndexPath) in
+                    let results = visibleRows.filter{(indexPath: IndexPath) in
                         return indexPath.row == row
                     }
                     if results.count > 0 {
-                        self.tableView.reloadRowsAtIndexPaths(results, withRowAnimation: .Automatic)
+                        self.tableView.reloadRows(at: results, with: .automatic)
                     }
                 }
             
         }
     }
     
-    func paymentUpdatedNotifcation(notification: NSNotification) {
+    func paymentUpdatedNotifcation(_ notification: Notification) {
         if  let userInfo = notification.userInfo,
             let purchaseResult = userInfo[StoreKitPurchaseResultTypeKey] as! String? {
                 if purchaseResult == StoreKitPurchaseResultType.Completed.rawValue {
-                    NSNotificationCenter.defaultCenter().removeObserver(self, name: StoreKitPurchaseNotificationName, object: nil)
+                    NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: StoreKitPurchaseNotificationName), object: nil)
                 }
         }
     }
     
     // MARK: private methods
     
-    private func updatePencils() {
+    fileprivate func updatePencils() {
         
         if let pencils = try? Pencil.allPencils(forProduct: self.product, context: self.product.managedObjectContext!) {
             self.pencils = pencils ?? [Pencil]()
@@ -132,14 +132,14 @@ class SelectPencilTableViewController: ContentTableViewController {
         }
     }
     
-    private func cloudUpdate(forced forced: Bool) {
+    fileprivate func cloudUpdate(forced: Bool) {
         if !forced {
             self.showSmallHUD(message: nil)
-            self.tableView.userInteractionEnabled = false
+            self.tableView.isUserInteractionEnabled = false
         }
         let modificationDate = recentModificationDate(inPencils: pencils)
         CloudManager.sharedManger.importAllPencilsForProduct(self.product, modifiedAfterDate: modificationDate ){ (success, error) in
-            self.tableView.userInteractionEnabled = true
+            self.tableView.isUserInteractionEnabled = true
             if !forced {
                 self.hideSmallHUD()
             } else {
@@ -157,30 +157,30 @@ class SelectPencilTableViewController: ContentTableViewController {
         }
     }
     
-    private func recentModificationDate(inPencils pencils: [Pencil]) -> NSDate {
+    fileprivate func recentModificationDate(inPencils pencils: [Pencil]) -> Date {
         if pencils.count == 0 {
-            return NSDate(timeIntervalSinceReferenceDate: 0)
+            return Date(timeIntervalSinceReferenceDate: 0)
         }
         let newestPencil =  pencils.reduce(pencils.first!) { (p1: Pencil, p2: Pencil) -> Pencil in
-            let date1 = p1.modificationDate ?? NSDate(timeIntervalSinceReferenceDate: 0)
-            let date2 = p2.modificationDate ?? NSDate(timeIntervalSinceReferenceDate: 0)
-            if date1.compare(date2) == NSComparisonResult.OrderedDescending {
+            let date1 = p1.modificationDate ?? Date(timeIntervalSinceReferenceDate: 0)
+            let date2 = p2.modificationDate ?? Date(timeIntervalSinceReferenceDate: 0)
+            if date1.compare(date2) == ComparisonResult.orderedDescending {
                 return p1
             }
             return p2
         }
-        return newestPencil.modificationDate ?? NSDate()
+        return newestPencil.modificationDate as Date? ?? Date()
     }
 
     // MARK: UITableViewDataSource
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.pencils.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(PencilTableViewCell.nibName, forIndexPath: indexPath) as! PencilTableViewCell
-        cell.accessoryType = .DisclosureIndicator
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: PencilTableViewCell.nibName, for: indexPath) as! PencilTableViewCell
+        cell.accessoryType = .disclosureIndicator
         let pencil = self.pencils[indexPath.row]
         cell.name = pencil.name
         cell.pencilIdentifier = pencil.identifier
@@ -191,7 +191,7 @@ class SelectPencilTableViewController: ContentTableViewController {
 
     // MARK: UITableViewDelegate
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var pencil: Pencil
         if tableView == searchResultsTableController.tableView {
             pencil = self.searchResultsTableController.searchResults[indexPath.row]
@@ -202,7 +202,7 @@ class SelectPencilTableViewController: ContentTableViewController {
         let viewController = EditPencilTableViewController(pencil: pencil)
         
         if self.presentedViewController == self.searchController {
-            self.dismissViewControllerAnimated(true) {
+            self.dismiss(animated: true) {
                 self.navigationController?.pushViewController(viewController, animated: true)
                 self.searchController.searchBar.text = nil
             }
@@ -217,16 +217,16 @@ class SelectPencilTableViewController: ContentTableViewController {
 
 extension SelectPencilTableViewController: UISearchBarDelegate, UISearchControllerDelegate, UISearchResultsUpdating {
  
-    func searchBarBookmarkButtonClicked(searchBar: UISearchBar) {
+    func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
     }
     
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
+    func updateSearchResults(for searchController: UISearchController) {
         let resultsController = searchController.searchResultsController as! PencilSearchResultsTableViewController
         
-        let whitespaceCharacterSet = NSCharacterSet.whitespaceCharacterSet()
-        let strippedString = searchController.searchBar.text!.stringByTrimmingCharactersInSet(whitespaceCharacterSet)
-        let searchItems = strippedString.componentsSeparatedByString(" ") as [String]
+        let whitespaceCharacterSet = CharacterSet.whitespaces
+        let strippedString = searchController.searchBar.text!.trimmingCharacters(in: whitespaceCharacterSet)
+        let searchItems = strippedString.components(separatedBy: " ") as [String]
 
         let identifierPredicate = NSPredicate(format: "identifier contains[cd] %@", strippedString)
         
@@ -241,11 +241,11 @@ extension SelectPencilTableViewController: UISearchBarDelegate, UISearchControll
             criteria = nameSubpredicates.first!
         }
 
-        let searchPredicate = NSCompoundPredicate(type: .OrPredicateType, subpredicates: [criteria, identifierPredicate])
+        let searchPredicate = NSCompoundPredicate(type: .or, subpredicates: [criteria, identifierPredicate])
         
-        let results = self.pencils.filter{ searchPredicate.evaluateWithObject($0) }
+        let results = self.pencils.filter{ searchPredicate.evaluate(with: $0) }
         
-        resultsController.searchResults = results ?? [Pencil]()
+        resultsController.searchResults = results
         resultsController.tableView.reloadData()
     }
     

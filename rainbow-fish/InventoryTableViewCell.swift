@@ -11,12 +11,12 @@ import QuartzCore
 
 class InventoryTableViewCell: UITableViewCell {
 
-    @IBOutlet private weak var quantityLabel: UILabel!
-    @IBOutlet private weak var titleLabel: UILabel!
-    @IBOutlet private weak var subTitleLabel: UILabel!
-    @IBOutlet private weak var colorSwatchView: UIView!
+    @IBOutlet fileprivate weak var quantityLabel: UILabel!
+    @IBOutlet fileprivate weak var titleLabel: UILabel!
+    @IBOutlet fileprivate weak var subTitleLabel: UILabel!
+    @IBOutlet fileprivate weak var colorSwatchView: UIView!
     
-    private var _swatchColor: UIColor?
+    fileprivate var _swatchColor: UIColor?
     
     var title: String? {
         get {
@@ -56,11 +56,11 @@ class InventoryTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.accessoryType = .DisclosureIndicator
+        self.accessoryType = .disclosureIndicator
         self.selectedBackgroundView = UIView(frame: self.bounds)
         self.separatorInset = UIEdgeInsets(top: 0, left: 35.0, bottom: 0, right: 0)
         self.selectedBackgroundView?.backgroundColor = AppearanceManager.appearanceManager.selectedCellBackgroundColor
-        self.contentView.backgroundColor = UIColor.whiteColor()
+        self.contentView.backgroundColor = UIColor.white
         self.quantityLabel.font = AppearanceManager.appearanceManager.standardFont
         self.quantityLabel.textColor = AppearanceManager.appearanceManager.bodyTextColor
         
@@ -71,12 +71,12 @@ class InventoryTableViewCell: UITableViewCell {
         self.subTitleLabel.textColor = AppearanceManager.appearanceManager.subTitleColor
         
         self.colorSwatchView.layer.cornerRadius = 10.0;
-        self.colorSwatchView.layer.borderColor = AppearanceManager.appearanceManager.blackColor.CGColor;
+        self.colorSwatchView.layer.borderColor = AppearanceManager.appearanceManager.blackColor.cgColor;
         self.colorSwatchView.layer.borderWidth = 1.0;
         
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         if let color = self._swatchColor {
             self.colorSwatchView.backgroundColor = color

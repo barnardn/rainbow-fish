@@ -12,7 +12,7 @@ import Foundation
 extension CKRecord {
     
     func assignParentReference(parentRecord parent: CKRecord, relationshipName: String) -> Void {
-        let reference = CKReference(record: parent, action: .DeleteSelf)
+        let reference = CKReference(record: parent, action: .deleteSelf)
         self.setObject(reference, forKey: relationshipName)
     }
     

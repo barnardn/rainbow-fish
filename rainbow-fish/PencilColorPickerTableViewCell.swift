@@ -10,8 +10,8 @@ import UIKit
 
 
 protocol PencilColorPickerTableViewCellDelegate {
-    func colorPickerTableViewCell(cell: PencilColorPickerTableViewCell, didChangeColor color: UIColor)
-    func colorPickerTableViewCell(cell: PencilColorPickerTableViewCell, didRequestHexCodeWithColor color: UIColor?)
+    func colorPickerTableViewCell(_ cell: PencilColorPickerTableViewCell, didChangeColor color: UIColor)
+    func colorPickerTableViewCell(_ cell: PencilColorPickerTableViewCell, didRequestHexCodeWithColor color: UIColor?)
 }
 
 
@@ -63,26 +63,26 @@ class PencilColorPickerTableViewCell: UITableViewCell {
             label.text = "0"
         }
         hexValueLabel.text = "#000000"
-        redSlider.addTarget(self, action: #selector(PencilColorPickerTableViewCell.sliderValueChanged(_:)), forControlEvents: .ValueChanged)
-        greenSlider.addTarget(self, action: #selector(PencilColorPickerTableViewCell.sliderValueChanged(_:)), forControlEvents: .ValueChanged)
-        blueSlider.addTarget(self, action: #selector(PencilColorPickerTableViewCell.sliderValueChanged(_:)), forControlEvents: .ValueChanged)
-        hexEntryButton.addTarget(self, action: #selector(PencilColorPickerTableViewCell.hexEntryButtonTapped(_:)), forControlEvents: .TouchUpInside)
-        hexEntryButton.setTitleColor(AppearanceManager.appearanceManager.brandColor, forState: .Normal)
+        redSlider.addTarget(self, action: #selector(PencilColorPickerTableViewCell.sliderValueChanged(_:)), for: .valueChanged)
+        greenSlider.addTarget(self, action: #selector(PencilColorPickerTableViewCell.sliderValueChanged(_:)), for: .valueChanged)
+        blueSlider.addTarget(self, action: #selector(PencilColorPickerTableViewCell.sliderValueChanged(_:)), for: .valueChanged)
+        hexEntryButton.addTarget(self, action: #selector(PencilColorPickerTableViewCell.hexEntryButtonTapped(_:)), for: .touchUpInside)
+        hexEntryButton.setTitleColor(AppearanceManager.appearanceManager.brandColor, for: UIControlState())
         sliders = [redSlider, greenSlider, blueSlider]
         
-        self.selectionStyle = .None
-        self.contentView.backgroundColor = UIColor.whiteColor()
+        self.selectionStyle = .none
+        self.contentView.backgroundColor = UIColor.white
         
         self.redLabel.text = NSLocalizedString("R:", comment:"red 'R' label")
         self.greenLabel.text = NSLocalizedString("G:", comment:"green 'G' label")
         self.blueLabel.text = NSLocalizedString("B:", comment:"blue 'B' label")
         
-        swatchView.backgroundColor = UIColor.blackColor()
-        swatchView.layer.borderColor = UIColor.blackColor().CGColor
+        swatchView.backgroundColor = UIColor.black
+        swatchView.layer.borderColor = UIColor.black.cgColor
         swatchView.layer.borderWidth = CGFloat(1.0)
     }
 
-    func sliderValueChanged(slider: UISlider) {
+    func sliderValueChanged(_ slider: UISlider) {
         let value = Int(slider.value * 255.0)
         switch slider {
         case redSlider:
@@ -103,7 +103,7 @@ class PencilColorPickerTableViewCell: UITableViewCell {
         }
     }
     
-    func hexEntryButtonTapped(sender: UIButton) {
+    func hexEntryButtonTapped(_ sender: UIButton) {
         if let delegate = self.delegate {
             delegate.colorPickerTableViewCell(self, didRequestHexCodeWithColor: self.color)
         }

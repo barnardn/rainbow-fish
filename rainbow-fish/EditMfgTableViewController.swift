@@ -12,56 +12,56 @@ import UIKit
 
 class EditMfgTableViewController: UITableViewController {
 
-    private var allManufacturers = [Manufacturer]()
+    fileprivate var allManufacturers = [Manufacturer]()
     
-    private lazy var doneButton: UIBarButtonItem = {
-        let button = UIBarButtonItem(barButtonSystemItem: .Done, target: self, action: #selector(EditMfgTableViewController.doneButtonTapped(_:)))
+    fileprivate lazy var doneButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(EditMfgTableViewController.doneButtonTapped(_:)))
         return button
     }()
     
     convenience init() {
-        self.init(style: UITableViewStyle.Grouped)
+        self.init(style: UITableViewStyle.grouped)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.registerClass(DefaultTableViewCell.self, forCellReuseIdentifier: DefaultTableViewCell.nibName as String)
+        self.tableView.register(DefaultTableViewCell.self, forCellReuseIdentifier: DefaultTableViewCell.nibName as String)
         self.navigationItem.leftBarButtonItem = self.doneButton
         self.updateDatasource()
     }
 
-    private func updateDatasource() {
+    fileprivate func updateDatasource() {
         
         let results = try? CDK.mainThreadContext.find(Manufacturer.self, predicate: nil, sortDescriptors: [NSSortDescriptor(key: ManufacturerAttributes.name.rawValue, ascending: true)], limit: nil, offset: nil)
         self.allManufacturers = results ?? [Manufacturer]()
         self.tableView!.reloadData()
     }
     
-    func doneButtonTapped(sender: UIBarButtonItem) {
+    func doneButtonTapped(_ sender: UIBarButtonItem) {
         let viewController = CatalogViewController()
         self.navigationController?.setViewControllers([viewController], animated: true)
     }
     
-    func isOwnedByMe(object: CloudSyncable) -> Bool {
+    func isOwnedByMe(_ object: CloudSyncable) -> Bool {
         return (object.ownerRecordIdentifier == AppController.appController.appConfiguration.iCloudRecordID)
     }
     
-    func editManufacturer(mfg: Manufacturer) {
+    func editManufacturer(_ mfg: Manufacturer) {
         let viewController = EditManufacturerNavigationController(manufacturer: mfg) { (didSave, edittedText, sender) -> Void in
             if !didSave {
-                self.dismissViewControllerAnimated(true, completion: nil)
+                self.dismiss(animated: true, completion: nil)
                 return;
             }
-            sender?.enabled = false
-            mfg.managedObjectContext?.performBlock({ (context: NSManagedObjectContext) in
+            sender?.isEnabled = false
+            mfg.managedObjectContext?.perform(block: { (context: NSManagedObjectContext) in
                 mfg.name = edittedText
-                return CommitAction.SaveToPersistentStore
+                return CommitAction.saveToPersistentStore
             }, completionHandler: { (result) in
-                sender?.enabled = true
+                sender?.isEnabled = true
                 do {
-                    try result()
+                    let _ = try result()
                     self.syncEditsToCloud(mfg, completion: { [unowned self] () -> Void in
-                        self.dismissViewControllerAnimated(true, completion: nil)
+                        self.dismiss(animated: true, completion: nil)
                         self.tableView.reloadData()
                     })
                 } catch {
@@ -69,25 +69,25 @@ class EditMfgTableViewController: UITableViewController {
                 }
             })
         }
-        self.presentViewController(viewController, animated: true, completion: nil)
+        self.present(viewController, animated: true, completion: nil)
     }
     
-    func editProduct(product: Product) {
+    func editProduct(_ product: Product) {
         let viewController = EditProductNavigationController(product: product) { (didSave, edittedText, sender) -> Void in
             if !didSave {
-                self.dismissViewControllerAnimated(true, completion: nil)
+                self.dismiss(animated: true, completion: nil)
                 return;
             }
-            sender?.enabled = false
-            product.managedObjectContext?.performBlock({ (context: NSManagedObjectContext) in
+            sender?.isEnabled = false
+            product.managedObjectContext?.perform(block: { (context: NSManagedObjectContext) in
                 product.name = edittedText
-                return CommitAction.SaveToPersistentStore
+                return CommitAction.saveToPersistentStore
                 }, completionHandler: { (result) in
-                    sender?.enabled = true
+                    sender?.isEnabled = true
                     do {
-                        try result()
+                        let _ = try result()
                         self.syncEditsToCloud(product) { [unowned self] in
-                            self.dismissViewControllerAnimated(true, completion: nil)
+                            self.dismiss(animated: true, completion: nil)
                             self.tableView.reloadData()
                         }
                     } catch {
@@ -95,33 +95,33 @@ class EditMfgTableViewController: UITableViewController {
                     }
                 })
         }
-        self.presentViewController(viewController, animated: true, completion: nil)
+        self.present(viewController, animated: true, completion: nil)
 
     }
     
-    func syncEditsToCloud(cloudObject: CloudSyncable, completion: () -> Void) {
+    func syncEditsToCloud(_ cloudObject: CloudSyncable, completion: @escaping () -> Void) {
         let record = cloudObject.toCKRecord()
         self.showHUD()
         CloudManager.sharedManger.syncChangeSet([record], completion: { [unowned self] (success, savedRecords, error) -> Void in
             self.hideHUD()
-            dispatch_async(dispatch_get_main_queue()) { completion() }
+            DispatchQueue.main.async { completion() }
         })
     }
 
     //MARK: tableview datasource
     
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return self.allManufacturers.count;
     }
 
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let mfg = self.allManufacturers[section]
         return mfg.products.count + 1
     }
 
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(DefaultTableViewCell.nibName as String, forIndexPath: indexPath) as! DefaultTableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: DefaultTableViewCell.nibName as String, for: indexPath) as! DefaultTableViewCell
         
         let cloudObject = self.cloudObjectAt(indexPath)
         if indexPath.row == 0 {
@@ -136,41 +136,41 @@ class EditMfgTableViewController: UITableViewController {
 
     //MARK: tableview delegate
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let cloudObject = self.cloudObjectAt(indexPath)
-        if let mfg = cloudObject as? Manufacturer where indexPath.row == 0 {
+        if let mfg = cloudObject as? Manufacturer, indexPath.row == 0 {
             self.editManufacturer(mfg)
-        } else if let product = cloudObject as? Product where indexPath.row > 0 {
+        } else if let product = cloudObject as? Product, indexPath.row > 0 {
             self.editProduct(product)
         }
     
     }
     
     
-    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         let cloudObject = self.cloudObjectAt(indexPath)
         if self.isOwnedByMe(cloudObject) {
             cell.textLabel?.textColor = AppearanceManager.appearanceManager.blackColor
-            cell.selectionStyle = .Blue
-            cell.accessoryType = .DisclosureIndicator
+            cell.selectionStyle = .blue
+            cell.accessoryType = .disclosureIndicator
         } else {
             cell.textLabel?.textColor = AppearanceManager.appearanceManager.disabledTitleColor
-            cell.selectionStyle = .None
-            cell.accessoryType = .None
+            cell.selectionStyle = .none
+            cell.accessoryType = .none
         }
     }
     
-    override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         let cloudObject = self.cloudObjectAt(indexPath)
         return self.isOwnedByMe(cloudObject) ? indexPath : nil
     }
     
-    override func tableView(tableView: UITableView, indentationLevelForRowAtIndexPath indexPath: NSIndexPath) -> Int {
+    override func tableView(_ tableView: UITableView, indentationLevelForRowAt indexPath: IndexPath) -> Int {
         return (indexPath.row == 0) ? 0 : 1;
     }
     
-    private func cloudObjectAt(indexPath: NSIndexPath) -> CloudSyncable {
+    fileprivate func cloudObjectAt(_ indexPath: IndexPath) -> CloudSyncable {
         let mfg = self.allManufacturers[indexPath.section]
         var cloudObject = mfg as CloudSyncable
         if indexPath.row > 0 {

@@ -10,7 +10,7 @@ import UIKit
 
 class BigButtonTableViewCell: UITableViewCell {
 
-    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet fileprivate weak var titleLabel: UILabel!
 
     var disabled: Bool = false {
         didSet {
@@ -34,8 +34,8 @@ class BigButtonTableViewCell: UITableViewCell {
     var destructiveButton: Bool = false {
         didSet {
             if self.destructiveButton {
-                self.titleLabel.textColor = UIColor.redColor()
-                self.selectedBackgroundView?.backgroundColor = UIColor.redColor()
+                self.titleLabel.textColor = UIColor.red
+                self.selectedBackgroundView?.backgroundColor = UIColor.red
             } else {
                 self.titleLabel.textColor = AppearanceManager.appearanceManager.brandColor
                 self.selectedBackgroundView?.backgroundColor = AppearanceManager.appearanceManager.selectedCellBackgroundColor
@@ -52,16 +52,16 @@ class BigButtonTableViewCell: UITableViewCell {
         self.selectedBackgroundView?.backgroundColor = AppearanceManager.appearanceManager.selectedCellBackgroundColor
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         if selected {
-            self.titleLabel.textColor = UIColor.whiteColor()
+            self.titleLabel.textColor = UIColor.white
             return
         }
         if self.disabled {
             self.titleLabel.textColor = AppearanceManager.appearanceManager.disabledTitleColor
         } else {
-            self.titleLabel.textColor = (self.destructiveButton) ? UIColor.redColor() : AppearanceManager.appearanceManager.brandColor
+            self.titleLabel.textColor = (self.destructiveButton) ? UIColor.red : AppearanceManager.appearanceManager.brandColor
         }
     }
     

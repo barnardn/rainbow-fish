@@ -3,30 +3,30 @@ import CoreDataKit
 
 
 @objc(Product)
-public class Product: _Product, NamedManagedObject {
+open class Product: _Product, NamedManagedObject {
     
     // MARK: NSManagedObject overrides
     
-    override public func awakeFromInsert() {
+    override open func awakeFromInsert() {
         super.awakeFromInsert()
         self.isNew = true
     }
     
-    class var UpdateIntervalInSeconds: NSTimeInterval { return 60.0 * 60.0 }
+    class var UpdateIntervalInSeconds: TimeInterval { return 60.0 * 60.0 }
     
-    public class var entityName : String {
-        return self.mogen_entityName()
+    open class var entityName : String {
+        return self.entityName()
     }
     
 }
 
 extension Product: CloudSyncable {
   
-    func populateFromCKRecord(record: CKRecord) {
+    func populateFromCKRecord(_ record: CKRecord) {
         self.recordID = record.recordID.recordName
-        self.name = record.objectForKey(ProductAttributes.name.rawValue) as? String
+        self.name = record.object(forKey: ProductAttributes.name.rawValue) as? String
         self.modificationDate = record.modificationDate
-        self.ownerRecordIdentifier = record.objectForKey(ProductAttributes.ownerRecordIdentifier.rawValue) as? String
+        self.ownerRecordIdentifier = record.object(forKey: ProductAttributes.ownerRecordIdentifier.rawValue) as? String
     }
 
     func toCKRecord() -> CKRecord {
@@ -42,7 +42,7 @@ extension Product: CloudSyncable {
         return record
     }
     
-    func toJson(includeRelationships: Bool = false ) -> NSDictionary {
+    func toJson(_ includeRelationships: Bool = false ) -> NSDictionary {
 
         let jsonObject = NSMutableDictionary()
         jsonObject[ProductAttributes.recordID.rawValue] = self.recordID
@@ -70,9 +70,9 @@ extension Product {
     var shouldPerformUpdate: Bool {
         get {
             if let lastSyncDate = self.syncInfo?.lastRefreshTime {
-                let updateTime = NSDate(timeInterval: Product.UpdateIntervalInSeconds, sinceDate: lastSyncDate)
-                let now = NSDate()
-                return (now.timeIntervalSinceDate(updateTime) >= 0.0)
+                let updateTime = Date(timeInterval: Product.UpdateIntervalInSeconds, since: lastSyncDate as Date)
+                let now = Date()
+                return (now.timeIntervalSince(updateTime) >= 0.0)
             }
             return true
         }
@@ -80,17 +80,17 @@ extension Product {
     
     func sortedPencils() -> [Pencil]? {
         if let pencils = self.pencils.allObjects as? [Pencil] {
-            return pencils.sort({ (p1: Pencil, p2: Pencil) -> Bool in
+            return pencils.sorted(by: { (p1: Pencil, p2: Pencil) -> Bool in
                 let name1 = p1.name as String!
                 let name2 = p2.name as String!
-                return (name1.localizedCaseInsensitiveCompare(name2) == .OrderedDescending)
+                return (name1!.localizedCaseInsensitiveCompare(name2!) == .orderedDescending)
             })
         }
         return nil
     }
     
-    func ckReferenceWithManufacturerRecord(manufacturerRecord: CKRecord) -> CKReference {
-        let reference = CKReference(record: manufacturerRecord, action: .DeleteSelf)
+    func ckReferenceWithManufacturerRecord(_ manufacturerRecord: CKRecord) -> CKReference {
+        let reference = CKReference(record: manufacturerRecord, action: .deleteSelf)
         let productRecord = self.toCKRecord()
         reference.setValue(productRecord, forKey: ProductRelationships.manufacturer.rawValue)
         return reference

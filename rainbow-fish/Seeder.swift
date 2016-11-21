@@ -12,31 +12,31 @@ import CoreDataKit
 import CloudKit
 import SwiftyJSON
 
-enum SeedError: ErrorType {
-    case Error(message : String)
+enum SeedError: Error {
+    case error(message : String)
 }
 
 class Seeder {
     
-    private let seedFile = "master.json"
-    private let seedDataSubdir = "StartupData"
-    private let container: CKContainer
-    private let publicDb: CKDatabase
+    fileprivate let seedFile = "master.json"
+    fileprivate let seedDataSubdir = "StartupData"
+    fileprivate let container: CKContainer
+    fileprivate let publicDb: CKDatabase
     
     init() {
-        container = CKContainer.defaultContainer()
+        container = CKContainer.default()
         publicDb = container.publicCloudDatabase
     }
 
-    func createCloudkitCatalog(progress: (success: Bool, message: String?) -> Void, completion: (success: Bool, message: String?) -> Void) throws {
+    func createCloudkitCatalog(_ progress: @escaping (_ success: Bool, _ message: String?) -> Void, completion: @escaping (_ success: Bool, _ message: String?) -> Void) throws {
         
-        let seedURL = NSBundle.mainBundle().URLForResource("master.json", withExtension: nil, subdirectory: self.seedDataSubdir)
+        let seedURL = Bundle.main.url(forResource: "master.json", withExtension: nil, subdirectory: self.seedDataSubdir)
         assert(seedURL != nil, "can't find seed json file")
         
         var recordOperations: [CKModifyRecordsOperation] = []
-        guard let seedJsonData = NSData(contentsOfURL: seedURL!)  else {
+        guard let seedJsonData = try? Data(contentsOf: seedURL!)  else {
             assertionFailure("Unable to read master json database")
-            throw SeedError.Error(message: "Unable to read master json database")
+            throw SeedError.error(message: "Unable to read master json database")
         }
         
         let jsonData = JSON(data: seedJsonData)
@@ -51,93 +51,105 @@ class Seeder {
                 let product = self.productWithName(prodLineKey, manufacturer: mfg)
                 changeSet.append(product)
 
-                guard let pencilDataURL = NSBundle.mainBundle().URLForResource(pencilFilename.stringValue, withExtension: nil, subdirectory: self.seedDataSubdir) else {
+                guard let pencilDataURL = Bundle.main.url(forResource: pencilFilename.stringValue, withExtension: nil, subdirectory: self.seedDataSubdir) else {
                     assertionFailure("Missing file \(pencilFilename.stringValue) for \(prodLineKey)")
-                    throw SeedError.Error(message: "Missing file \(pencilFilename.stringValue) for \(prodLineKey)")
+                    throw SeedError.error(message: "Missing file \(pencilFilename.stringValue) for \(prodLineKey)")
                 }
-                guard let pencilData = NSData(contentsOfURL: pencilDataURL) else {
+                
+                guard let pencilData = try? Data(contentsOf: pencilDataURL) else {
                     assertionFailure("Unable to get pencil json data")
-                    throw SeedError.Error(message: "Unable to get pencil json data")
+                    throw SeedError.error(message: "Unable to get pencil json data")
                 }
+                
                 let pencilJson = JSON(data: pencilData)
                 let pencilRecords = self.pencilRecordsFromJson(pencilJson, forProduct: product)
                 
-                changeSet.appendContentsOf(pencilRecords)
+                changeSet.append(contentsOf: pencilRecords)
             }
             
             let saveOp = CKModifyRecordsOperation(recordsToSave: changeSet, recordIDsToDelete: nil)
             saveOp.database = self.publicDb
-            saveOp.modifyRecordsCompletionBlock = { (records:[CKRecord]?, deletedIds:[CKRecordID]?, error: NSError?) in
+            saveOp.modifyRecordsCompletionBlock = { (records , deletedIds , error) in
                 if let error = error {
                     print(error.localizedDescription)
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        progress(success: false, message: "\(mfgKey) ✕")
-                    })
+                    
+                    DispatchQueue.main.async {
+                        progress(false, "\(mfgKey) ✕")
+                    }
+
                 } else {
-                    dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                        progress(success: true, message: "\(mfgKey) ✓")
-                    })
+                    
+                    DispatchQueue.main.async {
+                        progress(true, "\(mfgKey) ✓")
+                    }
+                    
                 }
 
             }
-            saveOp.savePolicy = .AllKeys
+            saveOp.savePolicy = .allKeys
             recordOperations.append(saveOp)
             
         }
         guard let lastOp = recordOperations.last else {
-            completion(success: false, message: "No records to seed")
+            completion(false, "No records to seed")
             return
         }
 
         lastOp.completionBlock = {
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                completion(success: true, message: "Cloud catalog creation complete!")
+            DispatchQueue.main.async(execute: { () -> Void in
+                completion(true, "Cloud catalog creation complete!")
             })
         }
         
         for saveOp in recordOperations {
             if saveOp != lastOp {
                 lastOp.addDependency(saveOp)
-                self.publicDb.addOperation(saveOp)
+                self.publicDb.add(saveOp)
             }
         }
-        self.publicDb.addOperation(lastOp)
+        self.publicDb.add(lastOp)
     }
     
-    func manufacturerWithName(name: String) -> CKRecord {
+    func manufacturerWithName(_ name: String) -> CKRecord {
         let manufacturer = CKRecord(recordType: Manufacturer.entityName)
-        manufacturer.setObject(name, forKey: ManufacturerAttributes.name.rawValue)
+        manufacturer.setObject(name as CKRecordValue?, forKey: ManufacturerAttributes.name.rawValue)
         return manufacturer
     }
     
-    func productWithName(name: String, manufacturer: CKRecord) -> CKRecord {
+    func productWithName(_ name: String, manufacturer: CKRecord) -> CKRecord {
         let product = CKRecord(recordType: Product.entityName)
-        product.setObject(name, forKey: ProductAttributes.name.rawValue)
+        product.setObject(name as CKRecordValue?, forKey: ProductAttributes.name.rawValue)
         
-        let manufactRef = CKReference(record: manufacturer, action: CKReferenceAction.DeleteSelf)
+        let manufactRef = CKReference(record: manufacturer, action: CKReferenceAction.deleteSelf)
         product.setObject(manufactRef, forKey: ProductRelationships.manufacturer.rawValue);
         return product
     }
     
-    func pencilRecordsFromJson(pencilJson: JSON, forProduct product: CKRecord) -> [CKRecord] {
+    func pencilRecordsFromJson(_ pencilJson: JSON, forProduct product: CKRecord) -> [CKRecord] {
         let pencilRecords = pencilJson.map { (_:String, json:JSON) -> CKRecord in
             let pencil = CKRecord(recordType: Pencil.entityName)
-            pencil.setObject(json[PencilAttributes.name.rawValue].stringValue, forKey: PencilAttributes.name.rawValue)
-            pencil.setObject(json[PencilAttributes.identifier.rawValue].stringValue, forKey: PencilAttributes.identifier.rawValue)
-            pencil.setObject(json[PencilAttributes.color.rawValue].stringValue, forKey: PencilAttributes.color.rawValue)
-            let productRef = CKReference(record: product, action: .DeleteSelf)
+
+            if  let name = json[PencilAttributes.name.rawValue].stringValue as CKRecordValue?,
+                let identifier = json[PencilAttributes.identifier.rawValue].stringValue as CKRecordValue?,
+                let color = json[PencilAttributes.color.rawValue].stringValue as CKRecordValue?
+            {
+                pencil.setObject(name, forKey: PencilAttributes.name.rawValue)
+                pencil.setObject(identifier, forKey: PencilAttributes.identifier.rawValue)
+                pencil.setObject(color, forKey: PencilAttributes.color.rawValue)
+            }
+            let productRef = CKReference(record: product, action: .deleteSelf)
             pencil.setObject(productRef, forKey: PencilRelationships.product.rawValue)
             return pencil
         }
         return pencilRecords
     }
     
-    func pencilsWithInfo(pencilInfo: [[String:String]], forProduct product: CKRecord) -> [CKRecord] {
+    func pencilsWithInfo(_ pencilInfo: [[String:String]], forProduct product: CKRecord) -> [CKRecord] {
         let pencilRecords = pencilInfo.map{ (p: [String:String]) -> CKRecord in
             let pencil = CKRecord(recordType: Pencil.entityName)
-            pencil.setObject(p[PencilAttributes.name.rawValue], forKey: PencilAttributes.name.rawValue)
-            pencil.setObject(p[PencilAttributes.identifier.rawValue], forKey: PencilAttributes.identifier.rawValue)
-            let productRef = CKReference(record: product, action: .DeleteSelf)
+            pencil.setObject(p[PencilAttributes.name.rawValue] as CKRecordValue?, forKey: PencilAttributes.name.rawValue)
+            pencil.setObject(p[PencilAttributes.identifier.rawValue] as CKRecordValue?, forKey: PencilAttributes.identifier.rawValue)
+            let productRef = CKReference(record: product, action: .deleteSelf)
             pencil.setObject(productRef, forKey: PencilRelationships.product.rawValue)
             return pencil
         }

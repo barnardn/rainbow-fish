@@ -13,41 +13,41 @@ import UIKit
 class SettingsTableViewController: ContentTableViewController {
 
     enum Sections: Int {
-        case MinimumInventory
-        case AppPurchase
-        case DataManagement
+        case minimumInventory
+        case appPurchase
+        case dataManagement
     }
     
     enum InventoryRows: Int {
-        case MinimumInventory
+        case minimumInventory
     }
     
     enum AppPurchaseRows: Int {
-        case InAppPurchaseRow
+        case inAppPurchaseRow
     }
     
     enum DataManagementRows: Int {
-        case DataExport
-        case DataImport
-        case DataSeed
+        case dataExport
+        case dataImport
+        case dataSeed
     }
     
-    private var settingsContext = 0
-    private var allowDataImportSection = false
+    fileprivate var settingsContext = 0
+    fileprivate var allowDataImportSection = false
     
-    private lazy var cloudImporter: CloudImport = {
+    fileprivate lazy var cloudImporter: CloudImport = {
         return CloudImport()
     }()
     
-    private lazy var catalogSeeder: Seeder = {
+    fileprivate lazy var catalogSeeder: Seeder = {
         return Seeder()
     }()
     
-    var sectionInfo = [ [InventoryRows.MinimumInventory.rawValue], [AppPurchaseRows.InAppPurchaseRow.rawValue], [DataManagementRows.DataExport.rawValue, DataManagementRows.DataImport.rawValue] ]
+    var sectionInfo = [ [InventoryRows.minimumInventory.rawValue], [AppPurchaseRows.inAppPurchaseRow.rawValue], [DataManagementRows.dataExport.rawValue, DataManagementRows.dataImport.rawValue] ]
     
     convenience init() {
-        self.init(style: .Grouped)
-        let image = UIImage(named: "tabbar-icon-settings")?.imageWithRenderingMode(.AlwaysTemplate)
+        self.init(style: .grouped)
+        let image = UIImage(named: "tabbar-icon-settings")?.withRenderingMode(.alwaysTemplate)
         self.title = NSLocalizedString("Settings", comment:"setting navigation item title")
         self.tabBarItem = UITabBarItem(title: NSLocalizedString("Settings", comment:"setting tabbar item title"), image: image, tag: 0)
         
@@ -61,13 +61,13 @@ class SettingsTableViewController: ContentTableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.registerNib(UINib(nibName: NameValueTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: NameValueTableViewCell.nibName)
-        self.tableView.registerNib(UINib(nibName: BigButtonTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: BigButtonTableViewCell.nibName)
+        self.tableView.register(UINib(nibName: NameValueTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: NameValueTableViewCell.nibName)
+        self.tableView.register(UINib(nibName: BigButtonTableViewCell.nibName, bundle: nil), forCellReuseIdentifier: BigButtonTableViewCell.nibName)
         
-        self.tableView.registerClass(ProductHeaderView.self, forHeaderFooterViewReuseIdentifier: "ProductHeaderView")
+        self.tableView.register(ProductHeaderView.self, forHeaderFooterViewReuseIdentifier: "ProductHeaderView")
         
-        AppController.appController.appConfiguration.addObserver(self, forKeyPath: "minInventoryQuantity", options: .New, context: &settingsContext)
-        AppController.appController.appConfiguration.addObserver(self, forKeyPath: "purchaseStatus", options: .New, context: &settingsContext)
+        AppController.appController.appConfiguration.addObserver(self, forKeyPath: "minInventoryQuantity", options: .new, context: &settingsContext)
+        AppController.appController.appConfiguration.addObserver(self, forKeyPath: "purchaseStatus", options: .new, context: &settingsContext)
         
         if AppController.appController.isNormsiPhone() {
             allowDataImportSection = true
@@ -75,32 +75,32 @@ class SettingsTableViewController: ContentTableViewController {
         
         if AppController.appController.isNormsiPhone() {
             var _ = self.sectionInfo.removeLast()
-            self.sectionInfo.append([DataManagementRows.DataExport.rawValue, DataManagementRows.DataImport.rawValue, DataManagementRows.DataSeed.rawValue])
+            self.sectionInfo.append([DataManagementRows.dataExport.rawValue, DataManagementRows.dataImport.rawValue, DataManagementRows.dataSeed.rawValue])
         }
 
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if !AppController.appController.allowsAppIconBadge() {
-            let settings = UIUserNotificationSettings(forTypes: .Badge, categories: nil)
-            UIApplication.sharedApplication().registerUserNotificationSettings(settings)
+            let settings = UIUserNotificationSettings(types: .badge, categories: nil)
+            UIApplication.shared.registerUserNotificationSettings(settings)
         }
     }
     
 
     // MARK: kvo 
     
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         guard context == &settingsContext else {
-            super.observeValueForKeyPath(keyPath, ofObject: object, change: change, context: context)
+            super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
             return
         }
         switch keyPath! {
             case "minInventoryQuantity":
-                self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: Sections.MinimumInventory.rawValue)], withRowAnimation: .None)
+                self.tableView.reloadRows(at: [IndexPath(row: 0, section: Sections.minimumInventory.rawValue)], with: .none)
             case "purchaseStatus":
-                self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: 0, inSection: Sections.AppPurchase.rawValue)], withRowAnimation: .None)
+                self.tableView.reloadRows(at: [IndexPath(row: 0, section: Sections.appPurchase.rawValue)], with: .none)
             default:
                 assertionFailure("unknown keypath observed \(keyPath)")
         }
@@ -108,36 +108,36 @@ class SettingsTableViewController: ContentTableViewController {
     
     // MARK: methods
     
-    private func exportDatabase (completionHandler: (success: Bool, error: NSError?) -> Void ) throws {
-        CDK.performBlockOnBackgroundContext({ (context: NSManagedObjectContext) in
+    fileprivate func exportDatabase (_ completionHandler: @escaping (_ success: Bool, _ error: NSError?) -> Void ) throws {
+        CDK.performOnBackgroundContext(block: { (context: NSManagedObjectContext) in
 
             do {
                 let results = try context.find(Manufacturer.self)
                 let database = NSMutableArray(capacity: results.count)
                 for mfg in results {
-                    database.addObject(mfg.toJson(true))
+                    database.add(mfg.toJson(true))
                 }
                 let outUrl = AppController.appController.urlForResourceInApplicationSupport(resourceName: "database.json")
-                if let obj = try? NSJSONSerialization.dataWithJSONObject(database, options: .PrettyPrinted) {
-                    obj.writeToURL(outUrl, atomically: true)
-                    dispatch_async(dispatch_get_main_queue()) { completionHandler(success: true, error: nil) }
+                if let obj = try? JSONSerialization.data(withJSONObject: database, options: .prettyPrinted) {
+                    try! obj.write(to: outUrl, options: .atomicWrite)
+                    DispatchQueue.main.async { completionHandler(true, nil) }
                 }
                 
-            } catch CoreDataKitError.CoreDataError(let coreDataError) {
+            } catch CoreDataKitError.coreDataError(let coreDataError) {
                 let nserror = NSError(domain: "com.clamdango.rainbowfish", code: 100, userInfo: [NSLocalizedDescriptionKey : "\(coreDataError)"])
-                completionHandler(success: false, error: nserror)
+                completionHandler(false, nserror)
                 
             } catch {
-                completionHandler(success: false, error: nil)
+                completionHandler(false, nil)
             }
             
-            return CommitAction.DoNothing
+            return CommitAction.doNothing
             
             }, completionHandler: nil)
         
     }
     
-    private func seedCloudDatabase() {
+    fileprivate func seedCloudDatabase() {
         
         // check existence of "database.json"
         
@@ -152,28 +152,28 @@ class SettingsTableViewController: ContentTableViewController {
         })
     }
     
-    private func confirmCreateDatabase() {
-        let alert = UIAlertController(title: "Confirm Action", message: "This operation will *INSERT* rows into the current public cloud database. Are you REALLY sure you want to do this?", preferredStyle: .Alert)
+    fileprivate func confirmCreateDatabase() {
+        let alert = UIAlertController(title: "Confirm Action", message: "This operation will *INSERT* rows into the current public cloud database. Are you REALLY sure you want to do this?", preferredStyle: .alert)
 
-        alert.addAction(UIAlertAction(title: "Go!", style: .Default, handler: { [unowned self] (_) -> Void in
+        alert.addAction(UIAlertAction(title: "Go!", style: .default, handler: { [unowned self] (_) -> Void in
             self.createDatabaseFromSeedJson()
             }))
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
         alert.view.tintColor = AppearanceManager.appearanceManager.brandColor
     }
     
     
-    private func createDatabaseFromSeedJson() {
+    fileprivate func createDatabaseFromSeedJson() {
 
-        guard let results = try? CDK.mainThreadContext.find(Manufacturer.self) where results.count == 0 else {
+        guard let results = try? CDK.mainThreadContext.find(Manufacturer.self), results.count == 0 else {
             
-            let alert = UIAlertController(title: "Records Found", message: "There are existing records in your local store. This operation can only be safely completed on an empty local and remote store.", preferredStyle: .Alert)
+            let alert = UIAlertController(title: "Records Found", message: "There are existing records in your local store. This operation can only be safely completed on an empty local and remote store.", preferredStyle: .alert)
             
-            alert.addAction(UIAlertAction(title: "Dismiss", style: .Cancel, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
             
             alert.view.tintColor = AppearanceManager.appearanceManager.brandColor
             
@@ -186,18 +186,18 @@ class SettingsTableViewController: ContentTableViewController {
             self.showHUD(message: "Creating Catalog...")
             try self.catalogSeeder.createCloudkitCatalog({ [unowned self] (success, message) -> Void in
                     self.showHUD(message: message)
-                    print(message)
+                    print(message!)
                 },
                 completion: { [unowned self] (success, message) -> Void in
                     self.hideHUD()
             })
             
-        } catch SeedError.Error(let message) {
+        } catch SeedError.error(let message) {
             
-            let alert = UIAlertController(title: "Error", message: message, preferredStyle: .Alert)
-            alert.addAction(UIAlertAction(title: "Dismiss", style: .Cancel, handler: nil))
+            let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
             
-            self.presentViewController(alert, animated: true) { [unowned self] in
+            self.present(alert, animated: true) { [unowned self] in
                 self.hideHUD()
             }
         } catch {
@@ -210,73 +210,73 @@ class SettingsTableViewController: ContentTableViewController {
     
     //MARK: tableview data source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return (self.allowDataImportSection) ? self.sectionInfo.count : self.sectionInfo.count - 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let thisSection = self.sectionInfo[section]
         return thisSection.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let ixPath = (indexPath.section, indexPath.row)
         switch ixPath {
-        case (Sections.DataManagement.rawValue, 0):
+        case (Sections.dataManagement.rawValue, 0):
             return self.configureDataExportCell(indexPath)
-        case  (Sections.DataManagement.rawValue, 1):
+        case  (Sections.dataManagement.rawValue, 1):
             return self.configureDataImportCell(indexPath)
-        case (Sections.DataManagement.rawValue, DataManagementRows.DataSeed.rawValue):
+        case (Sections.dataManagement.rawValue, DataManagementRows.dataSeed.rawValue):
             return self.configureSeedSell(indexPath)
-        case (Sections.AppPurchase.rawValue, AppPurchaseRows.InAppPurchaseRow.rawValue):
+        case (Sections.appPurchase.rawValue, AppPurchaseRows.inAppPurchaseRow.rawValue):
             return self.configureInAppPurchaseCell(indexPath)
         default:
             return self.configureInventoryCell(indexPath)
         }
     }
     
-    private func configureInventoryCell(indexPath: NSIndexPath) -> NameValueTableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(NameValueTableViewCell.nibName, forIndexPath: indexPath) as! NameValueTableViewCell
+    fileprivate func configureInventoryCell(_ indexPath: IndexPath) -> NameValueTableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: NameValueTableViewCell.nibName, for: indexPath) as! NameValueTableViewCell
         cell.name = NSLocalizedString("Minimum Inventory", comment:"settings pencil remaining title")
         if let quantity = AppController.appController.appConfiguration.minInventoryQuantity {
             cell.value = formatDecimalQuantity(quantity)
         } else {
             cell.value = ""
         }
-        cell.accessoryType = .DisclosureIndicator
+        cell.accessoryType = .disclosureIndicator
         return cell
     }
     
-    private func configureInAppPurchaseCell(indexPath: NSIndexPath) -> NameValueTableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(NameValueTableViewCell.nibName, forIndexPath: indexPath) as! NameValueTableViewCell
+    fileprivate func configureInAppPurchaseCell(_ indexPath: IndexPath) -> NameValueTableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: NameValueTableViewCell.nibName, for: indexPath) as! NameValueTableViewCell
         cell.name = NSLocalizedString("Support the Developer", comment:"in app purchase title")
         cell.value = "Please"
         if AppController.appController.appConfiguration.wasPurchasedSuccessfully {
             cell.value = NSLocalizedString("Thank You!", comment:"settings app purchase thank you message")
         }
-        cell.accessoryType = .DisclosureIndicator
+        cell.accessoryType = .disclosureIndicator
         return cell
     }
     
-    private func configureDataImportCell(indexPath: NSIndexPath) -> BigButtonTableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(BigButtonTableViewCell.nibName, forIndexPath: indexPath) as! BigButtonTableViewCell
+    fileprivate func configureDataImportCell(_ indexPath: IndexPath) -> BigButtonTableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: BigButtonTableViewCell.nibName, for: indexPath) as! BigButtonTableViewCell
         cell.title = NSLocalizedString("Seed Database", comment:"seed database admin function")
         return cell
     }
     
-    private func configureDataExportCell(indexPath: NSIndexPath) -> BigButtonTableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(BigButtonTableViewCell.nibName, forIndexPath: indexPath) as! BigButtonTableViewCell
+    fileprivate func configureDataExportCell(_ indexPath: IndexPath) -> BigButtonTableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: BigButtonTableViewCell.nibName, for: indexPath) as! BigButtonTableViewCell
         cell.title = NSLocalizedString("Export Database", comment:"export database admin function")
         return cell
     }
     
-    private func configureSeedSell(indexPath: NSIndexPath) -> BigButtonTableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(BigButtonTableViewCell.nibName, forIndexPath: indexPath) as! BigButtonTableViewCell
+    fileprivate func configureSeedSell(_ indexPath: IndexPath) -> BigButtonTableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: BigButtonTableViewCell.nibName, for: indexPath) as! BigButtonTableViewCell
         cell.title = NSLocalizedString("Create Cloud Data", comment:"create full database in iCloud admin function")
         return cell
     }
     
-    private func formatDecimalQuantity(quantity: NSDecimalNumber) -> String {
+    fileprivate func formatDecimalQuantity(_ quantity: NSDecimalNumber) -> String {
         let wholeNumber = Int(floorf(quantity.floatValue))
         if fmodf(quantity.floatValue, 1.0) > 0 {
             if wholeNumber == 0 {
@@ -291,14 +291,14 @@ class SettingsTableViewController: ContentTableViewController {
     
     // MARK: tableview delegate
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         var viewController: UIViewController?
         
         let ixPath = (indexPath.section, indexPath.row)
         
         switch ixPath {
-        case (Sections.DataManagement.rawValue, DataManagementRows.DataExport.rawValue):
-            tableView.deselectRowAtIndexPath(indexPath, animated: false)
+        case (Sections.dataManagement.rawValue, DataManagementRows.dataExport.rawValue):
+            tableView.deselectRow(at: indexPath, animated: false)
             self.showHUD(message: "Creating Export")
             do {
                 try self.exportDatabase({ (success, error) -> Void in
@@ -310,13 +310,13 @@ class SettingsTableViewController: ContentTableViewController {
             } catch {
                 assertionFailure("Database export failed")
             }
-        case (Sections.DataManagement.rawValue, DataManagementRows.DataImport.rawValue):
+        case (Sections.dataManagement.rawValue, DataManagementRows.dataImport.rawValue):
             self.seedCloudDatabase()
-            tableView.deselectRowAtIndexPath(indexPath, animated: false)
-        case (Sections.DataManagement.rawValue, DataManagementRows.DataSeed.rawValue):
+            tableView.deselectRow(at: indexPath, animated: false)
+        case (Sections.dataManagement.rawValue, DataManagementRows.dataSeed.rawValue):
             self.confirmCreateDatabase()
-            tableView.deselectRowAtIndexPath(indexPath, animated: false)
-        case (Sections.AppPurchase.rawValue, _):
+            tableView.deselectRow(at: indexPath, animated: false)
+        case (Sections.appPurchase.rawValue, _):
             viewController = SettingsPurchaseOptionsTableViewController()
         default:
             viewController = SettingsMinimumStockTableViewController()
@@ -327,13 +327,13 @@ class SettingsTableViewController: ContentTableViewController {
         }
     }
     
-    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = tableView.dequeueReusableHeaderFooterViewWithIdentifier("ProductHeaderView") as! ProductHeaderView
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "ProductHeaderView") as! ProductHeaderView
         
         switch section {
-        case Sections.MinimumInventory.rawValue:
+        case Sections.minimumInventory.rawValue:
             headerView.title = NSLocalizedString("Inventory Management", comment:"settings inventory mananagement section header")
-        case Sections.AppPurchase.rawValue:
+        case Sections.appPurchase.rawValue:
             headerView.title = NSLocalizedString("Purchase", comment:"settings in app purchase section")
         default:
             headerView.title = "Data Management"
@@ -342,7 +342,7 @@ class SettingsTableViewController: ContentTableViewController {
         return headerView
     }
     
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return ProductHeaderView.headerHeight
     }
     

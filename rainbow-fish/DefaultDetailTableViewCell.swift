@@ -14,8 +14,8 @@ class DefaultDetailTableViewCell: UITableViewCell {
         super.awakeFromNib()
         self.textLabel?.textColor = AppearanceManager.appearanceManager.bodyTextColor
         self.detailTextLabel?.textColor = AppearanceManager.appearanceManager.brandColor
-        self.contentView.backgroundColor = UIColor.whiteColor()
-        self.selectedBackgroundView = UIView(frame: CGRectZero)
+        self.contentView.backgroundColor = UIColor.white
+        self.selectedBackgroundView = UIView(frame: CGRect.zero)
         self.selectedBackgroundView?.backgroundColor = AppearanceManager.appearanceManager.selectedCellBackgroundColor
     }
     

@@ -10,8 +10,8 @@ import UIKit
 
 class NameValueTableViewCell: UITableViewCell {
 
-    @IBOutlet private weak var nameLabel: UILabel!
-    @IBOutlet private weak var valueLabel: UILabel!
+    @IBOutlet fileprivate weak var nameLabel: UILabel!
+    @IBOutlet fileprivate weak var valueLabel: UILabel!
     
     var name: String? {
         get {

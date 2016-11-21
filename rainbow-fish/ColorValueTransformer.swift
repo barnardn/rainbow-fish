@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ColorValueTransformer: NSValueTransformer {
+class ColorValueTransformer: ValueTransformer {
 
     
     class func allowsReveseTransformation() -> Bool {
@@ -19,19 +19,19 @@ class ColorValueTransformer: NSValueTransformer {
         return UIColor.self
     }
     
-    override func transformedValue(value: AnyObject?) -> AnyObject? {
+    override func transformedValue(_ value: Any?) -> Any? {
         if let colorValue = value as? UIColor {
             let (r,g,b,_) = colorValue.getIntegerValues()
             let str = "\(r),\(g),\(b)"
-            return str.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false)
+            return str.data(using: String.Encoding.utf8, allowLossyConversion: false)
         }
         return nil
     }
 
-    override func reverseTransformedValue(value: AnyObject?) -> AnyObject? {
-        if let dataValue = value as? NSData {
-            let stringValue = NSString(data: dataValue, encoding: NSUTF8StringEncoding) as! String
-            let rgb: [String] = stringValue.componentsSeparatedByString(",")
+    override func reverseTransformedValue(_ value: Any?) -> Any? {
+        if let dataValue = value as? Data {
+            let stringValue = NSString(data: dataValue, encoding: String.Encoding.utf8.rawValue) as! String
+            let rgb: [String] = stringValue.components(separatedBy: ",")
             assert(rgb.count == 3, "string returned was not a triple: \(stringValue)")
             let red = Int(rgb[0]) ?? 0
             let green = Int(rgb[1]) ?? 0

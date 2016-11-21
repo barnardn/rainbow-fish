@@ -14,27 +14,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
         application.setMinimumBackgroundFetchInterval(UIApplicationBackgroundFetchIntervalMinimum)
         
         AppController.appController.setup()
-        window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        window!.backgroundColor = UIColor.whiteColor()
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window!.backgroundColor = UIColor.white
         window!.rootViewController = RootViewController()
-        window!.tintColor = UIColor.whiteColor()
+        window!.tintColor = UIColor.white
         window!.makeKeyAndVisible()
         return true
     }
 
-    func application(application: UIApplication, performFetchWithCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         CloudManager.sharedManger.refreshManufacturersAndProducts(AppController.appController.lastUpdatedDate()) { (success: Bool, error: NSError?) -> Void in
             if success {
-                completionHandler(UIBackgroundFetchResult.NewData)
+                completionHandler(UIBackgroundFetchResult.newData)
                 AppController.appController.updateLastUpdatedDateToNow()
                 AppController.appController.shouldFetchCatalogOnDisplay = true
             } else {
-                completionHandler(UIBackgroundFetchResult.Failed)
+                completionHandler(UIBackgroundFetchResult.failed)
             }
         }
     }

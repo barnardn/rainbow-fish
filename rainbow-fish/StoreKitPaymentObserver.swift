@@ -22,7 +22,7 @@ let StoreKitPurchaseErrorUserInfoKey = "StoreKitPurchaseErrorUserInfoKey"
 
 class StoreKitPaymentObserver: NSObject, SKPaymentTransactionObserver {
 
-    func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         print("Payment queue observer have updated transaction info!")
         var notification: StoreKitPurchaseResultType?
         var havePurchases = false
@@ -30,59 +30,59 @@ class StoreKitPaymentObserver: NSObject, SKPaymentTransactionObserver {
         
         for transaction in transactions {
             switch transaction.transactionState {
-            case .Purchased:
+            case .purchased:
                 let productId = transaction.payment.productIdentifier
-                AppController.appController.appConfiguration.purchaseStatus = NSNumber(integer: SKPaymentTransactionState.Purchased.rawValue)
+                AppController.appController.appConfiguration.purchaseStatus = NSNumber(value: SKPaymentTransactionState.purchased.rawValue as Int)
                 AppController.appController.appConfiguration.purchasedProduct = productId
                 havePurchases = true
                 notification = .Completed
-            case .Restored:
-                let productId = transaction.originalTransaction!.payment.productIdentifier
-                AppController.appController.appConfiguration.purchaseStatus = NSNumber(integer: SKPaymentTransactionState.Purchased.rawValue)
+            case .restored:
+                let productId = transaction.original!.payment.productIdentifier
+                AppController.appController.appConfiguration.purchaseStatus = NSNumber(value: SKPaymentTransactionState.purchased.rawValue as Int)
                 AppController.appController.appConfiguration.purchasedProduct = productId
                 print("restored product id: \(productId)")
                 havePurchases = true
                 notification = .Completed
-            case .Deferred:
-                AppController.appController.appConfiguration.purchaseStatus = NSNumber(integer: SKPaymentTransactionState.Deferred.rawValue)
+            case .deferred:
+                AppController.appController.appConfiguration.purchaseStatus = NSNumber(value: SKPaymentTransactionState.deferred.rawValue as Int)
                 notification = .Deferred
-            case .Failed:
+            case .failed:
                 if !havePurchases {
-                    AppController.appController.appConfiguration.purchaseStatus = NSNumber(integer: SKPaymentTransactionState.Failed.rawValue)
+                    AppController.appController.appConfiguration.purchaseStatus = NSNumber(value: SKPaymentTransactionState.failed.rawValue as Int)
                     AppController.appController.appConfiguration.lastTransactionError = transaction.error?.localizedDescription
-                    lastTransactionError = transaction.error
+                    lastTransactionError = transaction.error as NSError?
                     notification = .Failed
                 }
-            case .Purchasing:
-                AppController.appController.appConfiguration.purchaseStatus = NSNumber(integer: SKPaymentTransactionState.Purchasing.rawValue)
+            case .purchasing:
+                AppController.appController.appConfiguration.purchaseStatus = NSNumber(value: SKPaymentTransactionState.purchasing.rawValue as Int)
             }
             AppController.appController.appConfiguration.save()
-            if transaction.transactionState != .Deferred && transaction.transactionState != .Purchasing {
+            if transaction.transactionState != .deferred && transaction.transactionState != .purchasing {
                 queue.finishTransaction(transaction)
                 if transactions.count == 1 {
-                    self.postNotification(notification!, error: transaction.error)
+                    self.postNotification(notification!, error: transaction.error as NSError?)
                 }
             }
         }
         if havePurchases {
-            AppController.appController.appConfiguration.purchaseStatus = NSNumber(integer: SKPaymentTransactionState.Purchased.rawValue)
+            AppController.appController.appConfiguration.purchaseStatus = NSNumber(value: SKPaymentTransactionState.purchased.rawValue as Int)
             self.postNotification(.Completed, error: nil)
         } else if let transactionError = lastTransactionError {
-            AppController.appController.appConfiguration.purchaseStatus = NSNumber(integer: SKPaymentTransactionState.Failed.rawValue)
+            AppController.appController.appConfiguration.purchaseStatus = NSNumber(value: SKPaymentTransactionState.failed.rawValue as Int)
             self.postNotification(.Failed, error: transactionError)
         }
         
     }
     
-    func postNotification(notificationType: StoreKitPurchaseResultType, error: NSError?) {
-        var userInfo = [NSObject : AnyObject]()
+    func postNotification(_ notificationType: StoreKitPurchaseResultType, error: NSError?) {
+        var userInfo = [AnyHashable: Any]()
         userInfo[StoreKitPurchaseResultTypeKey] = notificationType.rawValue
         if let error = error {
             userInfo[StoreKitPurchaseErrorUserInfoKey] = error
         }
-        let notification = NSNotification(name: StoreKitPurchaseNotificationName, object: nil, userInfo: userInfo)
-        dispatch_async(dispatch_get_main_queue(), { () -> Void in
-            NSNotificationCenter.defaultCenter().postNotification(notification)
+        let notification = Notification(name: Notification.Name(rawValue: StoreKitPurchaseNotificationName), object: nil, userInfo: userInfo)
+        DispatchQueue.main.async(execute: { () -> Void in
+            NotificationCenter.default.post(notification)
         })
     }
     

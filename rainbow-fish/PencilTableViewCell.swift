@@ -10,12 +10,12 @@ import UIKit
 
 class PencilTableViewCell: UITableViewCell {
 
-    @IBOutlet private weak var colorSwatchImageView: UIImageView!
-    @IBOutlet private weak var nameLabel: UILabel!
-    @IBOutlet private weak var pencilCodeLabel: UILabel!
-    @IBOutlet private weak var centerYAlignmentConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var inventoryStatusLabel: UILabel!
-    private var _colorSwatch: UIColor?
+    @IBOutlet fileprivate weak var colorSwatchImageView: UIImageView!
+    @IBOutlet fileprivate weak var nameLabel: UILabel!
+    @IBOutlet fileprivate weak var pencilCodeLabel: UILabel!
+    @IBOutlet fileprivate weak var centerYAlignmentConstraint: NSLayoutConstraint!
+    @IBOutlet fileprivate weak var inventoryStatusLabel: UILabel!
+    fileprivate var _colorSwatch: UIColor?
     
     
     var name: String? {
@@ -48,7 +48,7 @@ class PencilTableViewCell: UITableViewCell {
     
     var presentInInventory: Bool = false {
         didSet {
-            self.inventoryStatusLabel.hidden = !self.presentInInventory
+            self.inventoryStatusLabel.isHidden = !self.presentInInventory
             if self.presentInInventory {
                 self.centerYAlignmentConstraint.constant = 5.0
             } else {
@@ -60,11 +60,11 @@ class PencilTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.accessoryType = .DisclosureIndicator
+        self.accessoryType = .disclosureIndicator
         self.selectedBackgroundView = UIView(frame: self.bounds)
         self.separatorInset = UIEdgeInsets(top: 0, left: 35.0, bottom: 0, right: 0)
         self.selectedBackgroundView?.backgroundColor = AppearanceManager.appearanceManager.selectedCellBackgroundColor
-        self.contentView.backgroundColor = UIColor.whiteColor()
+        self.contentView.backgroundColor = UIColor.white
         
         self.nameLabel.font = AppearanceManager.appearanceManager.standardFont
         self.nameLabel.textColor = AppearanceManager.appearanceManager.bodyTextColor
@@ -76,11 +76,11 @@ class PencilTableViewCell: UITableViewCell {
         self.inventoryStatusLabel.textColor = AppearanceManager.appearanceManager.brandColor
         
         self.colorSwatchImageView.layer.cornerRadius = 10.0;
-        self.colorSwatchImageView.layer.borderColor = AppearanceManager.appearanceManager.blackColor.CGColor
+        self.colorSwatchImageView.layer.borderColor = AppearanceManager.appearanceManager.blackColor.cgColor
         self.colorSwatchImageView.layer.borderWidth = 1.0;
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         if let color = self._colorSwatch {
             self.colorSwatchImageView.backgroundColor = color

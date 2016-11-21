@@ -9,42 +9,42 @@
 import UIKit
 
 protocol DoneEditingInputAccessoryDelegate {
-    func doneEditingInputAccessoryDoneButtonTapped(inputAccessory: DoneEditingInputAccessoryView)
+    func doneEditingInputAccessoryDoneButtonTapped(_ inputAccessory: DoneEditingInputAccessoryView)
 }
 
 class DoneEditingInputAccessoryView: UIView {
 
     var delegate: DoneEditingInputAccessoryDelegate?
     lazy var doneButton: UIButton = {
-        let button = UIButton(frame: CGRectZero)
-        button.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
-        button.setTitle(NSLocalizedString("Done", comment:"quantity input accessory done button title"), forState: .Normal)
-        button.setTitleColor(AppearanceManager.appearanceManager.brandColor, forState: .Normal)
-        button.addTarget(self, action: #selector(DoneEditingInputAccessoryView.doneButtonTapped(_:)), forControlEvents: .TouchUpInside)
+        let button = UIButton(frame: CGRect.zero)
+        button.autoresizingMask = [UIViewAutoresizing.flexibleWidth, UIViewAutoresizing.flexibleHeight]
+        button.setTitle(NSLocalizedString("Done", comment:"quantity input accessory done button title"), for: UIControlState())
+        button.setTitleColor(AppearanceManager.appearanceManager.brandColor, for: UIControlState())
+        button.addTarget(self, action: #selector(DoneEditingInputAccessoryView.doneButtonTapped(_:)), for: .touchUpInside)
         return button
     }()
     
     lazy var topLine: UIView = {
-        let view =  UIView(frame: CGRectZero)
+        let view =  UIView(frame: CGRect.zero)
         view.backgroundColor = AppearanceManager.appearanceManager.appBackgroundColor
         return view
     }()
 
     lazy var bottomLine: UIView = {
-        let view =  UIView(frame: CGRectZero)
+        let view =  UIView(frame: CGRect.zero)
         view.backgroundColor = AppearanceManager.appearanceManager.appBackgroundColor
         return view
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.whiteColor()
+        self.backgroundColor = UIColor.white
         self.addSubview(self.doneButton)
         self.addSubview(self.topLine)
         self.addSubview(self.bottomLine)
     }
 
-    func doneButtonTapped(sender: UIButton) {
+    func doneButtonTapped(_ sender: UIButton) {
         if let delegate = self.delegate {
             delegate.doneEditingInputAccessoryDoneButtonTapped(self)
         }
@@ -52,10 +52,10 @@ class DoneEditingInputAccessoryView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        self.topLine.frame = CGRectMake(0.0, 0.0, CGRectGetWidth(self.bounds), 1.0)
+        self.topLine.frame = CGRect(x: 0.0, y: 0.0, width: self.bounds.width, height: 1.0)
         let size = self.doneButton.frame.size
-        self.doneButton.frame = CGRectMake(CGRectGetWidth(self.bounds) - size.width, 1.0, size.width, CGRectGetHeight(self.bounds) - 2.0)
-        self.bottomLine.frame = CGRectMake(0.0, CGRectGetHeight(self.bounds), CGRectGetWidth(self.bounds), 1.0)
+        self.doneButton.frame = CGRect(x: self.bounds.width - size.width, y: 1.0, width: size.width, height: self.bounds.height - 2.0)
+        self.bottomLine.frame = CGRect(x: 0.0, y: self.bounds.height, width: self.bounds.width, height: 1.0)
     }
     
     required init?(coder aDecoder: NSCoder) {

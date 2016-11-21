@@ -4,28 +4,28 @@ import CoreDataKit
 import CloudKit
 
 @objc(Manufacturer)
-public class Manufacturer: _Manufacturer, NamedManagedObject {
+open class Manufacturer: _Manufacturer, NamedManagedObject {
     
     // MARK: NSManagedObject overrides
 
-    override public func awakeFromInsert() {
+    override open func awakeFromInsert() {
         super.awakeFromInsert()
         self.isNew = true
     }
     
-    public class var entityName : String {
-        return self.mogen_entityName()
+    open class var entityName : String {
+        return self.entityName()
     }
     
 }
 
 extension Manufacturer: CloudSyncable {
    
-    func populateFromCKRecord(record: CKRecord) {
+    func populateFromCKRecord(_ record: CKRecord) {
         self.recordID = record.recordID.recordName
         self.modificationDate = record.modificationDate
-        self.name = record.objectForKey(ManufacturerAttributes.name.rawValue) as? String
-        self.ownerRecordIdentifier = record.objectForKey(ManufacturerAttributes.ownerRecordIdentifier.rawValue) as? String
+        self.name = record.object(forKey: ManufacturerAttributes.name.rawValue) as? String
+        self.ownerRecordIdentifier = record.object(forKey: ManufacturerAttributes.ownerRecordIdentifier.rawValue) as? String
     }
     
     func toCKRecord() -> CKRecord {
@@ -41,7 +41,7 @@ extension Manufacturer: CloudSyncable {
         return record
     }
     
-    func toJson(includeRelationships: Bool = false ) -> NSDictionary {
+    func toJson(_ includeRelationships: Bool = false ) -> NSDictionary {
         
         let jsonObject = NSMutableDictionary()
         jsonObject[ManufacturerAttributes.recordID.rawValue] = self.recordID
@@ -69,10 +69,10 @@ extension Manufacturer {
     
     func sortedProducts() -> [Product]? {
         if let products = self.products.allObjects as? [Product] {
-            return products.sort{(p1: Product, p2: Product) in
+            return products.sorted{(p1: Product, p2: Product) in
                 let name1 = p1.name as String!
                 let name2 = p2.name as String!
-                return ((name1.localizedCaseInsensitiveCompare(name2)) == .OrderedAscending)
+                return ((name1!.localizedCaseInsensitiveCompare(name2!)) == .orderedAscending)
             }
         }
         return nil
