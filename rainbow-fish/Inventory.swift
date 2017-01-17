@@ -5,7 +5,8 @@ import Foundation
 
 @objc(Inventory)
 open  class Inventory: _Inventory, NamedManagedObject {
-
+    /// The name of the entity as it is known in the managed object model
+    
     open class var entityName : String {
         return self.entityName()
     }

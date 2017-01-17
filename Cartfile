@@ -1,5 +1,5 @@
 # rainbow-fish dependencies
 
-github "mac-cain13/CoreDataKit" >= 0.3
+github "mac-cain13/CoreDataKit" >= 0.12
 github "SwiftyJSON/SwiftyJSON" >= 2.1.2
 github "ashleymills/Reachability.swift" >= 2.3

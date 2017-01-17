@@ -117,7 +117,7 @@ class CloudManager {
                 return
             }
             if cursor != nil {
-                self.continueProductsQuery(manufacturer, cursor: cursor!, productRecords: &productRecords, isLastOperation: isLastOperation, completion: importCompletion)
+                self.continueProductsQuery(manufacturer, cursor: cursor!, productRecords: productRecords, isLastOperation: isLastOperation, completion: importCompletion)
             } else {
                 self.storeManufacturer(manufacturer, productRecords: productRecords, completion: { () -> Void in
                     if isLastOperation {
@@ -130,11 +130,13 @@ class CloudManager {
         return queryOperation
     }
     
-    func continueProductsQuery(_ manufacturer: CKRecord, cursor: CKQueryCursor, productRecords: inout [CKRecord], isLastOperation: Bool, completion: @escaping (_ success: Bool, _ error: NSError?) -> Void) {
+    func continueProductsQuery(_ manufacturer: CKRecord, cursor: CKQueryCursor, productRecords: [CKRecord], isLastOperation: Bool, completion: @escaping (_ success: Bool, _ error: NSError?) -> Void) {
+        
+        var currentRecords = productRecords
         
         let operation = CKQueryOperation(cursor: cursor)
         operation.recordFetchedBlock = {(record: CKRecord) in
-            productRecords.append(record)
+            currentRecords.append(record)
         }
         
         operation.queryCompletionBlock = {[unowned self] (continueCursor, error) in
@@ -142,7 +144,7 @@ class CloudManager {
                 DispatchQueue.main.async(execute: { completion(false, error as NSError?) })
             } else {
                 if continueCursor != nil {
-                    self.continueProductsQuery(manufacturer, cursor: continueCursor!, productRecords: &productRecords, isLastOperation: isLastOperation, completion: completion)
+                    self.continueProductsQuery(manufacturer, cursor: continueCursor!, productRecords: currentRecords, isLastOperation: isLastOperation, completion: completion)
                 } else {
                     if isLastOperation {
                         DispatchQueue.main.async { completion(true, error as NSError?) }
@@ -186,7 +188,7 @@ class CloudManager {
                 DispatchQueue.main.async { completion(false, error as NSError?) }
             } else {
                 if cursor != nil {
-                    self.createQueryOperation(product, cursor: cursor!, results: &pencilRecords, completion: completion)
+                    self.createQueryOperation(product, cursor: cursor!, results: pencilRecords, completion: completion)
                 } else {
                     self.storePencilRecords(pencilRecords, forProduct: product, completion: completion)
                 }
@@ -196,12 +198,14 @@ class CloudManager {
     }
     
     
-    fileprivate func createQueryOperation(_ product: Product, cursor: CKQueryCursor!, results: inout [CKRecord], completion: @escaping (_ success: Bool, _ error: NSError?)->Void) -> Void {
+    fileprivate func createQueryOperation(_ product: Product, cursor: CKQueryCursor!, results: [CKRecord], completion: @escaping (_ success: Bool, _ error: NSError?)->Void) -> Void {
         let queryOperation = CKQueryOperation(cursor: cursor)
         queryOperation.resultsLimit = CKQueryOperationMaximumResults
         
+        var currentResults = results
+        
         queryOperation.recordFetchedBlock = {(record: CKRecord) in
-            results.append(record)
+            currentResults.append(record)
         }
         
         queryOperation.queryCompletionBlock = { [unowned self] (nextCursor, error ) in
@@ -209,7 +213,7 @@ class CloudManager {
                 DispatchQueue.main.async { completion(false, error as NSError?) }
             } else {
                 if nextCursor != nil {
-                    self.createQueryOperation(product, cursor: nextCursor!, results: &results, completion: completion)
+                    self.createQueryOperation(product, cursor: nextCursor!, results: currentResults, completion: completion)
                 } else {
                     self.storePencilRecords(results, forProduct: product, completion: completion)
                 }

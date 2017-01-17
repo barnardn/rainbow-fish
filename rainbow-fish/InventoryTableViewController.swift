@@ -24,16 +24,14 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 
 
 class InventoryTableViewController: ContentTableViewController {
-
-    private static var __once: () = { () -> Void in
-            AppController.appController.appConfiguration.addObserver(self, forKeyPath: "minInventoryQuantity", options: .new, context: &InventoryTableViewController.inventoryKVOContext)
-        }()
-
+    
     enum InventorySortModes: Int {
         case alpha = 0, quantity
     }
 
-    fileprivate var inventoryKVOContext = 0
+    fileprivate static var kvoSetupToken = 0
+    
+    fileprivate static var inventoryKVOContext = 0
     
     var inventory = [Inventory]()
     
@@ -93,10 +91,11 @@ class InventoryTableViewController: ContentTableViewController {
         
         // because the app settings are lazy loaded must observe them after we've updated our badge count to avoid triggering kvo!
         // may need to revisit this in the future
-        struct Static {
-            static var token: Int = 0
+        
+        if InventoryTableViewController.kvoSetupToken == 0 {
+            InventoryTableViewController.kvoSetupToken = 1;
+            AppController.appController.appConfiguration.addObserver(self, forKeyPath: "minInventoryQuantity", options: .new, context: &InventoryTableViewController.inventoryKVOContext)
         }
-        _ = InventoryTableViewController.__once
         
         if self.inventory.count == 0 {
             AppController.appController.setAppIconBadgeNumber(badgeNumber: 0)
@@ -150,7 +149,7 @@ class InventoryTableViewController: ContentTableViewController {
     // MARK: kvo 
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if context != &inventoryKVOContext {
+        if context != &InventoryTableViewController.inventoryKVOContext {
             super.observeValue(forKeyPath: keyPath, of: object, change: change, context: context)
             return
         }
